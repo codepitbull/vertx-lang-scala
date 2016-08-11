@@ -3,11 +3,14 @@ package io.vertx.lang.scala.tck
 import io.vertx.codegen.testmodel.DataObjectTCKImpl
 import io.vertx.lang.scala.json.Json
 import io.vertx.scala.codegen.testmodel._
+import org.junit.runner.RunWith
+import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FlatSpec, Matchers}
 
 /**
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
   */
+@RunWith(classOf[JUnitRunner])
 class DataObjectTCKTest extends FlatSpec with Matchers {
   val dataObjectTCK = DataObjectTCK(new DataObjectTCKImpl())
 
@@ -90,7 +93,7 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
     assert(Json.arr("BOB", "LAURA") === dataObject.getJsonArray("genEnumValues"))
   }
 
-  "testWriteDataObjectWithLists" should "work" ignore {
+  "testWriteDataObjectWithLists" should "work" in {
     import collection.JavaConversions._
 
     println(Json.arr(mapAsJavaMap(Map("foo" -> "eek")), mapAsJavaMap(Map("foo" -> "wibble"))).getValue(0).getClass)
