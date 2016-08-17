@@ -91,18 +91,31 @@ import @{importedType}\n
  {\n
 \n
 @code{
-var methodNameParamCountHandler = new java.util.HashMap();
-foreach(method : instanceMethods) {
-  if(method.params.size > 1 && method.params[method.params.size-1].type.kind == CLASS_HANDLER) {
-    methodNameParamCountHandler.put(method.name+"-"+method.params.size+"-true", method);
+
+def hasHandler(method) {
+  return method.params.size > 1 && method.params[method.params.size-1].type.kind == CLASS_HANDLER;
+}
+
+def hasAlternativeWithHandler(method) {
+  var curName = mappableNameForMethod(method);
+}
+
+def mappableNameForMethod(method) {
+ if(method.params.size > 1 && method.params[method.params.size-1].type.kind == CLASS_HANDLER) {
+    return method.name+"-"+method.params.size+"-true";
   }
   else {
-    methodNameParamCountHandler.put(method.name+"-"+method.params.size+"-false", method);
+    return method.name+"-"+method.params.size+"-false", method;
   }
 }
 
+var methodNameParamCountHandler = new java.util.HashMap();
+foreach(method : instanceMethods) {
+  methodNameParamCountHandler.put(mappableNameForMethod(method), method);
+}
+
 def isHandler(method) {
-  if(method.params.size > 1 && method.params[method.params.size-1].type.kind == CLASS_HANDLER) {
+  if(hasHandler(method)) {
     return 'WithHandler';
   }
   else {
