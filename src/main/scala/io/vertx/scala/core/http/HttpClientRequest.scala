@@ -58,6 +58,45 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     extends io.vertx.scala.core.streams.WriteStream[io.vertx.scala.core.buffer.Buffer] 
     with io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.http.HttpClientResponse] {
 
+/**
+*exceptionHandler-1-false
+*handler-1-false
+*putHeader-2-false
+*resume-0-false
+*connection-0-false
+*uri-0-false
+*endHandler-1-false
+*write-1-false
+*getHost-0-false
+*sendHead-1-false
+*end-0-false
+*setWriteQueueMaxSize-1-false
+*continueHandler-1-false
+*connectionHandler-1-false
+*headers-0-false
+*pause-0-false
+*path-0-false
+*query-0-false
+*write-2-false
+*writeQueueFull-0-false
+*pushHandler-1-false
+*sendHead-0-false
+*isChunked-0-false
+*method-0-false
+*end-1-false
+*writeCustomFrame-3-false
+*reset-1-false
+*setTimeout-1-false
+*streamId-0-false
+*setChunked-1-false
+*setHost-1-false
+*end-2-false
+*setRawMethod-1-false
+*writeCustomFrame-1-false
+*reset-0-false
+*getRawMethod-0-false
+*drainHandler-1-false
+*/
   def asJava: io.vertx.core.http.HttpClientRequest = _asJava
 
   /**

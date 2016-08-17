@@ -39,6 +39,33 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.buffer.Buffer] 
     with io.vertx.scala.core.streams.WriteStream[io.vertx.scala.core.buffer.Buffer] {
 
+/**
+*exceptionHandler-1-false
+*closeHandler-1-false
+*handler-1-false
+*resume-0-false
+*endHandler-1-false
+*sendFile-2-true
+*write-1-false
+*end-0-false
+*setWriteQueueMaxSize-1-false
+*sendFile-2-false
+*pause-0-false
+*sendFile-4-true
+*sendFile-3-false
+*upgradeToSsl-1-false
+*isSsl-0-false
+*sendFile-3-true
+*write-2-false
+*localAddress-0-false
+*writeQueueFull-0-false
+*close-0-false
+*end-1-false
+*remoteAddress-0-false
+*sendFile-1-false
+*writeHandlerID-0-false
+*drainHandler-1-false
+*/
   def asJava: io.vertx.core.net.NetSocket = _asJava
 
   /**

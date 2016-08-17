@@ -38,6 +38,24 @@ import io.vertx.scala.core.net.NetSocket
 class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientResponse) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.buffer.Buffer] {
 
+/**
+*statusCode-0-false
+*customFrameHandler-1-false
+*netSocket-0-false
+*exceptionHandler-1-false
+*statusMessage-0-false
+*handler-1-false
+*bodyHandler-1-false
+*resume-0-false
+*cookies-0-false
+*endHandler-1-false
+*getHeader-1-false
+*getTrailer-1-false
+*headers-0-false
+*trailers-0-false
+*pause-0-false
+*version-0-false
+*/
   def asJava: io.vertx.core.http.HttpClientResponse = _asJava
 
   def resume(): io.vertx.scala.core.http.HttpClientResponse = {

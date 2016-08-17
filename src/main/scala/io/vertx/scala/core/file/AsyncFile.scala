@@ -36,6 +36,28 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.buffer.Buffer] 
     with io.vertx.scala.core.streams.WriteStream[io.vertx.scala.core.buffer.Buffer] {
 
+/**
+*exceptionHandler-1-false
+*write-3-true
+*handler-1-false
+*resume-0-false
+*writeQueueFull-0-false
+*close-0-false
+*endHandler-1-false
+*end-1-false
+*write-1-false
+*flush-1-false
+*end-0-false
+*close-1-false
+*setWriteQueueMaxSize-1-false
+*setReadBufferSize-1-false
+*flush-0-false
+*read-5-true
+*pause-0-false
+*setReadPos-1-false
+*drainHandler-1-false
+*setWritePos-1-false
+*/
   def asJava: io.vertx.core.file.AsyncFile = _asJava
 
   /**

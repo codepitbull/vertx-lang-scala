@@ -28,6 +28,19 @@ import io.vertx.core.Handler
 class NetServer(private val _asJava: io.vertx.core.net.NetServer) 
     extends io.vertx.scala.core.metrics.Measured {
 
+/**
+*connectHandler-1-false
+*listen-0-false
+*listen-3-true
+*connectStream-0-false
+*listen-1-false
+*close-0-false
+*actualPort-0-false
+*isMetricsEnabled-0-false
+*listen-2-true
+*listen-2-false
+*close-1-false
+*/
   def asJava: io.vertx.core.net.NetServer = _asJava
 
   /**

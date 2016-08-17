@@ -34,6 +34,22 @@ import io.vertx.core.Handler
 class HttpServer(private val _asJava: io.vertx.core.http.HttpServer) 
     extends io.vertx.scala.core.metrics.Measured {
 
+/**
+*close-0-false
+*actualPort-0-false
+*listen-2-true
+*close-1-false
+*connectionHandler-1-false
+*websocketHandler-1-false
+*requestStream-0-false
+*requestHandler-1-false
+*listen-0-false
+*listen-3-true
+*listen-1-false
+*isMetricsEnabled-0-false
+*listen-2-false
+*websocketStream-0-false
+*/
   def asJava: io.vertx.core.http.HttpServer = _asJava
 
   /**

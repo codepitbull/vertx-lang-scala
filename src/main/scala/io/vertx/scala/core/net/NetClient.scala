@@ -33,6 +33,11 @@ import io.vertx.core.Handler
 class NetClient(private val _asJava: io.vertx.core.net.NetClient) 
     extends io.vertx.scala.core.metrics.Measured {
 
+/**
+*close-0-false
+*isMetricsEnabled-0-false
+*connect-3-true
+*/
   def asJava: io.vertx.core.net.NetClient = _asJava
 
   /**

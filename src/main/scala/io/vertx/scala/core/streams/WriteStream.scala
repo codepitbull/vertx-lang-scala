@@ -31,6 +31,15 @@ import io.vertx.core.Handler
 trait WriteStream[T] 
     extends io.vertx.scala.core.streams.StreamBase {
 
+/**
+*exceptionHandler-1-false
+*writeQueueFull-0-false
+*write-1-false
+*end-1-false
+*end-0-false
+*drainHandler-1-false
+*setWriteQueueMaxSize-1-false
+*/
   def asJava: java.lang.Object
 
   /**

@@ -36,6 +36,13 @@ import io.vertx.core.Handler
   */
 class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
 
+/**
+*getLockWithTimeout-3-true
+*getClusterWideMap-2-true
+*getCounter-2-true
+*getLocalMap-1-false
+*getLock-2-true
+*/
   def asJava: io.vertx.core.shareddata.SharedData = _asJava
 
   /**

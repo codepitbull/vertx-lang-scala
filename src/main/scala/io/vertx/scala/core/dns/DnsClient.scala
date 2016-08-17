@@ -28,6 +28,20 @@ import io.vertx.core.Handler
   */
 class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
 
+/**
+*lookup6-2-true
+*resolveSRV-2-true
+*lookup-2-true
+*resolveA-2-true
+*resolveNS-2-true
+*resolvePTR-2-true
+*resolveCNAME-2-true
+*resolveAAAA-2-true
+*resolveMX-2-true
+*lookup4-2-true
+*reverseLookup-2-true
+*resolveTXT-2-true
+*/
   def asJava: io.vertx.core.dns.DnsClient = _asJava
 
   /**

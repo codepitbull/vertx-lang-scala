@@ -64,6 +64,46 @@ import io.vertx.scala.core.http.HttpClient
 class Vertx(private val _asJava: io.vertx.core.Vertx) 
     extends io.vertx.scala.core.metrics.Measured {
 
+/**
+*deploymentIDs-0-false
+*exceptionHandler-1-false
+*createHttpClient-1-false
+*createDatagramSocket-1-false
+*close-1-false
+*deployVerticle-1-false
+*undeploy-2-true
+*createSharedWorkerExecutor-2-false
+*createSharedWorkerExecutor-1-false
+*createDnsClient-2-false
+*setPeriodic-2-true
+*periodicStream-1-false
+*createDatagramSocket-0-false
+*createHttpClient-0-false
+*createNetServer-0-false
+*createNetClient-0-false
+*executeBlocking-2-true
+*fileSystem-0-false
+*isMetricsEnabled-0-false
+*createHttpServer-1-false
+*deployVerticle-3-true
+*undeploy-1-false
+*setTimer-2-true
+*isClustered-0-false
+*createSharedWorkerExecutor-3-false
+*close-0-false
+*deployVerticle-2-false
+*eventBus-0-false
+*createNetServer-1-false
+*timerStream-1-false
+*deployVerticle-2-true
+*createHttpServer-0-false
+*cancelTimer-1-false
+*executeBlocking-3-true
+*getOrCreateContext-0-false
+*sharedData-0-false
+*createNetClient-1-false
+*runOnContext-1-false
+*/
   def asJava: io.vertx.core.Vertx = _asJava
 
   /**

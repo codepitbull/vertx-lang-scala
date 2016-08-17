@@ -36,6 +36,21 @@ import io.vertx.core.Handler
 class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageConsumer[T]) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.eventbus.Message[T]] {
 
+/**
+*exceptionHandler-1-false
+*bodyStream-0-false
+*getMaxBufferedMessages-0-false
+*handler-1-false
+*resume-0-false
+*endHandler-1-false
+*setMaxBufferedMessages-1-false
+*unregister-0-false
+*unregister-1-false
+*isRegistered-0-false
+*pause-0-false
+*address-0-false
+*completionHandler-1-false
+*/
   def asJava: io.vertx.core.eventbus.MessageConsumer[T] = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {

@@ -26,6 +26,9 @@ import io.vertx.core.Handler
   */
 trait StreamBase {
 
+/**
+*exceptionHandler-1-false
+*/
   def asJava: java.lang.Object
 
   /**

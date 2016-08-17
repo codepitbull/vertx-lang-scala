@@ -33,6 +33,35 @@ import io.vertx.scala.core.net.SocketAddress
 class ServerWebSocket(private val _asJava: io.vertx.core.http.ServerWebSocket) 
     extends io.vertx.scala.core.http.WebSocketBase {
 
+/**
+*exceptionHandler-1-false
+*closeHandler-1-false
+*writeBinaryMessage-1-false
+*handler-1-false
+*resume-0-false
+*writeFrame-1-false
+*uri-0-false
+*endHandler-1-false
+*write-1-false
+*frameHandler-1-false
+*end-0-false
+*binaryHandlerID-0-false
+*textHandlerID-0-false
+*setWriteQueueMaxSize-1-false
+*headers-0-false
+*writeFinalBinaryFrame-1-false
+*writeFinalTextFrame-1-false
+*pause-0-false
+*path-0-false
+*query-0-false
+*localAddress-0-false
+*reject-0-false
+*writeQueueFull-0-false
+*close-0-false
+*end-1-false
+*remoteAddress-0-false
+*drainHandler-1-false
+*/
   def asJava: io.vertx.core.http.ServerWebSocket = _asJava
 
   /**

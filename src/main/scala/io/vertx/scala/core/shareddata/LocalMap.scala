@@ -31,6 +31,19 @@ import scala.collection.JavaConverters._
   */
 class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V]) {
 
+/**
+*replaceIfPresent-3-false
+*size-0-false
+*replace-2-false
+*putIfAbsent-2-false
+*put-2-false
+*close-0-false
+*remove-1-false
+*removeIfPresent-2-false
+*get-1-false
+*isEmpty-0-false
+*clear-0-false
+*/
   def asJava: io.vertx.core.shareddata.LocalMap[K, V] = _asJava
 
   /**

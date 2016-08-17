@@ -28,6 +28,21 @@ import java.util.function.Function
   */
 class Future[T](private val _asJava: io.vertx.core.Future[T]) {
 
+/**
+*isComplete-0-false
+*setHandler-1-false
+*compose-2-false
+*complete-0-false
+*succeeded-0-false
+*compose-1-false
+*map-1-false
+*result-0-false
+*complete-1-false
+*failed-0-false
+*fail-1-false
+*cause-0-false
+*completer-0-false
+*/
   def asJava: io.vertx.core.Future[T] = _asJava
 
   /**

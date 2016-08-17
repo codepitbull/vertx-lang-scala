@@ -27,6 +27,15 @@ import io.vertx.core.Handler
   */
 class CompositeFuture(private val _asJava: io.vertx.core.CompositeFuture) {
 
+/**
+*setHandler-1-false
+*size-0-false
+*result-1-false
+*isComplete-1-false
+*cause-1-false
+*failed-1-false
+*succeeded-1-false
+*/
   def asJava: io.vertx.core.CompositeFuture = _asJava
 
   def setHandler(handler: io.vertx.core.AsyncResult [io.vertx.scala.core.CompositeFuture] => Unit): io.vertx.scala.core.CompositeFuture = {

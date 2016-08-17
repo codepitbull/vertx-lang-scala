@@ -35,6 +35,17 @@ import io.vertx.core.Handler
   */
 class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
 
+/**
+*headers-0-false
+*body-0-false
+*replyAddress-0-false
+*address-0-false
+*reply-2-false
+*fail-2-false
+*reply-1-false
+*reply-2-true
+*reply-3-true
+*/
   def asJava: io.vertx.core.eventbus.Message[T] = _asJava
 
   /**
