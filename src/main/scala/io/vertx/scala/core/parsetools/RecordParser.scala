@@ -55,6 +55,12 @@ import io.vertx.core.Handler
   */
 class RecordParser(private val _asJava: io.vertx.core.parsetools.RecordParser) {
 
+/**
+*delimitedMode-1-false
+*handle-1-false
+*fixedSizeMode-1-false
+*setOutput-1-false
+*/
   def asJava: io.vertx.core.parsetools.RecordParser = _asJava
 
   def setOutput(output: io.vertx.scala.core.buffer.Buffer => Unit): Unit = {

@@ -41,6 +41,27 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.datagram.DatagramPacket] 
     with io.vertx.scala.core.metrics.Measured {
 
+/**
+*exceptionHandler-1-false
+*sender-2-false
+*blockMulticastGroup-4-true
+*handler-1-false
+*localAddress-0-false
+*listenMulticastGroup-2-true
+*resume-0-false
+*send-5-true
+*unlistenMulticastGroup-4-true
+*close-0-false
+*endHandler-1-false
+*close-1-false
+*unlistenMulticastGroup-2-true
+*blockMulticastGroup-3-true
+*listenMulticastGroup-4-true
+*send-4-true
+*pause-0-false
+*listen-3-true
+*isMetricsEnabled-0-false
+*/
   def asJava: io.vertx.core.datagram.DatagramSocket = _asJava
 
   /**

@@ -30,6 +30,13 @@ import io.vertx.core.Handler
 trait ReadStream[T] 
     extends io.vertx.scala.core.streams.StreamBase {
 
+/**
+*exceptionHandler-1-false
+*handler-1-false
+*resume-0-false
+*pause-0-false
+*endHandler-1-false
+*/
   def asJava: java.lang.Object
 
   /**

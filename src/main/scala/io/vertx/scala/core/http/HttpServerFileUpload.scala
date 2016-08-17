@@ -29,6 +29,21 @@ import io.vertx.core.Handler
 class HttpServerFileUpload(private val _asJava: io.vertx.core.http.HttpServerFileUpload) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.buffer.Buffer] {
 
+/**
+*exceptionHandler-1-false
+*handler-1-false
+*resume-0-false
+*charset-0-false
+*isSizeAvailable-0-false
+*endHandler-1-false
+*name-0-false
+*contentTransferEncoding-0-false
+*streamToFileSystem-1-false
+*pause-0-false
+*size-0-false
+*filename-0-false
+*contentType-0-false
+*/
   def asJava: io.vertx.core.http.HttpServerFileUpload = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpServerFileUpload = {

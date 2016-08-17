@@ -56,6 +56,23 @@ import io.vertx.core.Handler
   */
 class Context(private val _asJava: io.vertx.core.Context) {
 
+/**
+*exceptionHandler-1-false
+*getInstanceCount-0-false
+*isWorkerContext-0-false
+*put-2-false
+*remove-1-false
+*isEventLoopContext-0-false
+*get-1-false
+*deploymentID-0-false
+*isMultiThreadedWorkerContext-0-false
+*executeBlocking-2-true
+*processArgs-0-false
+*executeBlocking-3-true
+*owner-0-false
+*config-0-false
+*runOnContext-1-false
+*/
   def asJava: io.vertx.core.Context = _asJava
 
   /**

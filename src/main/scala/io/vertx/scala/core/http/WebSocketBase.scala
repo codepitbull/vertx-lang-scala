@@ -35,6 +35,30 @@ trait WebSocketBase
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.buffer.Buffer] 
     with io.vertx.scala.core.streams.WriteStream[io.vertx.scala.core.buffer.Buffer] {
 
+/**
+*exceptionHandler-1-false
+*closeHandler-1-false
+*writeBinaryMessage-1-false
+*handler-1-false
+*resume-0-false
+*localAddress-0-false
+*writeFrame-1-false
+*writeQueueFull-0-false
+*close-0-false
+*endHandler-1-false
+*end-1-false
+*write-1-false
+*frameHandler-1-false
+*end-0-false
+*setWriteQueueMaxSize-1-false
+*binaryHandlerID-0-false
+*textHandlerID-0-false
+*remoteAddress-0-false
+*writeFinalBinaryFrame-1-false
+*writeFinalTextFrame-1-false
+*pause-0-false
+*drainHandler-1-false
+*/
   def asJava: java.lang.Object
 
   /**

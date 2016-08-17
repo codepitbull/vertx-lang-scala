@@ -25,6 +25,9 @@ import scala.collection.JavaConverters._
   */
 trait Measured {
 
+/**
+*isMetricsEnabled-0-false
+*/
   def asJava: java.lang.Object
 
   /**

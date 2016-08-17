@@ -26,6 +26,11 @@ import scala.collection.JavaConverters._
   */
 class SendContext[T](private val _asJava: io.vertx.core.eventbus.SendContext[T]) {
 
+/**
+*send-0-false
+*next-0-false
+*message-0-false
+*/
   def asJava: io.vertx.core.eventbus.SendContext[T] = _asJava
 
   /**

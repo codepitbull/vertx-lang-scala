@@ -27,6 +27,19 @@ import io.vertx.core.Handler
   */
 class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V]) {
 
+/**
+*put-4-true
+*putIfAbsent-4-true
+*removeIfPresent-3-true
+*put-3-true
+*remove-2-true
+*clear-1-false
+*putIfAbsent-3-true
+*replace-3-true
+*replaceIfPresent-4-true
+*size-1-false
+*get-2-true
+*/
   def asJava: io.vertx.core.shareddata.AsyncMap[K, V] = _asJava
 
   /**

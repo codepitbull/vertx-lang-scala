@@ -29,6 +29,24 @@ import io.vertx.core.cli.Argument
   */
 class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
 
+/**
+*getRawValues-1-false
+*isFlagEnabled-1-false
+*getRawValuesForOption-1-false
+*cli-0-false
+*getRawValueForOption-1-false
+*acceptMoreValues-1-false
+*isAskingForHelp-0-false
+*getRawValuesForArgument-1-false
+*isValid-0-false
+*getArgumentValue-1-false
+*allArguments-0-false
+*isArgumentAssigned-1-false
+*getOptionValue-1-false
+*getRawValueForArgument-1-false
+*isOptionAssigned-1-false
+*isSeenInCommandLine-1-false
+*/
   def asJava: io.vertx.core.cli.CommandLine = _asJava
 
   /**

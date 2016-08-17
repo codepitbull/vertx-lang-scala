@@ -91,6 +91,16 @@ import @{importedType}\n
  {\n
 \n
 @code{
+var methodNameParamCountHandler = new java.util.HashMap();
+foreach(method : instanceMethods) {
+  if(method.params.size > 1 && method.params[method.params.size-1].type.kind == CLASS_HANDLER) {
+    methodNameParamCountHandler.put(method.name+"-"+method.params.size+"-true", method);
+  }
+  else {
+    methodNameParamCountHandler.put(method.name+"-"+method.params.size+"-false", method);
+  }
+}
+
 def isHandler(method) {
   if(method.params.size > 1 && method.params[method.params.size-1].type.kind == CLASS_HANDLER) {
     return 'WithHandler';
@@ -100,6 +110,11 @@ def isHandler(method) {
   }
 }
 }
+/**\n
+@foreach{par : methodNameParamCountHandler.keySet}
+*@{par}\n
+@end{}
+*/\n
 @if{concrete}
 	@includeNamed{'classbody.templ'; indentation=''}
 @else{}

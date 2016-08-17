@@ -27,6 +27,15 @@ import io.vertx.core.Handler
   */
 class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
 
+/**
+*compareAndSet-3-true
+*getAndAdd-2-true
+*incrementAndGet-1-false
+*addAndGet-2-true
+*decrementAndGet-1-false
+*get-1-false
+*getAndIncrement-1-false
+*/
   def asJava: io.vertx.core.shareddata.Counter = _asJava
 
   /**

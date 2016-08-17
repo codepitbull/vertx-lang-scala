@@ -30,6 +30,15 @@ import io.vertx.core.Handler
 class PacketWritestream(private val _asJava: io.vertx.core.datagram.PacketWritestream) 
     extends io.vertx.scala.core.streams.WriteStream[io.vertx.scala.core.buffer.Buffer] {
 
+/**
+*exceptionHandler-1-false
+*writeQueueFull-0-false
+*end-1-false
+*write-1-false
+*end-0-false
+*drainHandler-1-false
+*setWriteQueueMaxSize-1-false
+*/
   def asJava: io.vertx.core.datagram.PacketWritestream = _asJava
 
   /**

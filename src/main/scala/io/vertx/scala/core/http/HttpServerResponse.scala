@@ -48,6 +48,50 @@ import io.vertx.core.Handler
 class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerResponse) 
     extends io.vertx.scala.core.streams.WriteStream[io.vertx.scala.core.buffer.Buffer] {
 
+/**
+*exceptionHandler-1-false
+*closeHandler-1-false
+*getStatusMessage-0-false
+*putHeader-2-false
+*bodyEndHandler-1-false
+*sendFile-2-true
+*push-5-true
+*write-1-false
+*end-0-false
+*setWriteQueueMaxSize-1-false
+*sendFile-2-false
+*headers-0-false
+*trailers-0-false
+*headersEndHandler-1-false
+*sendFile-4-true
+*ended-0-false
+*sendFile-3-false
+*headWritten-0-false
+*setStatusMessage-1-false
+*getStatusCode-0-false
+*sendFile-3-true
+*write-2-false
+*writeQueueFull-0-false
+*push-4-true
+*close-0-false
+*isChunked-0-false
+*end-1-false
+*writeCustomFrame-3-false
+*reset-1-false
+*streamId-0-false
+*setChunked-1-false
+*bytesWritten-0-false
+*writeContinue-0-false
+*end-2-false
+*writeCustomFrame-1-false
+*sendFile-1-false
+*reset-0-false
+*push-3-true
+*drainHandler-1-false
+*setStatusCode-1-false
+*putTrailer-2-false
+*closed-0-false
+*/
   def asJava: io.vertx.core.http.HttpServerResponse = _asJava
 
   /**

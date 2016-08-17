@@ -36,6 +36,25 @@ import io.vertx.core.Handler
 class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus) 
     extends io.vertx.scala.core.metrics.Measured {
 
+/**
+*localConsumer-2-true
+*addInterceptor-1-false
+*sender-2-false
+*consumer-1-false
+*sender-1-false
+*localConsumer-1-false
+*publisher-2-false
+*publish-2-false
+*consumer-2-true
+*removeInterceptor-1-false
+*send-3-true
+*send-2-false
+*send-4-true
+*isMetricsEnabled-0-false
+*publisher-1-false
+*send-3-false
+*publish-3-false
+*/
   def asJava: io.vertx.core.eventbus.EventBus = _asJava
 
   /**

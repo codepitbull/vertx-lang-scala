@@ -29,6 +29,13 @@ import io.vertx.core.Handler
 class HttpServerRequestStream(private val _asJava: io.vertx.core.http.HttpServerRequestStream) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.http.HttpServerRequest] {
 
+/**
+*exceptionHandler-1-false
+*handler-1-false
+*resume-0-false
+*pause-0-false
+*endHandler-1-false
+*/
   def asJava: io.vertx.core.http.HttpServerRequestStream = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpServerRequestStream = {

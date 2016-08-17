@@ -27,6 +27,10 @@ import io.vertx.scala.core.net.SocketAddress
   */
 class DatagramPacket(private val _asJava: io.vertx.core.datagram.DatagramPacket) {
 
+/**
+*data-0-false
+*sender-0-false
+*/
   def asJava: io.vertx.core.datagram.DatagramPacket = _asJava
 
   /**

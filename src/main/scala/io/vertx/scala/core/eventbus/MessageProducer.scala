@@ -30,6 +30,20 @@ import io.vertx.core.Handler
 class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProducer[T]) 
     extends io.vertx.scala.core.streams.WriteStream[T] {
 
+/**
+*send-2-true
+*deliveryOptions-1-false
+*exceptionHandler-1-false
+*writeQueueFull-0-false
+*address-0-false
+*close-0-false
+*end-1-false
+*write-1-false
+*drainHandler-1-false
+*end-0-false
+*setWriteQueueMaxSize-1-false
+*send-1-false
+*/
   def asJava: io.vertx.core.eventbus.MessageProducer[T] = _asJava
 
   /**

@@ -26,6 +26,16 @@ import scala.collection.JavaConverters._
   */
 class FileProps(private val _asJava: io.vertx.core.file.FileProps) {
 
+/**
+*isOther-0-false
+*creationTime-0-false
+*isDirectory-0-false
+*size-0-false
+*lastAccessTime-0-false
+*lastModifiedTime-0-false
+*isRegularFile-0-false
+*isSymbolicLink-0-false
+*/
   def asJava: io.vertx.core.file.FileProps = _asJava
 
   /**

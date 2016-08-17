@@ -29,6 +29,13 @@ import io.vertx.core.Handler
 class ServerWebSocketStream(private val _asJava: io.vertx.core.http.ServerWebSocketStream) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.http.ServerWebSocket] {
 
+/**
+*exceptionHandler-1-false
+*handler-1-false
+*resume-0-false
+*pause-0-false
+*endHandler-1-false
+*/
   def asJava: io.vertx.core.http.ServerWebSocketStream = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.ServerWebSocketStream = {

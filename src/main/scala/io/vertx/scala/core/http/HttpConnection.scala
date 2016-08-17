@@ -36,6 +36,27 @@ import io.vertx.core.Handler
   */
 class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
 
+/**
+*closeHandler-1-false
+*exceptionHandler-1-false
+*getWindowSize-0-false
+*shutdownHandler-1-false
+*close-0-false
+*shutdown-1-false
+*remoteSettingsHandler-1-false
+*settings-0-false
+*remoteSettings-0-false
+*goAway-1-false
+*ping-2-true
+*goAway-2-false
+*updateSettings-2-true
+*setWindowSize-1-false
+*updateSettings-1-false
+*goAway-3-false
+*pingHandler-1-false
+*shutdown-0-false
+*goAwayHandler-1-false
+*/
   def asJava: io.vertx.core.http.HttpConnection = _asJava
 
   /**

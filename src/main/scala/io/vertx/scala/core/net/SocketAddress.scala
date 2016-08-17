@@ -25,6 +25,10 @@ import scala.collection.JavaConverters._
   */
 class SocketAddress(private val _asJava: io.vertx.core.net.SocketAddress) {
 
+/**
+*port-0-false
+*host-0-false
+*/
   def asJava: io.vertx.core.net.SocketAddress = _asJava
 
   def host(): String = {

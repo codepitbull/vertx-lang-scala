@@ -25,6 +25,10 @@ import scala.collection.JavaConverters._
   */
 class MxRecord(private val _asJava: io.vertx.core.dns.MxRecord) {
 
+/**
+*name-0-false
+*priority-0-false
+*/
   def asJava: io.vertx.core.dns.MxRecord = _asJava
 
   /**

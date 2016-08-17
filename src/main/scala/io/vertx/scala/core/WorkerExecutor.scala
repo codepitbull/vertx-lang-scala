@@ -31,6 +31,12 @@ import io.vertx.core.Handler
 class WorkerExecutor(private val _asJava: io.vertx.core.WorkerExecutor) 
     extends io.vertx.scala.core.metrics.Measured {
 
+/**
+*executeBlocking-2-true
+*close-0-false
+*isMetricsEnabled-0-false
+*executeBlocking-3-true
+*/
   def asJava: io.vertx.core.WorkerExecutor = _asJava
 
   /**

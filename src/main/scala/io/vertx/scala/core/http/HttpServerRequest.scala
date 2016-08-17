@@ -42,6 +42,41 @@ import io.vertx.scala.core.net.NetSocket
 class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerRequest) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.buffer.Buffer] {
 
+/**
+*exceptionHandler-1-false
+*handler-1-false
+*resume-0-false
+*connection-0-false
+*uri-0-false
+*host-0-false
+*endHandler-1-false
+*absoluteURI-0-false
+*uploadHandler-1-false
+*getHeader-1-false
+*getFormAttribute-1-false
+*isEnded-0-false
+*isExpectMultipart-0-false
+*headers-0-false
+*scheme-0-false
+*pause-0-false
+*path-0-false
+*upgrade-0-false
+*isSSL-0-false
+*getParam-1-false
+*setExpectMultipart-1-false
+*netSocket-0-false
+*customFrameHandler-1-false
+*response-0-false
+*query-0-false
+*bodyHandler-1-false
+*localAddress-0-false
+*method-0-false
+*remoteAddress-0-false
+*formAttributes-0-false
+*params-0-false
+*version-0-false
+*rawMethod-0-false
+*/
   def asJava: io.vertx.core.http.HttpServerRequest = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpServerRequest = {
