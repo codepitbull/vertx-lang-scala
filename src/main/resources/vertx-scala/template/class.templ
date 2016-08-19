@@ -92,14 +92,6 @@ import @{importedType}\n
 \n
 @code{
 
-def hasHandler(method) {
-  return method.params.size > 1 && method.params[method.params.size-1].type.kind == CLASS_HANDLER;
-}
-
-def hasAlternativeWithHandler(method) {
-  var curName = mappableNameForMethod(method);
-}
-
 def mappableNameForMethod(method) {
  if(method.params.size > 1 && method.params[method.params.size-1].type.kind == CLASS_HANDLER) {
     return method.name+"-"+method.params.size+"-true";
@@ -109,25 +101,30 @@ def mappableNameForMethod(method) {
   }
 }
 
-var methodNameParamCountHandler = new java.util.HashMap();
+var methodNameParamCountHandler = new java.util.ArrayList();
 foreach(method : instanceMethods) {
-  methodNameParamCountHandler.put(mappableNameForMethod(method), method);
+  methodNameParamCountHandler.add(mappableNameForMethod(method));
 }
 
-def isHandler(method) {
-  if(hasHandler(method)) {
-    return 'WithHandler';
-  }
-  else {
-    return '';
+var actualMethods = new java.util.ArrayList();
+foreach(method : instanceMethods) {
+  if(!methodNameParamCountHandler.contains(method.name+"-"+(method.params.size+1)+"-true") || (method.params.size > 1 && method.params[method.params.size-1].type.kind == CLASS_HANDLER)){
+    actualMethods.add(method);
   }
 }
 }
 /**\n
-@foreach{par : methodNameParamCountHandler.keySet}
+@foreach{par : methodNameParamCountHandler}
 *@{par}\n
 @end{}
 */\n
+
+/**\n
+@foreach{par : actualMethods}
+*@{par.name}\n
+@end{}
+*/\n
+
 @if{concrete}
 	@includeNamed{'classbody.templ'; indentation=''}
 @else{}
@@ -143,7 +140,7 @@ def isHandler(method) {
 	\n
 	@foreach{method : staticMethods}
 	@if{includeMethod(method, staticMethods)}
-	  def @{method.name}@{isHandler(method)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+	  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 			@{methodInvocation(type.raw.name, method, '    ');}
 	  }\n
 	\n

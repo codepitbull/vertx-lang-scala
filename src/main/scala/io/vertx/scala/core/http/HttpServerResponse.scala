@@ -49,48 +49,95 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     extends io.vertx.scala.core.streams.WriteStream[io.vertx.scala.core.buffer.Buffer] {
 
 /**
-*exceptionHandler-1-false
-*closeHandler-1-false
-*getStatusMessage-0-false
-*putHeader-2-false
-*bodyEndHandler-1-false
-*sendFile-2-true
-*push-5-true
-*write-1-false
-*end-0-false
-*setWriteQueueMaxSize-1-false
-*sendFile-2-false
-*headers-0-false
-*trailers-0-false
-*headersEndHandler-1-false
-*sendFile-4-true
-*ended-0-false
-*sendFile-3-false
-*headWritten-0-false
-*setStatusMessage-1-false
-*getStatusCode-0-false
-*sendFile-3-true
-*write-2-false
 *writeQueueFull-0-false
-*push-4-true
-*close-0-false
-*isChunked-0-false
-*end-1-false
-*writeCustomFrame-3-false
-*reset-1-false
-*streamId-0-false
-*setChunked-1-false
-*bytesWritten-0-false
-*writeContinue-0-false
-*end-2-false
-*writeCustomFrame-1-false
-*sendFile-1-false
-*reset-0-false
-*push-3-true
+*exceptionHandler-1-false
+*write-1-false
+*setWriteQueueMaxSize-1-false
 *drainHandler-1-false
+*getStatusCode-0-false
 *setStatusCode-1-false
+*getStatusMessage-0-false
+*setStatusMessage-1-false
+*setChunked-1-false
+*isChunked-0-false
+*headers-0-false
+*putHeader-2-false
+*trailers-0-false
 *putTrailer-2-false
+*closeHandler-1-false
+*write-2-false
+*write-1-false
+*writeContinue-0-false
+*end-1-false
+*end-2-false
+*end-1-false
+*end-0-false
+*sendFile-1-false
+*sendFile-2-false
+*sendFile-3-false
+*sendFile-2-true
+*sendFile-3-true
+*sendFile-4-true
+*close-0-false
+*ended-0-false
 *closed-0-false
+*headWritten-0-false
+*headersEndHandler-1-false
+*bodyEndHandler-1-false
+*bytesWritten-0-false
+*streamId-0-false
+*push-4-true
+*push-4-true
+*push-3-true
+*push-5-true
+*reset-0-false
+*reset-1-false
+*writeCustomFrame-3-false
+*writeCustomFrame-1-false
+*/
+/**
+*writeQueueFull
+*exceptionHandler
+*write
+*setWriteQueueMaxSize
+*drainHandler
+*getStatusCode
+*setStatusCode
+*getStatusMessage
+*setStatusMessage
+*setChunked
+*isChunked
+*headers
+*putHeader
+*trailers
+*putTrailer
+*closeHandler
+*write
+*write
+*writeContinue
+*end
+*end
+*end
+*end
+*sendFile
+*sendFile
+*sendFile
+*close
+*ended
+*closed
+*headWritten
+*headersEndHandler
+*bodyEndHandler
+*bytesWritten
+*streamId
+*push
+*push
+*push
+*push
+*reset
+*reset
+*writeCustomFrame
+*writeCustomFrame
 */
   def asJava: io.vertx.core.http.HttpServerResponse = _asJava
 
@@ -102,7 +149,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     _asJava.writeQueueFull()
   }
 
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+  def exceptionHandler(handler: Throwable => Unit= null): io.vertx.scala.core.http.HttpServerResponse = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
@@ -117,7 +164,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     this
   }
 
-  def drainHandler(handler: () => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+  def drainHandler(handler: () => Unit= null): io.vertx.scala.core.http.HttpServerResponse = {
     _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -230,7 +277,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def closeHandler(handler: () => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+  def closeHandler(handler: () => Unit= null): io.vertx.scala.core.http.HttpServerResponse = {
     _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -303,51 +350,13 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   }
 
   /**
-    * Same as [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] using offset @code{0` which means starting from the beginning of the file.
-    * @param filename path to the file to serve
-    * @return a reference to this, so the API can be used fluently
-    */
-  def sendFile(filename: String): io.vertx.scala.core.http.HttpServerResponse = {
-    _asJava.sendFile(filename)
-    this
-  }
-
-  /**
-    * Same as [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] using length @code{Long.MAX_VALUE` which means until the end of the
-    * file.
-    * @param filename path to the file to serve
-    * @param offset offset to start serving from
-    * @return a reference to this, so the API can be used fluently
-    */
-  def sendFile(filename: String, offset: Long): io.vertx.scala.core.http.HttpServerResponse = {
-    _asJava.sendFile(filename, offset)
-    this
-  }
-
-  /**
-    * Ask the OS to stream a file as specified by `filename` directly
-    * from disk to the outgoing connection, bypassing userspace altogether
-    * (where supported by the underlying operating system.
-    * This is a very efficient way to serve files.
-    * The actual serve is asynchronous and may not complete until some time after this method has returned.
-    * @param filename path to the file to serve
-    * @param offset offset to start serving from
-    * @param length length to serve to
-    * @return a reference to this, so the API can be used fluently
-    */
-  def sendFile(filename: String, offset: Long, length: Long): io.vertx.scala.core.http.HttpServerResponse = {
-    _asJava.sendFile(filename, offset, length)
-    this
-  }
-
-  /**
     * Like [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] but providing a handler which will be notified once the file has been completely
     * written to the wire.
     * @param filename path to the file to serve
     * @param resultHandler handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def sendFileWithHandler(filename: String)( resultHandler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+  def sendFile(filename: String)(implicit resultHandler: io.vertx.core.AsyncResult [Unit] => Unit= null): io.vertx.scala.core.http.HttpServerResponse = {
     _asJava.sendFile(filename, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(resultHandler))
     this
   }
@@ -360,7 +369,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param resultHandler handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def sendFileWithHandler(filename: String, offset: Long)( resultHandler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+  def sendFile(filename: String, offset: Long)(implicit resultHandler: io.vertx.core.AsyncResult [Unit] => Unit= null): io.vertx.scala.core.http.HttpServerResponse = {
     _asJava.sendFile(filename, offset, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(resultHandler))
     this
   }
@@ -374,7 +383,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param resultHandler handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def sendFileWithHandler(filename: String, offset: Long, length: Long)( resultHandler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+  def sendFile(filename: String, offset: Long, length: Long)(implicit resultHandler: io.vertx.core.AsyncResult [Unit] => Unit= null): io.vertx.scala.core.http.HttpServerResponse = {
     _asJava.sendFile(filename, offset, length, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(resultHandler))
     this
   }
@@ -413,7 +422,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def headersEndHandler(handler: () => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+  def headersEndHandler(handler: () => Unit= null): io.vertx.scala.core.http.HttpServerResponse = {
     _asJava.headersEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -425,7 +434,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def bodyEndHandler(handler: () => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+  def bodyEndHandler(handler: () => Unit= null): io.vertx.scala.core.http.HttpServerResponse = {
     _asJava.bodyEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -447,21 +456,21 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   /**
     * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with no headers.
     */
-  def pushWithHandler(method: io.vertx.core.http.HttpMethod, host: String, path: String)( handler: io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServerResponse] => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+  def push(method: io.vertx.core.http.HttpMethod, host: String, path: String)(implicit handler: io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServerResponse] => Unit= null): io.vertx.scala.core.http.HttpServerResponse = {
     HttpServerResponse.apply(_asJava.push(method, host, path, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.http.HttpServerResponse], io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServerResponse]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.http.HttpServerResponse, io.vertx.scala.core.http.HttpServerResponse](x,(x => if (x == null) null else HttpServerResponse.apply(x))))(handler)))
   }
 
   /**
     * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with the host copied from the current request.
     */
-  def pushWithHandler(method: io.vertx.core.http.HttpMethod, path: String, headers: io.vertx.scala.core.MultiMap)( handler: io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServerResponse] => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+  def push(method: io.vertx.core.http.HttpMethod, path: String, headers: io.vertx.scala.core.MultiMap)(implicit handler: io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServerResponse] => Unit= null): io.vertx.scala.core.http.HttpServerResponse = {
     HttpServerResponse.apply(_asJava.push(method, path, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.http.HttpServerResponse], io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServerResponse]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.http.HttpServerResponse, io.vertx.scala.core.http.HttpServerResponse](x,(x => if (x == null) null else HttpServerResponse.apply(x))))(handler)))
   }
 
   /**
     * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with the host copied from the current request.
     */
-  def pushWithHandler(method: io.vertx.core.http.HttpMethod, path: String)( handler: io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServerResponse] => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+  def push(method: io.vertx.core.http.HttpMethod, path: String)(implicit handler: io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServerResponse] => Unit= null): io.vertx.scala.core.http.HttpServerResponse = {
     _asJava.push(method, path, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.http.HttpServerResponse], io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServerResponse]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.http.HttpServerResponse, io.vertx.scala.core.http.HttpServerResponse](x,(x => if (x == null) null else HttpServerResponse.apply(x))))(handler))
     this
   }
@@ -483,7 +492,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param handler the handler notified when the response can be written
     * @return a reference to this, so the API can be used fluently
     */
-  def pushWithHandler(method: io.vertx.core.http.HttpMethod, host: String, path: String, headers: io.vertx.scala.core.MultiMap)( handler: io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServerResponse] => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+  def push(method: io.vertx.core.http.HttpMethod, host: String, path: String, headers: io.vertx.scala.core.MultiMap)(implicit handler: io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServerResponse] => Unit= null): io.vertx.scala.core.http.HttpServerResponse = {
     _asJava.push(method, host, path, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.http.HttpServerResponse], io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServerResponse]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.http.HttpServerResponse, io.vertx.scala.core.http.HttpServerResponse](x,(x => if (x == null) null else HttpServerResponse.apply(x))))(handler))
     this
   }

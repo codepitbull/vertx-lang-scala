@@ -57,21 +57,38 @@ import io.vertx.core.Handler
 class Context(private val _asJava: io.vertx.core.Context) {
 
 /**
-*exceptionHandler-1-false
-*getInstanceCount-0-false
+*runOnContext-1-false
+*executeBlocking-3-true
+*executeBlocking-2-true
+*deploymentID-0-false
+*config-0-false
+*processArgs-0-false
+*isEventLoopContext-0-false
 *isWorkerContext-0-false
+*isMultiThreadedWorkerContext-0-false
+*get-1-false
 *put-2-false
 *remove-1-false
-*isEventLoopContext-0-false
-*get-1-false
-*deploymentID-0-false
-*isMultiThreadedWorkerContext-0-false
-*executeBlocking-2-true
-*processArgs-0-false
-*executeBlocking-3-true
 *owner-0-false
-*config-0-false
-*runOnContext-1-false
+*getInstanceCount-0-false
+*exceptionHandler-1-false
+*/
+/**
+*runOnContext
+*executeBlocking
+*executeBlocking
+*deploymentID
+*config
+*processArgs
+*isEventLoopContext
+*isWorkerContext
+*isMultiThreadedWorkerContext
+*get
+*put
+*remove
+*owner
+*getInstanceCount
+*exceptionHandler
 */
   def asJava: io.vertx.core.Context = _asJava
 
@@ -79,7 +96,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * Run the specified action asynchronously on the same context, some time after the current execution has completed.
     * @param action the action to run
     */
-  def runOnContext(action: () => Unit): Unit = {
+  def runOnContext(action: () => Unit= null): Unit = {
     _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => action()))
   }
 
@@ -98,7 +115,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
     * @param resultHandler handler that will be called when the blocking code is complete
     */
-  def executeBlockingWithHandler[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean)( resultHandler: io.vertx.core.AsyncResult [T] => Unit): Unit = {
+  def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit= null, ordered: Boolean, resultHandler: io.vertx.core.AsyncResult [T] => Unit= null): Unit = {
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, funcToMappedHandler[io.vertx.core.AsyncResult[T], io.vertx.core.AsyncResult [T]](x => io.vertx.lang.scala.AsyncResult[T, T](x,(x => x)))(resultHandler))
   }
 
@@ -107,7 +124,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * @param blockingCodeHandler handler representing the blocking code to run
     * @param resultHandler handler that will be called when the blocking code is complete
     */
-  def executeBlockingWithHandler[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit)( resultHandler: io.vertx.core.AsyncResult [T] => Unit): Unit = {
+  def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit= null, resultHandler: io.vertx.core.AsyncResult [T] => Unit= null): Unit = {
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), funcToMappedHandler[io.vertx.core.AsyncResult[T], io.vertx.core.AsyncResult [T]](x => io.vertx.lang.scala.AsyncResult[T, T](x,(x => x)))(resultHandler))
   }
 
@@ -218,7 +235,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.Context = {
+  def exceptionHandler(handler: Throwable => Unit= null): io.vertx.scala.core.Context = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }

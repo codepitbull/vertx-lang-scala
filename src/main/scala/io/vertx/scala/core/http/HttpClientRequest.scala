@@ -59,43 +59,86 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     with io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.http.HttpClientResponse] {
 
 /**
-*exceptionHandler-1-false
-*handler-1-false
-*putHeader-2-false
-*resume-0-false
-*connection-0-false
-*uri-0-false
-*endHandler-1-false
-*write-1-false
-*getHost-0-false
-*sendHead-1-false
-*end-0-false
-*setWriteQueueMaxSize-1-false
-*continueHandler-1-false
-*connectionHandler-1-false
-*headers-0-false
-*pause-0-false
-*path-0-false
-*query-0-false
-*write-2-false
 *writeQueueFull-0-false
-*pushHandler-1-false
-*sendHead-0-false
+*exceptionHandler-1-false
+*write-1-false
+*setWriteQueueMaxSize-1-false
+*drainHandler-1-false
+*handler-1-false
+*pause-0-false
+*resume-0-false
+*endHandler-1-false
+*setChunked-1-false
 *isChunked-0-false
 *method-0-false
-*end-1-false
-*writeCustomFrame-3-false
-*reset-1-false
-*setTimeout-1-false
-*streamId-0-false
-*setChunked-1-false
-*setHost-1-false
-*end-2-false
-*setRawMethod-1-false
-*writeCustomFrame-1-false
-*reset-0-false
 *getRawMethod-0-false
-*drainHandler-1-false
+*setRawMethod-1-false
+*uri-0-false
+*path-0-false
+*query-0-false
+*setHost-1-false
+*getHost-0-false
+*headers-0-false
+*putHeader-2-false
+*write-1-false
+*write-2-false
+*continueHandler-1-false
+*sendHead-0-false
+*sendHead-1-false
+*end-1-false
+*end-2-false
+*end-1-false
+*end-0-false
+*setTimeout-1-false
+*pushHandler-1-false
+*reset-0-false
+*reset-1-false
+*connection-0-false
+*connectionHandler-1-false
+*writeCustomFrame-3-false
+*streamId-0-false
+*writeCustomFrame-1-false
+*/
+/**
+*writeQueueFull
+*exceptionHandler
+*write
+*setWriteQueueMaxSize
+*drainHandler
+*handler
+*pause
+*resume
+*endHandler
+*setChunked
+*isChunked
+*method
+*getRawMethod
+*setRawMethod
+*uri
+*path
+*query
+*setHost
+*getHost
+*headers
+*putHeader
+*write
+*write
+*continueHandler
+*sendHead
+*sendHead
+*end
+*end
+*end
+*end
+*setTimeout
+*pushHandler
+*reset
+*reset
+*connection
+*connectionHandler
+*writeCustomFrame
+*streamId
+*writeCustomFrame
 */
   def asJava: io.vertx.core.http.HttpClientRequest = _asJava
 
@@ -107,7 +150,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     _asJava.writeQueueFull()
   }
 
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def exceptionHandler(handler: Throwable => Unit= null): io.vertx.scala.core.http.HttpClientRequest = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
@@ -125,12 +168,12 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     this
   }
 
-  def drainHandler(handler: () => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def drainHandler(handler: () => Unit= null): io.vertx.scala.core.http.HttpClientRequest = {
     _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
 
-  def handler(handler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def handler(handler: io.vertx.scala.core.http.HttpClientResponse => Unit= null): io.vertx.scala.core.http.HttpClientRequest = {
     _asJava.handler(funcToMappedHandler(HttpClientResponse.apply)(handler))
     this
   }
@@ -145,7 +188,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     this
   }
 
-  def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def endHandler(endHandler: () => Unit= null): io.vertx.scala.core.http.HttpClientRequest = {
     _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
@@ -277,7 +320,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * the [[io.vertx.scala.core.http.HttpClientRequest#sendHead]] method to force the request header to be written before the request has ended.
     * @return a reference to this, so the API can be used fluently
     */
-  def continueHandler(handler: () => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def continueHandler(handler: () => Unit= null): io.vertx.scala.core.http.HttpClientRequest = {
     _asJava.continueHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -299,7 +342,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * Like [[io.vertx.scala.core.http.HttpClientRequest#sendHead]] but with an handler after headers have been sent. The handler will be called with
     * the [[io.vertx.core.http.HttpVersion]] if it can be determined or null otherwise.
     */
-  def sendHead(completionHandler: io.vertx.core.http.HttpVersion => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def sendHead(completionHandler: io.vertx.core.http.HttpVersion => Unit= null): io.vertx.scala.core.http.HttpClientRequest = {
     _asJava.sendHead(funcToHandler(completionHandler))
     this
   }
@@ -371,7 +414,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def pushHandler(handler: io.vertx.scala.core.http.HttpClientRequest => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def pushHandler(handler: io.vertx.scala.core.http.HttpClientRequest => Unit= null): io.vertx.scala.core.http.HttpClientRequest = {
     _asJava.pushHandler(funcToMappedHandler(HttpClientRequest.apply)(handler))
     this
   }
@@ -406,7 +449,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def connectionHandler(handler: io.vertx.scala.core.http.HttpConnection => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def connectionHandler(handler: io.vertx.scala.core.http.HttpConnection => Unit= null): io.vertx.scala.core.http.HttpClientRequest = {
     _asJava.connectionHandler(funcToMappedHandler(HttpConnection.apply)(handler))
     this
   }

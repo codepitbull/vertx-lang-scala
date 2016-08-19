@@ -43,10 +43,16 @@ import scala.collection.JavaConverters._
 class Pump(private val _asJava: io.vertx.core.streams.Pump) {
 
 /**
-*numberPumped-0-false
+*setWriteQueueMaxSize-1-false
 *start-0-false
 *stop-0-false
-*setWriteQueueMaxSize-1-false
+*numberPumped-0-false
+*/
+/**
+*setWriteQueueMaxSize
+*start
+*stop
+*numberPumped
 */
   def asJava: io.vertx.core.streams.Pump = _asJava
 

@@ -30,18 +30,32 @@ import java.util.Map.Entry
 class MultiMap(private val _asJava: io.vertx.core.MultiMap) {
 
 /**
-*setAll-1-false
-*set-2-false
-*contains-1-false
-*size-0-false
+*get-1-false
 *getAll-1-false
+*contains-1-false
+*isEmpty-0-false
 *names-0-false
 *add-2-false
 *addAll-1-false
+*set-2-false
+*setAll-1-false
 *remove-1-false
-*get-1-false
-*isEmpty-0-false
 *clear-0-false
+*size-0-false
+*/
+/**
+*get
+*getAll
+*contains
+*isEmpty
+*names
+*add
+*addAll
+*set
+*setAll
+*remove
+*clear
+*size
 */
   def asJava: io.vertx.core.MultiMap = _asJava
 

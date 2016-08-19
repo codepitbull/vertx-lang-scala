@@ -238,16 +238,24 @@
   def methodParams(method) {
     var paramList = '';
     var first = true;
+    var handlerCounter = 0;
+    for (param : method.params) {
+      if(param.type.kind == CLASS_HANDLER)
+        handlerCounter += 1;
+    }
     for (param : method.params) {
         if (first) {
           first = false;
-        } else if(param.type.kind == CLASS_HANDLER) {
-          paramList += ')( ';
+        } else if(handlerCounter <= 1 && param.type.kind == CLASS_HANDLER) {
+          paramList += ')(';
         }
         else {
           paramList += ', ';
         }
         paramList += escapeIfKeyword(param.name) + ': ' + toOptionIfNullableAndParam(toScalaType(param.type), param.type, param);
+        if(param.type.kind == CLASS_HANDLER) {
+          paramList += ' = null';
+        }
     }
     paramList;
   }
