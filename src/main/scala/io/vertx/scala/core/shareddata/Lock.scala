@@ -28,12 +28,6 @@ import scala.collection.JavaConverters._
   */
 class Lock(private val _asJava: io.vertx.core.shareddata.Lock) {
 
-/**
-*release-0-false
-*/
-/**
-*release
-*/
   def asJava: io.vertx.core.shareddata.Lock = _asJava
 
   /**

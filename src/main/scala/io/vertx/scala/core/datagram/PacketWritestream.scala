@@ -30,24 +30,6 @@ import io.vertx.core.Handler
 class PacketWritestream(private val _asJava: io.vertx.core.datagram.PacketWritestream) 
     extends io.vertx.scala.core.streams.WriteStream[io.vertx.scala.core.buffer.Buffer] {
 
-/**
-*end-0-false
-*end-1-false
-*writeQueueFull-0-false
-*exceptionHandler-1-false
-*write-1-false
-*setWriteQueueMaxSize-1-false
-*drainHandler-1-false
-*/
-/**
-*end
-*end
-*writeQueueFull
-*exceptionHandler
-*write
-*setWriteQueueMaxSize
-*drainHandler
-*/
   def asJava: io.vertx.core.datagram.PacketWritestream = _asJava
 
   /**
@@ -74,7 +56,7 @@ class PacketWritestream(private val _asJava: io.vertx.core.datagram.PacketWrites
     _asJava.writeQueueFull()
   }
 
-  def exceptionHandler(handler: Throwable => Unit= null): io.vertx.scala.core.datagram.PacketWritestream = {
+  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.datagram.PacketWritestream = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
@@ -89,7 +71,7 @@ class PacketWritestream(private val _asJava: io.vertx.core.datagram.PacketWrites
     this
   }
 
-  def drainHandler(handler: () => Unit= null): io.vertx.scala.core.datagram.PacketWritestream = {
+  def drainHandler(handler: () => Unit): io.vertx.scala.core.datagram.PacketWritestream = {
     _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }

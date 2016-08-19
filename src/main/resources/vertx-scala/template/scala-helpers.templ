@@ -246,16 +246,10 @@
     for (param : method.params) {
         if (first) {
           first = false;
-        } else if(handlerCounter <= 1 && param.type.kind == CLASS_HANDLER) {
-          paramList += ')(';
-        }
-        else {
+        } else {
           paramList += ', ';
         }
         paramList += escapeIfKeyword(param.name) + ': ' + toOptionIfNullableAndParam(toScalaType(param.type), param.type, param);
-        if(param.type.kind == CLASS_HANDLER) {
-          paramList += ' = null';
-        }
     }
     paramList;
   }

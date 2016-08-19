@@ -2,7 +2,7 @@
   def asJava: java.lang.Object\n\n
 
 @comment{"# Trait methods"}
-@foreach{method : actualMethods}
+@foreach{method : instanceMethods}
 @if{includeMethod(method, instanceMethods)}
   @if{method.doc != null}@{methodDoc(method, '');}@end{}  
 	def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);}\n\n

@@ -39,56 +39,6 @@ import io.vertx.core.cli.Argument
   */
 class CLI(private val _asJava: io.vertx.core.cli.CLI) {
 
-/**
-*parse-1-false
-*parse-2-false
-*getName-0-false
-*setName-1-false
-*getDescription-0-false
-*setDescription-1-false
-*getSummary-0-false
-*setSummary-1-false
-*isHidden-0-false
-*setHidden-1-false
-*getOptions-0-false
-*addOption-1-false
-*addOptions-1-false
-*setOptions-1-false
-*getArguments-0-false
-*addArgument-1-false
-*addArguments-1-false
-*setArguments-1-false
-*getOption-1-false
-*getArgument-1-false
-*getArgument-1-false
-*removeOption-1-false
-*removeArgument-1-false
-*/
-/**
-*parse
-*parse
-*getName
-*setName
-*getDescription
-*setDescription
-*getSummary
-*setSummary
-*isHidden
-*setHidden
-*getOptions
-*addOption
-*addOptions
-*setOptions
-*getArguments
-*addArgument
-*addArguments
-*setArguments
-*getOption
-*getArgument
-*getArgument
-*removeOption
-*removeArgument
-*/
   def asJava: io.vertx.core.cli.CLI = _asJava
 
   /**
