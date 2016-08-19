@@ -31,24 +31,6 @@ import io.vertx.core.Handler
 trait WriteStream[T] 
     extends io.vertx.scala.core.streams.StreamBase {
 
-/**
-*exceptionHandler-1-false
-*write-1-false
-*end-0-false
-*end-1-false
-*setWriteQueueMaxSize-1-false
-*writeQueueFull-0-false
-*drainHandler-1-false
-*/
-/**
-*exceptionHandler
-*write
-*end
-*end
-*setWriteQueueMaxSize
-*writeQueueFull
-*drainHandler
-*/
   def asJava: java.lang.Object
 
   /**
@@ -56,7 +38,7 @@ trait WriteStream[T]
   * @param handler the exception handler
   * @return a reference to this, so the API can be used fluently
   */
-  def exceptionHandler(handler: Throwable => Unit= null): io.vertx.scala.core.streams.WriteStream[T]
+  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.WriteStream[T]
 
   /**
   * Write some data to the stream. The data is put on an internal write queue, and the write actually happens
@@ -100,7 +82,7 @@ trait WriteStream[T]
   * @param handler the handler
   * @return a reference to this, so the API can be used fluently
   */
-  def drainHandler(handler: () => Unit= null): io.vertx.scala.core.streams.WriteStream[T]
+  def drainHandler(handler: () => Unit): io.vertx.scala.core.streams.WriteStream[T]
 
 }
 
@@ -118,7 +100,7 @@ object WriteStream {
       * @param handler the exception handler
       * @return a reference to this, so the API can be used fluently
       */
-    def exceptionHandler(handler: Throwable => Unit= null): io.vertx.scala.core.streams.WriteStream[T] = {
+    def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.WriteStream[T] = {
         _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
       this
     }
@@ -177,7 +159,7 @@ object WriteStream {
       * @param handler the handler
       * @return a reference to this, so the API can be used fluently
       */
-    def drainHandler(handler: () => Unit= null): io.vertx.scala.core.streams.WriteStream[T] = {
+    def drainHandler(handler: () => Unit): io.vertx.scala.core.streams.WriteStream[T] = {
         _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
       this
     }

@@ -90,40 +90,6 @@ import @{importedType}\n
 
  {\n
 \n
-@code{
-
-def mappableNameForMethod(method) {
- if(method.params.size > 1 && method.params[method.params.size-1].type.kind == CLASS_HANDLER) {
-    return method.name+"-"+method.params.size+"-true";
-  }
-  else {
-    return method.name+"-"+method.params.size+"-false", method;
-  }
-}
-
-var methodNameParamCountHandler = new java.util.ArrayList();
-foreach(method : instanceMethods) {
-  methodNameParamCountHandler.add(mappableNameForMethod(method));
-}
-
-var actualMethods = new java.util.ArrayList();
-foreach(method : instanceMethods) {
-  if(!methodNameParamCountHandler.contains(method.name+"-"+(method.params.size+1)+"-true") || (method.params.size > 1 && method.params[method.params.size-1].type.kind == CLASS_HANDLER)){
-    actualMethods.add(method);
-  }
-}
-}
-/**\n
-@foreach{par : methodNameParamCountHandler}
-*@{par}\n
-@end{}
-*/\n
-
-/**\n
-@foreach{par : actualMethods}
-*@{par.name}\n
-@end{}
-*/\n
 
 @if{concrete}
 	@includeNamed{'classbody.templ'; indentation=''}

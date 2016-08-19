@@ -1,8 +1,9 @@
 package io.vertx.lang.scala
 
-import io.vertx.core.Handler
+import io.vertx.core.{AsyncResult, Handler}
 import io.vertx.core.logging.LoggerFactory
 
+import scala.concurrent.{Future, Promise}
 import scala.language.implicitConversions
 
 /**
@@ -121,6 +122,12 @@ object HandlerOps {
       Some(number.asInstanceOf[T])
   }
 
+  /**
+    * Null-save conversion of Java-Booleans into Scala-Options. Required as implicit-conversions will break on null-values.
+    * @param number a possible null-value
+    * @tparam T target of the conversion
+    * @return Option-value representing the conversion-result
+    */
   def nullsafeConvToOption[T](number:java.lang.Boolean): Option[T] = {
     if(number == null)
       None
@@ -128,10 +135,23 @@ object HandlerOps {
       Some(number.asInstanceOf[T])
   }
 
+  /**
+    * Null-save conversion of Java-Character into Scala-Options. Required as implicit-conversions will break on null-values.
+    * @param number a possible null-value
+    * @tparam T target of the conversion
+    * @return Option-value representing the conversion-result
+    */
   def nullsafeConvToOption[T](number:java.lang.Character): Option[T] = {
     if(number == null)
       None
     else
       Some(number.asInstanceOf[T])
+  }
+
+  def asyncResultToPromise[T](asyncResult: io.vertx.core.AsyncResult[T], promise: Promise[T]): Unit = {
+    if(asyncResult.succeeded())
+      promise.success(asyncResult.result())
+    else
+      promise.failure(asyncResult.cause())
   }
 }

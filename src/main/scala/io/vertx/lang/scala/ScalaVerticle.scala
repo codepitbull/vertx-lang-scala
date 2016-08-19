@@ -9,7 +9,6 @@ import io.vertx.scala.core.{Context, Vertx}
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
   */
 class ScalaVerticle extends Verticle {
-
   protected var jvertx: io.vertx.core.Vertx = null
   protected var vertx: Vertx = null
   protected var ctx: Context = null

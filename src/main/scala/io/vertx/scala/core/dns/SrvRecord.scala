@@ -25,24 +25,6 @@ import scala.collection.JavaConverters._
   */
 class SrvRecord(private val _asJava: io.vertx.core.dns.SrvRecord) {
 
-/**
-*priority-0-false
-*weight-0-false
-*port-0-false
-*name-0-false
-*protocol-0-false
-*service-0-false
-*target-0-false
-*/
-/**
-*priority
-*weight
-*port
-*name
-*protocol
-*service
-*target
-*/
   def asJava: io.vertx.core.dns.SrvRecord = _asJava
 
   /**

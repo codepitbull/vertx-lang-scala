@@ -5,7 +5,7 @@
 @{indentation}  def asJava: @includeNamed{'writeDelegateType'} = _asJava\n\n
 
 @comment{"# Class methods"}
-@foreach{method : actualMethods}
+@foreach{method : instanceMethods}
 @if{includeMethod(method, instanceMethods)}
 @if{method.doc != null}@{methodDoc(method, indentation + '  ');}@end{}
 @if{method.name == 'toString' && method.params.size == 0}

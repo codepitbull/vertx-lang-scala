@@ -29,28 +29,14 @@ import io.vertx.core.Handler
 class HttpServerRequestStream(private val _asJava: io.vertx.core.http.HttpServerRequestStream) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.http.HttpServerRequest] {
 
-/**
-*exceptionHandler-1-false
-*handler-1-false
-*pause-0-false
-*resume-0-false
-*endHandler-1-false
-*/
-/**
-*exceptionHandler
-*handler
-*pause
-*resume
-*endHandler
-*/
   def asJava: io.vertx.core.http.HttpServerRequestStream = _asJava
 
-  def exceptionHandler(handler: Throwable => Unit= null): io.vertx.scala.core.http.HttpServerRequestStream = {
+  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpServerRequestStream = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: io.vertx.scala.core.http.HttpServerRequest => Unit= null): io.vertx.scala.core.http.HttpServerRequestStream = {
+  def handler(handler: io.vertx.scala.core.http.HttpServerRequest => Unit): io.vertx.scala.core.http.HttpServerRequestStream = {
     _asJava.handler(funcToMappedHandler(HttpServerRequest.apply)(handler))
     this
   }
@@ -65,7 +51,7 @@ class HttpServerRequestStream(private val _asJava: io.vertx.core.http.HttpServer
     this
   }
 
-  def endHandler(endHandler: () => Unit= null): io.vertx.scala.core.http.HttpServerRequestStream = {
+  def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.HttpServerRequestStream = {
     _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }

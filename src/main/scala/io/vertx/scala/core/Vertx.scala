@@ -64,83 +64,6 @@ import io.vertx.scala.core.http.HttpClient
 class Vertx(private val _asJava: io.vertx.core.Vertx) 
     extends io.vertx.scala.core.metrics.Measured {
 
-/**
-*isMetricsEnabled-0-false
-*getOrCreateContext-0-false
-*createNetServer-1-false
-*createNetServer-0-false
-*createNetClient-1-false
-*createNetClient-0-false
-*createHttpServer-1-false
-*createHttpServer-0-false
-*createHttpClient-1-false
-*createHttpClient-0-false
-*createDatagramSocket-1-false
-*createDatagramSocket-0-false
-*fileSystem-0-false
-*eventBus-0-false
-*createDnsClient-2-false
-*sharedData-0-false
-*setTimer-2-true
-*timerStream-1-false
-*setPeriodic-2-true
-*periodicStream-1-false
-*cancelTimer-1-false
-*runOnContext-1-false
-*close-0-false
-*close-1-false
-*deployVerticle-1-false
-*deployVerticle-2-true
-*deployVerticle-2-false
-*deployVerticle-3-true
-*undeploy-1-false
-*undeploy-2-true
-*deploymentIDs-0-false
-*isClustered-0-false
-*executeBlocking-3-true
-*executeBlocking-2-true
-*createSharedWorkerExecutor-1-false
-*createSharedWorkerExecutor-2-false
-*createSharedWorkerExecutor-3-false
-*exceptionHandler-1-false
-*/
-/**
-*isMetricsEnabled
-*getOrCreateContext
-*createNetServer
-*createNetServer
-*createNetClient
-*createNetClient
-*createHttpServer
-*createHttpServer
-*createHttpClient
-*createHttpClient
-*createDatagramSocket
-*createDatagramSocket
-*fileSystem
-*eventBus
-*createDnsClient
-*sharedData
-*setTimer
-*timerStream
-*setPeriodic
-*periodicStream
-*cancelTimer
-*runOnContext
-*close
-*close
-*deployVerticle
-*deployVerticle
-*undeploy
-*deploymentIDs
-*isClustered
-*executeBlocking
-*executeBlocking
-*createSharedWorkerExecutor
-*createSharedWorkerExecutor
-*createSharedWorkerExecutor
-*exceptionHandler
-*/
   def asJava: io.vertx.core.Vertx = _asJava
 
   /**
@@ -294,7 +217,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param handler the handler that will be called with the timer ID when the timer fires
     * @return the unique ID of the timer
     */
-  def setTimer(delay: Long)(implicit handler: Long => Unit= null): Long = {
+  def setTimer(delay: Long, handler: Long => Unit): Long = {
     _asJava.setTimer(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler))
   }
 
@@ -315,7 +238,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param handler the handler that will be called with the timer ID when the timer fires
     * @return the unique ID of the timer
     */
-  def setPeriodic(delay: Long)(implicit handler: Long => Unit= null): Long = {
+  def setPeriodic(delay: Long, handler: Long => Unit): Long = {
     _asJava.setPeriodic(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler))
   }
 
@@ -343,7 +266,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * preceeding events have been handled.
     * @param action - a handler representing the action to execute
     */
-  def runOnContext(action: () => Unit= null): Unit = {
+  def runOnContext(action: () => Unit): Unit = {
     _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => action()))
   }
 
@@ -362,8 +285,20 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * Like [[io.vertx.scala.core.Vertx#close]] but the completionHandler will be called when the close is complete
     * @param completionHandler The handler will be notified when the close is complete.
     */
-  def close(completionHandler: io.vertx.core.AsyncResult [Unit] => Unit= null): Unit = {
+  def close(completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): Unit = {
     _asJava.close(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
+  }
+
+  /**
+    * Deploy a verticle instance given a name.
+    * 
+    * Given the name, Vert.x selects a  instance to use to instantiate the verticle.
+    * 
+    * For the rules on how factories are selected please consult the user manual.
+    * @param name the name.
+    */
+  def deployVerticle(name: String): Unit = {
+    _asJava.deployVerticle(name)
   }
 
   /**
@@ -376,8 +311,18 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param name The identifier
     * @param completionHandler a handler which will be notified when the deployment is complete
     */
-  def deployVerticle(name: String)(implicit completionHandler: io.vertx.core.AsyncResult [String] => Unit= null): Unit = {
+  def deployVerticle(name: String, completionHandler: io.vertx.core.AsyncResult [String] => Unit): Unit = {
     _asJava.deployVerticle(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x)))(completionHandler))
+  }
+
+  /**
+    * Like [[io.vertx.scala.core.Vertx#deployVerticle]] but <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a> are provided to configure the
+    * deployment.
+    * @param name the name
+    * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
+    */
+  def deployVerticle(name: String, options: io.vertx.scala.core.DeploymentOptions): Unit = {
+    _asJava.deployVerticle(name, options.asJava)
   }
 
   /**
@@ -387,8 +332,18 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
     * @param completionHandler a handler which will be notified when the deployment is complete
     */
-  def deployVerticle(name: String, options: io.vertx.scala.core.DeploymentOptions)(implicit completionHandler: io.vertx.core.AsyncResult [String] => Unit= null): Unit = {
+  def deployVerticle(name: String, options: io.vertx.scala.core.DeploymentOptions, completionHandler: io.vertx.core.AsyncResult [String] => Unit): Unit = {
     _asJava.deployVerticle(name, options.asJava, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x)))(completionHandler))
+  }
+
+  /**
+    * Undeploy a verticle deployment.
+    * 
+    * The actual undeployment happens asynchronously and may not complete until after the method has returned.
+    * @param deploymentID the deployment ID
+    */
+  def undeploy(deploymentID: String): Unit = {
+    _asJava.undeploy(deploymentID)
   }
 
   /**
@@ -396,7 +351,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param deploymentID the deployment ID
     * @param completionHandler a handler which will be notified when the undeployment is complete
     */
-  def undeploy(deploymentID: String)(implicit completionHandler: io.vertx.core.AsyncResult [Unit] => Unit= null): Unit = {
+  def undeploy(deploymentID: String, completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): Unit = {
     _asJava.undeploy(deploymentID, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
   }
 
@@ -434,14 +389,14 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
     * @param resultHandler handler that will be called when the blocking code is complete
     */
-  def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit= null, ordered: Boolean, resultHandler: io.vertx.core.AsyncResult [T] => Unit= null): Unit = {
+  def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean, resultHandler: io.vertx.core.AsyncResult [T] => Unit): Unit = {
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, funcToMappedHandler[io.vertx.core.AsyncResult[T], io.vertx.core.AsyncResult [T]](x => io.vertx.lang.scala.AsyncResult[T, T](x,(x => x)))(resultHandler))
   }
 
   /**
     * Like [[io.vertx.scala.core.Vertx#executeBlocking]] called with ordered = true.
     */
-  def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit= null, resultHandler: io.vertx.core.AsyncResult [T] => Unit= null): Unit = {
+  def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, resultHandler: io.vertx.core.AsyncResult [T] => Unit): Unit = {
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), funcToMappedHandler[io.vertx.core.AsyncResult[T], io.vertx.core.AsyncResult [T]](x => io.vertx.lang.scala.AsyncResult[T, T](x,(x => x)))(resultHandler))
   }
 
@@ -482,7 +437,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
-  def exceptionHandler(handler: Throwable => Unit= null): io.vertx.scala.core.Vertx = {
+  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.Vertx = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
@@ -505,7 +460,7 @@ object Vertx {
     Vertx.apply(io.vertx.core.Vertx.vertx(options.asJava))
   }
 
-  def clusteredVertx(options: io.vertx.scala.core.VertxOptions)(implicit resultHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.Vertx] => Unit= null): Unit = {
+  def clusteredVertx(options: io.vertx.scala.core.VertxOptions, resultHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.Vertx] => Unit): Unit = {
     io.vertx.core.Vertx.clusteredVertx(options.asJava, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.Vertx], io.vertx.core.AsyncResult [io.vertx.scala.core.Vertx]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.Vertx, io.vertx.scala.core.Vertx](x,(x => if (x == null) null else Vertx.apply(x))))(resultHandler))
   }
 

@@ -29,49 +29,19 @@ import io.vertx.core.Handler
 class HttpServerFileUpload(private val _asJava: io.vertx.core.http.HttpServerFileUpload) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.buffer.Buffer] {
 
-/**
-*exceptionHandler-1-false
-*handler-1-false
-*endHandler-1-false
-*pause-0-false
-*resume-0-false
-*streamToFileSystem-1-false
-*filename-0-false
-*name-0-false
-*contentType-0-false
-*contentTransferEncoding-0-false
-*charset-0-false
-*size-0-false
-*isSizeAvailable-0-false
-*/
-/**
-*exceptionHandler
-*handler
-*endHandler
-*pause
-*resume
-*streamToFileSystem
-*filename
-*name
-*contentType
-*contentTransferEncoding
-*charset
-*size
-*isSizeAvailable
-*/
   def asJava: io.vertx.core.http.HttpServerFileUpload = _asJava
 
-  def exceptionHandler(handler: Throwable => Unit= null): io.vertx.scala.core.http.HttpServerFileUpload = {
+  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpServerFileUpload = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit= null): io.vertx.scala.core.http.HttpServerFileUpload = {
+  def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpServerFileUpload = {
     _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
 
-  def endHandler(endHandler: () => Unit= null): io.vertx.scala.core.http.HttpServerFileUpload = {
+  def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.HttpServerFileUpload = {
     _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }

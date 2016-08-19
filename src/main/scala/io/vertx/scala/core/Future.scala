@@ -28,40 +28,6 @@ import java.util.function.Function
   */
 class Future[T](private val _asJava: io.vertx.core.Future[T]) {
 
-/**
-*isComplete-0-false
-*setHandler-1-false
-*complete-1-false
-*complete-0-false
-*fail-1-false
-*fail-1-false
-*result-0-false
-*cause-0-false
-*succeeded-0-false
-*failed-0-false
-*compose-2-false
-*compose-1-false
-*map-1-false
-*map-1-false
-*completer-0-false
-*/
-/**
-*isComplete
-*setHandler
-*complete
-*complete
-*fail
-*fail
-*result
-*cause
-*succeeded
-*failed
-*compose
-*compose
-*map
-*map
-*completer
-*/
   def asJava: io.vertx.core.Future[T] = _asJava
 
   /**
@@ -82,7 +48,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @param handler the Handler that will be called with the result
     * @return a reference to this, so it can be used fluently
     */
-  def setHandler(handler: io.vertx.core.AsyncResult [T] => Unit= null): io.vertx.scala.core.Future[T] = {
+  def setHandler(handler: io.vertx.core.AsyncResult [T] => Unit): io.vertx.scala.core.Future[T] = {
     _asJava.setHandler(funcToMappedHandler[io.vertx.core.AsyncResult[T], io.vertx.core.AsyncResult [T]](x => io.vertx.lang.scala.AsyncResult[T, T](x,(x => x)))(handler))
     this
   }
@@ -164,7 +130,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @param next the next future
     * @return the next future, used for chaining
     */
-  def compose[U](handler: T => Unit= null, next: io.vertx.scala.core.Future[U]): io.vertx.scala.core.Future[U] = {
+  def compose[U](handler: T => Unit, next: io.vertx.scala.core.Future[U]): io.vertx.scala.core.Future[U] = {
     Future.apply[U](_asJava.compose(funcToHandler(handler), next.asJava.asInstanceOf[io.vertx.core.Future[U]]))
   }
 

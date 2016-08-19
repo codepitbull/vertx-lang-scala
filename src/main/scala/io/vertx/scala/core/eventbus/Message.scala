@@ -35,26 +35,6 @@ import io.vertx.core.Handler
   */
 class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
 
-/**
-*address-0-false
-*headers-0-false
-*body-0-false
-*replyAddress-0-false
-*reply-1-false
-*reply-2-true
-*reply-2-false
-*reply-3-true
-*fail-2-false
-*/
-/**
-*address
-*headers
-*body
-*replyAddress
-*reply
-*reply
-*fail
-*/
   def asJava: io.vertx.core.eventbus.Message[T] = _asJava
 
   /**
@@ -92,13 +72,34 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
   }
 
   /**
+    * Reply to this message.
+    * 
+    * If the message was sent specifying a reply handler, that handler will be
+    * called when it has received a reply. If the message wasn't sent specifying a receipt handler
+    * this method does nothing.
+    * @param message the message to reply with.
+    */
+  def reply(message: AnyRef): Unit = {
+    _asJava.reply(message)
+  }
+
+  /**
     * The same as `reply(R message)` but you can specify handler for the reply - i.e.
     * to receive the reply to the reply.
     * @param message the message to reply with.
     * @param replyHandler the reply handler for the reply.
     */
-  def reply[R](message: AnyRef)(implicit replyHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[R]] => Unit= null): Unit = {
+  def reply[R](message: AnyRef, replyHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[R]] => Unit): Unit = {
     _asJava.reply(message, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[R]], io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[R]]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.eventbus.Message[R], io.vertx.scala.core.eventbus.Message[R]](x,(x => if (x == null) null else Message.apply[R](x))))(replyHandler))
+  }
+
+  /**
+    * Link [[io.vertx.scala.core.eventbus.Message#reply]] but allows you to specify delivery options for the reply.
+    * @param message the reply message
+    * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
+    */
+  def reply(message: AnyRef, options: io.vertx.scala.core.eventbus.DeliveryOptions): Unit = {
+    _asJava.reply(message, options.asJava)
   }
 
   /**
@@ -108,7 +109,7 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     * @param replyHandler the reply handler for the reply.
     */
-  def reply[R](message: AnyRef, options: io.vertx.scala.core.eventbus.DeliveryOptions)(implicit replyHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[R]] => Unit= null): Unit = {
+  def reply[R](message: AnyRef, options: io.vertx.scala.core.eventbus.DeliveryOptions, replyHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[R]] => Unit): Unit = {
     _asJava.reply(message, options.asJava, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[R]], io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[R]]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.eventbus.Message[R], io.vertx.scala.core.eventbus.Message[R]](x,(x => if (x == null) null else Message.apply[R](x))))(replyHandler))
   }
 
