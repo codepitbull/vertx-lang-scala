@@ -13,11 +13,11 @@ class ScalaVerticleTest extends FlatSpec with Matchers {
   "TestVerticle" should "reply to a hello message" in {
     val cl = new CountDownLatch(1)
     val vertx = Vertx.vertx
-    vertx.deployVerticleWithHandler(classOf[TestVerticle].getName)(r => cl.countDown())
+    vertx.deployVerticle(classOf[TestVerticle].getName)(r => cl.countDown())
     val delay = cl.await(100, TimeUnit.MILLISECONDS)
     assert(delay, "Deploy took longer than 100 ms")
     val cl2 = new CountDownLatch(1)
-    vertx.eventBus.sendWithHandler[String]("hello", "msg")( r => cl2.countDown())
+    vertx.eventBus.send[String]("hello", "msg", r => cl2.countDown())
     assert(cl2.await(100, TimeUnit.MILLISECONDS), "No answer within 100 ms")
   }
 }

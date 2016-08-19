@@ -27,9 +27,14 @@ import io.vertx.scala.core.buffer.Buffer
 class HttpFrame(private val _asJava: io.vertx.core.http.HttpFrame) {
 
 /**
-*payload-0-false
-*flags-0-false
 *type-0-false
+*flags-0-false
+*payload-0-false
+*/
+/**
+*type
+*flags
+*payload
 */
   def asJava: io.vertx.core.http.HttpFrame = _asJava
 

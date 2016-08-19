@@ -34,9 +34,14 @@ class NetClient(private val _asJava: io.vertx.core.net.NetClient)
     extends io.vertx.scala.core.metrics.Measured {
 
 /**
-*close-0-false
 *isMetricsEnabled-0-false
 *connect-3-true
+*close-0-false
+*/
+/**
+*isMetricsEnabled
+*connect
+*close
 */
   def asJava: io.vertx.core.net.NetClient = _asJava
 
@@ -57,7 +62,7 @@ class NetClient(private val _asJava: io.vertx.core.net.NetClient)
     * @param host the host
     * @return a reference to this, so the API can be used fluently
     */
-  def connectWithHandler(port: Int, host: String)( connectHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetSocket] => Unit): io.vertx.scala.core.net.NetClient = {
+  def connect(port: Int, host: String)(implicit connectHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetSocket] => Unit= null): io.vertx.scala.core.net.NetClient = {
     _asJava.connect(port, host, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.net.NetSocket], io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetSocket]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.net.NetSocket, io.vertx.scala.core.net.NetSocket](x,(x => if (x == null) null else NetSocket.apply(x))))(connectHandler))
     this
   }

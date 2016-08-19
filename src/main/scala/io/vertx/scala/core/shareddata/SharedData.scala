@@ -37,11 +37,18 @@ import io.vertx.core.Handler
 class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
 
 /**
-*getLockWithTimeout-3-true
 *getClusterWideMap-2-true
+*getLock-2-true
+*getLockWithTimeout-3-true
 *getCounter-2-true
 *getLocalMap-1-false
-*getLock-2-true
+*/
+/**
+*getClusterWideMap
+*getLock
+*getLockWithTimeout
+*getCounter
+*getLocalMap
 */
   def asJava: io.vertx.core.shareddata.SharedData = _asJava
 
@@ -51,7 +58,7 @@ class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
     * @param name the name of the map
     * @param resultHandler the map will be returned asynchronously in this handler
     */
-  def getClusterWideMapWithHandler[K, V](name: String)( resultHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.shareddata.AsyncMap[K, V]] => Unit): Unit = {
+  def getClusterWideMap[K, V](name: String)(implicit resultHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.shareddata.AsyncMap[K, V]] => Unit= null): Unit = {
     _asJava.getClusterWideMap(name, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.shareddata.AsyncMap[K,V]], io.vertx.core.AsyncResult [io.vertx.scala.core.shareddata.AsyncMap[K, V]]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.shareddata.AsyncMap[K,V], io.vertx.scala.core.shareddata.AsyncMap[K, V]](x,(x => if (x == null) null else AsyncMap.apply[K,V](x))))(resultHandler))
   }
 
@@ -60,7 +67,7 @@ class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
     * @param name the name of the lock
     * @param resultHandler the handler
     */
-  def getLockWithHandler(name: String)( resultHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.shareddata.Lock] => Unit): Unit = {
+  def getLock(name: String)(implicit resultHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.shareddata.Lock] => Unit= null): Unit = {
     _asJava.getLock(name, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.shareddata.Lock], io.vertx.core.AsyncResult [io.vertx.scala.core.shareddata.Lock]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.shareddata.Lock, io.vertx.scala.core.shareddata.Lock](x,(x => if (x == null) null else Lock.apply(x))))(resultHandler))
   }
 
@@ -71,7 +78,7 @@ class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
     * @param timeout the timeout in ms
     * @param resultHandler the handler
     */
-  def getLockWithTimeoutWithHandler(name: String, timeout: Long)( resultHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.shareddata.Lock] => Unit): Unit = {
+  def getLockWithTimeout(name: String, timeout: Long)(implicit resultHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.shareddata.Lock] => Unit= null): Unit = {
     _asJava.getLockWithTimeout(name, timeout, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.shareddata.Lock], io.vertx.core.AsyncResult [io.vertx.scala.core.shareddata.Lock]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.shareddata.Lock, io.vertx.scala.core.shareddata.Lock](x,(x => if (x == null) null else Lock.apply(x))))(resultHandler))
   }
 
@@ -80,7 +87,7 @@ class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
     * @param name the name of the counter.
     * @param resultHandler the handler
     */
-  def getCounterWithHandler(name: String)( resultHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.shareddata.Counter] => Unit): Unit = {
+  def getCounter(name: String)(implicit resultHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.shareddata.Counter] => Unit= null): Unit = {
     _asJava.getCounter(name, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.shareddata.Counter], io.vertx.core.AsyncResult [io.vertx.scala.core.shareddata.Counter]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.shareddata.Counter, io.vertx.scala.core.shareddata.Counter](x,(x => if (x == null) null else Counter.apply(x))))(resultHandler))
   }
 

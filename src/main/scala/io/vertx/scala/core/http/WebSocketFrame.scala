@@ -34,12 +34,20 @@ import io.vertx.scala.core.buffer.Buffer
 class WebSocketFrame(private val _asJava: io.vertx.core.http.WebSocketFrame) {
 
 /**
-*textData-0-false
-*isContinuation-0-false
-*isFinal-0-false
-*isBinary-0-false
 *isText-0-false
+*isBinary-0-false
+*isContinuation-0-false
+*textData-0-false
 *binaryData-0-false
+*isFinal-0-false
+*/
+/**
+*isText
+*isBinary
+*isContinuation
+*textData
+*binaryData
+*isFinal
 */
   def asJava: io.vertx.core.http.WebSocketFrame = _asJava
 

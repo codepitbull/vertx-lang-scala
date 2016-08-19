@@ -26,9 +26,14 @@ import scala.collection.JavaConverters._
 class FileSystemProps(private val _asJava: io.vertx.core.file.FileSystemProps) {
 
 /**
-*usableSpace-0-false
-*unallocatedSpace-0-false
 *totalSpace-0-false
+*unallocatedSpace-0-false
+*usableSpace-0-false
+*/
+/**
+*totalSpace
+*unallocatedSpace
+*usableSpace
 */
   def asJava: io.vertx.core.file.FileSystemProps = _asJava
 

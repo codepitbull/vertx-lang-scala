@@ -29,6 +29,9 @@ trait StreamBase {
 /**
 *exceptionHandler-1-false
 */
+/**
+*exceptionHandler
+*/
   def asJava: java.lang.Object
 
   /**
@@ -36,7 +39,7 @@ trait StreamBase {
   * @param handler the handler
   * @return a reference to this, so the API can be used fluently
   */
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.StreamBase
+  def exceptionHandler(handler: Throwable => Unit= null): io.vertx.scala.core.streams.StreamBase
 
 }
 
@@ -54,7 +57,7 @@ object StreamBase {
       * @param handler the handler
       * @return a reference to this, so the API can be used fluently
       */
-    def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.StreamBase = {
+    def exceptionHandler(handler: Throwable => Unit= null): io.vertx.scala.core.streams.StreamBase = {
         _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
       this
     }

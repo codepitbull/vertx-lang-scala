@@ -32,10 +32,16 @@ class WorkerExecutor(private val _asJava: io.vertx.core.WorkerExecutor)
     extends io.vertx.scala.core.metrics.Measured {
 
 /**
-*executeBlocking-2-true
-*close-0-false
 *isMetricsEnabled-0-false
 *executeBlocking-3-true
+*executeBlocking-2-true
+*close-0-false
+*/
+/**
+*isMetricsEnabled
+*executeBlocking
+*executeBlocking
+*close
 */
   def asJava: io.vertx.core.WorkerExecutor = _asJava
 
@@ -65,14 +71,14 @@ class WorkerExecutor(private val _asJava: io.vertx.core.WorkerExecutor)
     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
     * @param resultHandler handler that will be called when the blocking code is complete
     */
-  def executeBlockingWithHandler[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean)( resultHandler: io.vertx.core.AsyncResult [T] => Unit): Unit = {
+  def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit= null, ordered: Boolean, resultHandler: io.vertx.core.AsyncResult [T] => Unit= null): Unit = {
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, funcToMappedHandler[io.vertx.core.AsyncResult[T], io.vertx.core.AsyncResult [T]](x => io.vertx.lang.scala.AsyncResult[T, T](x,(x => x)))(resultHandler))
   }
 
   /**
     * Like [[io.vertx.scala.core.WorkerExecutor#executeBlocking]] called with ordered = true.
     */
-  def executeBlockingWithHandler[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit)( resultHandler: io.vertx.core.AsyncResult [T] => Unit): Unit = {
+  def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit= null, resultHandler: io.vertx.core.AsyncResult [T] => Unit= null): Unit = {
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), funcToMappedHandler[io.vertx.core.AsyncResult[T], io.vertx.core.AsyncResult [T]](x => io.vertx.lang.scala.AsyncResult[T, T](x,(x => x)))(resultHandler))
   }
 
