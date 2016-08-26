@@ -56,8 +56,10 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     MessageProducer.apply[T](_asJava.send(message))
   }
 
-  def send[R](message: T, replyHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[R]] => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+  def sendFuture[R](message: T): concurrent.Future[io.vertx.scala.core.eventbus.Message[R]] = {
+    val promiseAndHandler = handlerForAsyncResult[io.vertx.core.eventbus.Message<R>]
     MessageProducer.apply[T](_asJava.send(message, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[R]], io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[R]]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.eventbus.Message[R], io.vertx.scala.core.eventbus.Message[R]](x,(x => if (x == null) null else Message.apply[R](x))))(replyHandler)))
+    promiseAndHandler._2.future
   }
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {

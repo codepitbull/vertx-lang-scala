@@ -106,8 +106,10 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
     * Optional method which can be called to indicate when the registration has been propagated across the cluster.
     * @param completionHandler the completion handler
     */
-  def completionHandler(completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): Unit = {
+  def completionHandlerFuture(): concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
     _asJava.completionHandler(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
+    promiseAndHandler._2.future
   }
 
   /**
@@ -121,8 +123,10 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
     * Unregisters the handler which created this registration
     * @param completionHandler the handler called when the unregister is done. For example in a cluster when all nodes of the event bus have been unregistered.
     */
-  def unregister(completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): Unit = {
+  def unregisterFuture(): concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
     _asJava.unregister(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
+    promiseAndHandler._2.future
   }
 
 }

@@ -216,7 +216,9 @@
   }
 
   def returnTypeOf(method) {
-    if (method.fluent) {
+    if(shouldMethodReturnAFuture(method)) {
+      'concurrent.Future['+toScalaType(typeOfReturnedFuture(method))+']';
+    } else if (method.fluent) {
       toOptionIfNullable(toScalaType(method.returnType), method.returnType);
     } else if (method.returnType instanceof io.vertx.codegen.type.VoidTypeInfo) {
       'Unit';
@@ -244,12 +246,15 @@
         handlerCounter += 1;
     }
     for (param : method.params) {
-        if (first) {
-          first = false;
-        } else {
-          paramList += ', ';
+        if(!(param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT && !method.isFluent)) {
+
+            if (first) {
+              first = false;
+            } else {
+              paramList += ', ';
+            }
+            paramList += escapeIfKeyword(param.name) + ': ' + toOptionIfNullableAndParam(toScalaType(param.type), param.type, param);
         }
-        paramList += escapeIfKeyword(param.name) + ': ' + toOptionIfNullableAndParam(toScalaType(param.type), param.type, param);
     }
     paramList;
   }
@@ -261,6 +266,15 @@
     } else {
       params = '(' + params + ')';
     }
+  }
+
+  def shouldMethodReturnAFuture(method) {
+    var size = method.params.size;
+    return size > 0 && method.params[size-1].type.kind == CLASS_HANDLER && method.params[size-1].type.args[0].kind == CLASS_ASYNC_RESULT;
+  }
+
+  def typeOfReturnedFuture(method) {
+    return method.params[method.params.size-1].type.args[0].args[0];
   }
 
   def createGenericFromTypeWithParamName(type, paramName) {

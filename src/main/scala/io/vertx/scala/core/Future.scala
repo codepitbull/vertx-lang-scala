@@ -48,9 +48,11 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @param handler the Handler that will be called with the result
     * @return a reference to this, so it can be used fluently
     */
-  def setHandler(handler: io.vertx.core.AsyncResult [T] => Unit): io.vertx.scala.core.Future[T] = {
+  def setHandlerFuture(handler: io.vertx.core.AsyncResult [T] => Unit): concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResult[T]
     _asJava.setHandler(funcToMappedHandler[io.vertx.core.AsyncResult[T], io.vertx.core.AsyncResult [T]](x => io.vertx.lang.scala.AsyncResult[T, T](x,(x => x)))(handler))
     this
+    promiseAndHandler._2.future
   }
 
   /**

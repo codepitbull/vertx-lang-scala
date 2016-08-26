@@ -67,9 +67,11 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @param replyHandler reply handler will be called when any reply from the recipient is received, may be `null`
     * @return a reference to this, so the API can be used fluently
     */
-  def send[T](address: String, message: AnyRef, replyHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[T]] => Unit): io.vertx.scala.core.eventbus.EventBus = {
+  def sendFuture[T](address: String, message: AnyRef, replyHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[T]] => Unit): concurrent.Future[io.vertx.scala.core.eventbus.Message[T]] = {
+    val promiseAndHandler = handlerForAsyncResult[io.vertx.core.eventbus.Message<T>]
     _asJava.send(address, message, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[T]], io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[T]]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.eventbus.Message[T], io.vertx.scala.core.eventbus.Message[T]](x,(x => if (x == null) null else Message.apply[T](x))))(replyHandler))
     this
+    promiseAndHandler._2.future
   }
 
   /**
@@ -93,9 +95,11 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @param replyHandler reply handler will be called when any reply from the recipient is received, may be `null`
     * @return a reference to this, so the API can be used fluently
     */
-  def send[T](address: String, message: AnyRef, options: io.vertx.scala.core.eventbus.DeliveryOptions, replyHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[T]] => Unit): io.vertx.scala.core.eventbus.EventBus = {
+  def sendFuture[T](address: String, message: AnyRef, options: io.vertx.scala.core.eventbus.DeliveryOptions, replyHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[T]] => Unit): concurrent.Future[io.vertx.scala.core.eventbus.Message[T]] = {
+    val promiseAndHandler = handlerForAsyncResult[io.vertx.core.eventbus.Message<T>]
     _asJava.send(address, message, options.asJava, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[T]], io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[T]]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.eventbus.Message[T], io.vertx.scala.core.eventbus.Message[T]](x,(x => if (x == null) null else Message.apply[T](x))))(replyHandler))
     this
+    promiseAndHandler._2.future
   }
 
   /**

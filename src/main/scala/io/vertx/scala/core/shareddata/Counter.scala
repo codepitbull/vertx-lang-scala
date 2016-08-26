@@ -33,32 +33,40 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
     * Get the current value of the counter
     * @param resultHandler handler which will be passed the value
     */
-  def get(resultHandler: io.vertx.core.AsyncResult [Long] => Unit): Unit = {
+  def getFuture(): concurrent.Future[Long] = {
+    val promiseAndHandler = handlerForAsyncResult[java.lang.Long]
     _asJava.get(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Long], io.vertx.core.AsyncResult [Long]](x => io.vertx.lang.scala.AsyncResult[java.lang.Long, Long](x,(x => x)))(resultHandler))
+    promiseAndHandler._2.future
   }
 
   /**
     * Increment the counter atomically and return the new count
     * @param resultHandler handler which will be passed the value
     */
-  def incrementAndGet(resultHandler: io.vertx.core.AsyncResult [Long] => Unit): Unit = {
+  def incrementAndGetFuture(): concurrent.Future[Long] = {
+    val promiseAndHandler = handlerForAsyncResult[java.lang.Long]
     _asJava.incrementAndGet(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Long], io.vertx.core.AsyncResult [Long]](x => io.vertx.lang.scala.AsyncResult[java.lang.Long, Long](x,(x => x)))(resultHandler))
+    promiseAndHandler._2.future
   }
 
   /**
     * Increment the counter atomically and return the value before the increment.
     * @param resultHandler handler which will be passed the value
     */
-  def getAndIncrement(resultHandler: io.vertx.core.AsyncResult [Long] => Unit): Unit = {
+  def getAndIncrementFuture(): concurrent.Future[Long] = {
+    val promiseAndHandler = handlerForAsyncResult[java.lang.Long]
     _asJava.getAndIncrement(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Long], io.vertx.core.AsyncResult [Long]](x => io.vertx.lang.scala.AsyncResult[java.lang.Long, Long](x,(x => x)))(resultHandler))
+    promiseAndHandler._2.future
   }
 
   /**
     * Decrement the counter atomically and return the new count
     * @param resultHandler handler which will be passed the value
     */
-  def decrementAndGet(resultHandler: io.vertx.core.AsyncResult [Long] => Unit): Unit = {
+  def decrementAndGetFuture(): concurrent.Future[Long] = {
+    val promiseAndHandler = handlerForAsyncResult[java.lang.Long]
     _asJava.decrementAndGet(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Long], io.vertx.core.AsyncResult [Long]](x => io.vertx.lang.scala.AsyncResult[java.lang.Long, Long](x,(x => x)))(resultHandler))
+    promiseAndHandler._2.future
   }
 
   /**
@@ -66,8 +74,10 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
     * @param value the value to add
     * @param resultHandler handler which will be passed the value
     */
-  def addAndGet(value: Long, resultHandler: io.vertx.core.AsyncResult [Long] => Unit): Unit = {
+  def addAndGetFuture(value: Long): concurrent.Future[Long] = {
+    val promiseAndHandler = handlerForAsyncResult[java.lang.Long]
     _asJava.addAndGet(value, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Long], io.vertx.core.AsyncResult [Long]](x => io.vertx.lang.scala.AsyncResult[java.lang.Long, Long](x,(x => x)))(resultHandler))
+    promiseAndHandler._2.future
   }
 
   /**
@@ -75,8 +85,10 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
     * @param value the value to add
     * @param resultHandler handler which will be passed the value
     */
-  def getAndAdd(value: Long, resultHandler: io.vertx.core.AsyncResult [Long] => Unit): Unit = {
+  def getAndAddFuture(value: Long): concurrent.Future[Long] = {
+    val promiseAndHandler = handlerForAsyncResult[java.lang.Long]
     _asJava.getAndAdd(value, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Long], io.vertx.core.AsyncResult [Long]](x => io.vertx.lang.scala.AsyncResult[java.lang.Long, Long](x,(x => x)))(resultHandler))
+    promiseAndHandler._2.future
   }
 
   /**
@@ -86,8 +98,10 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
     * @param value the new value
     * @param resultHandler the handler will be passed true on success
     */
-  def compareAndSet(expected: Long, value: Long, resultHandler: io.vertx.core.AsyncResult [Boolean] => Unit): Unit = {
+  def compareAndSetFuture(expected: Long, value: Long): concurrent.Future[Boolean] = {
+    val promiseAndHandler = handlerForAsyncResult[java.lang.Boolean]
     _asJava.compareAndSet(expected, value, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Boolean], io.vertx.core.AsyncResult [Boolean]](x => io.vertx.lang.scala.AsyncResult[java.lang.Boolean, Boolean](x,(x => x)))(resultHandler))
+    promiseAndHandler._2.future
   }
 
 }
