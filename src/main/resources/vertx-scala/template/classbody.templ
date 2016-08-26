@@ -20,24 +20,26 @@
 @{methodInvocation('_asJava', method, indentation + '    ');}
 @{indentation}  }\n\n
 @else{}
+@if{future}
+@{indentation}  def @{methodName}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+@{indentation}    val promiseAndHandler = handlerForAsyncResult[@{typeOfReturnedFuture(method)}]\n
+@{indentation}@{methodInvocation('_asJava', method, indentation + '    ');}
+@{indentation}    promiseAndHandler._2.future\n
+@{indentation}  }\n\n
+@else{}
 @{indentation}  def @{methodName}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 @if{method.cacheReturn && !method.fluent}
 @{indentation}    if(cached_@{cacheDecls.size()} == null) {\n
 @{indentation}      cached_@{cacheDecls.size()}=
 @end{}
-@if{future}
-@{indentation}    val promiseAndHandler = handlerForAsyncResult[@{typeOfReturnedFuture(method)}]\n
-@end{}
 @{indentation}@{methodInvocation('_asJava', method, indentation + '    ');}
-@if{future}
-@{indentation}    promiseAndHandler._2.future\n
-@end{}
 @if{method.cacheReturn && !method.fluent}
 @{indentation}    }\n
 @{indentation}    cached_@{cacheDecls.size()}\n
 @code{cacheDecls.add('private var cached_' + cacheDecls.size() +': '+ returnTypeOf(method) + ' = _')}
 @end{}
 @{indentation}  }\n\n
+@end{}
 @end{}
 @end{}
 @end{}

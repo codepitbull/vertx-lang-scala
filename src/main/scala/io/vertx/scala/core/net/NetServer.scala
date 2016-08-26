@@ -77,8 +77,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     */
   def listenFuture(listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetServer] => Unit): concurrent.Future[io.vertx.scala.core.net.NetServer] = {
     val promiseAndHandler = handlerForAsyncResult[io.vertx.core.net.NetServer]
-    _asJava.listen(funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.net.NetServer], io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetServer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.net.NetServer, io.vertx.scala.core.net.NetServer](x,(x => if (x == null) null else NetServer.apply(x))))(listenHandler))
-    this
+    _asJava.listen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -107,8 +106,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     */
   def listenFuture(port: Int, host: String, listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetServer] => Unit): concurrent.Future[io.vertx.scala.core.net.NetServer] = {
     val promiseAndHandler = handlerForAsyncResult[io.vertx.core.net.NetServer]
-    _asJava.listen(port, host, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.net.NetServer], io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetServer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.net.NetServer, io.vertx.scala.core.net.NetServer](x,(x => if (x == null) null else NetServer.apply(x))))(listenHandler))
-    this
+    _asJava.listen(port, host, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -134,8 +132,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     */
   def listenFuture(port: Int, listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetServer] => Unit): concurrent.Future[io.vertx.scala.core.net.NetServer] = {
     val promiseAndHandler = handlerForAsyncResult[io.vertx.core.net.NetServer]
-    _asJava.listen(port, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.net.NetServer], io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetServer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.net.NetServer, io.vertx.scala.core.net.NetServer](x,(x => if (x == null) null else NetServer.apply(x))))(listenHandler))
-    this
+    _asJava.listen(port, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -153,7 +150,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     */
   def closeFuture(): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.close(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
+    _asJava.close(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

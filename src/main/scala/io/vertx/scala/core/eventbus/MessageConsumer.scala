@@ -108,7 +108,7 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
     */
   def completionHandlerFuture(): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.completionHandler(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
+    _asJava.completionHandler(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -125,7 +125,7 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
     */
   def unregisterFuture(): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.unregister(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
+    _asJava.unregister(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

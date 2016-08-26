@@ -52,8 +52,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def copyFuture(from: String, to: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.copy(from, to, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.copy(from, to, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -79,8 +78,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def copyRecursiveFuture(from: String, to: String, recursive: Boolean, handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.copyRecursive(from, to, recursive, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.copyRecursive(from, to, recursive, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -103,8 +101,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def moveFuture(from: String, to: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.move(from, to, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.move(from, to, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -127,8 +124,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def truncateFuture(path: String, len: Long, handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.truncate(path, len, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.truncate(path, len, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -152,8 +148,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def chmodFuture(path: String, perms: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.chmod(path, perms, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.chmod(path, perms, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -180,8 +175,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def chmodRecursiveFuture(path: String, perms: String, dirPerms: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.chmodRecursive(path, perms, dirPerms, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.chmodRecursive(path, perms, dirPerms, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -203,8 +197,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def chownFuture(path: String, user: scala.Option[String], group: scala.Option[String], handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.chown(path, (if(user.isDefined) user.get else null), (if(group.isDefined) group.get else null), funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.chown(path, (if(user.isDefined) user.get else null), (if(group.isDefined) group.get else null), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -227,8 +220,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def propsFuture(path: String, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.file.FileProps] => Unit): concurrent.Future[io.vertx.scala.core.file.FileProps] = {
     val promiseAndHandler = handlerForAsyncResult[io.vertx.core.file.FileProps]
-    _asJava.props(path, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.file.FileProps], io.vertx.core.AsyncResult [io.vertx.scala.core.file.FileProps]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.file.FileProps, io.vertx.scala.core.file.FileProps](x,(x => if (x == null) null else FileProps.apply(x))))(handler))
-    this
+    _asJava.props(path, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -249,8 +241,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def lpropsFuture(path: String, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.file.FileProps] => Unit): concurrent.Future[io.vertx.scala.core.file.FileProps] = {
     val promiseAndHandler = handlerForAsyncResult[io.vertx.core.file.FileProps]
-    _asJava.lprops(path, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.file.FileProps], io.vertx.core.AsyncResult [io.vertx.scala.core.file.FileProps]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.file.FileProps, io.vertx.scala.core.file.FileProps](x,(x => if (x == null) null else FileProps.apply(x))))(handler))
-    this
+    _asJava.lprops(path, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -270,8 +261,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def linkFuture(link: String, existing: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.link(link, existing, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.link(link, existing, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -292,8 +282,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def symlinkFuture(link: String, existing: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.symlink(link, existing, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.symlink(link, existing, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -313,8 +302,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def unlinkFuture(link: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.unlink(link, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.unlink(link, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -334,8 +322,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def readSymlinkFuture(link: String, handler: io.vertx.core.AsyncResult [String] => Unit): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.String]
-    _asJava.readSymlink(link, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x)))(handler))
-    this
+    _asJava.readSymlink(link, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -354,8 +341,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def deleteFuture(path: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.delete(path, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.delete(path, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -379,8 +365,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def deleteRecursiveFuture(path: String, recursive: Boolean, handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.deleteRecursive(path, recursive, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.deleteRecursive(path, recursive, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -402,8 +387,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def mkdirFuture(path: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.mkdir(path, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.mkdir(path, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -431,8 +415,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def mkdirFuture(path: String, perms: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.mkdir(path, perms, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.mkdir(path, perms, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -454,8 +437,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def mkdirsFuture(path: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.mkdirs(path, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.mkdirs(path, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -483,8 +465,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def mkdirsFuture(path: String, perms: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.mkdirs(path, perms, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.mkdirs(path, perms, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -506,8 +487,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def readDirFuture(path: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResult[java.util.List<java.lang.String>]
-    _asJava.readDir(path, funcToMappedHandler[io.vertx.core.AsyncResult[java.util.List[java.lang.String]], io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]]](x => io.vertx.lang.scala.AsyncResult[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x,x => if (x == null) null else x.asScala))(handler))
-    this
+    _asJava.readDir(path, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -532,8 +512,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def readDirFuture(path: String, filter: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResult[java.util.List<java.lang.String>]
-    _asJava.readDir(path, filter, funcToMappedHandler[io.vertx.core.AsyncResult[java.util.List[java.lang.String]], io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]]](x => io.vertx.lang.scala.AsyncResult[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x,x => if (x == null) null else x.asScala))(handler))
-    this
+    _asJava.readDir(path, filter, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -554,8 +533,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def readFileFuture(path: String, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.buffer.Buffer] => Unit): concurrent.Future[io.vertx.scala.core.buffer.Buffer] = {
     val promiseAndHandler = handlerForAsyncResult[io.vertx.core.buffer.Buffer]
-    _asJava.readFile(path, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.buffer.Buffer], io.vertx.core.AsyncResult [io.vertx.scala.core.buffer.Buffer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.buffer.Buffer, io.vertx.scala.core.buffer.Buffer](x,(x => if (x == null) null else Buffer.apply(x))))(handler))
-    this
+    _asJava.readFile(path, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -575,8 +553,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def writeFileFuture(path: String, data: io.vertx.scala.core.buffer.Buffer, handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.writeFile(path, data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.writeFile(path, data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -598,8 +575,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def openFuture(path: String, options: io.vertx.scala.core.file.OpenOptions, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.file.AsyncFile] => Unit): concurrent.Future[io.vertx.scala.core.file.AsyncFile] = {
     val promiseAndHandler = handlerForAsyncResult[io.vertx.core.file.AsyncFile]
-    _asJava.open(path, options.asJava, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.file.AsyncFile], io.vertx.core.AsyncResult [io.vertx.scala.core.file.AsyncFile]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.file.AsyncFile, io.vertx.scala.core.file.AsyncFile](x,(x => if (x == null) null else AsyncFile.apply(x))))(handler))
-    this
+    _asJava.open(path, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -618,8 +594,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def createFileFuture(path: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.createFile(path, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.createFile(path, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -640,8 +615,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def createFileFuture(path: String, perms: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.createFile(path, perms, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.createFile(path, perms, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -661,8 +635,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def existsFuture(path: String, handler: io.vertx.core.AsyncResult [Boolean] => Unit): concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Boolean]
-    _asJava.exists(path, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Boolean], io.vertx.core.AsyncResult [Boolean]](x => io.vertx.lang.scala.AsyncResult[java.lang.Boolean, Boolean](x,(x => x)))(handler))
-    this
+    _asJava.exists(path, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -681,8 +654,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def fsPropsFuture(path: String, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.file.FileSystemProps] => Unit): concurrent.Future[io.vertx.scala.core.file.FileSystemProps] = {
     val promiseAndHandler = handlerForAsyncResult[io.vertx.core.file.FileSystemProps]
-    _asJava.fsProps(path, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.file.FileSystemProps], io.vertx.core.AsyncResult [io.vertx.scala.core.file.FileSystemProps]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.file.FileSystemProps, io.vertx.scala.core.file.FileSystemProps](x,(x => if (x == null) null else FileSystemProps.apply(x))))(handler))
-    this
+    _asJava.fsProps(path, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

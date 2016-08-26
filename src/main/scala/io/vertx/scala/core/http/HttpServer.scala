@@ -132,8 +132,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     */
   def listenFuture(port: Int, host: String, listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServer] => Unit): concurrent.Future[io.vertx.scala.core.http.HttpServer] = {
     val promiseAndHandler = handlerForAsyncResult[io.vertx.core.http.HttpServer]
-    _asJava.listen(port, host, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.http.HttpServer], io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.http.HttpServer, io.vertx.scala.core.http.HttpServer](x,(x => if (x == null) null else HttpServer.apply(x))))(listenHandler))
-    this
+    _asJava.listen(port, host, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -155,8 +154,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     */
   def listenFuture(port: Int, listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServer] => Unit): concurrent.Future[io.vertx.scala.core.http.HttpServer] = {
     val promiseAndHandler = handlerForAsyncResult[io.vertx.core.http.HttpServer]
-    _asJava.listen(port, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.http.HttpServer], io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.http.HttpServer, io.vertx.scala.core.http.HttpServer](x,(x => if (x == null) null else HttpServer.apply(x))))(listenHandler))
-    this
+    _asJava.listen(port, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -166,8 +164,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     */
   def listenFuture(listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServer] => Unit): concurrent.Future[io.vertx.scala.core.http.HttpServer] = {
     val promiseAndHandler = handlerForAsyncResult[io.vertx.core.http.HttpServer]
-    _asJava.listen(funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.http.HttpServer], io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.http.HttpServer, io.vertx.scala.core.http.HttpServer](x,(x => if (x == null) null else HttpServer.apply(x))))(listenHandler))
-    this
+    _asJava.listen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -186,7 +183,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     */
   def closeFuture(): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.close(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
+    _asJava.close(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
