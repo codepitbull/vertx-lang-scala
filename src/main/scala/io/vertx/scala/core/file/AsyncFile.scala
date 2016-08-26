@@ -114,7 +114,7 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     */
   def closeFuture(): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.close(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
+    _asJava.close(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -135,8 +135,7 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     */
   def writeFuture(buffer: io.vertx.scala.core.buffer.Buffer, position: Long, handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.write(buffer.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], position, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.write(buffer.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], position, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -158,8 +157,7 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     */
   def readFuture(buffer: io.vertx.scala.core.buffer.Buffer, offset: Int, position: Long, length: Int, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.buffer.Buffer] => Unit): concurrent.Future[io.vertx.scala.core.buffer.Buffer] = {
     val promiseAndHandler = handlerForAsyncResult[io.vertx.core.buffer.Buffer]
-    _asJava.read(buffer.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], offset, position, length, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.buffer.Buffer], io.vertx.core.AsyncResult [io.vertx.scala.core.buffer.Buffer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.buffer.Buffer, io.vertx.scala.core.buffer.Buffer](x,(x => if (x == null) null else Buffer.apply(x))))(handler))
-    this
+    _asJava.read(buffer.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], offset, position, length, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -181,8 +179,7 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     */
   def flushFuture(handler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.flush(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+    _asJava.flush(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

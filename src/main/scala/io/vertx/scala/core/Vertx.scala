@@ -287,7 +287,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     */
   def closeFuture(): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.close(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
+    _asJava.close(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -315,7 +315,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     */
   def deployVerticleFuture(name: String): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.String]
-    _asJava.deployVerticle(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x)))(completionHandler))
+    _asJava.deployVerticle(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -338,7 +338,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     */
   def deployVerticleFuture(name: String, options: io.vertx.scala.core.DeploymentOptions): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.String]
-    _asJava.deployVerticle(name, options.asJava, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x)))(completionHandler))
+    _asJava.deployVerticle(name, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -359,7 +359,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     */
   def undeployFuture(deploymentID: String): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
-    _asJava.undeploy(deploymentID, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
+    _asJava.undeploy(deploymentID, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -399,7 +399,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     */
   def executeBlockingFuture[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResult[T]
-    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, funcToMappedHandler[io.vertx.core.AsyncResult[T], io.vertx.core.AsyncResult [T]](x => io.vertx.lang.scala.AsyncResult[T, T](x,(x => x)))(resultHandler))
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -408,7 +408,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     */
   def executeBlockingFuture[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResult[T]
-    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), funcToMappedHandler[io.vertx.core.AsyncResult[T], io.vertx.core.AsyncResult [T]](x => io.vertx.lang.scala.AsyncResult[T, T](x,(x => x)))(resultHandler))
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -473,7 +473,7 @@ object Vertx {
   }
 
   def clusteredVertx(options: io.vertx.scala.core.VertxOptions): concurrent.Future[io.vertx.scala.core.Vertx] = {
-    io.vertx.core.Vertx.clusteredVertx(options.asJava, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.Vertx], io.vertx.core.AsyncResult [io.vertx.scala.core.Vertx]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.Vertx, io.vertx.scala.core.Vertx](x,(x => if (x == null) null else Vertx.apply(x))))(resultHandler))
+    io.vertx.core.Vertx.clusteredVertx(options.asJava, promiseAndHandler._1)
   }
 
   def currentContext(): scala.Option[io.vertx.scala.core.Context] = {

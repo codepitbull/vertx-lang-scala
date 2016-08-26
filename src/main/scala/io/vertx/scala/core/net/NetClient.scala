@@ -54,8 +54,7 @@ class NetClient(private val _asJava: io.vertx.core.net.NetClient)
     */
   def connectFuture(port: Int, host: String, connectHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetSocket] => Unit): concurrent.Future[io.vertx.scala.core.net.NetSocket] = {
     val promiseAndHandler = handlerForAsyncResult[io.vertx.core.net.NetSocket]
-    _asJava.connect(port, host, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.net.NetSocket], io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetSocket]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.net.NetSocket, io.vertx.scala.core.net.NetSocket](x,(x => if (x == null) null else NetSocket.apply(x))))(connectHandler))
-    this
+    _asJava.connect(port, host, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

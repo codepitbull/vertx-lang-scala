@@ -405,9 +405,15 @@
     return invocation;
   }
 
-  def handleMethodParams(params) {
+  def handleMethodParams(method) {
     var first = true;
     var invocation = '';
+    var future = shouldMethodReturnAFuture(method);
+    var params = method.params;
+    if(future) {
+      params = new java.util.ArrayList(params);
+      params.remove(params.size - 1);
+    }
     for (param : params) {
       if (first) {
         first = false;
@@ -429,8 +435,7 @@
         } else if (param.type.kind == CLASS_MAP) {
         /*TODO do the same dance with x.java as above */
           if (param.type.args[0].kind == CLASS_API &&
-              param.type.args[1].kind == CLASS_API)
-          {
+              param.type.args[1].kind == CLASS_API) {
             invocation += handleOptionForCollection(param, '.map(kv => (kv._1.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[0]) + '], kv._2.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[1]) + '])).asJava');
           } else if (param.type.args[0].kind == CLASS_API) {
             invocation += handleOptionForCollection(param, '.map(kv => (kv._1.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[0]) + '], kv._2:' + param.type.args[1].name + ')).asJava');
@@ -449,6 +454,12 @@
           invocation += handleOption(param);
         }
       }
+    }
+    if(future) {
+      if (!first) {
+        invocation += ', ';
+      }
+      invocation += 'promiseAndHandler._1';
     }
     return invocation;
   }
@@ -493,13 +504,13 @@
   def methodInvocation(target, method, indentation) {
     var invocation = '';
     var fluent = method.isFluent();
+    var future = shouldMethodReturnAFuture(method);
     var wrap = false;
 
     if (method.returnType.kind == CLASS_HANDLER && method.returnType.args[0].kind == CLASS_ASYNC_RESULT && method.returnType.args[0].args[0].kind == CLASS_API) {
-      invocation += 'v => ' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method.params) +').handle(io.vertx.lang.scala.AsyncResult['+toScalaType(method.returnType.args[0].args[0])+', '+method.returnType.args[0].args[0]+'] (v, t => t.asJava)';
+      invocation += 'v => ' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +').handle(io.vertx.lang.scala.AsyncResult['+toScalaType(method.returnType.args[0].args[0])+', '+method.returnType.args[0].args[0]+'] (v, t => t.asJava)';
     }
-    else {
-      if (method.returnType.kind == CLASS_HANDLER) {
+    else {if (method.returnType.kind == CLASS_HANDLER) {
         var ret = method.returnType.args[0];
         var scalaType = toOptionIfNullable(toScalaType(method.returnType.args[0]), method.returnType.args[0]);
         invocation += indentation;
@@ -526,7 +537,7 @@
         invocation += toScalaApply(method.returnType.getSimpleName()) + '(';
       }
 
-      invocation += target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method.params);
+      invocation += target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method);
 
       if (wrap) {
         invocation += '))';
@@ -558,7 +569,7 @@
       invocation += conversion + '\n';
     }
 
-    if (method.isFluent()) {
+    if (method.isFluent() && !future) {
       invocation += indentation;
       invocation += 'this\n';
     }
