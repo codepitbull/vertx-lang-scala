@@ -1124,7 +1124,7 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableByteHandler(true,b => assert(testByte == b))
     nullableTCK.methodWithNullableByteHandler(false,b => assert(null == b))
     val w = new Waiter()
-    nullableTCK.methodWithNullableByteHandlerAsyncResult(true,b => {w{assert(testByte == b.result())}; w.dismiss()})
+    nullableTCK.methodWithNullableByteHandlerAsyncResultFuture(true,b => {w{assert(testByte == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
     nullableTCK.methodWithNullableByteHandlerAsyncResult(false,b => {w2{intercept[NullPointerException](b.result())}; w2.dismiss()})
