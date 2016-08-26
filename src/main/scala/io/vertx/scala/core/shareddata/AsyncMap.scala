@@ -35,7 +35,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @param resultHandler - this will be called some time later with the async result.
     */
   def getFuture(k: K): concurrent.Future[V] = {
-    val promiseAndHandler = handlerForAsyncResult[V]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[V,V]((x => x))
     _asJava.get(k, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -47,7 +47,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @param completionHandler - this will be called some time later to signify the value has been put
     */
   def putFuture(k: K, v: V): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
     _asJava.put(k, v, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -61,7 +61,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @param completionHandler the handler
     */
   def putFuture(k: K, v: V, ttl: Long): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
     _asJava.put(k, v, ttl, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -74,7 +74,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @param completionHandler the handler
     */
   def putIfAbsentFuture(k: K, v: V): concurrent.Future[V] = {
-    val promiseAndHandler = handlerForAsyncResult[V]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[V,V]((x => x))
     _asJava.putIfAbsent(k, v, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -88,7 +88,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @param completionHandler the handler
     */
   def putIfAbsentFuture(k: K, v: V, ttl: Long): concurrent.Future[V] = {
-    val promiseAndHandler = handlerForAsyncResult[V]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[V,V]((x => x))
     _asJava.putIfAbsent(k, v, ttl, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -99,7 +99,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @param resultHandler - this will be called some time later to signify the value has been removed
     */
   def removeFuture(k: K): concurrent.Future[V] = {
-    val promiseAndHandler = handlerForAsyncResult[V]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[V,V]((x => x))
     _asJava.remove(k, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -111,7 +111,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @param resultHandler - this will be called some time later to signify the value has been removed
     */
   def removeIfPresentFuture(k: K, v: V): concurrent.Future[Boolean] = {
-    val promiseAndHandler = handlerForAsyncResult[java.lang.Boolean]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean,Boolean]((x => x))
     _asJava.removeIfPresent(k, v, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -123,7 +123,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @param resultHandler the result handler will be passed the previous value
     */
   def replaceFuture(k: K, v: V): concurrent.Future[V] = {
-    val promiseAndHandler = handlerForAsyncResult[V]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[V,V]((x => x))
     _asJava.replace(k, v, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -136,7 +136,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @param resultHandler the result handler
     */
   def replaceIfPresentFuture(k: K, oldValue: V, newValue: V): concurrent.Future[Boolean] = {
-    val promiseAndHandler = handlerForAsyncResult[java.lang.Boolean]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean,Boolean]((x => x))
     _asJava.replaceIfPresent(k, oldValue, newValue, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -146,7 +146,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @param resultHandler called on completion
     */
   def clearFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
     _asJava.clear(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -156,7 +156,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @param resultHandler handler which will receive the number of entries
     */
   def sizeFuture(): concurrent.Future[Int] = {
-    val promiseAndHandler = handlerForAsyncResult[java.lang.Integer]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Integer,Int]((x => x))
     _asJava.size(promiseAndHandler._1)
     promiseAndHandler._2.future
   }

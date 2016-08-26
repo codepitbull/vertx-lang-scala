@@ -57,7 +57,7 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
   }
 
   def sendFuture[R](message: T): concurrent.Future[io.vertx.scala.core.eventbus.Message[R]] = {
-    val promiseAndHandler = handlerForAsyncResult[io.vertx.core.eventbus.Message<R>]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[R],io.vertx.scala.core.eventbus.Message[R]]((x => if (x == null) null else Message.apply[R](x)))
     MessageProducer.apply[T](_asJava.send(message, promiseAndHandler._1))
     promiseAndHandler._2.future
   }

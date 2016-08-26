@@ -37,7 +37,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return a reference to this, so the API can be used fluently
     */
   def lookupFuture(name: String, handler: io.vertx.core.AsyncResult [String] => Unit): concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResult[java.lang.String]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.lookup(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -49,7 +49,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return a reference to this, so the API can be used fluently
     */
   def lookup4Future(name: String, handler: io.vertx.core.AsyncResult [String] => Unit): concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResult[java.lang.String]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.lookup4(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -61,7 +61,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return a reference to this, so the API can be used fluently
     */
   def lookup6Future(name: String, handler: io.vertx.core.AsyncResult [String] => Unit): concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResult[java.lang.String]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.lookup6(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -73,7 +73,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return a reference to this, so the API can be used fluently
     */
   def resolveAFuture(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
-    val promiseAndHandler = handlerForAsyncResult[java.util.List<java.lang.String>]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]]((x => if (x == null) null else x.asScala))
     _asJava.resolveA(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -85,7 +85,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return a reference to this, so the API can be used fluently
     */
   def resolveAAAAFuture(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
-    val promiseAndHandler = handlerForAsyncResult[java.util.List<java.lang.String>]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]]((x => if (x == null) null else x.asScala))
     _asJava.resolveAAAA(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -97,7 +97,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return a reference to this, so the API can be used fluently.
     */
   def resolveCNAMEFuture(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
-    val promiseAndHandler = handlerForAsyncResult[java.util.List<java.lang.String>]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]]((x => if (x == null) null else x.asScala))
     _asJava.resolveCNAME(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -109,7 +109,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return a reference to this, so the API can be used fluently.
     */
   def resolveMXFuture(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[io.vertx.scala.core.dns.MxRecord]] => Unit): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.scala.core.dns.MxRecord]] = {
-    val promiseAndHandler = handlerForAsyncResult[java.util.List<io.vertx.core.dns.MxRecord>]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.dns.MxRecord],scala.collection.mutable.Buffer[io.vertx.scala.core.dns.MxRecord]]((x => if (x == null) null else x.asScala.map(MxRecord.apply)))
     _asJava.resolveMX(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -121,7 +121,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return a reference to this, so the API can be used fluently.
     */
   def resolveTXTFuture(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
-    val promiseAndHandler = handlerForAsyncResult[java.util.List<java.lang.String>]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]]((x => if (x == null) null else x.asScala))
     _asJava.resolveTXT(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -133,7 +133,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return a reference to this, so the API can be used fluently.
     */
   def resolvePTRFuture(name: String, handler: io.vertx.core.AsyncResult [String] => Unit): concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResult[java.lang.String]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.resolvePTR(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -145,7 +145,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return a reference to this, so the API can be used fluently.
     */
   def resolveNSFuture(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
-    val promiseAndHandler = handlerForAsyncResult[java.util.List<java.lang.String>]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]]((x => if (x == null) null else x.asScala))
     _asJava.resolveNS(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -157,7 +157,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return a reference to this, so the API can be used fluently.
     */
   def resolveSRVFuture(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[io.vertx.scala.core.dns.SrvRecord]] => Unit): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.scala.core.dns.SrvRecord]] = {
-    val promiseAndHandler = handlerForAsyncResult[java.util.List<io.vertx.core.dns.SrvRecord>]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.dns.SrvRecord],scala.collection.mutable.Buffer[io.vertx.scala.core.dns.SrvRecord]]((x => if (x == null) null else x.asScala.map(SrvRecord.apply)))
     _asJava.resolveSRV(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -170,7 +170,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return a reference to this, so the API can be used fluently.
     */
   def reverseLookupFuture(ipaddress: String, handler: io.vertx.core.AsyncResult [String] => Unit): concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResult[java.lang.String]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.reverseLookup(ipaddress, promiseAndHandler._1)
     promiseAndHandler._2.future
   }

@@ -49,7 +49,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @return a reference to this, so it can be used fluently
     */
   def setHandlerFuture(handler: io.vertx.core.AsyncResult [T] => Unit): concurrent.Future[T] = {
-    val promiseAndHandler = handlerForAsyncResult[T]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
     _asJava.setHandler(promiseAndHandler._1)
     promiseAndHandler._2.future
   }

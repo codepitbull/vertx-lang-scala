@@ -68,7 +68,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return a reference to this, so the API can be used fluently
     */
   def sendFuture[T](address: String, message: AnyRef, replyHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[T]] => Unit): concurrent.Future[io.vertx.scala.core.eventbus.Message[T]] = {
-    val promiseAndHandler = handlerForAsyncResult[io.vertx.core.eventbus.Message<T>]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[T],io.vertx.scala.core.eventbus.Message[T]]((x => if (x == null) null else Message.apply[T](x)))
     _asJava.send(address, message, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -95,7 +95,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return a reference to this, so the API can be used fluently
     */
   def sendFuture[T](address: String, message: AnyRef, options: io.vertx.scala.core.eventbus.DeliveryOptions, replyHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[T]] => Unit): concurrent.Future[io.vertx.scala.core.eventbus.Message[T]] = {
-    val promiseAndHandler = handlerForAsyncResult[io.vertx.core.eventbus.Message<T>]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[T],io.vertx.scala.core.eventbus.Message[T]]((x => if (x == null) null else Message.apply[T](x)))
     _asJava.send(address, message, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
