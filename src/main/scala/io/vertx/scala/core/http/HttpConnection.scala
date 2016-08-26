@@ -192,9 +192,11 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @param completionHandler the handler notified when the settings have been acknowledged by the remote endpoint
     * @return a reference to this, so the API can be used fluently
     */
-  def updateSettings(settings: io.vertx.scala.core.http.Http2Settings, completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.http.HttpConnection = {
+  def updateSettingsFuture(settings: io.vertx.scala.core.http.Http2Settings, completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
     _asJava.updateSettings(settings.asJava, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
     this
+    promiseAndHandler._2.future
   }
 
   /**
@@ -224,9 +226,11 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @param pongHandler an async result handler notified with pong reply or the failure
     * @return a reference to this, so the API can be used fluently
     */
-  def ping(data: io.vertx.scala.core.buffer.Buffer, pongHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.buffer.Buffer] => Unit): io.vertx.scala.core.http.HttpConnection = {
+  def pingFuture(data: io.vertx.scala.core.buffer.Buffer, pongHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.buffer.Buffer] => Unit): concurrent.Future[io.vertx.scala.core.buffer.Buffer] = {
+    val promiseAndHandler = handlerForAsyncResult[io.vertx.core.buffer.Buffer]
     _asJava.ping(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.buffer.Buffer], io.vertx.core.AsyncResult [io.vertx.scala.core.buffer.Buffer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.buffer.Buffer, io.vertx.scala.core.buffer.Buffer](x,(x => if (x == null) null else Buffer.apply(x))))(pongHandler))
     this
+    promiseAndHandler._2.future
   }
 
   /**

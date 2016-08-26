@@ -3,12 +3,15 @@ package io.vertx.lang.scala
 import io.vertx.core.{AbstractVerticle, Future, Verticle}
 import io.vertx.scala.core.{Context, Vertx}
 
+import scala.concurrent.ExecutionContext
+
 /**
   * Base class for verticle implementiations.
   *
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
   */
 class ScalaVerticle extends Verticle {
+  protected lazy implicit val executionContext:ExecutionContext = VertxExecutionContext(vertx.getOrCreateContext())
   protected var jvertx: io.vertx.core.Vertx = null
   protected var vertx: Vertx = null
   protected var ctx: Context = null

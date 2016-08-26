@@ -3,23 +3,35 @@
 
 @comment{"# Generic asJava method"}
 @{indentation}  def asJava: @includeNamed{'writeDelegateType'} = _asJava\n\n
-
 @comment{"# Class methods"}
 @foreach{method : instanceMethods}
+@code{
+  var future = shouldMethodReturnAFuture(method);
+  var methodName = method.name;
+  if(future)
+    methodName += 'Future';
+  methodName = escapeIfKeyword(methodName);
+}
 @if{includeMethod(method, instanceMethods)}
 @if{method.doc != null}@{methodDoc(method, indentation + '  ');}@end{}
 @if{method.name == 'toString' && method.params.size == 0}
 @comment{"TODO: we need a generic way to identify overridden base methods like hashCode, toString, ..."}
-@{indentation}  override def @{escapeIfKeyword(method.name)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+@{indentation}  override def @{methodName}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 @{methodInvocation('_asJava', method, indentation + '    ');}
 @{indentation}  }\n\n
 @else{}
-@{indentation}  def @{escapeIfKeyword(method.name)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+@{indentation}  def @{methodName}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 @if{method.cacheReturn && !method.fluent}
 @{indentation}    if(cached_@{cacheDecls.size()} == null) {\n
 @{indentation}      cached_@{cacheDecls.size()}=
 @end{}
+@if{future}
+@{indentation}    val promiseAndHandler = handlerForAsyncResult[@{typeOfReturnedFuture(method)}]\n
+@end{}
 @{indentation}@{methodInvocation('_asJava', method, indentation + '    ');}
+@if{future}
+@{indentation}    promiseAndHandler._2.future\n
+@end{}
 @if{method.cacheReturn && !method.fluent}
 @{indentation}    }\n
 @{indentation}    cached_@{cacheDecls.size()}\n

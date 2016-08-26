@@ -1,5 +1,6 @@
 package io.vertx.lang.scala
 
+import io.vertx.core
 import io.vertx.core.{AsyncResult, Handler}
 import io.vertx.core.logging.LoggerFactory
 
@@ -148,10 +149,25 @@ object HandlerOps {
       Some(number.asInstanceOf[T])
   }
 
-  def asyncResultToPromise[T](asyncResult: io.vertx.core.AsyncResult[T], promise: Promise[T]): Unit = {
-    if(asyncResult.succeeded())
-      promise.success(asyncResult.result())
-    else
-      promise.failure(asyncResult.cause())
+  /**
+    *
+    * val promiseAndHandler = handlerForAsyncResult[Void]
+    * _asJava.close(promiseAndHandler._1)
+    * promiseAndHandler._2.future
+    *
+    * @tparam T
+    * @return
+    */
+  def handlerForAsyncResult[T]() = {
+    val promise = Promise[T]()
+    val handler = new Handler[core.AsyncResult[T]] {
+      override def handle(event: core.AsyncResult[T]): Unit = {
+        if(event.failed())
+          promise.failure(event.cause())
+        else
+          promise.success(event.result())
+      }
+    }
+    (handler,promise)
   }
 }
