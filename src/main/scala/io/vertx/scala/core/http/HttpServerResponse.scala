@@ -304,7 +304,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @return a reference to this, so the API can be used fluently
     */
   def sendFileFuture(filename: String, resultHandler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
     _asJava.sendFile(filename, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -318,7 +318,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @return a reference to this, so the API can be used fluently
     */
   def sendFileFuture(filename: String, offset: Long, resultHandler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
     _asJava.sendFile(filename, offset, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -333,7 +333,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @return a reference to this, so the API can be used fluently
     */
   def sendFileFuture(filename: String, offset: Long, length: Long, resultHandler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
     _asJava.sendFile(filename, offset, length, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -407,7 +407,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with no headers.
     */
   def pushFuture(method: io.vertx.core.http.HttpMethod, host: String, path: String): concurrent.Future[io.vertx.scala.core.http.HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResult[io.vertx.core.http.HttpServerResponse]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,io.vertx.scala.core.http.HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
     HttpServerResponse.apply(_asJava.push(method, host, path, promiseAndHandler._1))
     promiseAndHandler._2.future
   }
@@ -416,7 +416,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with the host copied from the current request.
     */
   def pushFuture(method: io.vertx.core.http.HttpMethod, path: String, headers: io.vertx.scala.core.MultiMap): concurrent.Future[io.vertx.scala.core.http.HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResult[io.vertx.core.http.HttpServerResponse]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,io.vertx.scala.core.http.HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
     HttpServerResponse.apply(_asJava.push(method, path, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], promiseAndHandler._1))
     promiseAndHandler._2.future
   }
@@ -425,7 +425,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with the host copied from the current request.
     */
   def pushFuture(method: io.vertx.core.http.HttpMethod, path: String, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServerResponse] => Unit): concurrent.Future[io.vertx.scala.core.http.HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResult[io.vertx.core.http.HttpServerResponse]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,io.vertx.scala.core.http.HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
     _asJava.push(method, path, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -448,7 +448,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @return a reference to this, so the API can be used fluently
     */
   def pushFuture(method: io.vertx.core.http.HttpMethod, host: String, path: String, headers: io.vertx.scala.core.MultiMap, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServerResponse] => Unit): concurrent.Future[io.vertx.scala.core.http.HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResult[io.vertx.core.http.HttpServerResponse]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,io.vertx.scala.core.http.HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
     _asJava.push(method, host, path, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], promiseAndHandler._1)
     promiseAndHandler._2.future
   }

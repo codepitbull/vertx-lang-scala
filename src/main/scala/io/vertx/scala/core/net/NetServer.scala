@@ -76,7 +76,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * @return a reference to this, so the API can be used fluently
     */
   def listenFuture(listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetServer] => Unit): concurrent.Future[io.vertx.scala.core.net.NetServer] = {
-    val promiseAndHandler = handlerForAsyncResult[io.vertx.core.net.NetServer]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetServer,io.vertx.scala.core.net.NetServer]((x => if (x == null) null else NetServer.apply(x)))
     _asJava.listen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -105,7 +105,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * @return a reference to this, so the API can be used fluently
     */
   def listenFuture(port: Int, host: String, listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetServer] => Unit): concurrent.Future[io.vertx.scala.core.net.NetServer] = {
-    val promiseAndHandler = handlerForAsyncResult[io.vertx.core.net.NetServer]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetServer,io.vertx.scala.core.net.NetServer]((x => if (x == null) null else NetServer.apply(x)))
     _asJava.listen(port, host, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -131,7 +131,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * @return a reference to this, so the API can be used fluently
     */
   def listenFuture(port: Int, listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetServer] => Unit): concurrent.Future[io.vertx.scala.core.net.NetServer] = {
-    val promiseAndHandler = handlerForAsyncResult[io.vertx.core.net.NetServer]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetServer,io.vertx.scala.core.net.NetServer]((x => if (x == null) null else NetServer.apply(x)))
     _asJava.listen(port, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -149,7 +149,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * @param completionHandler the handler
     */
   def closeFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
     _asJava.close(promiseAndHandler._1)
     promiseAndHandler._2.future
   }

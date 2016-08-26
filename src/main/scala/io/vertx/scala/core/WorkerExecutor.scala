@@ -60,7 +60,7 @@ class WorkerExecutor(private val _asJava: io.vertx.core.WorkerExecutor)
     * @param resultHandler handler that will be called when the blocking code is complete
     */
   def executeBlockingFuture[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean): concurrent.Future[T] = {
-    val promiseAndHandler = handlerForAsyncResult[T]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -69,7 +69,7 @@ class WorkerExecutor(private val _asJava: io.vertx.core.WorkerExecutor)
     * Like [[io.vertx.scala.core.WorkerExecutor#executeBlocking]] called with ordered = true.
     */
   def executeBlockingFuture[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit): concurrent.Future[T] = {
-    val promiseAndHandler = handlerForAsyncResult[T]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), promiseAndHandler._1)
     promiseAndHandler._2.future
   }

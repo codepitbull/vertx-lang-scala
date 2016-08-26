@@ -22,7 +22,7 @@
 @else{}
 @if{future}
 @{indentation}  def @{methodName}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
-@{indentation}    val promiseAndHandler = handlerForAsyncResult[@{typeOfReturnedFuture(method)}]\n
+@{indentation}    val promiseAndHandler = handlerForAsyncResultWithConversion[@{changeJavaGenericNotationToScalaNotation(typeOfReturnedFuture(method))},@{toScalaType(typeOfReturnedFuture(method))}](@{convertType(typeOfReturnedFuture(method))})\n
 @{indentation}@{methodInvocation('_asJava', method, indentation + '    ');}
 @{indentation}    promiseAndHandler._2.future\n
 @{indentation}  }\n\n

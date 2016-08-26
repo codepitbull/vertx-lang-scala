@@ -45,7 +45,7 @@ class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
     * @param resultHandler the map will be returned asynchronously in this handler
     */
   def getClusterWideMapFuture[K, V](name: String): concurrent.Future[io.vertx.scala.core.shareddata.AsyncMap[K, V]] = {
-    val promiseAndHandler = handlerForAsyncResult[io.vertx.core.shareddata.AsyncMap<K,V>]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.shareddata.AsyncMap[K,V],io.vertx.scala.core.shareddata.AsyncMap[K, V]]((x => if (x == null) null else AsyncMap.apply[K,V](x)))
     _asJava.getClusterWideMap(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -56,7 +56,7 @@ class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
     * @param resultHandler the handler
     */
   def getLockFuture(name: String): concurrent.Future[io.vertx.scala.core.shareddata.Lock] = {
-    val promiseAndHandler = handlerForAsyncResult[io.vertx.core.shareddata.Lock]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.shareddata.Lock,io.vertx.scala.core.shareddata.Lock]((x => if (x == null) null else Lock.apply(x)))
     _asJava.getLock(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -69,7 +69,7 @@ class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
     * @param resultHandler the handler
     */
   def getLockWithTimeoutFuture(name: String, timeout: Long): concurrent.Future[io.vertx.scala.core.shareddata.Lock] = {
-    val promiseAndHandler = handlerForAsyncResult[io.vertx.core.shareddata.Lock]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.shareddata.Lock,io.vertx.scala.core.shareddata.Lock]((x => if (x == null) null else Lock.apply(x)))
     _asJava.getLockWithTimeout(name, timeout, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -80,7 +80,7 @@ class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
     * @param resultHandler the handler
     */
   def getCounterFuture(name: String): concurrent.Future[io.vertx.scala.core.shareddata.Counter] = {
-    val promiseAndHandler = handlerForAsyncResult[io.vertx.core.shareddata.Counter]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.shareddata.Counter,io.vertx.scala.core.shareddata.Counter]((x => if (x == null) null else Counter.apply(x)))
     _asJava.getCounter(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }

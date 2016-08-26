@@ -193,7 +193,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @return a reference to this, so the API can be used fluently
     */
   def updateSettingsFuture(settings: io.vertx.scala.core.http.Http2Settings, completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResult[java.lang.Void]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
     _asJava.updateSettings(settings.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -226,7 +226,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @return a reference to this, so the API can be used fluently
     */
   def pingFuture(data: io.vertx.scala.core.buffer.Buffer, pongHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.buffer.Buffer] => Unit): concurrent.Future[io.vertx.scala.core.buffer.Buffer] = {
-    val promiseAndHandler = handlerForAsyncResult[io.vertx.core.buffer.Buffer]
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.buffer.Buffer,io.vertx.scala.core.buffer.Buffer]((x => if (x == null) null else Buffer.apply(x)))
     _asJava.ping(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
