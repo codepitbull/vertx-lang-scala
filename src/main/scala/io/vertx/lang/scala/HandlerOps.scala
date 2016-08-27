@@ -184,8 +184,14 @@ object HandlerOps {
       override def handle(event: core.AsyncResult[J]): Unit = {
         if(event.failed())
           promise.failure(event.cause())
-        else
-          promise.success(conversion(event.result()))
+        else {
+          try {
+            promise.success(conversion(event.result()))
+          }
+          catch {
+            case npe:NullPointerException => promise.failure(npe)
+          }
+        }
       }
     }
     (handler,promise)
