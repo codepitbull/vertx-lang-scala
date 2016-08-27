@@ -1654,206 +1654,162 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableSetGenEnumReturn(true)
     nullableTCK.methodWithNullableSetGenEnumReturn(false)
   }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//  "testNullableMapByte" should "work" in {
-//    import collection.JavaConverters._
-//    val testMapByte = Map("1" -> 1.toByte, "2" -> 2.toByte, "3" -> 3.toByte)
-//    nullableTCK.methodWithNullableMapByteParam(true, None)
-//    nullableTCK.methodWithNullableMapByteParam(false, Option(testMapByte))
-//    nullableTCK.methodWithNullableMapByteHandler(true,b => assert(testMapByte == b))
-//    nullableTCK.methodWithNullableMapByteHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableMapByteHandlerAsyncResult(true,b => {w{assert(testMapByte.toSet.diff(b.result().toSet).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableMapByteHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableMapByteReturn(true)
-//    nullableTCK.methodWithNullableMapByteReturn(false)
-//  }
-//
-//  "testNullableMapShort" should "work" in {
-//    import collection.JavaConverters._
-//    val testMapShort = Map("1" -> 1.toShort, "2" -> 2.toShort, "3" -> 3.toShort)
-//    nullableTCK.methodWithNullableMapShortParam(true, None)
-//    nullableTCK.methodWithNullableMapShortParam(false, Option(testMapShort))
-//    nullableTCK.methodWithNullableMapShortHandler(true,b => assert(testMapShort == b))
-//    nullableTCK.methodWithNullableMapShortHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableMapShortHandlerAsyncResult(true,b => {w{assert(testMapShort.toSet.diff(b.result().toSet).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableMapShortHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableMapShortReturn(true)
-//    nullableTCK.methodWithNullableMapShortReturn(false)
-//  }
-//
-//  "testNullableMapInteger" should "work" in {
-//    import collection.JavaConverters._
-//    val testMapInteger = Map("1" -> 1,"2" -> 2, "3" -> 3)
-//    nullableTCK.methodWithNullableMapIntegerParam(true, None)
-//    nullableTCK.methodWithNullableMapIntegerParam(false, Option(testMapInteger))
-//    nullableTCK.methodWithNullableMapIntegerHandler(true,b => assert(testMapInteger == b))
-//    nullableTCK.methodWithNullableMapIntegerHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableMapIntegerHandlerAsyncResult(true,b => {w{assert(testMapInteger.toSet.diff(b.result().toSet).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableMapIntegerHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableMapIntegerReturn(true)
-//    nullableTCK.methodWithNullableMapIntegerReturn(false)
-//  }
-//
-//  "testNullableMapLong" should "work" in {
-//    import collection.JavaConverters._
-//    val testMapLong = Map("1" -> 1l, "2" -> 2l, "3" -> 3l)
-//    nullableTCK.methodWithNullableMapLongParam(true, None)
-//    nullableTCK.methodWithNullableMapLongParam(false, Option(testMapLong))
-//    nullableTCK.methodWithNullableMapLongHandler(true,b => assert(testMapLong == b))
-//    nullableTCK.methodWithNullableMapLongHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableMapLongHandlerAsyncResult(true,b => {w{assert(testMapLong.toSet.diff(b.result().toSet).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableMapLongHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableMapLongReturn(true)
-//    nullableTCK.methodWithNullableMapLongReturn(false)
-//  }
-//
-//  "testNullableMapFloat" should "work" in {
-//    import collection.JavaConverters._
-//    val testMapFloat = Map("1" -> 1.1f, "2" -> 2.2f, "3" -> 3.3f)
-//    nullableTCK.methodWithNullableMapFloatParam(true, None)
-//    nullableTCK.methodWithNullableMapFloatParam(false, Option(testMapFloat))
-//    nullableTCK.methodWithNullableMapFloatHandler(true,b => assert(testMapFloat == b))
-//    nullableTCK.methodWithNullableMapFloatHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableMapFloatHandlerAsyncResult(true,b => {w{assert(testMapFloat.toSet.diff(b.result().toSet).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableMapFloatHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableMapFloatReturn(true)
-//    nullableTCK.methodWithNullableMapFloatReturn(false)
-//  }
-//
-//  "testNullableMapDouble" should "work" in {
-//    import collection.JavaConverters._
-//    val testMapDouble = Map("1" -> 1.11, "2" -> 2.22, "3" ->3.33)
-//    nullableTCK.methodWithNullableMapDoubleParam(true, None)
-//    nullableTCK.methodWithNullableMapDoubleParam(false, Option(testMapDouble))
-//    nullableTCK.methodWithNullableMapDoubleHandler(true,b => assert(testMapDouble == b))
-//    nullableTCK.methodWithNullableMapDoubleHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableMapDoubleHandlerAsyncResult(true,b => {w{assert(testMapDouble.toSet.diff(b.result().toSet).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableMapDoubleHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableMapDoubleReturn(true)
-//    nullableTCK.methodWithNullableMapDoubleReturn(false)
-//  }
-//
-//  "testNullableMapBoolean" should "work" in {
-//    import collection.JavaConverters._
-//    val testMapBoolean = Map( "1" -> true, "2" -> false, "3" -> true)
-//    nullableTCK.methodWithNullableMapBooleanParam(true, None)
-//    nullableTCK.methodWithNullableMapBooleanParam(false, Option(testMapBoolean))
-//    nullableTCK.methodWithNullableMapBooleanHandler(true,b => assert(testMapBoolean == b))
-//    nullableTCK.methodWithNullableMapBooleanHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableMapBooleanHandlerAsyncResult(true,b => {w{assert(testMapBoolean.toSet.diff(b.result().toSet).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableMapBooleanHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableMapBooleanReturn(true)
-//    nullableTCK.methodWithNullableMapBooleanReturn(false)
-//  }
-//
-//  "testNullableMapString" should "work" in {
-//    import collection.JavaConverters._
-//    val testMapString = Map("1" -> "first", "2" -> "second", "3" -> "third")
-//    nullableTCK.methodWithNullableMapStringParam(true, None)
-//    nullableTCK.methodWithNullableMapStringParam(false, Option(testMapString))
-//    nullableTCK.methodWithNullableMapStringHandler(true,b => assert(testMapString == b))
-//    nullableTCK.methodWithNullableMapStringHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableMapStringHandlerAsyncResult(true,b => {w{assert(testMapString.toSet.diff(b.result().toSet).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableMapStringHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableMapStringReturn(true)
-//    nullableTCK.methodWithNullableMapStringReturn(false)
-//  }
-//
-//  "testNullableMapChar" should "work" in {
-//    import collection.JavaConverters._
-//    val testMapChar = Map("1" -> 'x', "2" -> 'y', "3" -> 'z')
-//    nullableTCK.methodWithNullableMapCharParam(true, None)
-//    nullableTCK.methodWithNullableMapCharParam(false, Option(testMapChar))
-//    nullableTCK.methodWithNullableMapCharHandler(true,b => assert(testMapChar == b))
-//    nullableTCK.methodWithNullableMapCharHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableMapCharHandlerAsyncResult(true,b => {w{assert(testMapChar.toSet.diff(b.result().toSet).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableMapCharHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableMapCharReturn(true)
-//    nullableTCK.methodWithNullableMapCharReturn(false)
-//  }
-//
-//  "testNullableMapJsonObject" should "work" in {
-//    import collection.JavaConverters._
-//    val testMapJsonObject = Map("1" -> Json.obj(("foo","bar")), "2" -> Json.obj(("juu",3)))
-//    nullableTCK.methodWithNullableMapJsonObjectParam(true, None)
-//    nullableTCK.methodWithNullableMapJsonObjectParam(false, Option(testMapJsonObject))
-//    nullableTCK.methodWithNullableMapJsonObjectHandler(true,b => assert(testMapJsonObject == b))
-//    nullableTCK.methodWithNullableMapJsonObjectHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableMapJsonObjectHandlerAsyncResult(true,b => {w{assert(testMapJsonObject.toSet.diff(b.result().toSet).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableMapJsonObjectHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableMapJsonObjectReturn(true)
-//    nullableTCK.methodWithNullableMapJsonObjectReturn(false)
-//  }
-//
-//  "testNullableMapJsonArray" should "work" in {
-//    import collection.JavaConverters._
-//    val testMapJsonArray:Map[String, JsonArray] = Map("2" -> Json.arr("juu"), "1" -> Json.arr("foo","bar"))
-//    nullableTCK.methodWithNullableMapJsonArrayParam(true, None)
-//    nullableTCK.methodWithNullableMapJsonArrayParam(false, Option(testMapJsonArray))
-//    nullableTCK.methodWithNullableMapJsonArrayHandler(true,b => assert(testMapJsonArray.toSet.diff(b.toSet).isEmpty))
-//    nullableTCK.methodWithNullableMapJsonArrayHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableMapJsonArrayHandlerAsyncResult(true,b => {w{assert(testMapJsonArray.toSet.diff(b.result().toSet).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableMapJsonArrayHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableMapJsonArrayReturn(true)
-//    nullableTCK.methodWithNullableMapJsonArrayReturn(false)
-//  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  "testNullableMapByte" should "work" in {
+    import collection.JavaConverters._
+    val testMapByte = Map("1" -> 1.toByte, "2" -> 2.toByte, "3" -> 3.toByte)
+    nullableTCK.methodWithNullableMapByteParam(true, None)
+    nullableTCK.methodWithNullableMapByteParam(false, Option(testMapByte))
+    nullableTCK.methodWithNullableMapByteHandler(true,b => assert(testMapByte == b))
+    nullableTCK.methodWithNullableMapByteHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableMapByteHandlerAsyncResultFuture(true).foreach(b => {w{assert(testMapByte.toSet.diff(b.toSet).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableMapByteHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableMapByteReturn(true)
+    nullableTCK.methodWithNullableMapByteReturn(false)
+  }
+
+  "testNullableMapShort" should "work" in {
+    import collection.JavaConverters._
+    val testMapShort = Map("1" -> 1.toShort, "2" -> 2.toShort, "3" -> 3.toShort)
+    nullableTCK.methodWithNullableMapShortParam(true, None)
+    nullableTCK.methodWithNullableMapShortParam(false, Option(testMapShort))
+    nullableTCK.methodWithNullableMapShortHandler(true,b => assert(testMapShort == b))
+    nullableTCK.methodWithNullableMapShortHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableMapShortHandlerAsyncResultFuture(true).foreach(b => {w{assert(testMapShort.toSet.diff(b.toSet).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableMapShortHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableMapShortReturn(true)
+    nullableTCK.methodWithNullableMapShortReturn(false)
+  }
+
+  "testNullableMapInteger" should "work" in {
+    import collection.JavaConverters._
+    val testMapInteger = Map("1" -> 1,"2" -> 2, "3" -> 3)
+    nullableTCK.methodWithNullableMapIntegerParam(true, None)
+    nullableTCK.methodWithNullableMapIntegerParam(false, Option(testMapInteger))
+    nullableTCK.methodWithNullableMapIntegerHandler(true,b => assert(testMapInteger == b))
+    nullableTCK.methodWithNullableMapIntegerHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableMapIntegerHandlerAsyncResultFuture(true).foreach(b => {w{assert(testMapInteger.toSet.diff(b.toSet).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableMapIntegerHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableMapIntegerReturn(true)
+    nullableTCK.methodWithNullableMapIntegerReturn(false)
+  }
+
+  "testNullableMapLong" should "work" in {
+    import collection.JavaConverters._
+    val testMapLong = Map("1" -> 1l, "2" -> 2l, "3" -> 3l)
+    nullableTCK.methodWithNullableMapLongParam(true, None)
+    nullableTCK.methodWithNullableMapLongParam(false, Option(testMapLong))
+    nullableTCK.methodWithNullableMapLongHandler(true,b => assert(testMapLong == b))
+    nullableTCK.methodWithNullableMapLongHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableMapLongHandlerAsyncResultFuture(true).foreach(b => {w{assert(testMapLong.toSet.diff(b.toSet).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableMapLongHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableMapLongReturn(true)
+    nullableTCK.methodWithNullableMapLongReturn(false)
+  }
+
+  "testNullableMapFloat" should "work" in {
+    import collection.JavaConverters._
+    val testMapFloat = Map("1" -> 1.1f, "2" -> 2.2f, "3" -> 3.3f)
+    nullableTCK.methodWithNullableMapFloatParam(true, None)
+    nullableTCK.methodWithNullableMapFloatParam(false, Option(testMapFloat))
+    nullableTCK.methodWithNullableMapFloatHandler(true,b => assert(testMapFloat == b))
+    nullableTCK.methodWithNullableMapFloatHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableMapFloatHandlerAsyncResultFuture(true).foreach(b => {w{assert(testMapFloat.toSet.diff(b.toSet).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableMapFloatHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableMapFloatReturn(true)
+    nullableTCK.methodWithNullableMapFloatReturn(false)
+  }
+
+  "testNullableMapDouble" should "work" in {
+    import collection.JavaConverters._
+    val testMapDouble = Map("1" -> 1.11, "2" -> 2.22, "3" ->3.33)
+    nullableTCK.methodWithNullableMapDoubleParam(true, None)
+    nullableTCK.methodWithNullableMapDoubleParam(false, Option(testMapDouble))
+    nullableTCK.methodWithNullableMapDoubleHandler(true,b => assert(testMapDouble == b))
+    nullableTCK.methodWithNullableMapDoubleHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableMapDoubleHandlerAsyncResultFuture(true).foreach(b => {w{assert(testMapDouble.toSet.diff(b.toSet).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableMapDoubleHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableMapDoubleReturn(true)
+    nullableTCK.methodWithNullableMapDoubleReturn(false)
+  }
+
+  "testNullableMapBoolean" should "work" in {
+    import collection.JavaConverters._
+    val testMapBoolean = Map( "1" -> true, "2" -> false, "3" -> true)
+    nullableTCK.methodWithNullableMapBooleanParam(true, None)
+    nullableTCK.methodWithNullableMapBooleanParam(false, Option(testMapBoolean))
+    nullableTCK.methodWithNullableMapBooleanHandler(true,b => assert(testMapBoolean == b))
+    nullableTCK.methodWithNullableMapBooleanHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableMapBooleanHandlerAsyncResultFuture(true).foreach(b => {w{assert(testMapBoolean.toSet.diff(b.toSet).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableMapBooleanHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableMapBooleanReturn(true)
+    nullableTCK.methodWithNullableMapBooleanReturn(false)
+  }
+
+  "testNullableMapString" should "work" in {
+    import collection.JavaConverters._
+    val testMapString = Map("1" -> "first", "2" -> "second", "3" -> "third")
+    nullableTCK.methodWithNullableMapStringParam(true, None)
+    nullableTCK.methodWithNullableMapStringParam(false, Option(testMapString))
+    nullableTCK.methodWithNullableMapStringHandler(true,b => assert(testMapString == b))
+    nullableTCK.methodWithNullableMapStringHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableMapStringHandlerAsyncResultFuture(true).foreach(b => {w{assert(testMapString.toSet.diff(b.toSet).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableMapStringHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableMapStringReturn(true)
+    nullableTCK.methodWithNullableMapStringReturn(false)
+  }
+
+  "testNullableMapChar" should "work" in {
+    import collection.JavaConverters._
+    val testMapChar = Map("1" -> 'x', "2" -> 'y', "3" -> 'z')
+    nullableTCK.methodWithNullableMapCharParam(true, None)
+    nullableTCK.methodWithNullableMapCharParam(false, Option(testMapChar))
+    nullableTCK.methodWithNullableMapCharHandler(true,b => assert(testMapChar == b))
+    nullableTCK.methodWithNullableMapCharHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableMapCharHandlerAsyncResultFuture(true).foreach(b => {w{assert(testMapChar.toSet.diff(b.toSet).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableMapCharHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableMapCharReturn(true)
+    nullableTCK.methodWithNullableMapCharReturn(false)
+  }
+
+  "testNullableMapJsonObject" should "work" in {
+    import collection.JavaConverters._
+    val testMapJsonObject = Map("1" -> Json.obj(("foo","bar")), "2" -> Json.obj(("juu",3)))
+    nullableTCK.methodWithNullableMapJsonObjectParam(true, None)
+    nullableTCK.methodWithNullableMapJsonObjectParam(false, Option(testMapJsonObject))
+    nullableTCK.methodWithNullableMapJsonObjectHandler(true,b => assert(testMapJsonObject == b))
+    nullableTCK.methodWithNullableMapJsonObjectHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableMapJsonObjectHandlerAsyncResultFuture(true).foreach(b => {w{assert(testMapJsonObject.toSet.diff(b.toSet).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableMapJsonObjectHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableMapJsonObjectReturn(true)
+    nullableTCK.methodWithNullableMapJsonObjectReturn(false)
+  }
+
+  "testNullableMapJsonArray" should "work" in {
+    import collection.JavaConverters._
+    val testMapJsonArray:Map[String, JsonArray] = Map("2" -> Json.arr("juu"), "1" -> Json.arr("foo","bar"))
+    nullableTCK.methodWithNullableMapJsonArrayParam(true, None)
+    nullableTCK.methodWithNullableMapJsonArrayParam(false, Option(testMapJsonArray))
+    nullableTCK.methodWithNullableMapJsonArrayHandler(true,b => assert(testMapJsonArray.toSet.diff(b.toSet).isEmpty))
+    nullableTCK.methodWithNullableMapJsonArrayHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableMapJsonArrayHandlerAsyncResultFuture(true).foreach(b => {w{assert(testMapJsonArray.toSet.diff(b.toSet).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableMapJsonArrayHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableMapJsonArrayReturn(true)
+    nullableTCK.methodWithNullableMapJsonArrayReturn(false)
+  }
 
   "testNullableMapApi" should "work" in {
     import collection.JavaConverters._
