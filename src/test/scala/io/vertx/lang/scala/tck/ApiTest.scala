@@ -256,19 +256,15 @@ class ApiTest extends FlatSpec with Matchers {
     obj.methodWithHandlerListAbstractVertxGen(it => assert(it.map(_.getString()) == List("abstractfoo", "abstractbar")))
   }
 
-//  "testMethodWithHandlerAsyncResultListVertxGen" should "work" in {
-//    import scala.collection.JavaConversions._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultListVertxGen(it => { w {assert(it.result().map(_.getString()) == ArrayBuffer("foo", "bar"))}; w.dismiss()})
-//    w.await(timeout(50 millis))
-//  }
-//
-//  "testMethodWithHandlerAsyncResultListAbstractVertxGen" should "work" in {
-//    import scala.collection.JavaConversions._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultListAbstractVertxGen(it => { w {assert(it.result().map(_.getString()) == ArrayBuffer("abstractfoo", "abstractbar"))}; w.dismiss()})
-//    w.await(timeout(50 millis))
-//  }
+  "testMethodWithHandlerAsyncResultListVertxGen" should "work" in {
+    import scala.collection.JavaConversions._
+    exec1(w => obj.methodWithHandlerAsyncResultListVertxGenFuture().foreach(it => { w {assert(it.map(_.getString()) == ArrayBuffer("foo", "bar"))}; w.dismiss()}))
+  }
+
+  "testMethodWithHandlerAsyncResultListAbstractVertxGen" should "work" in {
+    import scala.collection.JavaConversions._
+    exec1(w => obj.methodWithHandlerAsyncResultListAbstractVertxGenFuture().foreach(it => { w {assert(it.map(_.getString()) == ArrayBuffer("abstractfoo", "abstractbar"))}; w.dismiss()}))
+  }
 
   "testMethodWithHandlerSetVertxGen" should "work" in {
     obj.methodWithHandlerSetVertxGen(it => assert(it.map(_.getString()) == Set("bar", "foo")))
@@ -278,19 +274,15 @@ class ApiTest extends FlatSpec with Matchers {
     obj.methodWithHandlerSetAbstractVertxGen(it => assert(it.map(_.getString()) == Set("abstractfoo", "abstractbar")))
   }
 
-//  "testMethodWithHandlerAsyncResultSetVertxGen" should "work" in {
-//    import scala.collection.JavaConversions._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultSetVertxGen(it => { w {assert(it.result().map(_.getString()) == Set("bar", "foo"))}; w.dismiss()})
-//    w.await(timeout(50 millis))
-//  }
-//
-//  "testMethodWithHandlerAsyncResultSetAbstractVertxGen" should "work" in {
-//    import scala.collection.JavaConversions._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultSetAbstractVertxGen(it => { w {assert(it.result().map(_.getString()) == Set("abstractbar", "abstractfoo"))}; w.dismiss()})
-//    w.await(timeout(50 millis))
-//  }
+  "testMethodWithHandlerAsyncResultSetVertxGen" should "work" in {
+    import scala.collection.JavaConversions._
+    exec1(w => obj.methodWithHandlerAsyncResultSetVertxGenFuture().foreach(it => { w {assert(it.map(_.getString()) == Set("bar", "foo"))}; w.dismiss()}))
+  }
+
+  "testMethodWithHandlerAsyncResultSetAbstractVertxGen" should "work" in {
+    import scala.collection.JavaConversions._
+    exec1(w => obj.methodWithHandlerAsyncResultSetAbstractVertxGenFuture().foreach(it => { w {assert(it.map(_.getString()) == Set("abstractbar", "abstractfoo"))}; w.dismiss()}))
+  }
 
   "testMethodWithHandlerListJsonObject" should "work" in {
     obj.methodWithHandlerListJsonObject(it => assert(it == List(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan")))))
@@ -304,26 +296,20 @@ class ApiTest extends FlatSpec with Matchers {
     obj.methodWithHandlerListComplexJsonObject(it => assert(it == List(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue"))))))
   }
 
-//  "testMethodWithHandlerAsyncResultListJsonObject" should "work" in {
-//    import scala.collection.JavaConversions._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultListJsonObject(it => { w {assert(List(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan"))).sameElements(it.result()))}; w.dismiss()})
-//    w.await(timeout(50 millis))
-//  }
-//
-//  "testMethodWithHandlerAsyncResultListNullJsonObject" should "work" in {
-//    import scala.collection.JavaConversions._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultListNullJsonObject(it => { w {assert(List(null).sameElements(it.result()))}; w.dismiss()})
-//    w.await(timeout(50 millis))
-//  }
-//
-//  "testMethodWithHandlerAsyncResultListComplexJsonObject" should "work" in {
-//    import scala.collection.JavaConversions._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultListComplexJsonObject(it => { w {assert(List(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue")))).sameElements(it.result()))}; w.dismiss()})
-//    w.await(timeout(50 millis))
-//  }
+  "testMethodWithHandlerAsyncResultListJsonObject" should "work" in {
+    import scala.collection.JavaConversions._
+    exec1(w => obj.methodWithHandlerAsyncResultListJsonObjectFuture().foreach(it => { w {assert(List(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan"))).sameElements(it))}; w.dismiss()}))
+  }
+
+  "testMethodWithHandlerAsyncResultListNullJsonObject" should "work" in {
+    import scala.collection.JavaConversions._
+    exec1(w => obj.methodWithHandlerAsyncResultListNullJsonObjectFuture().foreach(it => { w {assert(List(null).sameElements(it))}; w.dismiss()}))
+  }
+
+  "testMethodWithHandlerAsyncResultListComplexJsonObject" should "work" in {
+    import scala.collection.JavaConversions._
+    exec1(w => obj.methodWithHandlerAsyncResultListComplexJsonObjectFuture().foreach(it => { w {assert(List(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue")))).sameElements(it))}; w.dismiss()}))
+  }
 
   "testMethodWithHandlerSetJsonObject" should "work" in {
     obj.methodWithHandlerSetJsonObject(it => assert(it == Set(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan")))))
@@ -337,26 +323,20 @@ class ApiTest extends FlatSpec with Matchers {
     obj.methodWithHandlerSetComplexJsonObject(it => assert(it == Set(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue"))))))
   }
 
-//  "testMethodWithHandlerAsyncResultSetJsonObject" should "work" in {
-//    import scala.collection.JavaConversions._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultSetJsonObject(it => { w {assert(Set(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan"))).sameElements(it.result()))}; w.dismiss()})
-//    w.await(timeout(50 millis))
-//  }
-//
-//  "testMethodWithHandlerAsyncResultSetNullJsonObject" should "work" in {
-//    import scala.collection.JavaConversions._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultSetNullJsonObject(it => { w {assert(Set(null).sameElements(it.result()))}; w.dismiss()})
-//    w.await(timeout(50 millis))
-//  }
-//
-//  "testMethodWithHandlerAsyncResultSetComplexJsonObject" should "work" in {
-//    import scala.collection.JavaConversions._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultSetComplexJsonObject(it => { w {assert(Set(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue")))).sameElements(it.result()))}; w.dismiss()})
-//    w.await(timeout(50 millis))
-//  }
+  "testMethodWithHandlerAsyncResultSetJsonObject" should "work" in {
+    import scala.collection.JavaConversions._
+    exec1(w => obj.methodWithHandlerAsyncResultSetJsonObjectFuture().foreach(it => { w {assert(Set(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan"))).sameElements(it))}; w.dismiss()}))
+  }
+
+  "testMethodWithHandlerAsyncResultSetNullJsonObject" should "work" in {
+    import scala.collection.JavaConversions._
+    exec1(w => obj.methodWithHandlerAsyncResultSetNullJsonObjectFuture().foreach(it => { w {assert(Set(null).sameElements(it))}; w.dismiss()}))
+  }
+
+  "testMethodWithHandlerAsyncResultSetComplexJsonObject" should "work" in {
+    import scala.collection.JavaConversions._
+    exec1(w => obj.methodWithHandlerAsyncResultSetComplexJsonObjectFuture().foreach(it => { w {assert(Set(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue")))).sameElements(it))}; w.dismiss()}))
+  }
 
   "testMethodWithHandlerListJsonArray" should "work" in {
     obj.methodWithHandlerListJsonArray(it => assert(it == List(arr("green", "blue"), arr("yellow", "purple"))))
@@ -410,26 +390,20 @@ class ApiTest extends FlatSpec with Matchers {
     obj.methodWithHandlerSetNullDataObject(it => assert(Set(null) == it))
   }
 
-//  "testMethodWithHandlerAsyncResultListJsonArray" should "work" in {
-//    import collection.JavaConverters._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultListJsonArray(it => { w {assert(it.result().diff(List(arr("green", "blue"), arr("yellow", "purple"))).isEmpty)}; w.dismiss()})
-//    w.await(timeout(50 millis))
-//  }
-//
-//  "testMethodWithHandlerAsyncResultListNullJsonArray" should "work" in {
-//    import collection.JavaConverters._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultListNullJsonArray(it => { w {assert(it.result() == List(null))}; w.dismiss()})
-//    w.await(timeout(50 millis))
-//  }
-//
-//  "testMethodWithHandlerAsyncResultListComplexJsonArray" should "work" in {
-//    import collection.JavaConverters._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultListComplexJsonArray(it => { w {assert(it.result().diff(List(arr(Json.obj(("foo", "hello"))), arr(Json.obj(("bar", "bye"))))).isEmpty)}; w.dismiss()})
-//    w.await(timeout(50 millis))
-//  }
+  "testMethodWithHandlerAsyncResultListJsonArray" should "work" in {
+    import collection.JavaConverters._
+    exec1(w => obj.methodWithHandlerAsyncResultListJsonArrayFuture().foreach(it => { w {assert(it.diff(List(arr("green", "blue"), arr("yellow", "purple"))).isEmpty)}; w.dismiss()}))
+  }
+
+  "testMethodWithHandlerAsyncResultListNullJsonArray" should "work" in {
+    import collection.JavaConverters._
+    exec1(w => obj.methodWithHandlerAsyncResultListNullJsonArrayFuture().foreach(it => { w {assert(it == List(null))}; w.dismiss()}))
+  }
+
+  "testMethodWithHandlerAsyncResultListComplexJsonArray" should "work" in {
+    import collection.JavaConverters._
+    exec1(w => obj.methodWithHandlerAsyncResultListComplexJsonArrayFuture().foreach(it => { w {assert(it.diff(List(arr(Json.obj(("foo", "hello"))), arr(Json.obj(("bar", "bye"))))).isEmpty)}; w.dismiss()}))
+  }
 
   "testMethodWithHandlerSetJsonArray" should "work" in {
     obj.methodWithHandlerSetJsonArray(it => assert(it == Set(arr("green", "blue"), arr("yellow", "purple"))))
@@ -443,104 +417,88 @@ class ApiTest extends FlatSpec with Matchers {
     obj.methodWithHandlerSetComplexJsonArray(it => assert(it == Set(arr(Json.obj(("foo", "hello"))), arr(Json.obj(("bar", "bye"))))))
   }
 
-//  "testMethodWithHandlerAsyncResultSetJsonArray" should "work" in {
-//    import collection.JavaConverters._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultSetJsonArray(it => { w {assert(it.result().diff(Set(arr("green", "blue"), arr("yellow", "purple"))).isEmpty)}; w.dismiss()})
-//    w.await(timeout(50 millis))
-//  }
-//
-//  "testMethodWithHandlerAsyncResultNullSetJsonArray" should "work" in {
-//    import collection.JavaConverters._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultSetNullJsonArray(it => { w {assert(it.result() == Set(null))}; w.dismiss()})
-//    w.await(timeout(50 millis))
-//  }
-//
-//  "testMethodWithHandlerAsyncResultSetComplexJsonArray" should "work" in {
-//    import collection.JavaConverters._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultSetComplexJsonArray(it => { w {assert(it.result().diff(Set(arr(Json.obj(("foo", "hello"))), arr(Json.obj(("bar", "bye"))))).isEmpty)}; w.dismiss()})
-//    w.await(timeout(50 millis))
-//  }
-//
-//  "testMethodWithHandlerAsyncResultListDataObject" should "work" in {
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultListDataObject(it => {
-//      w {
-//        assert("String 1" == it.result()(0).getFoo)
-//        assert(1 == it.result()(0).getBar)
-//        assert(1.1 == it.result()(0).getWibble)
-//
-//        assert("String 2" == it.result()(1).getFoo)
-//        assert(2 == it.result()(1).getBar)
-//        assert(2.2 == it.result()(1).getWibble)
-//      }
-//      w.dismiss()
-//    })
-//    w.await(timeout(50 millis))
-//  }
-//
-//  "testMethodWithHandlerAsyncResultNullListDataObject" should "work" in {
-//    import collection.JavaConverters._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultListNullDataObject(it => {
-//      w { assert(List(null) == it.result()) }
-//      w.dismiss()
-//    })
-//    w.await(timeout(50 millis))
-//  }
-//
-//  "testMethodWithHandlerAsyncResultSetDataObject" should "work" in {
-//    import collection.JavaConversions._
-//    val w = new Waiter
-//    var checkVar = 0
-//    obj.methodWithHandlerAsyncResultSetDataObject(it => {
-//      val coll = it.result()
-//      coll.forall(td => {
-//        if ("String 1" == td.getFoo) {
-//          assert(1 == td.getBar)
-//          assert(1.1 == td.getWibble)
-//          checkVar += 1
-//          w.dismiss()
-//        }
-//        else if ("String 2" == td.getFoo) {
-//          assert(2 == td.getBar)
-//          assert(2.2 == td.getWibble)
-//          checkVar -= 1
-//          w.dismiss()
-//        }
-//        true
-//      })
-//    })
-//    w.await(timeout(50 millis))
-//    assert(checkVar == 0)
-//  }
-//
-//
-//  "testMethodWithHandlerAsyncResultNullSetDataObject" should "work" in {
-//    import collection.JavaConverters._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultSetNullDataObject(it => {
-//      w{ assert(Set(null) == it.result())}
-//      w.dismiss()
-//    })
-//    w.await(timeout(50 millis))
-//  }
-//
-//
-//  "testMethodWithHandlerUserTypes" should "work" in {
-//    obj.methodWithHandlerUserTypes(it => assert(it.getString == "echidnas"))
-//  }
-//
-//  "testMethodWithHandlerAsyncResultUserTypes" should "work" in {
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultUserTypes(it => {
-//      w{assert(it.result.getString == "cheetahs")}
-//      w.dismiss()
-//    })
-//    w.await(timeout(50 millis))
-//  }
+  "testMethodWithHandlerAsyncResultSetJsonArray" should "work" in {
+    import collection.JavaConverters._
+    exec1(w => obj.methodWithHandlerAsyncResultSetJsonArrayFuture().foreach(it => { w {assert(it.diff(Set(arr("green", "blue"), arr("yellow", "purple"))).isEmpty)}; w.dismiss()}))
+  }
+
+  "testMethodWithHandlerAsyncResultNullSetJsonArray" should "work" in {
+    import collection.JavaConverters._
+    exec1(w => obj.methodWithHandlerAsyncResultSetNullJsonArrayFuture().foreach(it => { w {assert(it == Set(null))}; w.dismiss()}))
+  }
+
+  "testMethodWithHandlerAsyncResultSetComplexJsonArray" should "work" in {
+    import collection.JavaConverters._
+    exec1(w => obj.methodWithHandlerAsyncResultSetComplexJsonArrayFuture().foreach(it => { w {assert(it.diff(Set(arr(Json.obj(("foo", "hello"))), arr(Json.obj(("bar", "bye"))))).isEmpty)}; w.dismiss()}))
+  }
+
+  "testMethodWithHandlerAsyncResultListDataObject" should "work" in {
+    exec1(w => obj.methodWithHandlerAsyncResultListDataObjectFuture().foreach(it => {
+      w {
+        assert("String 1" == it(0).getFoo)
+        assert(1 == it(0).getBar)
+        assert(1.1 == it(0).getWibble)
+
+        assert("String 2" == it(1).getFoo)
+        assert(2 == it(1).getBar)
+        assert(2.2 == it(1).getWibble)
+      }
+      w.dismiss()
+    }))
+  }
+
+  "testMethodWithHandlerAsyncResultNullListDataObject" should "work" in {
+    import collection.JavaConverters._
+    exec1(w => obj.methodWithHandlerAsyncResultListNullDataObjectFuture().foreach(it => {
+      w { assert(List(null) == it) }
+      w.dismiss()
+    }))
+  }
+
+  "testMethodWithHandlerAsyncResultSetDataObject" should "work" in {
+    import collection.JavaConversions._
+    var checkVar = 0
+    exec1(w => obj.methodWithHandlerAsyncResultSetDataObjectFuture().foreach(it => {
+      val coll = it
+      coll.forall(td => {
+        if ("String 1" == td.getFoo) {
+          assert(1 == td.getBar)
+          assert(1.1 == td.getWibble)
+          checkVar += 1
+          w.dismiss()
+        }
+        else if ("String 2" == td.getFoo) {
+          assert(2 == td.getBar)
+          assert(2.2 == td.getWibble)
+          checkVar -= 1
+          w.dismiss()
+        }
+        true
+      })
+    }))
+    assert(checkVar == 0)
+  }
+
+
+  "testMethodWithHandlerAsyncResultNullSetDataObject" should "work" in {
+    import collection.JavaConverters._
+    exec1(w => obj.methodWithHandlerAsyncResultSetNullDataObjectFuture().foreach(it => {
+      w{ assert(Set(null) == it)}
+      w.dismiss()
+    }))
+  }
+
+
+  "testMethodWithHandlerUserTypes" should "work" in {
+    obj.methodWithHandlerUserTypes(it => assert(it.getString == "echidnas"))
+  }
+
+  "testMethodWithHandlerAsyncResultUserTypes" should "work" in {
+    exec1(w => obj.methodWithHandlerAsyncResultUserTypesFuture().foreach(it => {
+      w{assert(it.getString == "cheetahs")}
+      w.dismiss()
+    }))
+  }
 
   "testMethodWithConcreteHandlerUserTypesSubtype" should "work" in {
     obj.methodWithConcreteHandlerUserTypeSubtype(Factory.createConcreteHandlerUserType(it => assert(it.getString == "echidnas")))
@@ -563,26 +521,20 @@ class ApiTest extends FlatSpec with Matchers {
     obj.methodWithHandlerVoid(() => assert(true))
   }
 
-//  "testMethodWithHandlerAsyncResultVoid" should "work" in {
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultVoid(false,(res) => {
-//      w { assert(res.succeeded()) }
-//      w.dismiss()
-//    })
-//    w.await(timeout(50 millis))
-//  }
-//
-//  "testMethodWithHandlerAsyncResultVoidFails" should "work" in {
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultVoid(true,(res) => {
-//      w {
-//        assert(res.failed())
-//        assert(res.cause().getMessage == "foo!")
-//      }
-//      w.dismiss()
-//    })
-//    w.await(timeout(50 millis))
-//  }
+  "testMethodWithHandlerAsyncResultVoid" should "work" in {
+    exec1(w => obj.methodWithHandlerAsyncResultVoidFuture(false).foreach((res) => {
+      w.dismiss()
+    }))
+  }
+
+  "testMethodWithHandlerAsyncResultVoidFails" should "work" in {
+    exec1(w => obj.methodWithHandlerAsyncResultVoidFuture(true).onFailure{
+      case t => {
+        w { assert(t.getMessage == "foo!") }
+        w.dismiss()
+      };
+    })
+  }
 
   "testMethodWithHandlerThrowable" should "work" in {
     obj.methodWithHandlerThrowable((res) => {
@@ -597,14 +549,14 @@ class ApiTest extends FlatSpec with Matchers {
     })
   }
 
-//  "testMethodWithHandlerAsyncResultGenericUserType" should "work" in {
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultGenericUserType[String]("string_value_2",(res) => {
-//      w {assert(res.result.getValue == "string_value_2") }
-//      w.dismiss()
-//    })
-//    w.await(timeout(50 millis))
-//  }
+  "testMethodWithHandlerAsyncResultGenericUserType" should "work" in {
+    exec1(w =>
+      obj.methodWithHandlerAsyncResultGenericUserTypeFuture[String]("string_value_2").foreach((res) => {
+        w {assert(res.getValue == "string_value_2") }
+        w.dismiss()
+      })
+    )
+  }
 
   "testMethodWithGenericParam" should "work" in {
     obj.methodWithGenericParam("String", "foo")
@@ -621,15 +573,15 @@ class ApiTest extends FlatSpec with Matchers {
     obj.methodWithGenericHandler[JsonObject]("JsonObjectComplex",(res) => assert(res == Json.obj(("outer", Json.obj(("foo", "hello"))), ("bar", arr("this", "that")))))
   }
 
-//  "testMethodWithGenericHandlerAsyncResult" should "work" in {
-//    val w = new Waiter
-//    obj.methodWithGenericHandlerAsyncResult[String]("String",(res) => { w {assert(res.result() == "foo")}; w.dismiss()})
-//    obj.methodWithGenericHandlerAsyncResult[io.vertx.codegen.testmodel.RefedInterface1]("Ref",(res) => { w {assert(res.result().getString == "bar")}; w.dismiss()})
-//    obj.methodWithGenericHandlerAsyncResult[JsonObject]("JsonObject",(res) => { w { assert(res.result() == Json.obj(("foo", "hello"), ("bar", 123)))}; w.dismiss()})
-//    obj.methodWithGenericHandlerAsyncResult[JsonArray]("JsonArray",(res) => { w { assert(res.result() == arr("foo", "bar", "wib"))}; w.dismiss()})
-//    obj.methodWithGenericHandlerAsyncResult[JsonObject]("JsonObjectComplex",(res) => { w {assert(res.result() == Json.obj(("outer", Json.obj(("foo", "hello"))), ("bar", arr("this", "that"))))}; w.dismiss()})
-//    w.await(timeout(50 millis), dismissals(5))
-//  }
+  "testMethodWithGenericHandlerAsyncResult" should "work" in {
+    exec(5)(w => {
+      obj.methodWithGenericHandlerAsyncResultFuture[String]("String").foreach((res) => { w {assert(res == "foo")}; w.dismiss()})
+      obj.methodWithGenericHandlerAsyncResultFuture[io.vertx.codegen.testmodel.RefedInterface1]("Ref").foreach((res) => { w {assert(res.getString == "bar")}; w.dismiss()})
+      obj.methodWithGenericHandlerAsyncResultFuture[JsonObject]("JsonObject").foreach((res) => { w { assert(res == Json.obj(("foo", "hello"), ("bar", 123)))}; w.dismiss()})
+      obj.methodWithGenericHandlerAsyncResultFuture[JsonArray]("JsonArray").foreach((res) => { w { assert(res == arr("foo", "bar", "wib"))}; w.dismiss()})
+      obj.methodWithGenericHandlerAsyncResultFuture[JsonObject]("JsonObjectComplex").foreach((res) => { w {assert(res == Json.obj(("outer", Json.obj(("foo", "hello"))), ("bar", arr("this", "that"))))}; w.dismiss()})
+    })
+  }
 
   "testMethodListParams" should "work" in {
     val refed1 = new RefedInterface1(new RefedInterface1Impl())
@@ -694,19 +646,15 @@ class ApiTest extends FlatSpec with Matchers {
     obj.methodWithHandlerSetEnum(it => assert(it == Set(TestEnum.TIM, TestEnum.JULIEN)))
   }
 
-//  "testMethodWithHandlerAsyncResultListEnum" should "work" in {
-//    import collection.JavaConverters._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultListEnum(it => { w{assert(it.result().toSet.diff(Set(TestEnum.TIM, TestEnum.JULIEN)).isEmpty)}; w.dismiss()})
-//    w.await(timeout(50 millis), dismissals(1))
-//  }
-//
-//  "testMethodWithHandlerAsyncResultSetEnum" should "work" in {
-//    import collection.JavaConverters._
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultSetEnum(it => { w{assert(it.result().diff(Set(TestEnum.TIM, TestEnum.JULIEN)).isEmpty)}; w.dismiss()})
-//    w.await(timeout(50 millis), dismissals(1))
-//  }
+  "testMethodWithHandlerAsyncResultListEnum" should "work" in {
+    import collection.JavaConverters._
+    exec1(w => obj.methodWithHandlerAsyncResultListEnumFuture().foreach(it => { w{assert(it.toSet.diff(Set(TestEnum.TIM, TestEnum.JULIEN)).isEmpty)}; w.dismiss()}))
+  }
+
+  "testMethodWithHandlerAsyncResultSetEnum" should "work" in {
+    import collection.JavaConverters._
+    exec1(w => obj.methodWithHandlerAsyncResultSetEnumFuture().foreach(it => { w{assert(it.diff(Set(TestEnum.TIM, TestEnum.JULIEN)).isEmpty)}; w.dismiss()}))
+  }
 
   "testBasicReturns" should "work" in {
     assert(123 == obj.methodWithByteReturn())
@@ -1031,56 +979,45 @@ class ApiTest extends FlatSpec with Matchers {
     assert(0 == count)
   }
 
-//  "testJsonHandlerAsyncResultParams" should "work" in {
-//    val w = new Waiter
-//    obj.methodWithHandlerAsyncResultJsonObject(it => {
-//      w{assert(Json.obj(("cheese", "stilton")) == it.result())}
-//      w.dismiss()
-//    })
-//    w.await(timeout(50 millis))
-//    val w2 = new Waiter
-//    obj.methodWithHandlerAsyncResultJsonArray(it => {
-//      w2{assert(arr("socks", "shoes") == it.result())}
-//      w2.dismiss()
-//    })
-//    w2.await(timeout(50 millis))
-//  }
-//
-//  "testNullJsonHandlerAsyncResultParams" should "work" in {
-//    val w = new Waiter
-//
-//    obj.methodWithHandlerAsyncResultNullJsonObject(it => {
-//      w{assert(null == it.result())}
-//      w.dismiss()
-//    })
-//
-//    w.await(timeout(50 millis))
-//    val w2 = new Waiter
-//    obj.methodWithHandlerAsyncResultNullJsonArray(it => {
-//      w2{assert(null == it.result())}
-//      w2.dismiss()
-//    })
-//
-//    w2.await(timeout(50 millis))
-//  }
-//
-//  "testComplexJsonHandlerAsyncResultParams" should "work" in {
-//    val w = new Waiter
-//
-//    obj.methodWithHandlerAsyncResultComplexJsonObject(it => {
-//      w{assert(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue"))) == it.result())}
-//      w.dismiss()
-//    })
-//
-//    w.await(timeout(50 millis))
-//    val w2 = new Waiter
-//    obj.methodWithHandlerAsyncResultComplexJsonArray(it => {
-//      w{assert(arr(Json.obj(("foo", "hello")), Json.obj(("bar", "bye"))) == it.result())}
-//      w2.dismiss()
-//    })
-//
-//    w2.await(timeout(50 millis))
-//  }
+  "testJsonHandlerAsyncResultParams" should "work" in {
+    exec(2)(w => {
+      obj.methodWithHandlerAsyncResultJsonObjectFuture().foreach(it => {
+        w{assert(Json.obj(("cheese", "stilton")) == it)}
+        w.dismiss()
+      })
+      obj.methodWithHandlerAsyncResultJsonArrayFuture().foreach(it => {
+        w{assert(arr("socks", "shoes") == it)}
+        w.dismiss()
+      })
+    })
+  }
+
+  "testNullJsonHandlerAsyncResultParams" should "work" in {
+    exec(2)(w => {
+      obj.methodWithHandlerAsyncResultNullJsonObjectFuture().foreach(it => {
+        w{assert(null == it)}
+        w.dismiss()
+      })
+
+      obj.methodWithHandlerAsyncResultNullJsonArrayFuture().foreach(it => {
+        w{assert(null == it)}
+        w.dismiss()
+      })
+    })
+  }
+
+  "testComplexJsonHandlerAsyncResultParams" should "work" in {
+    exec(2)(w => {
+      obj.methodWithHandlerAsyncResultComplexJsonObjectFuture().foreach(it => {
+        w{assert(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue"))) == it)}
+        w.dismiss()
+      })
+      obj.methodWithHandlerAsyncResultComplexJsonArrayFuture().foreach(it => {
+        w{assert(arr(Json.obj(("foo", "hello")), Json.obj(("bar", "bye"))) == it)}
+        w.dismiss()
+      })
+    })
+  }
 
   "testMethodWithListEnumReturn" should "work" in {
     assert(List(TestEnum.JULIEN, TestEnum.TIM) == obj.methodWithListEnumReturn())
@@ -1122,248 +1059,185 @@ class ApiTest extends FlatSpec with Matchers {
 
   val nullableTCK = testmodel.NullableTCK(new NullableTCKImpl)
 
-//  "testNullableByte" should "work" in {
-//    val testByte = 67.toByte
-//    nullableTCK.methodWithNullableByteParam(true, None)
-//    nullableTCK.methodWithNullableByteParam(false, Option(testByte))
-//    nullableTCK.methodWithNullableByteHandler(true,b => assert(testByte == b))
-//    nullableTCK.methodWithNullableByteHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableByteHandlerAsyncResultFuture(true).foreach(b => {w{assert(testByte == b)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableByteHandlerAsyncResultFuture(false).foreach(b => {w2{intercept[NullPointerException](b)}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableByteReturn(true)
-//    nullableTCK.methodWithNullableByteReturn(false)
-//  }
+  "testNullableByte" should "work" in {
+    val testByte = 67.toByte
+    nullableTCK.methodWithNullableByteParam(true, None)
+    nullableTCK.methodWithNullableByteParam(false, Option(testByte))
+    nullableTCK.methodWithNullableByteHandler(true,b => assert(testByte == b))
+    nullableTCK.methodWithNullableByteHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableByteHandlerAsyncResultFuture(true).foreach(b => {w{assert(testByte == b)}; w.dismiss()}))
+    //TODO: Is this behavior correct? Check with other params, too
+    exec1(w => nullableTCK.methodWithNullableByteHandlerAsyncResultFuture(false).onFailure{case t => {w{assert(t.isInstanceOf[NullPointerException])}; w.dismiss()}})
+    nullableTCK.methodWithNullableByteReturn(true)
+    nullableTCK.methodWithNullableByteReturn(false)
+  }
 
-//  "testNullableShort" should "work" in {
-//    val testShort = 1024.toShort
-//    nullableTCK.methodWithNullableShortParam(true, None)
-//    nullableTCK.methodWithNullableShortParam(false, Option(testShort))
-//    nullableTCK.methodWithNullableShortHandler(true,b => assert(testShort == b))
-//    nullableTCK.methodWithNullableShortHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableShortHandlerAsyncResult(true,b => {w{assert(testShort == b.result())}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableShortHandlerAsyncResult(false,b => {w2{intercept[NullPointerException](b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableShortReturn(true)
-//    nullableTCK.methodWithNullableShortReturn(false)
-//  }
-//
-//  "testNullableInteger" should "work" in {
-//    val testInteger = 1234567
-//    nullableTCK.methodWithNullableIntegerParam(true, None)
-//    nullableTCK.methodWithNullableIntegerParam(false, Option(testInteger))
-//    nullableTCK.methodWithNullableIntegerHandler(true,b => assert(testInteger == b))
-//    nullableTCK.methodWithNullableIntegerHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableIntegerHandlerAsyncResult(true,b => {w{assert(testInteger == b.result())}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableIntegerHandlerAsyncResult(false,b => {w2{intercept[NullPointerException](b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableIntegerReturn(true)
-//    nullableTCK.methodWithNullableIntegerReturn(false)
-//  }
-//
-//  "testNullableLong" should "work" in {
-//    val testLong = 9876543210l
-//    nullableTCK.methodWithNullableLongParam(true, None)
-//    nullableTCK.methodWithNullableLongParam(false, Option(testLong))
-//    nullableTCK.methodWithNullableLongHandler(true,b => assert(testLong == b))
-//    nullableTCK.methodWithNullableLongHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableLongHandlerAsyncResult(true,b => {w{assert(testLong == b.result())}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableLongHandlerAsyncResult(false,b => {w2{intercept[NullPointerException](b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableLongReturn(true)
-//    nullableTCK.methodWithNullableLongReturn(false)
-//  }
-//
-//  "testNullableFloat" should "work" in {
-//    val testFloat = 3.14.toFloat
-//    nullableTCK.methodWithNullableFloatParam(true, None)
-//    nullableTCK.methodWithNullableFloatParam(false, Option(testFloat))
-//    nullableTCK.methodWithNullableFloatHandler(true,b => assert(testFloat == b))
-//    nullableTCK.methodWithNullableFloatHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableFloatHandlerAsyncResult(true,b => {w{assert(testFloat == b.result())}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableFloatHandlerAsyncResult(false,b => {w2{intercept[NullPointerException](null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableFloatReturn(true)
-//    nullableTCK.methodWithNullableFloatReturn(false)
-//  }
-//
-//  "testNullableDouble" should "work" in {
-//    val testDouble = 3.1415926
-//    nullableTCK.methodWithNullableDoubleParam(true, None)
-//    nullableTCK.methodWithNullableDoubleParam(false, Option(testDouble))
-//    nullableTCK.methodWithNullableDoubleHandler(true,b => assert(testDouble == b))
-//    nullableTCK.methodWithNullableDoubleHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableDoubleHandlerAsyncResult(true,b => {w{assert(testDouble == b.result())}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableDoubleHandlerAsyncResult(false,b => {w2{intercept[NullPointerException](b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableDoubleReturn(true)
-//    nullableTCK.methodWithNullableDoubleReturn(false)
-//  }
-//
-//  "testNullableBoolean" should "work" in {
-//    val testBoolean = true
-//    nullableTCK.methodWithNullableBooleanParam(true, None)
-//    nullableTCK.methodWithNullableBooleanParam(false, Option(testBoolean))
-//    nullableTCK.methodWithNullableBooleanHandler(true,b => assert(testBoolean == b))
-//    nullableTCK.methodWithNullableBooleanHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableBooleanHandlerAsyncResult(true,b => {w{assert(testBoolean == b.result())}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableBooleanHandlerAsyncResult(false,b => {w2{intercept[NullPointerException](b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableBooleanReturn(true)
-//    nullableTCK.methodWithNullableBooleanReturn(false)
-//  }
-//
-//  "testNullableChar" should "work" in {
-//    val testChar = 'f'
-//    nullableTCK.methodWithNullableCharParam(true, None)
-//    nullableTCK.methodWithNullableCharParam(false, Option(testChar))
-//    nullableTCK.methodWithNullableCharHandler(true,b => assert(testChar == b))
-//    nullableTCK.methodWithNullableCharHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableCharHandlerAsyncResult(true,b => {w{assert(testChar == b.result())}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableCharHandlerAsyncResult(false,b => {w2{intercept[NullPointerException](null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableCharReturn(true)
-//    nullableTCK.methodWithNullableCharReturn(false)
-//  }
-//
-//  "testNullableJsonObject" should "work" in {
-//    val testJsonObject = Json.obj(("foo","wibble"),("bar",3))
-//    nullableTCK.methodWithNullableJsonObjectParam(true, None)
-//    nullableTCK.methodWithNullableJsonObjectParam(false, Option(testJsonObject))
-//    nullableTCK.methodWithNullableJsonObjectHandler(true,b => assert(testJsonObject == b))
-//    nullableTCK.methodWithNullableJsonObjectHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableJsonObjectHandlerAsyncResult(true,b => {w{assert(testJsonObject == b.result())}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableJsonObjectHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableJsonObjectReturn(true)
-//    nullableTCK.methodWithNullableJsonObjectReturn(false)
-//  }
-//
-//  "testNullableJsonArray" should "work" in {
-//    val testJsonArray = Json.arr("one","two","three")
-//    nullableTCK.methodWithNullableJsonArrayParam(true, None)
-//    nullableTCK.methodWithNullableJsonArrayParam(false, Option(testJsonArray))
-//    nullableTCK.methodWithNullableJsonArrayHandler(true,b => assert(testJsonArray == b))
-//    nullableTCK.methodWithNullableJsonArrayHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableJsonArrayHandlerAsyncResult(true,b => {w{assert(testJsonArray == b.result())}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableJsonArrayHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableJsonArrayReturn(true)
-//    nullableTCK.methodWithNullableJsonArrayReturn(false)
-//  }
-//
-//  "testNullableApi" should "work" in {
-//    val testApi = RefedInterface1(new RefedInterface1Impl().setString("lovely_dae"))
-//    nullableTCK.methodWithNullableApiParam(true, None)
-//    nullableTCK.methodWithNullableApiParam(false, Option(testApi))
-//    nullableTCK.methodWithNullableApiHandler(true,b => assert(testApi.asJava == b.asJava))
-//    nullableTCK.methodWithNullableApiHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableApiHandlerAsyncResult(true,b => {w{assert(testApi.asJava == b.result().asJava)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableApiHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableApiReturn(true)
-//    nullableTCK.methodWithNullableApiReturn(false)
-//  }
-//
-//  "testNullableDataObject" should "work" in {
-//    val testDataObject = TestDataObject.fromJson(Json.obj(("foo","foo_value"), ("bar",12345), ("wibble", 3.5)))
-//    nullableTCK.methodWithNullableDataObjectParam(true, None)
-//    nullableTCK.methodWithNullableDataObjectParam(false, Option(testDataObject))
-//    nullableTCK.methodWithNullableDataObjectHandler(true,b => assert(testDataObject.asJava.toJson == b.asJava.toJson))
-//    nullableTCK.methodWithNullableDataObjectHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableDataObjectHandlerAsyncResult(true,b => {w{assert(testDataObject.asJava.toJson == b.result().asJava.toJson)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableDataObjectHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableDataObjectReturn(true)
-//    nullableTCK.methodWithNullableDataObjectReturn(false)
-//  }
-//
-//  "testNullableEnum" should "work" in {
-//    val testEnum = TestEnum.TIM
-//    nullableTCK.methodWithNullableEnumParam(true, None)
-//    nullableTCK.methodWithNullableEnumParam(false, Option(testEnum))
-//    nullableTCK.methodWithNullableEnumHandler(true,b => assert(testEnum == b))
-//    nullableTCK.methodWithNullableEnumHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableEnumHandlerAsyncResult(true,b => {w{assert(testEnum == b.result())}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableEnumHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableEnumReturn(true)
-//    nullableTCK.methodWithNullableEnumReturn(false)
-//  }
-//
-//  "testNullableGenEnum" should "work" in {
-//    val testGenEnum = TestGenEnum.MIKE
-//    nullableTCK.methodWithNullableGenEnumParam(true, None)
-//    nullableTCK.methodWithNullableGenEnumParam(false, Option(testGenEnum))
-//    nullableTCK.methodWithNullableGenEnumHandler(true,b => assert(testGenEnum == b))
-//    nullableTCK.methodWithNullableGenEnumHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableGenEnumHandlerAsyncResult(true,b => {w{assert(testGenEnum == b.result())}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableGenEnumHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableGenEnumReturn(true)
-//    nullableTCK.methodWithNullableGenEnumReturn(false)
-//  }
-//
-//  "testNullableTypeVariable" should "work" in {
-//    nullableTCK.methodWithNullableTypeVariableParam(false, "whatever")
-//    nullableTCK.methodWithNullableTypeVariableParam(true, null)
-//    val w1 = new Waiter()
-//    nullableTCK.methodWithNullableTypeVariableHandler[String](true, "wibble",a => {w1{assert(a == "wibble")}; w1.dismiss()})
-//    w1.await()
-//    val w2 = new Waiter()
-//    nullableTCK.methodWithNullableTypeVariableHandler[String](true, null,b => {w1{assert(b == "sausages")}; w2.dismiss()})
-//    w2.await()
-//    val w3 = new Waiter()
-//    nullableTCK.methodWithNullableTypeVariableHandlerAsyncResult[String](true, "sausages",c => {w3{assert(c.result() == "sausages")};w3.dismiss()})
-//    w3.await()
-//    val w4 = new Waiter()
-//    nullableTCK.methodWithNullableTypeVariableHandlerAsyncResult[String](true, null,d => {w4{assert(d.result() == null)};w4.dismiss()})
-//    assert("fizz1" == nullableTCK.methodWithNullableTypeVariableReturn[String](true, "fizz1"))
-//    assert(null == nullableTCK.methodWithNullableTypeVariableReturn(false, "fizz2"))
-//    w4.await()
-//  }
+  "testNullableShort" should "work" in {
+    val testShort = 1024.toShort
+    nullableTCK.methodWithNullableShortParam(true, None)
+    nullableTCK.methodWithNullableShortParam(false, Option(testShort))
+    nullableTCK.methodWithNullableShortHandler(true,b => assert(testShort == b))
+    nullableTCK.methodWithNullableShortHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableShortHandlerAsyncResultFuture(true).foreach(b => {w{assert(testShort == b)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableShortHandlerAsyncResultFuture(false).onFailure{case t => {w{assert(t.isInstanceOf[NullPointerException])}; w.dismiss()}})
+    nullableTCK.methodWithNullableShortReturn(true)
+    nullableTCK.methodWithNullableShortReturn(false)
+  }
+
+  "testNullableInteger" should "work" in {
+    val testInteger = 1234567
+    nullableTCK.methodWithNullableIntegerParam(true, None)
+    nullableTCK.methodWithNullableIntegerParam(false, Option(testInteger))
+    nullableTCK.methodWithNullableIntegerHandler(true,b => assert(testInteger == b))
+    nullableTCK.methodWithNullableIntegerHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableIntegerHandlerAsyncResultFuture(true).foreach(b => {w{assert(testInteger == b)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableIntegerHandlerAsyncResultFuture(false).onFailure{case t => {w{assert(t.isInstanceOf[NullPointerException])}; w.dismiss()}})
+    nullableTCK.methodWithNullableIntegerReturn(true)
+    nullableTCK.methodWithNullableIntegerReturn(false)
+  }
+
+  "testNullableLong" should "work" in {
+    val testLong = 9876543210l
+    nullableTCK.methodWithNullableLongParam(true, None)
+    nullableTCK.methodWithNullableLongParam(false, Option(testLong))
+    nullableTCK.methodWithNullableLongHandler(true,b => assert(testLong == b))
+    nullableTCK.methodWithNullableLongHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableLongHandlerAsyncResultFuture(true).foreach(b => {w{assert(testLong == b)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableLongHandlerAsyncResultFuture(false).onFailure{case t => {w{assert(t.isInstanceOf[NullPointerException])}; w.dismiss()}})
+    nullableTCK.methodWithNullableLongReturn(true)
+    nullableTCK.methodWithNullableLongReturn(false)
+  }
+
+  "testNullableFloat" should "work" in {
+    val testFloat = 3.14.toFloat
+    nullableTCK.methodWithNullableFloatParam(true, None)
+    nullableTCK.methodWithNullableFloatParam(false, Option(testFloat))
+    nullableTCK.methodWithNullableFloatHandler(true,b => assert(testFloat == b))
+    nullableTCK.methodWithNullableFloatHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableFloatHandlerAsyncResultFuture(true).foreach(b => {w{assert(testFloat == b)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableFloatHandlerAsyncResultFuture(false).onFailure{case t => {w{assert(t.isInstanceOf[NullPointerException])}; w.dismiss()}})
+    nullableTCK.methodWithNullableFloatReturn(true)
+    nullableTCK.methodWithNullableFloatReturn(false)
+  }
+
+  "testNullableDouble" should "work" in {
+    val testDouble = 3.1415926
+    nullableTCK.methodWithNullableDoubleParam(true, None)
+    nullableTCK.methodWithNullableDoubleParam(false, Option(testDouble))
+    nullableTCK.methodWithNullableDoubleHandler(true,b => assert(testDouble == b))
+    nullableTCK.methodWithNullableDoubleHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableDoubleHandlerAsyncResultFuture(true).foreach(b => {w{assert(testDouble == b)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableDoubleHandlerAsyncResultFuture(false).onFailure{case t => {w{assert(t.isInstanceOf[NullPointerException])}; w.dismiss()}})
+    nullableTCK.methodWithNullableDoubleReturn(true)
+    nullableTCK.methodWithNullableDoubleReturn(false)
+  }
+
+  "testNullableBoolean" should "work" in {
+    val testBoolean = true
+    nullableTCK.methodWithNullableBooleanParam(true, None)
+    nullableTCK.methodWithNullableBooleanParam(false, Option(testBoolean))
+    nullableTCK.methodWithNullableBooleanHandler(true,b => assert(testBoolean == b))
+    nullableTCK.methodWithNullableBooleanHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableBooleanHandlerAsyncResultFuture(true).foreach(b => {w{assert(testBoolean == b)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableBooleanHandlerAsyncResultFuture(false).onFailure{case t => {w{assert(t.isInstanceOf[NullPointerException])}; w.dismiss()}})
+    nullableTCK.methodWithNullableBooleanReturn(true)
+    nullableTCK.methodWithNullableBooleanReturn(false)
+  }
+
+  "testNullableChar" should "work" in {
+    val testChar = 'f'
+    nullableTCK.methodWithNullableCharParam(true, None)
+    nullableTCK.methodWithNullableCharParam(false, Option(testChar))
+    nullableTCK.methodWithNullableCharHandler(true,b => assert(testChar == b))
+    nullableTCK.methodWithNullableCharHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableCharHandlerAsyncResultFuture(true).foreach(b => {w{assert(testChar == b)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableCharHandlerAsyncResultFuture(false).onFailure{case t => {w{assert(t.isInstanceOf[NullPointerException])}; w.dismiss()}})
+    nullableTCK.methodWithNullableCharReturn(true)
+    nullableTCK.methodWithNullableCharReturn(false)
+  }
+
+  "testNullableJsonObject" should "work" in {
+    val testJsonObject = Json.obj(("foo","wibble"),("bar",3))
+    nullableTCK.methodWithNullableJsonObjectParam(true, None)
+    nullableTCK.methodWithNullableJsonObjectParam(false, Option(testJsonObject))
+    nullableTCK.methodWithNullableJsonObjectHandler(true,b => assert(testJsonObject == b))
+    nullableTCK.methodWithNullableJsonObjectHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableJsonObjectHandlerAsyncResultFuture(true).foreach(b => {w{assert(testJsonObject == b)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableJsonObjectHandlerAsyncResultFuture(false).foreach(t => {w{assert(t == null)}; w.dismiss()}))
+    nullableTCK.methodWithNullableJsonObjectReturn(true)
+    nullableTCK.methodWithNullableJsonObjectReturn(false)
+  }
+
+  "testNullableJsonArray" should "work" in {
+    val testJsonArray = Json.arr("one","two","three")
+    nullableTCK.methodWithNullableJsonArrayParam(true, None)
+    nullableTCK.methodWithNullableJsonArrayParam(false, Option(testJsonArray))
+    nullableTCK.methodWithNullableJsonArrayHandler(true,b => assert(testJsonArray == b))
+    nullableTCK.methodWithNullableJsonArrayHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableJsonArrayHandlerAsyncResultFuture(true).foreach(b => {w{assert(testJsonArray == b)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableJsonArrayHandlerAsyncResultFuture(false).foreach(t => {w{assert(t == null)}; w.dismiss()}))
+    nullableTCK.methodWithNullableJsonArrayReturn(true)
+    nullableTCK.methodWithNullableJsonArrayReturn(false)
+  }
+
+  "testNullableApi" should "work" in {
+    val testApi = RefedInterface1(new RefedInterface1Impl().setString("lovely_dae"))
+    nullableTCK.methodWithNullableApiParam(true, None)
+    nullableTCK.methodWithNullableApiParam(false, Option(testApi))
+    nullableTCK.methodWithNullableApiHandler(true,b => assert(testApi.asJava == b.asJava))
+    nullableTCK.methodWithNullableApiHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableApiHandlerAsyncResultFuture(true).foreach(b => {w{assert(testApi.asJava == b.asJava)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableApiHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableApiReturn(true)
+    nullableTCK.methodWithNullableApiReturn(false)
+  }
+
+  "testNullableDataObject" should "work" in {
+    val testDataObject = TestDataObject.fromJson(Json.obj(("foo","foo_value"), ("bar",12345), ("wibble", 3.5)))
+    nullableTCK.methodWithNullableDataObjectParam(true, None)
+    nullableTCK.methodWithNullableDataObjectParam(false, Option(testDataObject))
+    nullableTCK.methodWithNullableDataObjectHandler(true,b => assert(testDataObject.asJava.toJson == b.asJava.toJson))
+    nullableTCK.methodWithNullableDataObjectHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableDataObjectHandlerAsyncResultFuture(true).foreach(b => {w{assert(testDataObject.asJava.toJson == b.asJava.toJson)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableDataObjectHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableDataObjectReturn(true)
+    nullableTCK.methodWithNullableDataObjectReturn(false)
+  }
+
+  "testNullableEnum" should "work" in {
+    val testEnum = TestEnum.TIM
+    nullableTCK.methodWithNullableEnumParam(true, None)
+    nullableTCK.methodWithNullableEnumParam(false, Option(testEnum))
+    nullableTCK.methodWithNullableEnumHandler(true,b => assert(testEnum == b))
+    nullableTCK.methodWithNullableEnumHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableEnumHandlerAsyncResultFuture(true).foreach(b => {w{assert(testEnum == b)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableEnumHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableEnumReturn(true)
+    nullableTCK.methodWithNullableEnumReturn(false)
+  }
+
+  "testNullableGenEnum" should "work" in {
+    val testGenEnum = TestGenEnum.MIKE
+    nullableTCK.methodWithNullableGenEnumParam(true, None)
+    nullableTCK.methodWithNullableGenEnumParam(false, Option(testGenEnum))
+    nullableTCK.methodWithNullableGenEnumHandler(true,b => assert(testGenEnum == b))
+    nullableTCK.methodWithNullableGenEnumHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableGenEnumHandlerAsyncResultFuture(true).foreach(b => {w{assert(testGenEnum == b)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableGenEnumHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableGenEnumReturn(true)
+    nullableTCK.methodWithNullableGenEnumReturn(false)
+  }
+
+  "testNullableTypeVariable" should "work" in {
+    nullableTCK.methodWithNullableTypeVariableParam(false, "whatever")
+    nullableTCK.methodWithNullableTypeVariableParam(true, null)
+    exec1(w => nullableTCK.methodWithNullableTypeVariableHandler[String](true, "wibble",a => {w{assert(a == "wibble")}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableTypeVariableHandler[String](true, null,b => {w{assert(b == null)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableTypeVariableHandlerAsyncResultFuture[String](true, "sausages").foreach(c => {w{assert(c == "sausages")};w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableTypeVariableHandlerAsyncResultFuture[String](true, null).foreach(d => {w{assert(d == null)};w.dismiss()}))
+    assert("fizz1" == nullableTCK.methodWithNullableTypeVariableReturn[String](true, "fizz1"))
+    assert(null == nullableTCK.methodWithNullableTypeVariableReturn(false, "fizz2"))
+  }
 
   "testNullableObjectParam" should "work" in {
     nullableTCK.methodWithNullableObjectParam(true, null)
