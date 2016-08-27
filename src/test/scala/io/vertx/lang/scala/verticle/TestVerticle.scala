@@ -12,7 +12,8 @@ class TestVerticle extends ScalaVerticle{
     vertx.eventBus
       .consumer[String]("hello")
       .handler(a => a.reply("world"))
-      .completionHandler(c => startFuture.complete())
-    vertx.eventBus().send[String]("asd","",(reply:StringAsyncMsg) => println(reply))
+      .completionHandlerFuture()
+      .foreach(c => startFuture.complete())
+    vertx.eventBus().sendFuture[String]("asd","",null).foreach(reply => println(reply))
   }
 }
