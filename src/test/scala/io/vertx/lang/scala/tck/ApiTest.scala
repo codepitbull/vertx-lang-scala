@@ -207,7 +207,7 @@ class ApiTest extends FlatSpec with Matchers {
     )
   }
 
-  //TODO: AAAAARGH
+  //TODO: This combination is very tricky and I will ignore it for now (Handler<AsyncResult> as param AND as return type ...)
 //  "testMethodWithHandlerAsyncResultGenericReturn" should "work" in {
 //    val w = new Waiter
 //    def stringHandler = obj.methodWithHandlerAsyncResultGenericReturnFuture[String]().foreach(ar =>
@@ -1825,7 +1825,7 @@ class ApiTest extends FlatSpec with Matchers {
 
 
 
-//TODO there is no meaningful way to implement these in Scala as primitve nulls aren't possible
+//There is no meaningful way to implement these in Scala as primitve nulls aren't possible
 //  shared test void testListNullableByte() => testListNullable(ArrayList { 12.byte,null,24.byte }, nullableTCK.methodWithListNullableByteParam, nullableTCK.methodWithListNullableByteHandler, nullableTCK.methodWithListNullableByteHandlerAsyncResult, nullableTCK.methodWithListNullableByteReturn);
 //  shared test void testListNullableShort() => testListNullable(ArrayList { 520,null,1040 }, nullableTCK.methodWithListNullableShortParam, nullableTCK.methodWithListNullableShortHandler, nullableTCK.methodWithListNullableShortHandlerAsyncResult, nullableTCK.methodWithListNullableShortReturn);
 //  shared test void testListNullableInteger() => testListNullable(ArrayList { 12345,null,54321 }, nullableTCK.methodWithListNullableIntegerParam, nullableTCK.methodWithListNullableIntegerHandler, nullableTCK.methodWithListNullableIntegerHandlerAsyncResult, nullableTCK.methodWithListNullableIntegerReturn);
@@ -1836,78 +1836,65 @@ class ApiTest extends FlatSpec with Matchers {
 //  shared test void testListNullableChar() => testListNullable(ArrayList { 'F',null,'R' }, nullableTCK.methodWithListNullableCharParam, nullableTCK.methodWithListNullableCharHandler, nullableTCK.methodWithListNullableCharHandlerAsyncResult, nullableTCK.methodWithListNullableCharReturn);
 
 
-//  "testListNullableString" should "work" in {
-//    import collection.JavaConverters._
-//    val testListString:mutable.Buffer[String] = mutable.Buffer("first",null,"third")
-//    nullableTCK.methodWithListNullableStringParam(testListString)
-//    nullableTCK.methodWithListNullableStringHandler(b => assert(testListString.diff(b).isEmpty))
-//    val w = new Waiter()
-//    nullableTCK.methodWithListNullableStringHandlerAsyncResult(b => {w{assert(testListString.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    assert(testListString == nullableTCK.methodWithListNullableStringReturn())
-//  }
-//
-//  "testListNullableJsonObject" should "work" in {
-//    import collection.JavaConverters._
-//    val testListJsonObject:mutable.Buffer[JsonObject] = mutable.Buffer(Json.obj(("foo","bar")), null, Json.obj(("juu",3)))
-//    nullableTCK.methodWithListNullableJsonObjectParam(testListJsonObject)
-//    nullableTCK.methodWithListNullableJsonObjectHandler(b => assert(testListJsonObject.diff(b).isEmpty))
-//    val w = new Waiter()
-//    nullableTCK.methodWithListNullableJsonObjectHandlerAsyncResult(b => {w{assert(testListJsonObject.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    assert(testListJsonObject == nullableTCK.methodWithListNullableJsonObjectReturn())
-//  }
-//
-//  "testListNullableJsonArray" should "work" in {
-//    import collection.JavaConverters._
-//    val testListJsonArray:mutable.Buffer[JsonArray] = mutable.Buffer(Json.arr("foo","bar"), null, Json.arr("juu"))
-//    nullableTCK.methodWithListNullableJsonArrayParam(testListJsonArray)
-//    nullableTCK.methodWithListNullableJsonArrayHandler(b => assert(testListJsonArray.diff(b).isEmpty))
-//    val w = new Waiter()
-//    nullableTCK.methodWithListNullableJsonArrayHandlerAsyncResult(b => {w{assert(testListJsonArray.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    assert(testListJsonArray == nullableTCK.methodWithListNullableJsonArrayReturn())
-//  }
-//
-//  //TODO requires nullsafe equals in RefedInterface1Impl
-//  "testListNullableApi" should "work" ignore {
-//    import collection.JavaConverters._
-//    val iface1 = new RefedInterface1Impl().setString("first")
-//    val iface2 = new RefedInterface1Impl().setString("third")
-//    val testListApi:mutable.Buffer[RefedInterface1] = mutable.Buffer(RefedInterface1(iface1), null, RefedInterface1(iface2))
-//    nullableTCK.methodWithListNullableApiParam(testListApi)
-//    nullableTCK.methodWithListNullableApiHandler(b => assert(testListApi.map(x => refedIfaceToJavaOrNull(x)) == b.map(x => refedIfaceToJavaOrNull(x))))
-//    val w = new Waiter()
-//    nullableTCK.methodWithListNullableApiHandlerAsyncResult(b => {w{assert(testListApi.map(x => refedIfaceToJavaOrNull(x)).diff(b.result().map(a => refedIfaceToJavaOrNull(a))).isEmpty)}; w.dismiss()})
-//    w.await()
-//    assert(testListApi.map(x => refedIfaceToJavaOrNull(x)) == nullableTCK.methodWithListNullableApiReturn().map(x => refedIfaceToJavaOrNull(x)))
-//  }
-//
-//  "testListNullableDataObject" should "work" in {
-//    import collection.JavaConverters._
-//    val json1 = Json.obj(("foo","first"), ("bar",1), ("wibble",1.1))
-//    val json2 = Json.obj(("foo","third"), ("bar",3), ("wibble",3.3))
-//    val testListDataObject:mutable.Buffer[TestDataObject] = mutable.Buffer(TestDataObject.fromJson(json1), null, TestDataObject.fromJson(json2))
-//    nullableTCK.methodWithListNullableDataObjectParam(testListDataObject)
-//    nullableTCK.methodWithListNullableDataObjectHandler(b => assert(testListDataObject.map(x => dataObjectToJsonOrNull(x)) == b.map(x => dataObjectToJsonOrNull(x))))
-//    val w = new Waiter()
-//    nullableTCK.methodWithListNullableDataObjectHandlerAsyncResult(b => {w{assert(testListDataObject.map(x => dataObjectToJsonOrNull(x)) == b.result().map(x => dataObjectToJsonOrNull(x)))}; w.dismiss()})
-//    w.await()
-//    assert(testListDataObject.map(x => dataObjectToJsonOrNull(x)) == nullableTCK.methodWithListNullableDataObjectReturn().map(x => dataObjectToJsonOrNull(x)))
-//  }
-//
-//  "testListNullableGenEnum" should "work" in {
-//    import collection.JavaConverters._
-//    val testListGenEnum:mutable.Buffer[TestGenEnum] = mutable.Buffer(TestGenEnum.BOB,null,TestGenEnum.LELAND)
-//    nullableTCK.methodWithListNullableGenEnumParam(testListGenEnum)
-//    nullableTCK.methodWithListNullableGenEnumHandler(b => assert(testListGenEnum.diff(b).isEmpty))
-//    val w = new Waiter()
-//    nullableTCK.methodWithListNullableGenEnumHandlerAsyncResult(b => {w{assert(testListGenEnum.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    assert(testListGenEnum == nullableTCK.methodWithListNullableGenEnumReturn())
-//  }
+  "testListNullableString" should "work" in {
+    import collection.JavaConverters._
+    val testListString:mutable.Buffer[String] = mutable.Buffer("first",null,"third")
+    nullableTCK.methodWithListNullableStringParam(testListString)
+    nullableTCK.methodWithListNullableStringHandler(b => assert(testListString.diff(b).isEmpty))
+    exec1(w => nullableTCK.methodWithListNullableStringHandlerAsyncResultFuture().foreach(b => {w{assert(testListString.diff(b).isEmpty)}; w.dismiss()}))
+    assert(testListString == nullableTCK.methodWithListNullableStringReturn())
+  }
 
-  //TODO there is no meaningful way to implement these in Scala as primitve nulls aren't possible
+  "testListNullableJsonObject" should "work" in {
+    import collection.JavaConverters._
+    val testListJsonObject:mutable.Buffer[JsonObject] = mutable.Buffer(Json.obj(("foo","bar")), null, Json.obj(("juu",3)))
+    nullableTCK.methodWithListNullableJsonObjectParam(testListJsonObject)
+    nullableTCK.methodWithListNullableJsonObjectHandler(b => assert(testListJsonObject.diff(b).isEmpty))
+    exec1(w => nullableTCK.methodWithListNullableJsonObjectHandlerAsyncResultFuture().foreach(b => {w{assert(testListJsonObject.diff(b).isEmpty)}; w.dismiss()}))
+    assert(testListJsonObject == nullableTCK.methodWithListNullableJsonObjectReturn())
+  }
+
+  "testListNullableJsonArray" should "work" in {
+    import collection.JavaConverters._
+    val testListJsonArray:mutable.Buffer[JsonArray] = mutable.Buffer(Json.arr("foo","bar"), null, Json.arr("juu"))
+    nullableTCK.methodWithListNullableJsonArrayParam(testListJsonArray)
+    nullableTCK.methodWithListNullableJsonArrayHandler(b => assert(testListJsonArray.diff(b).isEmpty))
+    exec1(w => nullableTCK.methodWithListNullableJsonArrayHandlerAsyncResultFuture().foreach(b => {w{assert(testListJsonArray.diff(b).isEmpty)}; w.dismiss()}))
+    assert(testListJsonArray == nullableTCK.methodWithListNullableJsonArrayReturn())
+  }
+
+  "testListNullableApi" should "work" ignore {
+    import collection.JavaConverters._
+    val iface1 = new RefedInterface1Impl().setString("first")
+    val iface2 = new RefedInterface1Impl().setString("third")
+    val testListApi:mutable.Buffer[RefedInterface1] = mutable.Buffer(RefedInterface1(iface1), null, RefedInterface1(iface2))
+    nullableTCK.methodWithListNullableApiParam(testListApi)
+    nullableTCK.methodWithListNullableApiHandler(b => assert(testListApi.map(x => refedIfaceToJavaOrNull(x)) == b.map(x => refedIfaceToJavaOrNull(x))))
+    exec1(w => nullableTCK.methodWithListNullableApiHandlerAsyncResultFuture().foreach(b => {w{assert(testListApi.map(x => refedIfaceToJavaOrNull(x)).diff(b.map(a => refedIfaceToJavaOrNull(a))).isEmpty)}; w.dismiss()}))
+    assert(testListApi.map(x => refedIfaceToJavaOrNull(x)) == nullableTCK.methodWithListNullableApiReturn().map(x => refedIfaceToJavaOrNull(x)))
+  }
+
+  "testListNullableDataObject" should "work" in {
+    import collection.JavaConverters._
+    val json1 = Json.obj(("foo","first"), ("bar",1), ("wibble",1.1))
+    val json2 = Json.obj(("foo","third"), ("bar",3), ("wibble",3.3))
+    val testListDataObject:mutable.Buffer[TestDataObject] = mutable.Buffer(TestDataObject.fromJson(json1), null, TestDataObject.fromJson(json2))
+    nullableTCK.methodWithListNullableDataObjectParam(testListDataObject)
+    nullableTCK.methodWithListNullableDataObjectHandler(b => assert(testListDataObject.map(x => dataObjectToJsonOrNull(x)) == b.map(x => dataObjectToJsonOrNull(x))))
+    exec1(w => nullableTCK.methodWithListNullableDataObjectHandlerAsyncResultFuture().foreach(b => {w{assert(testListDataObject.map(x => dataObjectToJsonOrNull(x)) == b.map(x => dataObjectToJsonOrNull(x)))}; w.dismiss()}))
+    assert(testListDataObject.map(x => dataObjectToJsonOrNull(x)) == nullableTCK.methodWithListNullableDataObjectReturn().map(x => dataObjectToJsonOrNull(x)))
+  }
+
+  "testListNullableGenEnum" should "work" in {
+    import collection.JavaConverters._
+    val testListGenEnum:mutable.Buffer[TestGenEnum] = mutable.Buffer(TestGenEnum.BOB,null,TestGenEnum.LELAND)
+    nullableTCK.methodWithListNullableGenEnumParam(testListGenEnum)
+    nullableTCK.methodWithListNullableGenEnumHandler(b => assert(testListGenEnum.diff(b).isEmpty))
+    exec1(w => nullableTCK.methodWithListNullableGenEnumHandlerAsyncResultFuture().foreach(b => {w{assert(testListGenEnum.diff(b).isEmpty)}; w.dismiss()}))
+    assert(testListGenEnum == nullableTCK.methodWithListNullableGenEnumReturn())
+  }
+
+  //There is no meaningful way to implement these in Scala as primitve nulls aren't possible
   //  shared test void testSetNullableByte() => testSetNullable(ArrayList { 12.byte,null,24.byte }, nullableTCK.methodWithSetNullableByteParam, nullableTCK.methodWithSetNullableByteHandler, nullableTCK.methodWithSetNullableByteHandlerAsyncResult, nullableTCK.methodWithSetNullableByteReturn);
 //  shared test void testSetNullableShort() => testSetNullable(ArrayList { 520,null,1040 }, nullableTCK.methodWithSetNullableShortParam, nullableTCK.methodWithSetNullableShortHandler, nullableTCK.methodWithSetNullableShortHandlerAsyncResult, nullableTCK.methodWithSetNullableShortReturn);
 //  shared test void testSetNullableInteger() => testSetNullable(ArrayList { 12345,null,54321 }, nullableTCK.methodWithSetNullableIntegerParam, nullableTCK.methodWithSetNullableIntegerHandler, nullableTCK.methodWithSetNullableIntegerHandlerAsyncResult, nullableTCK.methodWithSetNullableIntegerReturn);
@@ -1917,38 +1904,32 @@ class ApiTest extends FlatSpec with Matchers {
 //  shared test void testSetNullableBoolean() => testSetNullable(ArrayList { true,null,false }, nullableTCK.methodWithSetNullableBooleanParam, nullableTCK.methodWithSetNullableBooleanHandler, nullableTCK.methodWithSetNullableBooleanHandlerAsyncResult, nullableTCK.methodWithSetNullableBooleanReturn);
 //  shared test void testSetNullableChar() => testSetNullable(ArrayList { 'F',null,'R' }, nullableTCK.methodWithSetNullableCharParam, nullableTCK.methodWithSetNullableCharHandler, nullableTCK.methodWithSetNullableCharHandlerAsyncResult, nullableTCK.methodWithSetNullableCharReturn);
 
-//  "testSetNullableString" should "work" in {
-//    import collection.JavaConverters._
-//    val testSetString:Set[String] = Set("first",null,"third")
-//    nullableTCK.methodWithSetNullableStringParam(testSetString)
-//    nullableTCK.methodWithSetNullableStringHandler(b => assert(testSetString.diff(b).isEmpty))
-//    val w = new Waiter()
-//    nullableTCK.methodWithSetNullableStringHandlerAsyncResult(b => {w{assert(testSetString.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    assert(testSetString == nullableTCK.methodWithSetNullableStringReturn())
-//  }
-//
-//  "testSetNullableJsonObject" should "work" in {
-//    import collection.JavaConverters._
-//    val testSetJsonObject:Set[JsonObject] = Set(Json.obj(("foo","bar")), null, Json.obj(("juu",3)))
-//    nullableTCK.methodWithSetNullableJsonObjectParam(testSetJsonObject)
-//    nullableTCK.methodWithSetNullableJsonObjectHandler(b => assert(testSetJsonObject.diff(b).isEmpty))
-//    val w = new Waiter()
-//    nullableTCK.methodWithSetNullableJsonObjectHandlerAsyncResult(b => {w{assert(testSetJsonObject.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    assert(testSetJsonObject == nullableTCK.methodWithSetNullableJsonObjectReturn())
-//  }
-//
-//  "testSetNullableJsonArray" should "work" in {
-//    import collection.JavaConverters._
-//    val testSetJsonArray:Set[JsonArray] = Set(Json.arr("foo","bar"), null, Json.arr("juu"))
-//    nullableTCK.methodWithSetNullableJsonArrayParam(testSetJsonArray)
-//    nullableTCK.methodWithSetNullableJsonArrayHandler(b => assert(testSetJsonArray.diff(b).isEmpty))
-//    val w = new Waiter()
-//    nullableTCK.methodWithSetNullableJsonArrayHandlerAsyncResult(b => {w{assert(testSetJsonArray.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    assert(testSetJsonArray == nullableTCK.methodWithSetNullableJsonArrayReturn())
-//  }
+  "testSetNullableString" should "work" in {
+    import collection.JavaConverters._
+    val testSetString:Set[String] = Set("first",null,"third")
+    nullableTCK.methodWithSetNullableStringParam(testSetString)
+    nullableTCK.methodWithSetNullableStringHandler(b => assert(testSetString.diff(b).isEmpty))
+    exec1(w => nullableTCK.methodWithSetNullableStringHandlerAsyncResultFuture().foreach(b => {w{assert(testSetString.diff(b).isEmpty)}; w.dismiss()}))
+    assert(testSetString == nullableTCK.methodWithSetNullableStringReturn())
+  }
+
+  "testSetNullableJsonObject" should "work" in {
+    import collection.JavaConverters._
+    val testSetJsonObject:Set[JsonObject] = Set(Json.obj(("foo","bar")), null, Json.obj(("juu",3)))
+    nullableTCK.methodWithSetNullableJsonObjectParam(testSetJsonObject)
+    nullableTCK.methodWithSetNullableJsonObjectHandler(b => assert(testSetJsonObject.diff(b).isEmpty))
+    exec1(w => nullableTCK.methodWithSetNullableJsonObjectHandlerAsyncResultFuture().foreach(b => {w{assert(testSetJsonObject.diff(b).isEmpty)}; w.dismiss()}))
+    assert(testSetJsonObject == nullableTCK.methodWithSetNullableJsonObjectReturn())
+  }
+
+  "testSetNullableJsonArray" should "work" in {
+    import collection.JavaConverters._
+    val testSetJsonArray:Set[JsonArray] = Set(Json.arr("foo","bar"), null, Json.arr("juu"))
+    nullableTCK.methodWithSetNullableJsonArrayParam(testSetJsonArray)
+    nullableTCK.methodWithSetNullableJsonArrayHandler(b => assert(testSetJsonArray.diff(b).isEmpty))
+    exec1(w => nullableTCK.methodWithSetNullableJsonArrayHandlerAsyncResultFuture().foreach(b => {w{assert(testSetJsonArray.diff(b).isEmpty)}; w.dismiss()}))
+    assert(testSetJsonArray == nullableTCK.methodWithSetNullableJsonArrayReturn())
+  }
 
   "testSetNullableApi" should "work" in {
     import collection.JavaConverters._
@@ -1958,39 +1939,33 @@ class ApiTest extends FlatSpec with Matchers {
     //TODO: RefedInterface1Impl needs a nullsafe equals method!
 //    nullableTCK.methodWithSetNullableApiParam(testSetApi)
 //    nullableTCK.methodWithSetNullableApiHandler(b => assert(testSetApi.map(x => refedIfaceToJavaOrNull(x)) == b.map(x => refedIfaceToJavaOrNull(x))))
-//    val w = new Waiter()
-//    nullableTCK.methodWithSetNullableApiHandlerAsyncResult(b => {w{assert(testSetApi.map(x => refedIfaceToJavaOrNull(x)).asJava == b.result())}; w.dismiss()})
-//    w.await()
+//    exec1(w => nullableTCK.methodWithSetNullableApiHandlerAsyncResultFuture().foreach(b => {w{assert(testSetApi.map(x => refedIfaceToJavaOrNull(x)).asJava == b)}; w.dismiss()}))
 //    assert(testSetApi.map(x => refedIfaceToJavaOrNull(x)) == nullableTCK.methodWithSetNullableApiReturn().map(x => refedIfaceToJavaOrNull(x)))
   }
 
-//  "testSetNullableDataObject" should "work" in {
-//    import collection.JavaConverters._
-//    val json1 = Json.obj(("foo","first"), ("bar",1), ("wibble",1.1))
-//    val json2 = Json.obj(("foo","third"), ("bar",3), ("wibble",3.3))
-//    val testSetDataObject:Set[TestDataObject] = Set(TestDataObject.fromJson(json1), null, TestDataObject.fromJson(json2))
-//    nullableTCK.methodWithSetNullableDataObjectParam(testSetDataObject)
-//    nullableTCK.methodWithSetNullableDataObjectHandler(b => assert(testSetDataObject.map(x => dataObjectToJsonOrNull(x)) == b.map(x => dataObjectToJsonOrNull(x))))
-//    val w = new Waiter()
-//    nullableTCK.methodWithSetNullableDataObjectHandlerAsyncResult(b => {w{assert(testSetDataObject.map(x => dataObjectToJsonOrNull(x)) == b.result().map(x => dataObjectToJsonOrNull(x)))}; w.dismiss()})
-//    w.await()
-//    assert(testSetDataObject.map(x => dataObjectToJsonOrNull(x)) == nullableTCK.methodWithSetNullableDataObjectReturn().map(x => dataObjectToJsonOrNull(x)))
-//  }
-//
-//
-//
-//  "testSetNullableGenEnum" should "work" in {
-//    import collection.JavaConverters._
-//    val testSetGenEnum:Set[TestGenEnum] = Set(TestGenEnum.BOB,null,TestGenEnum.LELAND)
-//    nullableTCK.methodWithSetNullableGenEnumParam(testSetGenEnum)
-//    nullableTCK.methodWithSetNullableGenEnumHandler(b => assert(testSetGenEnum.diff(b).isEmpty))
-//    val w = new Waiter()
-//    nullableTCK.methodWithSetNullableGenEnumHandlerAsyncResult(b => {w{assert(testSetGenEnum.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    assert(testSetGenEnum == nullableTCK.methodWithSetNullableGenEnumReturn())
-//  }
+  "testSetNullableDataObject" should "work" in {
+    import collection.JavaConverters._
+    val json1 = Json.obj(("foo","first"), ("bar",1), ("wibble",1.1))
+    val json2 = Json.obj(("foo","third"), ("bar",3), ("wibble",3.3))
+    val testSetDataObject:Set[TestDataObject] = Set(TestDataObject.fromJson(json1), null, TestDataObject.fromJson(json2))
+    nullableTCK.methodWithSetNullableDataObjectParam(testSetDataObject)
+    nullableTCK.methodWithSetNullableDataObjectHandler(b => assert(testSetDataObject.map(x => dataObjectToJsonOrNull(x)) == b.map(x => dataObjectToJsonOrNull(x))))
+    exec1(w => nullableTCK.methodWithSetNullableDataObjectHandlerAsyncResultFuture().foreach(b => {w{assert(testSetDataObject.map(x => dataObjectToJsonOrNull(x)) == b.map(x => dataObjectToJsonOrNull(x)))}; w.dismiss()}))
+    assert(testSetDataObject.map(x => dataObjectToJsonOrNull(x)) == nullableTCK.methodWithSetNullableDataObjectReturn().map(x => dataObjectToJsonOrNull(x)))
+  }
 
-  //TODO there is no meaningful way to implement these in Scala as primitve nulls aren't possible
+
+
+  "testSetNullableGenEnum" should "work" in {
+    import collection.JavaConverters._
+    val testSetGenEnum:Set[TestGenEnum] = Set(TestGenEnum.BOB,null,TestGenEnum.LELAND)
+    nullableTCK.methodWithSetNullableGenEnumParam(testSetGenEnum)
+    nullableTCK.methodWithSetNullableGenEnumHandler(b => assert(testSetGenEnum.diff(b).isEmpty))
+    exec1(w => nullableTCK.methodWithSetNullableGenEnumHandlerAsyncResultFuture().foreach(b => {w{assert(testSetGenEnum.diff(b).isEmpty)}; w.dismiss()}))
+    assert(testSetGenEnum == nullableTCK.methodWithSetNullableGenEnumReturn())
+  }
+
+  //There is no meaningful way to implement these in Scala as primitve nulls aren't possible
 //  shared test void testMapNullableByte() => testMapNullable(ArrayList { 12.byte,null,24.byte }, nullableTCK.methodWithMapNullableByteParam, nullableTCK.methodWithMapNullableByteHandler, nullableTCK.methodWithMapNullableByteHandlerAsyncResult, nullableTCK.methodWithMapNullableByteReturn);
 //  shared test void testMapNullableShort() => testMapNullable(ArrayList { 520,null,1040 }, nullableTCK.methodWithMapNullableShortParam, nullableTCK.methodWithMapNullableShortHandler, nullableTCK.methodWithMapNullableShortHandlerAsyncResult, nullableTCK.methodWithMapNullableShortReturn);
 //  shared test void testMapNullableInteger() => testMapNullable(ArrayList { 12345,null,54321 }, nullableTCK.methodWithMapNullableIntegerParam, nullableTCK.methodWithMapNullableIntegerHandler, nullableTCK.methodWithMapNullableIntegerHandlerAsyncResult, nullableTCK.methodWithMapNullableIntegerReturn);
@@ -2000,38 +1975,32 @@ class ApiTest extends FlatSpec with Matchers {
 //  shared test void testMapNullableBoolean() => testMapNullable(ArrayList { true, null, false }, nullableTCK.methodWithMapNullableBooleanParam, nullableTCK.methodWithMapNullableBooleanHandler, nullableTCK.methodWithMapNullableBooleanHandlerAsyncResult, nullableTCK.methodWithMapNullableBooleanReturn);
 //  shared test void testMapNullableChar() => testMapNullable(ArrayList { 'F',null,'R' }, nullableTCK.methodWithMapNullableCharParam, nullableTCK.methodWithMapNullableCharHandler, nullableTCK.methodWithMapNullableCharHandlerAsyncResult, nullableTCK.methodWithMapNullableCharReturn);
 
-//  "testMapNullableString" should "work" in {
-//    import collection.JavaConverters._
-//    val testMapString:Map[String, String] = Map("1" -> "first","2" -> null, "3" -> "third")
-//    nullableTCK.methodWithMapNullableStringParam(testMapString)
-//    nullableTCK.methodWithMapNullableStringHandler(b => assert(testMapString.toSet.diff(b.toSet).isEmpty))
-//    val w = new Waiter()
-//    nullableTCK.methodWithMapNullableStringHandlerAsyncResult(b => {w{assert(testMapString.toSet.diff(b.result().toSet).isEmpty)}; w.dismiss()})
-//    w.await()
-//    assert(testMapString == nullableTCK.methodWithMapNullableStringReturn())
-//  }
-//
-//  "testMapNullableJsonObject" should "work" in {
-//    import collection.JavaConverters._
-//    val testMapJsonObject:Map[String, JsonObject] = Map("1" -> Json.obj(("foo","bar")), "2" -> null, "3" -> Json.obj(("juu",3)))
-//    nullableTCK.methodWithMapNullableJsonObjectParam(testMapJsonObject)
-//    nullableTCK.methodWithMapNullableJsonObjectHandler(b => assert(testMapJsonObject.toSet.diff(b.toSet).isEmpty))
-//    val w = new Waiter()
-//    nullableTCK.methodWithMapNullableJsonObjectHandlerAsyncResult(b => {w{assert(testMapJsonObject.toSet.diff(b.result().toSet).isEmpty)}; w.dismiss()})
-//    w.await()
-//    assert(testMapJsonObject == nullableTCK.methodWithMapNullableJsonObjectReturn())
-//  }
-//
-//  "testMapNullableJsonArray" should "work" in {
-//    import collection.JavaConverters._
-//    val testMapJsonArray:Map[String, JsonArray] = Map("1" -> Json.arr("foo","bar"), "2" -> null, "3" -> Json.arr("juu"))
-//    nullableTCK.methodWithMapNullableJsonArrayParam(testMapJsonArray)
-//    nullableTCK.methodWithMapNullableJsonArrayHandler(b => assert(testMapJsonArray.toSet.diff(b.toSet).isEmpty))
-//    val w = new Waiter()
-//    nullableTCK.methodWithMapNullableJsonArrayHandlerAsyncResult(b => {w{assert(testMapJsonArray.toSet.diff(b.result().toSet).isEmpty)}; w.dismiss()})
-//    w.await()
-//    assert(testMapJsonArray == nullableTCK.methodWithMapNullableJsonArrayReturn())
-//  }
+  "testMapNullableString" should "work" in {
+    import collection.JavaConverters._
+    val testMapString:Map[String, String] = Map("1" -> "first","2" -> null, "3" -> "third")
+    nullableTCK.methodWithMapNullableStringParam(testMapString)
+    nullableTCK.methodWithMapNullableStringHandler(b => assert(testMapString.toSet.diff(b.toSet).isEmpty))
+    exec1(w => nullableTCK.methodWithMapNullableStringHandlerAsyncResultFuture().foreach(b => {w{assert(testMapString.toSet.diff(b.toSet).isEmpty)}; w.dismiss()}))
+    assert(testMapString == nullableTCK.methodWithMapNullableStringReturn())
+  }
+
+  "testMapNullableJsonObject" should "work" in {
+    import collection.JavaConverters._
+    val testMapJsonObject:Map[String, JsonObject] = Map("1" -> Json.obj(("foo","bar")), "2" -> null, "3" -> Json.obj(("juu",3)))
+    nullableTCK.methodWithMapNullableJsonObjectParam(testMapJsonObject)
+    nullableTCK.methodWithMapNullableJsonObjectHandler(b => assert(testMapJsonObject.toSet.diff(b.toSet).isEmpty))
+    exec1(w => nullableTCK.methodWithMapNullableJsonObjectHandlerAsyncResultFuture().foreach(b => {w{assert(testMapJsonObject.toSet.diff(b.toSet).isEmpty)}; w.dismiss()}))
+    assert(testMapJsonObject == nullableTCK.methodWithMapNullableJsonObjectReturn())
+  }
+
+  "testMapNullableJsonArray" should "work" in {
+    import collection.JavaConverters._
+    val testMapJsonArray:Map[String, JsonArray] = Map("1" -> Json.arr("foo","bar"), "2" -> null, "3" -> Json.arr("juu"))
+    nullableTCK.methodWithMapNullableJsonArrayParam(testMapJsonArray)
+    nullableTCK.methodWithMapNullableJsonArrayHandler(b => assert(testMapJsonArray.toSet.diff(b.toSet).isEmpty))
+    exec1(w => nullableTCK.methodWithMapNullableJsonArrayHandlerAsyncResultFuture().foreach(b => {w{assert(testMapJsonArray.toSet.diff(b.toSet).isEmpty)}; w.dismiss()}))
+    assert(testMapJsonArray == nullableTCK.methodWithMapNullableJsonArrayReturn())
+  }
 
   "testMapNullableApi" should "work" in {
     import collection.JavaConverters._
@@ -2041,16 +2010,13 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithMapNullableApiParam(testMapApi)
   }
 
-//  "testNullableHandler" should "work" in {
-//    nullableTCK.methodWithNullableHandler(true,null)
-//    val w1 = new Waiter()
-//    nullableTCK.methodWithNullableHandler(false,a => {w1{assert("the_string_value" == a)};w1.dismiss()})
-//    w1.await()
-//    nullableTCK.methodWithNullableHandlerAsyncResult(true,null)
-//    val w2 = new Waiter()
-//    nullableTCK.methodWithNullableHandlerAsyncResult(false,a => {w2{assert("the_string_value" == a.result())};w2.dismiss()})
-//    w2.await()
-//  }
+  "testNullableHandler" should "work" in {
+    nullableTCK.methodWithNullableHandler(true,null)
+    exec1(w => nullableTCK.methodWithNullableHandler(false,a => {w{assert("the_string_value" == a)};w.dismiss()}))
+    //Test makes no sense as the handlers are created inside the method => vertx-lang-scala specific
+    //exec1(w => nullableTCK.methodWithNullableHandlerAsyncResultFuture(true))
+    exec1(w => nullableTCK.methodWithNullableHandlerAsyncResultFuture(false).foreach(a => {w{assert("the_string_value" == a)};w.dismiss()}))
+  }
 
   "testHttpServerOptionsJson" should "work" in {
     val json = Json.obj(("compressionSupported", true), ("ssl",true), ("sendBufferSize", 65000))
