@@ -1447,273 +1447,213 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableListGenEnumReturn(true)
     nullableTCK.methodWithNullableListGenEnumReturn(false)
   }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//  "testNullableSetByte" should "work" in {
-//    import collection.JavaConverters._
-//    val testSetByte = Set(12.toByte,24.toByte,(-12).toByte)
-//    nullableTCK.methodWithNullableSetByteParam(true, None)
-//    nullableTCK.methodWithNullableSetByteParam(false, Option(testSetByte))
-//    nullableTCK.methodWithNullableSetByteHandler(true,b => assert(testSetByte == b))
-//    nullableTCK.methodWithNullableSetByteHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableSetByteHandlerAsyncResult(true,b => {w{assert(testSetByte.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableSetByteHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableSetByteReturn(true)
-//    nullableTCK.methodWithNullableSetByteReturn(false)
-//  }
-//
-//  "testNullableSetShort" should "work" in {
-//    import collection.JavaConverters._
-//    val testSetShort = Set(520.toShort,1040.toShort,(-520).toShort)
-//    nullableTCK.methodWithNullableSetShortParam(true, None)
-//    nullableTCK.methodWithNullableSetShortParam(false, Option(testSetShort))
-//    nullableTCK.methodWithNullableSetShortHandler(true,b => assert(testSetShort == b))
-//    nullableTCK.methodWithNullableSetShortHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableSetShortHandlerAsyncResult(true,b => {w{assert(testSetShort.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableSetShortHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableSetShortReturn(true)
-//    nullableTCK.methodWithNullableSetShortReturn(false)
-//  }
-//
-//  "testNullableSetInteger" should "work" in {
-//    import collection.JavaConverters._
-//    val testSetInteger = Set(12345,54321,-12345)
-//    nullableTCK.methodWithNullableSetIntegerParam(true, None)
-//    nullableTCK.methodWithNullableSetIntegerParam(false, Option(testSetInteger))
-//    nullableTCK.methodWithNullableSetIntegerHandler(true,b => assert(testSetInteger == b))
-//    nullableTCK.methodWithNullableSetIntegerHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableSetIntegerHandlerAsyncResult(true,b => {w{assert(testSetInteger.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableSetIntegerHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableSetIntegerReturn(true)
-//    nullableTCK.methodWithNullableSetIntegerReturn(false)
-//  }
-//
-//  "testNullableSetLong" should "work" in {
-//    import collection.JavaConverters._
-//    val testSetLong = Set(123456789l,987654321l,-123456789l)
-//    nullableTCK.methodWithNullableSetLongParam(true, None)
-//    nullableTCK.methodWithNullableSetLongParam(false, Option(testSetLong))
-//    nullableTCK.methodWithNullableSetLongHandler(true,b => assert(testSetLong == b))
-//    nullableTCK.methodWithNullableSetLongHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableSetLongHandlerAsyncResult(true,b => {w{assert(testSetLong.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableSetLongHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableSetLongReturn(true)
-//    nullableTCK.methodWithNullableSetLongReturn(false)
-//  }
-//
-//  "testNullableSetFloat" should "work" in {
-//    import collection.JavaConverters._
-//    val testSetFloat = Set(1.1f,2.2f,3.3f)
-//    nullableTCK.methodWithNullableSetFloatParam(true, None)
-//    nullableTCK.methodWithNullableSetFloatParam(false, Option(testSetFloat))
-//    nullableTCK.methodWithNullableSetFloatHandler(true,b => assert(testSetFloat == b))
-//    nullableTCK.methodWithNullableSetFloatHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableSetFloatHandlerAsyncResult(true,b => {w{assert(testSetFloat.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableSetFloatHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableSetFloatReturn(true)
-//    nullableTCK.methodWithNullableSetFloatReturn(false)
-//  }
-//
-//  "testNullableSetDouble" should "work" in {
-//    import collection.JavaConverters._
-//    val testSetDouble = Set(1.11,2.22,3.33)
-//    nullableTCK.methodWithNullableSetDoubleParam(true, None)
-//    nullableTCK.methodWithNullableSetDoubleParam(false, Option(testSetDouble))
-//    nullableTCK.methodWithNullableSetDoubleHandler(true,b => assert(testSetDouble == b))
-//    nullableTCK.methodWithNullableSetDoubleHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableSetDoubleHandlerAsyncResult(true,b => {w{assert(testSetDouble.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableSetDoubleHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableSetDoubleReturn(true)
-//    nullableTCK.methodWithNullableSetDoubleReturn(false)
-//  }
-//
-//  "testNullableSetBoolean" should "work" in {
-//    import collection.JavaConverters._
-//    val testSetBoolean = Set( true,false,true)
-//    nullableTCK.methodWithNullableSetBooleanParam(true, None)
-//    nullableTCK.methodWithNullableSetBooleanParam(false, Option(testSetBoolean))
-//    nullableTCK.methodWithNullableSetBooleanHandler(true,b => assert(testSetBoolean == b))
-//    nullableTCK.methodWithNullableSetBooleanHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableSetBooleanHandlerAsyncResult(true,b => {w{assert(testSetBoolean.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableSetBooleanHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableSetBooleanReturn(true)
-//    nullableTCK.methodWithNullableSetBooleanReturn(false)
-//  }
-//
-//  "testNullableSetString" should "work" in {
-//    import collection.JavaConverters._
-//    val testSetString = Set("first","second","third")
-//    nullableTCK.methodWithNullableSetStringParam(true, None)
-//    nullableTCK.methodWithNullableSetStringParam(false, Option(testSetString))
-//    nullableTCK.methodWithNullableSetStringHandler(true,b => assert(testSetString == b))
-//    nullableTCK.methodWithNullableSetStringHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableSetStringHandlerAsyncResult(true,b => {w{assert(testSetString.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableSetStringHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableSetStringReturn(true)
-//    nullableTCK.methodWithNullableSetStringReturn(false)
-//  }
-//
-//  "testNullableSetChar" should "work" in {
-//    import collection.JavaConverters._
-//    val testSetChar = Set('x','y','z')
-//    nullableTCK.methodWithNullableSetCharParam(true, None)
-//    nullableTCK.methodWithNullableSetCharParam(false, Option(testSetChar))
-//    nullableTCK.methodWithNullableSetCharHandler(true,b => assert(testSetChar == b))
-//    nullableTCK.methodWithNullableSetCharHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableSetCharHandlerAsyncResult(true,b => {w{assert(testSetChar.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableSetCharHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableSetCharReturn(true)
-//    nullableTCK.methodWithNullableSetCharReturn(false)
-//  }
-//
-//  "testNullableSetJsonObject" should "work" in {
-//    import collection.JavaConverters._
-//    val testSetJsonObject = Set(Json.obj(("foo","bar")), Json.obj(("juu",3)))
-//    nullableTCK.methodWithNullableSetJsonObjectParam(true, None)
-//    nullableTCK.methodWithNullableSetJsonObjectParam(false, Option(testSetJsonObject))
-//    nullableTCK.methodWithNullableSetJsonObjectHandler(true,b => assert(testSetJsonObject == b))
-//    nullableTCK.methodWithNullableSetJsonObjectHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableSetJsonObjectHandlerAsyncResult(true,b => {w{assert(testSetJsonObject.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableSetJsonObjectHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableSetJsonObjectReturn(true)
-//    nullableTCK.methodWithNullableSetJsonObjectReturn(false)
-//  }
-//
-//  "testNullableSetJsonArray" should "work" in {
-//    import collection.JavaConverters._
-//    val testSetJsonArray = Set(Json.arr("foo","bar"), Json.arr("juu"))
-//    nullableTCK.methodWithNullableSetJsonArrayParam(true, None)
-//    nullableTCK.methodWithNullableSetJsonArrayParam(false, Option(testSetJsonArray))
-//    nullableTCK.methodWithNullableSetJsonArrayHandler(true,b => assert(testSetJsonArray == b))
-//    nullableTCK.methodWithNullableSetJsonArrayHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableSetJsonArrayHandlerAsyncResult(true,b => {w{assert(testSetJsonArray.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableSetJsonArrayHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableSetJsonArrayReturn(true)
-//    nullableTCK.methodWithNullableSetJsonArrayReturn(false)
-//  }
-//
-//  "testNullableSetApi" should "work" in {
-//    import collection.JavaConverters._
-//    val iface = new RefedInterface1Impl().setString("refed_is_here")
-//    val testSetApi = Set(RefedInterface1(iface))
-//    nullableTCK.methodWithNullableSetApiParam(true, None)
-//    nullableTCK.methodWithNullableSetApiParam(false, Option(testSetApi))
-//    nullableTCK.methodWithNullableSetApiHandler(true,b => assert(b.forall(a => a.asJava == iface)))
-//    nullableTCK.methodWithNullableSetApiHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableSetApiHandlerAsyncResult(true,b => {w{assert(b.result().forall(a => a.asJava == iface))}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableSetApiHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableSetApiReturn(true)
-//    nullableTCK.methodWithNullableSetApiReturn(false)
-//  }
-//
-//  "testNullableSetDataObject" should "work" in {
-//    import collection.JavaConverters._
-//    val json = Json.obj(("foo","foo_value"), ("bar",12345), ("wibble",5.6))
-//    val testSetDataObject = Set(TestDataObject.fromJson(json))
-//    nullableTCK.methodWithNullableSetDataObjectParam(true, None)
-//    nullableTCK.methodWithNullableSetDataObjectParam(false, Option(testSetDataObject))
-//    nullableTCK.methodWithNullableSetDataObjectHandler(true,b => assert(b.forall(a => a.asJava.toJson == json)))
-//    nullableTCK.methodWithNullableSetDataObjectHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableSetDataObjectHandlerAsyncResult(true,b => {w{assert(testSetDataObject.forall(a => a.asJava.toJson == Json.obj(("foo","foo_value"), ("bar",12345), ("wibble",5.6))))}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableSetDataObjectHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableSetDataObjectReturn(true)
-//    nullableTCK.methodWithNullableSetDataObjectReturn(false)
-//  }
-//
-//  "testNullableSetEnum" should "work" in {
-//    import collection.JavaConverters._
-//    val testSetEnum = Set(TestEnum.TIM, TestEnum.JULIEN)
-//    nullableTCK.methodWithNullableSetEnumParam(true, None)
-//    nullableTCK.methodWithNullableSetEnumParam(false, Option(testSetEnum))
-//    nullableTCK.methodWithNullableSetEnumHandler(true,b => assert(testSetEnum == b))
-//    nullableTCK.methodWithNullableSetEnumHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableSetEnumHandlerAsyncResult(true,b => {w{assert(testSetEnum.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableSetEnumHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableSetEnumReturn(true)
-//    nullableTCK.methodWithNullableSetEnumReturn(false)
-//  }
-//
-//  "testNullableSetGenEnum" should "work" in {
-//    import collection.JavaConverters._
-//    val testSetGenEnum = Set(TestGenEnum.BOB, TestGenEnum.LELAND)
-//    nullableTCK.methodWithNullableSetGenEnumParam(true, None)
-//    nullableTCK.methodWithNullableSetGenEnumParam(false, Option(testSetGenEnum))
-//    nullableTCK.methodWithNullableSetGenEnumHandler(true,b => assert(testSetGenEnum == b))
-//    nullableTCK.methodWithNullableSetGenEnumHandler(false,b => assert(null == b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithNullableSetGenEnumHandlerAsyncResult(true,b => {w{assert(testSetGenEnum.diff(b.result()).isEmpty)}; w.dismiss()})
-//    w.await()
-//    val w2= new Waiter()
-//    nullableTCK.methodWithNullableSetGenEnumHandlerAsyncResult(false,b => {w2{assert(null == b.result())}; w2.dismiss()})
-//    w2.await()
-//    nullableTCK.methodWithNullableSetGenEnumReturn(true)
-//    nullableTCK.methodWithNullableSetGenEnumReturn(false)
-//  }
+
+
+
+
+
+
+
+
+
+
+
+  "testNullableSetByte" should "work" in {
+    import collection.JavaConverters._
+    val testSetByte = Set(12.toByte,24.toByte,(-12).toByte)
+    nullableTCK.methodWithNullableSetByteParam(true, None)
+    nullableTCK.methodWithNullableSetByteParam(false, Option(testSetByte))
+    nullableTCK.methodWithNullableSetByteHandler(true,b => assert(testSetByte == b))
+    nullableTCK.methodWithNullableSetByteHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableSetByteHandlerAsyncResultFuture(true).foreach(b => {w{assert(testSetByte.diff(b).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableSetByteHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableSetByteReturn(true)
+    nullableTCK.methodWithNullableSetByteReturn(false)
+  }
+
+  "testNullableSetShort" should "work" in {
+    import collection.JavaConverters._
+    val testSetShort = Set(520.toShort,1040.toShort,(-520).toShort)
+    nullableTCK.methodWithNullableSetShortParam(true, None)
+    nullableTCK.methodWithNullableSetShortParam(false, Option(testSetShort))
+    nullableTCK.methodWithNullableSetShortHandler(true,b => assert(testSetShort == b))
+    nullableTCK.methodWithNullableSetShortHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableSetShortHandlerAsyncResultFuture(true).foreach(b => {w{assert(testSetShort.diff(b).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableSetShortHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableSetShortReturn(true)
+    nullableTCK.methodWithNullableSetShortReturn(false)
+  }
+
+  "testNullableSetInteger" should "work" in {
+    import collection.JavaConverters._
+    val testSetInteger = Set(12345,54321,-12345)
+    nullableTCK.methodWithNullableSetIntegerParam(true, None)
+    nullableTCK.methodWithNullableSetIntegerParam(false, Option(testSetInteger))
+    nullableTCK.methodWithNullableSetIntegerHandler(true,b => assert(testSetInteger == b))
+    nullableTCK.methodWithNullableSetIntegerHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableSetIntegerHandlerAsyncResultFuture(true).foreach(b => {w{assert(testSetInteger.diff(b).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableSetIntegerHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableSetIntegerReturn(true)
+    nullableTCK.methodWithNullableSetIntegerReturn(false)
+  }
+
+  "testNullableSetLong" should "work" in {
+    import collection.JavaConverters._
+    val testSetLong = Set(123456789l,987654321l,-123456789l)
+    nullableTCK.methodWithNullableSetLongParam(true, None)
+    nullableTCK.methodWithNullableSetLongParam(false, Option(testSetLong))
+    nullableTCK.methodWithNullableSetLongHandler(true,b => assert(testSetLong == b))
+    nullableTCK.methodWithNullableSetLongHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableSetLongHandlerAsyncResultFuture(true).foreach(b => {w{assert(testSetLong.diff(b).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableSetLongHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableSetLongReturn(true)
+    nullableTCK.methodWithNullableSetLongReturn(false)
+  }
+
+  "testNullableSetFloat" should "work" in {
+    import collection.JavaConverters._
+    val testSetFloat = Set(1.1f,2.2f,3.3f)
+    nullableTCK.methodWithNullableSetFloatParam(true, None)
+    nullableTCK.methodWithNullableSetFloatParam(false, Option(testSetFloat))
+    nullableTCK.methodWithNullableSetFloatHandler(true,b => assert(testSetFloat == b))
+    nullableTCK.methodWithNullableSetFloatHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableSetFloatHandlerAsyncResultFuture(true).foreach(b => {w{assert(testSetFloat.diff(b).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableSetFloatHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableSetFloatReturn(true)
+    nullableTCK.methodWithNullableSetFloatReturn(false)
+  }
+
+  "testNullableSetDouble" should "work" in {
+    import collection.JavaConverters._
+    val testSetDouble = Set(1.11,2.22,3.33)
+    nullableTCK.methodWithNullableSetDoubleParam(true, None)
+    nullableTCK.methodWithNullableSetDoubleParam(false, Option(testSetDouble))
+    nullableTCK.methodWithNullableSetDoubleHandler(true,b => assert(testSetDouble == b))
+    nullableTCK.methodWithNullableSetDoubleHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableSetDoubleHandlerAsyncResultFuture(true).foreach(b => {w{assert(testSetDouble.diff(b).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableSetDoubleHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableSetDoubleReturn(true)
+    nullableTCK.methodWithNullableSetDoubleReturn(false)
+  }
+
+  "testNullableSetBoolean" should "work" in {
+    import collection.JavaConverters._
+    val testSetBoolean = Set( true,false,true)
+    nullableTCK.methodWithNullableSetBooleanParam(true, None)
+    nullableTCK.methodWithNullableSetBooleanParam(false, Option(testSetBoolean))
+    nullableTCK.methodWithNullableSetBooleanHandler(true,b => assert(testSetBoolean == b))
+    nullableTCK.methodWithNullableSetBooleanHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableSetBooleanHandlerAsyncResultFuture(true).foreach(b => {w{assert(testSetBoolean.diff(b).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableSetBooleanHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableSetBooleanReturn(true)
+    nullableTCK.methodWithNullableSetBooleanReturn(false)
+  }
+
+  "testNullableSetString" should "work" in {
+    import collection.JavaConverters._
+    val testSetString = Set("first","second","third")
+    nullableTCK.methodWithNullableSetStringParam(true, None)
+    nullableTCK.methodWithNullableSetStringParam(false, Option(testSetString))
+    nullableTCK.methodWithNullableSetStringHandler(true,b => assert(testSetString == b))
+    nullableTCK.methodWithNullableSetStringHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableSetStringHandlerAsyncResultFuture(true).foreach(b => {w{assert(testSetString.diff(b).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableSetStringHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableSetStringReturn(true)
+    nullableTCK.methodWithNullableSetStringReturn(false)
+  }
+
+  "testNullableSetChar" should "work" in {
+    import collection.JavaConverters._
+    val testSetChar = Set('x','y','z')
+    nullableTCK.methodWithNullableSetCharParam(true, None)
+    nullableTCK.methodWithNullableSetCharParam(false, Option(testSetChar))
+    nullableTCK.methodWithNullableSetCharHandler(true,b => assert(testSetChar == b))
+    nullableTCK.methodWithNullableSetCharHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableSetCharHandlerAsyncResultFuture(true).foreach(b => {w{assert(testSetChar.diff(b).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableSetCharHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableSetCharReturn(true)
+    nullableTCK.methodWithNullableSetCharReturn(false)
+  }
+
+  "testNullableSetJsonObject" should "work" in {
+    import collection.JavaConverters._
+    val testSetJsonObject = Set(Json.obj(("foo","bar")), Json.obj(("juu",3)))
+    nullableTCK.methodWithNullableSetJsonObjectParam(true, None)
+    nullableTCK.methodWithNullableSetJsonObjectParam(false, Option(testSetJsonObject))
+    nullableTCK.methodWithNullableSetJsonObjectHandler(true,b => assert(testSetJsonObject == b))
+    nullableTCK.methodWithNullableSetJsonObjectHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableSetJsonObjectHandlerAsyncResultFuture(true).foreach(b => {w{assert(testSetJsonObject.diff(b).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableSetJsonObjectHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableSetJsonObjectReturn(true)
+    nullableTCK.methodWithNullableSetJsonObjectReturn(false)
+  }
+
+  "testNullableSetJsonArray" should "work" in {
+    import collection.JavaConverters._
+    val testSetJsonArray = Set(Json.arr("foo","bar"), Json.arr("juu"))
+    nullableTCK.methodWithNullableSetJsonArrayParam(true, None)
+    nullableTCK.methodWithNullableSetJsonArrayParam(false, Option(testSetJsonArray))
+    nullableTCK.methodWithNullableSetJsonArrayHandler(true,b => assert(testSetJsonArray == b))
+    nullableTCK.methodWithNullableSetJsonArrayHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableSetJsonArrayHandlerAsyncResultFuture(true).foreach(b => {w{assert(testSetJsonArray.diff(b).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableSetJsonArrayHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableSetJsonArrayReturn(true)
+    nullableTCK.methodWithNullableSetJsonArrayReturn(false)
+  }
+
+  "testNullableSetApi" should "work" in {
+    import collection.JavaConverters._
+    val iface = new RefedInterface1Impl().setString("refed_is_here")
+    val testSetApi = Set(RefedInterface1(iface))
+    nullableTCK.methodWithNullableSetApiParam(true, None)
+    nullableTCK.methodWithNullableSetApiParam(false, Option(testSetApi))
+    nullableTCK.methodWithNullableSetApiHandler(true,b => assert(b.forall(a => a.asJava == iface)))
+    nullableTCK.methodWithNullableSetApiHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableSetApiHandlerAsyncResultFuture(true).foreach(b => {w{assert(b.forall(a => a.asJava == iface))}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableSetApiHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableSetApiReturn(true)
+    nullableTCK.methodWithNullableSetApiReturn(false)
+  }
+
+  "testNullableSetDataObject" should "work" in {
+    import collection.JavaConverters._
+    val json = Json.obj(("foo","foo_value"), ("bar",12345), ("wibble",5.6))
+    val testSetDataObject = Set(TestDataObject.fromJson(json))
+    nullableTCK.methodWithNullableSetDataObjectParam(true, None)
+    nullableTCK.methodWithNullableSetDataObjectParam(false, Option(testSetDataObject))
+    nullableTCK.methodWithNullableSetDataObjectHandler(true,b => assert(b.forall(a => a.asJava.toJson == json)))
+    nullableTCK.methodWithNullableSetDataObjectHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableSetDataObjectHandlerAsyncResultFuture(true).foreach(b => {w{assert(testSetDataObject.forall(a => a.asJava.toJson == Json.obj(("foo","foo_value"), ("bar",12345), ("wibble",5.6))))}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableSetDataObjectHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableSetDataObjectReturn(true)
+    nullableTCK.methodWithNullableSetDataObjectReturn(false)
+  }
+
+  "testNullableSetEnum" should "work" in {
+    import collection.JavaConverters._
+    val testSetEnum = Set(TestEnum.TIM, TestEnum.JULIEN)
+    nullableTCK.methodWithNullableSetEnumParam(true, None)
+    nullableTCK.methodWithNullableSetEnumParam(false, Option(testSetEnum))
+    nullableTCK.methodWithNullableSetEnumHandler(true,b => assert(testSetEnum == b))
+    nullableTCK.methodWithNullableSetEnumHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableSetEnumHandlerAsyncResultFuture(true).foreach(b => {w{assert(testSetEnum.diff(b).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableSetEnumHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableSetEnumReturn(true)
+    nullableTCK.methodWithNullableSetEnumReturn(false)
+  }
+
+  "testNullableSetGenEnum" should "work" in {
+    import collection.JavaConverters._
+    val testSetGenEnum = Set(TestGenEnum.BOB, TestGenEnum.LELAND)
+    nullableTCK.methodWithNullableSetGenEnumParam(true, None)
+    nullableTCK.methodWithNullableSetGenEnumParam(false, Option(testSetGenEnum))
+    nullableTCK.methodWithNullableSetGenEnumHandler(true,b => assert(testSetGenEnum == b))
+    nullableTCK.methodWithNullableSetGenEnumHandler(false,b => assert(null == b))
+    exec1(w => nullableTCK.methodWithNullableSetGenEnumHandlerAsyncResultFuture(true).foreach(b => {w{assert(testSetGenEnum.diff(b).isEmpty)}; w.dismiss()}))
+    exec1(w => nullableTCK.methodWithNullableSetGenEnumHandlerAsyncResultFuture(false).foreach(b => {w{assert(null == b)}; w.dismiss()}))
+    nullableTCK.methodWithNullableSetGenEnumReturn(true)
+    nullableTCK.methodWithNullableSetGenEnumReturn(false)
+  }
 //
 //
 //
