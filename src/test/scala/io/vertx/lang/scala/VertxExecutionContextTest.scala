@@ -16,7 +16,8 @@ class VertxExecutionContextTest extends FlatSpec with Matchers {
   "Using Promise to complete a Vertx-Future" should "work with a VertxExecutionContext" in {
     val cl = new CountDownLatch(1)
     val vertx = Vertx.vertx
-    vertx.deployVerticle(classOf[PromiseTestVerticle].getName, r => cl.countDown())
+    implicit val exec = VertxExecutionContext(vertx.getOrCreateContext())
+    vertx.deployVerticleFuture(classOf[PromiseTestVerticle].getName).foreach(r => cl.countDown())
     val delay = cl.await(100, TimeUnit.MILLISECONDS)
     assert(delay, "Deploy took longer than 100 ms")
   }
@@ -31,8 +32,8 @@ class PromiseTestVerticle extends ScalaVerticle {
     val p2 = Promise[String]()
     val f2 = p2.future
 
-    vertx.eventBus().consumer[String]("asd").handler(a => println(a)).completionHandler(a => p1.success("1"))
-    vertx.eventBus().consumer[String]("asd2").handler(a => println(a)).completionHandler(a => p2.success("2"))
+    vertx.eventBus().consumer[String]("asd").handler(a => println(a)).completionHandlerFuture().foreach(a => p1.success("1"))
+    vertx.eventBus().consumer[String]("asd2").handler(a => println(a)).completionHandlerFuture().foreach(a => p2.success("2"))
     val res = for {
       a1 <- f1
       a2 <- f2
