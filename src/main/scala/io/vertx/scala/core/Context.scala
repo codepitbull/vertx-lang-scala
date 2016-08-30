@@ -63,7 +63,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * @param action the action to run
     */
   def runOnContext(action: () => Unit): Unit = {
-    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => action()))
+    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => action()/*assblaa*/))
   }
 
   /**
@@ -83,7 +83,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     */
   def executeBlockingFuture[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
-    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, promiseAndHandler._1)
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler/*assblaa*/), ordered, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -94,7 +94,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     */
   def executeBlockingFuture[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
-    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), promiseAndHandler._1)
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler/*assblaa*/), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -206,7 +206,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * @return a reference to this, so the API can be used fluently
     */
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.Context = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler/*assblaa*/))
     this
   }
 

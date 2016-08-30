@@ -59,7 +59,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   }
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpServerResponse = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler/*assblaa*/))
     this
   }
 
@@ -74,7 +74,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   }
 
   def drainHandler(handler: () => Unit): io.vertx.scala.core.http.HttpServerResponse = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()/*assblaa*/))
     this
   }
 
@@ -187,7 +187,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @return a reference to this, so the API can be used fluently
     */
   def closeHandler(handler: () => Unit): io.vertx.scala.core.http.HttpServerResponse = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()/*assblaa*/))
     this
   }
 
@@ -373,7 +373,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @return a reference to this, so the API can be used fluently
     */
   def headersEndHandler(handler: () => Unit): io.vertx.scala.core.http.HttpServerResponse = {
-    _asJava.headersEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    _asJava.headersEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()/*assblaa*/))
     this
   }
 
@@ -385,7 +385,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @return a reference to this, so the API can be used fluently
     */
   def bodyEndHandler(handler: () => Unit): io.vertx.scala.core.http.HttpServerResponse = {
-    _asJava.bodyEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    _asJava.bodyEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()/*assblaa*/))
     this
   }
 

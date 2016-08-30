@@ -110,12 +110,12 @@ class ServerWebSocket(private val _asJava: io.vertx.core.http.ServerWebSocket)
   }
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.ServerWebSocket = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler/*assblaa*/))
     this
   }
 
   def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.ServerWebSocket = {
-    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
+    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler/*assblaa*/))
     this
   }
 
@@ -130,7 +130,7 @@ class ServerWebSocket(private val _asJava: io.vertx.core.http.ServerWebSocket)
   }
 
   def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.ServerWebSocket = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()/*assblaa*/))
     this
   }
 
@@ -145,7 +145,7 @@ class ServerWebSocket(private val _asJava: io.vertx.core.http.ServerWebSocket)
   }
 
   def drainHandler(handler: () => Unit): io.vertx.scala.core.http.ServerWebSocket = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()/*assblaa*/))
     this
   }
 
@@ -170,12 +170,12 @@ class ServerWebSocket(private val _asJava: io.vertx.core.http.ServerWebSocket)
   }
 
   def closeHandler(handler: () => Unit): io.vertx.scala.core.http.ServerWebSocket = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()/*assblaa*/))
     this
   }
 
   def frameHandler(handler: io.vertx.scala.core.http.WebSocketFrame => Unit): io.vertx.scala.core.http.ServerWebSocket = {
-    _asJava.frameHandler(funcToMappedHandler(WebSocketFrame.apply)(handler))
+    _asJava.frameHandler(funcToMappedHandler(WebSocketFrame.apply)(handler/*assblaa*/))
     this
   }
 

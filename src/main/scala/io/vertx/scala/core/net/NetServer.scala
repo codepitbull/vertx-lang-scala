@@ -55,7 +55,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * @return a reference to this, so the API can be used fluently
     */
   def connectHandler(handler: io.vertx.scala.core.net.NetSocket => Unit): io.vertx.scala.core.net.NetServer = {
-    NetServer.apply(_asJava.connectHandler(funcToMappedHandler(NetSocket.apply)(handler)))
+    NetServer.apply(_asJava.connectHandler(funcToMappedHandler(NetSocket.apply)(handler/*assblaa*/)))
   }
 
   /**

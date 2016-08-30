@@ -240,14 +240,8 @@
   def methodParams(method) {
     var paramList = '';
     var first = true;
-    var handlerCounter = 0;
     for (param : method.params) {
-      if(param.type.kind == CLASS_HANDLER)
-        handlerCounter += 1;
-    }
-    for (param : method.params) {
-        if(!(param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT && !method.isFluent)) {
-
+        if(!(param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT && !method.isFluent && !(method.returnType.kind == CLASS_HANDLER))) {
             if (first) {
               first = false;
             } else {
@@ -270,7 +264,7 @@
 
   def shouldMethodReturnAFuture(method) {
     var size = method.params.size;
-    return size > 0 && method.params[size-1].type.kind == CLASS_HANDLER && method.params[size-1].type.args[0].kind == CLASS_ASYNC_RESULT;
+    return size > 0 && method.params[size-1].type.kind == CLASS_HANDLER && method.params[size-1].type.args[0].kind == CLASS_ASYNC_RESULT && !(method.returnType.kind == CLASS_HANDLER);
   }
 
   def typeOfReturnedFuture(method) {

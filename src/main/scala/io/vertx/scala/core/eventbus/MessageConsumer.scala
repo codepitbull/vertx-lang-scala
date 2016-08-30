@@ -39,12 +39,12 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
   def asJava: io.vertx.core.eventbus.MessageConsumer[T] = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler/*assblaa*/))
     this
   }
 
   def handler(handler: io.vertx.scala.core.eventbus.Message[T] => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    _asJava.handler(funcToMappedHandler(Message.apply[T])(handler))
+    _asJava.handler(funcToMappedHandler(Message.apply[T])(handler/*assblaa*/))
     this
   }
 
@@ -59,7 +59,7 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
   }
 
   def endHandler(endHandler: () => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()/*assblaa*/))
     this
   }
 

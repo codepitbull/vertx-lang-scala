@@ -36,12 +36,12 @@ class TimeoutStream(private val _asJava: io.vertx.core.TimeoutStream)
   def asJava: io.vertx.core.TimeoutStream = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.TimeoutStream = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler/*assblaa*/))
     this
   }
 
   def handler(handler: Long => Unit): io.vertx.scala.core.TimeoutStream = {
-    _asJava.handler(funcToMappedHandler[java.lang.Long, Long](x => x)(handler))
+    _asJava.handler(funcToMappedHandler[java.lang.Long, Long](x => x)(handler/*assblaa*/))
     this
   }
 
@@ -56,7 +56,7 @@ class TimeoutStream(private val _asJava: io.vertx.core.TimeoutStream)
   }
 
   def endHandler(endHandler: () => Unit): io.vertx.scala.core.TimeoutStream = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()/*assblaa*/))
     this
   }
 

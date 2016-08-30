@@ -80,7 +80,7 @@ object ReadStream {
       * @return a reference to this, so the API can be used fluently
       */
     def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.ReadStream[T] = {
-        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler/*assblaa*/))
       this
     }
 
@@ -89,7 +89,7 @@ object ReadStream {
       * @return a reference to this, so the API can be used fluently
       */
     def handler(handler: T => Unit): io.vertx.scala.core.streams.ReadStream[T] = {
-        _asJava.handler(funcToHandler(handler))
+        _asJava.handler(funcToHandler(handler/*assblaa*/))
       this
     }
 
@@ -116,7 +116,7 @@ object ReadStream {
       * @return a reference to this, so the API can be used fluently
       */
     def endHandler(endHandler: () => Unit): io.vertx.scala.core.streams.ReadStream[T] = {
-        _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+        _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()/*assblaa*/))
       this
     }
 

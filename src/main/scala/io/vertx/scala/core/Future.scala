@@ -132,7 +132,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @return the next future, used for chaining
     */
   def compose[U](handler: T => Unit, next: io.vertx.scala.core.Future[U]): io.vertx.scala.core.Future[U] = {
-    Future.apply[U](_asJava.compose(funcToHandler(handler), next.asJava.asInstanceOf[io.vertx.core.Future[U]]))
+    Future.apply[U](_asJava.compose(funcToHandler(handler/*assblaa*/), next.asJava.asInstanceOf[io.vertx.core.Future[U]]))
   }
 
   /**

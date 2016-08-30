@@ -57,12 +57,12 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
   }
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.net.NetSocket = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler/*assblaa*/))
     this
   }
 
   def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.net.NetSocket = {
-    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
+    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler/*assblaa*/))
     this
   }
 
@@ -77,7 +77,7 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
   }
 
   def endHandler(endHandler: () => Unit): io.vertx.scala.core.net.NetSocket = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()/*assblaa*/))
     this
   }
 
@@ -92,7 +92,7 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
   }
 
   def drainHandler(handler: () => Unit): io.vertx.scala.core.net.NetSocket = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()/*assblaa*/))
     this
   }
 
@@ -248,7 +248,7 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     * @return a reference to this, so the API can be used fluently
     */
   def closeHandler(handler: () => Unit): io.vertx.scala.core.net.NetSocket = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()/*assblaa*/))
     this
   }
 
@@ -258,7 +258,7 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     * @return a reference to this, so the API can be used fluently
     */
   def upgradeToSsl(handler: () => Unit): io.vertx.scala.core.net.NetSocket = {
-    _asJava.upgradeToSsl(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    _asJava.upgradeToSsl(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()/*assblaa*/))
     this
   }
 

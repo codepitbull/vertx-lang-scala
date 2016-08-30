@@ -62,7 +62,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @return a reference to this, so the API can be used fluently
     */
   def requestHandler(handler: io.vertx.scala.core.http.HttpServerRequest => Unit): io.vertx.scala.core.http.HttpServer = {
-    _asJava.requestHandler(funcToMappedHandler(HttpServerRequest.apply)(handler))
+    _asJava.requestHandler(funcToMappedHandler(HttpServerRequest.apply)(handler/*assblaa*/))
     this
   }
 
@@ -71,7 +71,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @return a reference to this, so the API can be used fluently
     */
   def connectionHandler(handler: io.vertx.scala.core.http.HttpConnection => Unit): io.vertx.scala.core.http.HttpServer = {
-    _asJava.connectionHandler(funcToMappedHandler(HttpConnection.apply)(handler))
+    _asJava.connectionHandler(funcToMappedHandler(HttpConnection.apply)(handler/*assblaa*/))
     this
   }
 
@@ -93,7 +93,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @return a reference to this, so the API can be used fluently
     */
   def websocketHandler(handler: io.vertx.scala.core.http.ServerWebSocket => Unit): io.vertx.scala.core.http.HttpServer = {
-    _asJava.websocketHandler(funcToMappedHandler(ServerWebSocket.apply)(handler))
+    _asJava.websocketHandler(funcToMappedHandler(ServerWebSocket.apply)(handler/*assblaa*/))
     this
   }
 

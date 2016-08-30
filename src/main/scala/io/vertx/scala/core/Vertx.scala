@@ -218,7 +218,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @return the unique ID of the timer
     */
   def setTimer(delay: Long, handler: Long => Unit): Long = {
-    _asJava.setTimer(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler))
+    _asJava.setTimer(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler/*assblaa*/))
   }
 
   /**
@@ -239,7 +239,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @return the unique ID of the timer
     */
   def setPeriodic(delay: Long, handler: Long => Unit): Long = {
-    _asJava.setPeriodic(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler))
+    _asJava.setPeriodic(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler/*assblaa*/))
   }
 
   /**
@@ -267,7 +267,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param action - a handler representing the action to execute
     */
   def runOnContext(action: () => Unit): Unit = {
-    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => action()))
+    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => action()/*assblaa*/))
   }
 
   /**
@@ -399,7 +399,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     */
   def executeBlockingFuture[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
-    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, promiseAndHandler._1)
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler/*assblaa*/), ordered, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -408,7 +408,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     */
   def executeBlockingFuture[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
-    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), promiseAndHandler._1)
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler/*assblaa*/), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -450,7 +450,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @return a reference to this, so the API can be used fluently
     */
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.Vertx = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler/*assblaa*/))
     this
   }
 

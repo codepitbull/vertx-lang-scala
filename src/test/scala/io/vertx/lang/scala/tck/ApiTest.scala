@@ -207,20 +207,19 @@ class ApiTest extends FlatSpec with Matchers {
     )
   }
 
-  //TODO: This combination is very tricky and I will ignore it for now (Handler<AsyncResult> as param AND as return type ...)
-//  "testMethodWithHandlerAsyncResultGenericReturn" should "work" in {
-//    val w = new Waiter
-//    def stringHandler = obj.methodWithHandlerAsyncResultGenericReturnFuture[String]().foreach(ar =>
-//       {w { assert("the-result" == ar) };w.dismiss()})
-//    stringHandler(Future.succeededFuture("the-result"))
-//    w.await(timeout(50 millis))
-//
-//    val w2 = new Waiter
-//    def objHandler = obj.methodWithHandlerAsyncResultGenericReturnFuture[TestInterface].foreach(ar =>
-//      { w2 { assert(obj == ar)}; w2.dismiss()} )
-//    objHandler(Future.succeededFuture(obj))
-//    w2.await(timeout(50 millis))
-//  }
+  "testMethodWithHandlerAsyncResultGenericReturn" should "work" in {
+    val w = new Waiter
+    def stringHandler = obj.methodWithHandlerAsyncResultGenericReturnFuture[String]().foreach(ar =>
+       {w { assert("the-result" == ar) };w.dismiss()})
+    stringHandler(Future.succeededFuture("the-result"))
+    w.await(timeout(50 millis))
+
+    val w2 = new Waiter
+    def objHandler = obj.methodWithHandlerAsyncResultGenericReturnFuture[TestInterface].foreach(ar =>
+      { w2 { assert(obj == ar)}; w2.dismiss()} )
+    objHandler(Future.succeededFuture(obj))
+    w2.await(timeout(50 millis))
+  }
 
   "testMethodWithHandlerAsyncResultVertxGenReturn" should "work" in {
     var handler = obj.methodWithHandlerAsyncResultVertxGenReturn("wibble", false)
