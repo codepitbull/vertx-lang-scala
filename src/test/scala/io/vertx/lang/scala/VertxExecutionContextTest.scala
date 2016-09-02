@@ -26,14 +26,8 @@ class VertxExecutionContextTest extends FlatSpec with Matchers {
 class PromiseTestVerticle extends ScalaVerticle {
 
   override def start(startFuture: Future[Void]): Unit = {
-    implicit val exec = VertxExecutionContext(vertx.getOrCreateContext())
-    val p1 = Promise[String]()
-    val f1 = p1.future
-    val p2 = Promise[String]()
-    val f2 = p2.future
-
-    vertx.eventBus().consumer[String]("asd").handler(a => println(a)).completionHandlerFuture().foreach(a => p1.success("1"))
-    vertx.eventBus().consumer[String]("asd2").handler(a => println(a)).completionHandlerFuture().foreach(a => p2.success("2"))
+    val f1 = vertx.eventBus().consumer[String]("asd").handler(a => println(a)).completionHandlerFuture()
+    val f2 = vertx.eventBus().consumer[String]("asd2").handler(a => println(a)).completionHandlerFuture()
     val res = for {
       a1 <- f1
       a2 <- f2

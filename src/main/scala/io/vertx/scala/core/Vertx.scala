@@ -473,9 +473,9 @@ object Vertx {
   }
 
   def clusteredVertxFuture(options: io.vertx.scala.core.VertxOptions): concurrent.Future[io.vertx.scala.core.Vertx] = {
-val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.Vertx,io.vertx.scala.core.Vertx]((x => if (x == null) null else Vertx.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.Vertx,io.vertx.scala.core.Vertx]((x => if (x == null) null else Vertx.apply(x)))
     io.vertx.core.Vertx.clusteredVertx(options.asJava, promiseAndHandler._1)
-promiseAndHandler._2.future
+    promiseAndHandler._2.future
   }
 
   def currentContext(): scala.Option[io.vertx.scala.core.Context] = {

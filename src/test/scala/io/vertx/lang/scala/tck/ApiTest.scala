@@ -19,7 +19,6 @@ package io.vertx.lang.scala.tck
 import com.acme.scala.pkg.MyInterface
 import io.vertx.codegen.testmodel._
 import io.vertx.core.http.HttpServerOptions
-import io.vertx.core.impl.FutureFactoryImpl
 import io.vertx.core.json.{JsonArray, JsonObject}
 import io.vertx.core.{Future, VertxException}
 import io.vertx.lang.scala.ScalaAsyncResult
