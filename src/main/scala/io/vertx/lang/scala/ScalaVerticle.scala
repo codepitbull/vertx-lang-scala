@@ -11,7 +11,7 @@ import scala.concurrent.ExecutionContext
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
   */
 class ScalaVerticle extends Verticle {
-  protected lazy implicit val executionContext:ExecutionContext = VertxExecutionContext(vertx.getOrCreateContext())
+  protected implicit var executionContext:ExecutionContext = null
   protected var jvertx: io.vertx.core.Vertx = null
   protected var vertx: Vertx = null
   protected var ctx: Context = null
@@ -20,6 +20,7 @@ class ScalaVerticle extends Verticle {
     this.jvertx = vertx
     this.vertx = new Vertx(vertx)
     this.ctx = new Context(context)
+    this.executionContext = VertxExecutionContext(this.vertx.getOrCreateContext())
   }
 
   override def getVertx: io.vertx.core.Vertx = jvertx
