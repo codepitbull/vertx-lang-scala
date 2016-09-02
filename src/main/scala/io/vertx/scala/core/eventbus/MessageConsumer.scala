@@ -106,7 +106,7 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
     * Optional method which can be called to indicate when the registration has been propagated across the cluster.
     * @param completionHandler the completion handler
     */
-  def completionHandlerFuture(): concurrent.Future[Unit] = {
+  def completionFuture(): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
     _asJava.completionHandler(promiseAndHandler._1)
     promiseAndHandler._2.future

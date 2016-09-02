@@ -108,8 +108,11 @@ import @{importedType}\n
 @code{
   var future = shouldMethodReturnAFuture(method);
   var methodName = method.name;
-  if(future)
+  if(future) {
+    if(methodName.endsWith('Handler'))
+      methodName = methodName.substring(0, methodName.length-7);
     methodName += 'Future';
+  }
   methodName = escapeIfKeyword(methodName);
 }
 	@if{includeMethod(method, staticMethods)}

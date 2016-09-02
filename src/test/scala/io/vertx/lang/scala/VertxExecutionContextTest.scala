@@ -8,8 +8,6 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FlatSpec, Matchers}
 
-import scala.concurrent.Promise
-
 @RunWith(classOf[JUnitRunner])
 class VertxExecutionContextTest extends FlatSpec with Matchers {
   val vertx = Vertx
@@ -26,8 +24,8 @@ class VertxExecutionContextTest extends FlatSpec with Matchers {
 class PromiseTestVerticle extends ScalaVerticle {
 
   override def start(startFuture: Future[Void]): Unit = {
-    val f1 = vertx.eventBus().consumer[String]("asd").handler(a => println(a)).completionHandlerFuture()
-    val f2 = vertx.eventBus().consumer[String]("asd2").handler(a => println(a)).completionHandlerFuture()
+    val f1 = vertx.eventBus().consumer[String]("asd").handler(a => println(a)).completionFuture()
+    val f2 = vertx.eventBus().consumer[String]("asd2").handler(a => println(a))completionFuture()
     val res = for {
       a1 <- f1
       a2 <- f2
