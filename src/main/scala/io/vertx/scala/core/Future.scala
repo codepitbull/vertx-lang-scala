@@ -45,9 +45,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * 
     * If the future has already been completed it will be called immediately. Otherwise it will be called when the
     * future is completed.
-    * @param handler the Handler that will be called with the result
-    * @return a reference to this, so it can be used fluently
-    */
+    * @return a future WUHUUU    */
   def setFuture(handler: io.vertx.core.AsyncResult [T] => Unit): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
     _asJava.setHandler(promiseAndHandler._1)

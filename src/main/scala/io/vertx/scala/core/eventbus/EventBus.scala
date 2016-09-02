@@ -64,9 +64,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * subsequently replies to the message.
     * @param address the address to send it to
     * @param message the message, may be `null`
-    * @param replyHandler reply handler will be called when any reply from the recipient is received, may be `null`
-    * @return a reference to this, so the API can be used fluently
-    */
+    * @return a future WUHUUU    */
   def sendFuture[T](address: String, message: AnyRef, replyHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[T]] => Unit): concurrent.Future[io.vertx.scala.core.eventbus.Message[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[T],io.vertx.scala.core.eventbus.Message[T]]((x => if (x == null) null else Message.apply[T](x)))
     _asJava.send(address, message, promiseAndHandler._1)
@@ -91,9 +89,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @param address the address to send it to
     * @param message the message, may be `null`
     * @param options delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-    * @param replyHandler reply handler will be called when any reply from the recipient is received, may be `null`
-    * @return a reference to this, so the API can be used fluently
-    */
+    * @return a future WUHUUU    */
   def sendFuture[T](address: String, message: AnyRef, options: io.vertx.scala.core.eventbus.DeliveryOptions, replyHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[T]] => Unit): concurrent.Future[io.vertx.scala.core.eventbus.Message[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[T],io.vertx.scala.core.eventbus.Message[T]]((x => if (x == null) null else Message.apply[T](x)))
     _asJava.send(address, message, options.asJava, promiseAndHandler._1)
