@@ -54,7 +54,7 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
   }
 
   def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.file.AsyncFile = {
-    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler/*assblaa*/))
+    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
 
@@ -69,7 +69,7 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
   }
 
   def endHandler(endHandler: () => Unit): io.vertx.scala.core.file.AsyncFile = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()/*assblaa*/))
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
 
@@ -84,12 +84,12 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
   }
 
   def drainHandler(handler: () => Unit): io.vertx.scala.core.file.AsyncFile = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()/*assblaa*/))
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.file.AsyncFile = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler/*assblaa*/))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 

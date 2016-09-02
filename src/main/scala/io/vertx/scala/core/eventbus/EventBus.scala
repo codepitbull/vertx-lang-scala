@@ -144,7 +144,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return the event bus message consumer
     */
   def consumer[T](address: String, handler: io.vertx.scala.core.eventbus.Message[T] => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    MessageConsumer.apply[T](_asJava.consumer(address, funcToMappedHandler(Message.apply[T])(handler/*assblaa*/)))
+    MessageConsumer.apply[T](_asJava.consumer(address, funcToMappedHandler(Message.apply[T])(handler)))
   }
 
   /**
@@ -163,7 +163,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return the event bus message consumer
     */
   def localConsumer[T](address: String, handler: io.vertx.scala.core.eventbus.Message[T] => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    MessageConsumer.apply[T](_asJava.localConsumer(address, funcToMappedHandler(Message.apply[T])(handler/*assblaa*/)))
+    MessageConsumer.apply[T](_asJava.localConsumer(address, funcToMappedHandler(Message.apply[T])(handler)))
   }
 
   /**

@@ -45,12 +45,12 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
   def asJava: io.vertx.core.http.HttpServerRequest = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpServerRequest = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler/*assblaa*/))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
   def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpServerRequest = {
-    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler/*assblaa*/))
+    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
 
@@ -65,7 +65,7 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
   }
 
   def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.HttpServerRequest = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()/*assblaa*/))
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
 
@@ -216,7 +216,7 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * @param bodyHandler This handler will be called after all the body has been received
     */
   def bodyHandler(bodyHandler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpServerRequest = {
-    _asJava.bodyHandler(funcToMappedHandler(Buffer.apply)(bodyHandler/*assblaa*/))
+    _asJava.bodyHandler(funcToMappedHandler(Buffer.apply)(bodyHandler))
     this
   }
 
@@ -261,7 +261,7 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * @return a reference to this, so the API can be used fluently
     */
   def uploadHandler(uploadHandler: io.vertx.scala.core.http.HttpServerFileUpload => Unit): io.vertx.scala.core.http.HttpServerRequest = {
-    _asJava.uploadHandler(funcToMappedHandler(HttpServerFileUpload.apply)(uploadHandler/*assblaa*/))
+    _asJava.uploadHandler(funcToMappedHandler(HttpServerFileUpload.apply)(uploadHandler))
     this
   }
 
@@ -315,7 +315,7 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * @return a reference to this, so the API can be used fluently
     */
   def customFrameHandler(handler: io.vertx.scala.core.http.HttpFrame => Unit): io.vertx.scala.core.http.HttpServerRequest = {
-    _asJava.customFrameHandler(funcToMappedHandler(HttpFrame.apply)(handler/*assblaa*/))
+    _asJava.customFrameHandler(funcToMappedHandler(HttpFrame.apply)(handler))
     this
   }
 

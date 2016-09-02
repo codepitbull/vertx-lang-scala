@@ -247,17 +247,17 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
   }
 
   def endHandler(endHandler: () => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()/*assblaa*/))
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
 
   def handler(handler: io.vertx.scala.core.datagram.DatagramPacket => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
-    _asJava.handler(funcToMappedHandler(DatagramPacket.apply)(handler/*assblaa*/))
+    _asJava.handler(funcToMappedHandler(DatagramPacket.apply)(handler))
     this
   }
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler/*assblaa*/))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 

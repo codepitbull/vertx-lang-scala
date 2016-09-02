@@ -63,7 +63,7 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
   }
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler/*assblaa*/))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
@@ -78,7 +78,7 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
   }
 
   def drainHandler(handler: () => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()/*assblaa*/))
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
 

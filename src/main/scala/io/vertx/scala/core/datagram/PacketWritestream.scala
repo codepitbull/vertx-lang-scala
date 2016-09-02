@@ -57,7 +57,7 @@ class PacketWritestream(private val _asJava: io.vertx.core.datagram.PacketWrites
   }
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.datagram.PacketWritestream = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler/*assblaa*/))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
@@ -72,7 +72,7 @@ class PacketWritestream(private val _asJava: io.vertx.core.datagram.PacketWrites
   }
 
   def drainHandler(handler: () => Unit): io.vertx.scala.core.datagram.PacketWritestream = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()/*assblaa*/))
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
 

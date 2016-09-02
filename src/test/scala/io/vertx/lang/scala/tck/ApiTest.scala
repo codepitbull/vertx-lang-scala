@@ -19,8 +19,10 @@ package io.vertx.lang.scala.tck
 import com.acme.scala.pkg.MyInterface
 import io.vertx.codegen.testmodel._
 import io.vertx.core.http.HttpServerOptions
+import io.vertx.core.impl.FutureFactoryImpl
 import io.vertx.core.json.{JsonArray, JsonObject}
 import io.vertx.core.{Future, VertxException}
+import io.vertx.lang.scala.ScalaAsyncResult
 import io.vertx.lang.scala.json.Json
 import io.vertx.lang.scala.json.Json.arr
 import io.vertx.scala.codegen.testmodel
@@ -208,17 +210,15 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerAsyncResultGenericReturn" should "work" in {
-    val w = new Waiter
-    def stringHandler = obj.methodWithHandlerAsyncResultGenericReturnFuture[String]().foreach(ar =>
-       {w { assert("the-result" == ar) };w.dismiss()})
-    stringHandler(Future.succeededFuture("the-result"))
-    w.await(timeout(50 millis))
+    val w = new Waiter()
+    def stringHandler = obj.methodWithHandlerAsyncResultGenericReturn[String](a => {w{assert(a.result() == "the-result")}; w.dismiss();})
+    stringHandler(ScalaAsyncResult("the-result"))
+    w.await()
 
     val w2 = new Waiter
-    def objHandler = obj.methodWithHandlerAsyncResultGenericReturnFuture[TestInterface].foreach(ar =>
-      { w2 { assert(obj == ar)}; w2.dismiss()} )
-    objHandler(Future.succeededFuture(obj))
-    w2.await(timeout(50 millis))
+    def objHandler = obj.methodWithHandlerAsyncResultGenericReturn[TestInterface](a => {w2{assert(a.result() == obj)};w2.dismiss();})
+    objHandler(ScalaAsyncResult(obj))
+    w2.await()
   }
 
   "testMethodWithHandlerAsyncResultVertxGenReturn" should "work" in {

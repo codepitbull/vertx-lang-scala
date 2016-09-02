@@ -46,12 +46,12 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
   }
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpClientResponse = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler/*assblaa*/))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
   def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpClientResponse = {
-    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler/*assblaa*/))
+    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
 
@@ -61,7 +61,7 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
   }
 
   def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.HttpClientResponse = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()/*assblaa*/))
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
 
@@ -142,7 +142,7 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     * @param bodyHandler This handler will be called after all the body has been received
     */
   def bodyHandler(bodyHandler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpClientResponse = {
-    _asJava.bodyHandler(funcToMappedHandler(Buffer.apply)(bodyHandler/*assblaa*/))
+    _asJava.bodyHandler(funcToMappedHandler(Buffer.apply)(bodyHandler))
     this
   }
 
@@ -152,7 +152,7 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     * @return a reference to this, so the API can be used fluently
     */
   def customFrameHandler(handler: io.vertx.scala.core.http.HttpFrame => Unit): io.vertx.scala.core.http.HttpClientResponse = {
-    _asJava.customFrameHandler(funcToMappedHandler(HttpFrame.apply)(handler/*assblaa*/))
+    _asJava.customFrameHandler(funcToMappedHandler(HttpFrame.apply)(handler))
     this
   }
 
