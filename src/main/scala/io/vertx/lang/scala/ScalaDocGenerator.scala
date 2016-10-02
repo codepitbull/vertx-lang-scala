@@ -9,15 +9,16 @@ import javax.annotation.processing.ProcessingEnvironment
 import javax.lang.model.element._
 import javax.lang.model.`type`.ExecutableType
 import javax.lang.model.`type`.TypeMirror
-import java.util.List
+
+import scala.collection.JavaConversions._
 
 /**
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
   */
 class ScalaDocGenerator extends DocGenerator {
-  private var factory: TypeMirrorFactory = null
-  private var translator: CodeTranslator = null
-  private var env: ProcessingEnvironment = null
+  private var factory: TypeMirrorFactory = _
+  private var translator: CodeTranslator = _
+  private var env: ProcessingEnvironment = _
 
   def init(processingEnv: ProcessingEnvironment) {
     factory = new TypeMirrorFactory(processingEnv.getElementUtils, processingEnv.getTypeUtils)
@@ -78,17 +79,14 @@ class ScalaDocGenerator extends DocGenerator {
       var anchor: String = '#' + elt.getSimpleName.toString + "("
       val `type`: TypeMirror = elt.asType
       val methodType: ExecutableType = env.getTypeUtils.erasure(`type`).asInstanceOf[ExecutableType]
-      val parameterTypes: util.List[_ <: TypeMirror] = methodType.getParameterTypes
-      var i: Int = 0
-      while (i < parameterTypes.size) {
-        {
-          if (i > 0) anchor += ",%20"
-          anchor += parameterTypes.get(i).toString
-        }
-        {
-          i += 1; i - 1
+
+      methodType.getParameterTypes.zipWithIndex.foreach{
+        case (v, i) => {
+          if(i > 0) anchor += ",%20"
+          anchor += v.toString
         }
       }
+
       anchor += ')'
       link = link + anchor
     }
@@ -107,7 +105,11 @@ class ScalaDocGenerator extends DocGenerator {
     defaultLabel
   }
 
-  def resolveConstructorLink(elt: ExecutableElement, coordinate: Coordinate): String = "todo"
+  def resolveConstructorLink(elt: ExecutableElement, coordinate: Coordinate): String = {
+    return "todo"
+  }
 
-  def resolveFieldLink(elt: VariableElement, coordinate: Coordinate): String = "todo"
+  def resolveFieldLink(elt: VariableElement, coordinate: Coordinate): String = {
+    return "todo"
+  }
 }
