@@ -47,12 +47,52 @@ class ScalaCodeBuilder extends CodeBuilder {
       }
     })
 
-  override def asyncResultHandler(bodyKind: BodyKind, resultType: ParameterizedTypeInfo, resultName: String, body: CodeModel): ExpressionModel = new LambdaExpressionModel(this, bodyKind, Collections.singletonList(resultType), Collections.singletonList(resultName), body)
+
+  override def asyncResultHandler(bodyKind: BodyKind, parameterizedTypeInfo: ParameterizedTypeInfo, s: String, codeModel: CodeModel, codeModel1: CodeModel, codeModel2: CodeModel): ExpressionModel = {
+    new ExpressionModel(this) {
+      override def render(writer: CodeWriter) {
+        writer.indent()
+        writer.append(".onComplete {\n")
+        writer.indent()
+        writer.append(s"case Success(result) => ")
+        writer.indent()
+
+        if(codeModel1 != null) {
+          writer.append("{\n")
+          codeModel1.render(writer)
+          writer.unindent()
+          writer.append("}\n")
+        }
+        else {
+          writer.append("println(\"Success\")\n")
+          writer.unindent()
+        }
+
+        writer.append(s"case Failure(throwable) => ")
+        writer.indent()
+        if(codeModel2 != null) {
+          writer.append("{\n")
+          codeModel2.render(writer)
+          writer.unindent()
+          writer.append("}\n")
+        }
+        else {
+          writer.append("println(\"Failure\")\n")
+          writer.unindent()
+        }
+        writer.unindent()
+        writer.append("}\n")
+        writer.unindent()
+      }
+    }
+  }
 
   override def enhancedForLoop(variableName: String, expression: ExpressionModel, body: StatementModel): StatementModel = {
     new StatementModel() {
       override def render(renderer: CodeWriter): Unit = {
-        renderer.append("enhancedForLoop")
+        renderer.append("enhancedForLoop - \n")
+        body.render(renderer)
+        renderer.append("enhancedForLoop - \n")
       }
     }
   }
@@ -62,6 +102,8 @@ class ScalaCodeBuilder extends CodeBuilder {
     new StatementModel() {
       override def render(renderer: CodeWriter): Unit = {
         renderer.append("forLoop - \n")
+        body.render(renderer)
+        renderer.append("forLoop - \n")
       }
     }
   }
@@ -69,12 +111,15 @@ class ScalaCodeBuilder extends CodeBuilder {
   override def sequenceForLoop(variableName: String, fromValue: ExpressionModel, toValue: ExpressionModel, body: StatementModel): StatementModel = {
     new StatementModel() {
       override def render(renderer: CodeWriter): Unit = {
-        renderer.append("forLoop - \n")
-        renderer.append(s"for ( ${variableName} <- ${fromValue} to ${toValue}) {\n")
+        renderer.append(s"for ( ${variableName} <- ")
+        fromValue.render(renderer)
+        renderer.append(" to ")
+        toValue.render(renderer)
+        renderer.append(") {\n")
         renderer.indent
         body.render(renderer)
         renderer.unindent
-        renderer.append("}")
+        renderer.append("}\n")
       }
     }
   }
@@ -113,4 +158,6 @@ class ScalaCodeBuilder extends CodeBuilder {
     unit.getMain.render(writer)
     return writer.getBuffer.toString
   }
+
+
 }

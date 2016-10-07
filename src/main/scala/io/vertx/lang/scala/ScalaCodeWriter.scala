@@ -2,6 +2,7 @@ package io.vertx.lang.scala
 
 import java.util
 import java.util.Arrays
+import javax.lang.model.element.TypeElement
 
 import com.sun.source.tree.LambdaExpressionTree
 import com.sun.source.tree.LambdaExpressionTree.BodyKind
@@ -115,7 +116,7 @@ class ScalaCodeWriter(builder: ScalaCodeBuilder) extends CodeWriter(builder){
     parameterNames.zipWithIndex.foreach{
       case (v, i) => {
         if(i > 0) append(", ")
-        append(s"${v}: ${parameterTypes(i)}")
+        append(s"${v}: ${parameterTypes(i).translateName("scala")}")
       }
     }
     append(") => {\n")
@@ -184,7 +185,7 @@ class ScalaCodeWriter(builder: ScalaCodeBuilder) extends CodeWriter(builder){
   override def renderJsonArray(jsonArray: JsonArrayLiteralModel): Unit = append("renderJsonArray")
 
   override def renderDataObject(model: DataObjectLiteralModel): Unit = {
-    append("renderDataObject-"+model.getType.getSimpleName())
+    append(s"${model.getType.getSimpleName()}()")
 
   }
 
@@ -208,4 +209,6 @@ class ScalaCodeWriter(builder: ScalaCodeBuilder) extends CodeWriter(builder){
   override def renderAsyncResultSucceeded(resultType: TypeInfo, name: String): Unit = append("renderAsyncResultSucceeded")
 
   override def renderDataObjectAssign(expression: ExpressionModel, name: String, value: ExpressionModel): Unit = renderJsonObjectAssign(expression, name, value)
+
+  override def renderInstanceOf(expression: ExpressionModel, `type`: TypeElement): Unit = append("renderInstanceOf")
 }

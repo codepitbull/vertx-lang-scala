@@ -30,7 +30,7 @@ describe options and arguments:
 [source,scala]
 ----
 import io.vertx.scala.core.cli.CLI
-var cli = CLI.create("copy").setSummary("A command line interface to copy files.").addOption(renderDataObject-Option).addArgument(renderDataObject-Argument).addArgument(renderDataObject-Argument)
+var cli = CLI.create("copy").setSummary("A command line interface to copy files.").addOption(Option()).addArgument(Argument()).addArgument(Argument())
 
 ----
 
@@ -53,7 +53,7 @@ configure the option to receive several values using `link:../dataobjects.html#O
 [source,scala]
 ----
 import io.vertx.scala.core.cli.CLI
-var cli = CLI.create("some-name").setSummary("A command line interface illustrating the options valuation.").addOption(renderDataObject-Option).addOption(renderDataObject-Option).addOption(renderDataObject-Option)
+var cli = CLI.create("some-name").setSummary("A command line interface illustrating the options valuation.").addOption(Option()).addOption(Option()).addOption(Option())
 
 ----
 
@@ -63,7 +63,7 @@ the parsing:
 [source,scala]
 ----
 import io.vertx.scala.core.cli.CLI
-var cli = CLI.create("some-name").addOption(renderDataObject-Option)
+var cli = CLI.create("some-name").addOption(Option())
 
 ----
 
@@ -73,7 +73,7 @@ the command line:
 [source,scala]
 ----
 import io.vertx.scala.core.cli.CLI
-var cli = CLI.create("some-name").addOption(renderDataObject-Option)
+var cli = CLI.create("some-name").addOption(Option())
 
 ----
 
@@ -85,7 +85,7 @@ If the option value is contrained to a fixed set, you can set the different acce
 [source,scala]
 ----
 import io.vertx.scala.core.cli.CLI
-var cli = CLI.create("some-name").addOption(renderDataObject-Option)
+var cli = CLI.create("some-name").addOption(Option())
 
 ----
 
@@ -102,7 +102,7 @@ index `0`:
 [source,scala]
 ----
 import io.vertx.scala.core.cli.CLI
-var cli = CLI.create("some-name").addArgument(renderDataObject-Argument).addArgument(renderDataObject-Argument)
+var cli = CLI.create("some-name").addArgument(Argument()).addArgument(Argument())
 
 ----
 
@@ -111,7 +111,7 @@ If you don't set the argument indexes, it computes it automatically by using the
 [source,scala]
 ----
 import io.vertx.scala.core.cli.CLI
-var cli = CLI.create("some-name").addArgument(renderDataObject-Argument).addArgument(renderDataObject-Argument)
+var cli = CLI.create("some-name").addArgument(Argument()).addArgument(Argument())
 
 ----
 
@@ -134,7 +134,7 @@ Once your `link:../../scaladoc/io/vertx/scala/core/cli/CLI.html[CLI]` instance i
 [source,scala]
 ----
 import io.vertx.scala.core.cli.CLI
-var cli = CLI.create("copy").setSummary("A command line interface to copy files.").addOption(renderDataObject-Option).addArgument(renderDataObject-Argument).addArgument(renderDataObject-Argument)
+var cli = CLI.create("copy").setSummary("A command line interface to copy files.").addOption(Option()).addArgument(Argument()).addArgument(Argument())
 
 var builder = java.lang.StringBuilder()
 cli.usage(builder)
@@ -195,7 +195,7 @@ won't failed, but give you the opportunity to check if the user asks for help:
 [source,scala]
 ----
 import io.vertx.scala.core.cli.CLI
-var cli = CLI.create("test").addOption(renderDataObject-Option).addOption(renderDataObject-Option)
+var cli = CLI.create("test").addOption(Option()).addOption(Option())
 
 var line = cli.parse(java.util.Collections.singletonList("-h"))
 

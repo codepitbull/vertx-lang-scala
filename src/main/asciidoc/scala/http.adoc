@@ -26,7 +26,7 @@ instance when creating it:
 [source,scala]
 ----
 
-var options = renderDataObject-HttpServerOptions
+var options = HttpServerOptions()
 
 var server = vertx.createHttpServer(options)
 
@@ -44,7 +44,7 @@ To handle `h2` requests, TLS must be enabled along with `link:../dataobjects.htm
 
 [source,scala]
 ----
-var options = renderDataObject-HttpServerOptions
+var options = HttpServerOptions()
 
 var server = vertx.createHttpServer(options)
 
@@ -75,7 +75,7 @@ For debugging purposes, network activity can be logged.
 [source,scala]
 ----
 
-var options = renderDataObject-HttpServerOptions
+var options = HttpServerOptions()
 
 var server = vertx.createHttpServer(options)
 
@@ -120,13 +120,15 @@ For example:
 ----
 
 var server = vertx.createHttpServer()
-server.listen(8080, "myhost.com", (res: io.vertx.core.AsyncResult<io.vertx.core.http.HttpServer>) => {
-  if (renderAsyncResultSucceeded) {
-    println("Server is now listening!")
-  } else {
-    println("Failed to bind!")
+server.listen(8080, "myhost.com", .onComplete {
+    case Success(result) => {
+      println("Server is now listening!")
+    }
+    case Failure(throwable) => {
+      println("Failed to bind!")
+    }
   }
-})
+)
 
 ----
 
@@ -138,7 +140,7 @@ To be notified when a request arrives you need to set a `link:../../scaladoc/io/
 ----
 
 var server = vertx.createHttpServer()
-server.requestHandler((request: io.vertx.core.http.HttpServerRequest) => {
+server.requestHandler((request: io.vertx.scala.core.http.HttpServerRequest) => {
   // Handle the request in here
 })
 
@@ -166,7 +168,7 @@ Here's a simple example of a server handling a request and replying with "hello 
 [source,scala]
 ----
 
-vertx.createHttpServer().requestHandler((request: io.vertx.core.http.HttpServerRequest) => {
+vertx.createHttpServer().requestHandler((request: io.vertx.scala.core.http.HttpServerRequest) => {
   request.response().end("Hello world")
 }).listen(8080)
 
@@ -292,7 +294,7 @@ this will get called every time a chunk of the request body arrives. Here's an e
 [source,scala]
 ----
 
-request.handler((buffer: io.vertx.core.buffer.Buffer) => {
+request.handler((buffer: io.vertx.scala.core.buffer.Buffer) => {
   println(s"I have received a chunk of the body of length ${buffer.length()}")
 })
 
@@ -311,7 +313,7 @@ import io.vertx.scala.core.buffer.Buffer
 // Create an empty buffer
 var totalBuffer = Buffer.buffer()
 
-request.handler((buffer: io.vertx.core.buffer.Buffer) => {
+request.handler((buffer: io.vertx.scala.core.buffer.Buffer) => {
   println(s"I have received a chunk of the body of length ${buffer.length()}")
   totalBuffer.appendBuffer(buffer)
 })
@@ -328,7 +330,7 @@ for you. The body handler is called once when all the body has been received:
 [source,scala]
 ----
 
-request.bodyHandler((totalBuffer: io.vertx.core.buffer.Buffer) => {
+request.bodyHandler((totalBuffer: io.vertx.scala.core.buffer.Buffer) => {
   println(s"Full body received, length = ${totalBuffer.length()}")
 })
 
@@ -360,7 +362,7 @@ once the entire body has been read:
 [source,scala]
 ----
 
-server.requestHandler((request: io.vertx.core.http.HttpServerRequest) => {
+server.requestHandler((request: io.vertx.scala.core.http.HttpServerRequest) => {
   request.setExpectMultipart(true)
   request.endHandler((v: java.lang.Void) => {
     // The body has now been fully read, so retrieve the form attributes
@@ -385,9 +387,9 @@ The object passed into the handler is a `link:../../scaladoc/io/vertx/scala/core
 [source,scala]
 ----
 
-server.requestHandler((request: io.vertx.core.http.HttpServerRequest) => {
+server.requestHandler((request: io.vertx.scala.core.http.HttpServerRequest) => {
   request.setExpectMultipart(true)
-  request.uploadHandler((upload: io.vertx.core.http.HttpServerFileUpload) => {
+  request.uploadHandler((upload: io.vertx.scala.core.http.HttpServerFileUpload) => {
     println(s"Got a file upload ${upload.name()}")
   })
 })
@@ -400,8 +402,8 @@ exhaustion, instead, the upload data is received in chunks:
 [source,scala]
 ----
 
-request.uploadHandler((upload: io.vertx.core.http.HttpServerFileUpload) => {
-  upload.handler((chunk: io.vertx.core.buffer.Buffer) => {
+request.uploadHandler((upload: io.vertx.scala.core.http.HttpServerFileUpload) => {
+  upload.handler((chunk: io.vertx.scala.core.buffer.Buffer) => {
     println(s"Received a chunk of the upload of length ${chunk.length()}")
   })
 })
@@ -417,7 +419,7 @@ If you just want to upload the file to disk somewhere you can use `link:../../sc
 [source,scala]
 ----
 
-request.uploadHandler((upload: io.vertx.core.http.HttpServerFileUpload) => {
+request.uploadHandler((upload: io.vertx.scala.core.http.HttpServerFileUpload) => {
   upload.streamToFileSystem(s"myuploads_directory/${upload.filename()}")
 })
 
@@ -437,7 +439,7 @@ this will get called every time a custom frame arrives. Here's an example:
 [source,scala]
 ----
 
-request.customFrameHandler((frame: io.vertx.core.http.HttpFrame) => {
+request.customFrameHandler((frame: io.vertx.scala.core.http.HttpFrame) => {
 
   println(s"Received a frame type=${frame.type()} payload${frame.payload().toString()}")
 })
@@ -641,7 +643,7 @@ Here's a very simple web server that serves files from the file system using sen
 
 [source,scala]
 ----
-vertx.createHttpServer().requestHandler((request: io.vertx.core.http.HttpServerRequest) => {
+vertx.createHttpServer().requestHandler((request: io.vertx.scala.core.http.HttpServerRequest) => {
   var file = ""
   if (request.path() == "/") {
     file = "index.html"
@@ -669,7 +671,7 @@ When there is a need to serve just a segment of a file, say starting from a give
 
 [source,scala]
 ----
-vertx.createHttpServer().requestHandler((request: io.vertx.core.http.HttpServerRequest) => {
+vertx.createHttpServer().requestHandler((request: io.vertx.scala.core.http.HttpServerRequest) => {
   var offset = 0
   try {
     offset = java.lang.Long.parseLong(request.getParam("start"))
@@ -696,7 +698,7 @@ case you can just do:
 
 [source,scala]
 ----
-vertx.createHttpServer().requestHandler((request: io.vertx.core.http.HttpServerRequest) => {
+vertx.createHttpServer().requestHandler((request: io.vertx.scala.core.http.HttpServerRequest) => {
   var offset = 0
   try {
     offset = java.lang.Long.parseLong(request.getParam("start"))
@@ -724,7 +726,7 @@ at any one time:
 ----
 import io.vertx.core.http.HttpMethod
 import io.vertx.scala.core.streams.Pump
-vertx.createHttpServer().requestHandler((request: io.vertx.core.http.HttpServerRequest) => {
+vertx.createHttpServer().requestHandler((request: io.vertx.scala.core.http.HttpServerRequest) => {
   var response = request.response()
   if (request.method() == HttpMethod.PUT) {
     response.setChunked(true)
@@ -795,7 +797,14 @@ The request handler are notified of stream reset events with the `link:../../sca
 
 [source,scala]
 ----
-Code not translatable
+
+request.response().exceptionHandler((err: java.lang.Throwable) => {
+  if (renderInstanceOf) {
+    var reset = err
+    println(s"Stream reset ${reset.getCode()}")
+  }
+})
+
 ----
 
 ==== Server push
@@ -811,19 +820,20 @@ import io.vertx.core.http.HttpMethod
 var response = request.response()
 
 // Push main.js to the client
-response.push(HttpMethod.GET, "/main.js", (ar: io.vertx.core.AsyncResult<io.vertx.core.http.HttpServerResponse>) => {
+response.push(HttpMethod.GET, "/main.js", .onComplete {
+    case Success(result) => {
 
-  if (renderAsyncResultSucceeded) {
+      // The server is ready to push the response
+      var pushedResponse = ar.result()
 
-    // The server is ready to push the response
-    var pushedResponse = renderAsyncResultValue
-
-    // Send main.js response
-    pushedResponse.putHeader("content-type", "application/json").end("alert(\"Push response hello\")")
-  } else {
-    println(s"Could not push client resource ${renderAsyncResultCause}")
+      // Send main.js response
+      pushedResponse.putHeader("content-type", "application/json").end("alert(\"Push response hello\")")
+    }
+    case Failure(throwable) => {
+      println(s"Could not push client resource ${ar.cause()}")
+    }
   }
-})
+)
 
 // Send the requested resource
 response.sendFile("<html><head><script src=\"/main.js\"></script></head><body></body></html>")
@@ -874,7 +884,7 @@ If you want to configure options for the client, you create it as follows:
 
 [source,scala]
 ----
-var options = renderDataObject-HttpClientOptions
+var options = HttpClientOptions()
 var client = vertx.createHttpClient(options)
 
 ----
@@ -890,7 +900,7 @@ For `h2` requests, TLS must be enabled with _Application-Layer Protocol Negotiat
 ----
 import io.vertx.core.http.HttpVersion
 
-var options = renderDataObject-HttpClientOptions
+var options = HttpClientOptions()
 
 var client = vertx.createHttpClient(options)
 
@@ -902,7 +912,7 @@ For `h2c` requests, TLS must be disabled, the client will do an HTTP/1.1 request
 ----
 import io.vertx.core.http.HttpVersion
 
-var options = renderDataObject-HttpClientOptions
+var options = HttpClientOptions()
 
 var client = vertx.createHttpClient(options)
 
@@ -926,7 +936,7 @@ For debugging purposes, network activity can be logged.
 
 [source,scala]
 ----
-var options = renderDataObject-HttpClientOptions
+var options = HttpClientOptions()
 var client = vertx.createHttpClient(options)
 
 ----
@@ -944,10 +954,10 @@ every time you make a request you can configure the client with a default host/p
 [source,scala]
 ----
 // Set the default host
-var options = renderDataObject-HttpClientOptions
+var options = HttpClientOptions()
 // Can also set default port if you want...
 var client = vertx.createHttpClient(options)
-client.getNow("/some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
+client.getNow("/some-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
   println(s"Received response with status code ${response.statusCode()}")
 })
 
@@ -961,12 +971,12 @@ simply specify the host/port when doing the request.
 var client = vertx.createHttpClient()
 
 // Specify both port and host name
-client.getNow(8080, "myserver.mycompany.com", "/some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
+client.getNow(8080, "myserver.mycompany.com", "/some-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
   println(s"Received response with status code ${response.statusCode()}")
 })
 
 // This time use the default port 80 but specify the host name
-client.getNow("foo.othercompany.com", "/other-uri", (response: io.vertx.core.http.HttpClientResponse) => {
+client.getNow("foo.othercompany.com", "/other-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
   println(s"Received response with status code ${response.statusCode()}")
 })
 
@@ -990,12 +1000,12 @@ called with the http response when it comes back.
 var client = vertx.createHttpClient()
 
 // Send a GET request
-client.getNow("/some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
+client.getNow("/some-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
   println(s"Received response with status code ${response.statusCode()}")
 })
 
 // Send a GET request
-client.headNow("/other-uri", (response: io.vertx.core.http.HttpClientResponse) => {
+client.headNow("/other-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
   println(s"Received response with status code ${response.statusCode()}")
 })
 
@@ -1013,11 +1023,11 @@ the HTTP method at run-time:
 import io.vertx.core.http.HttpMethod
 var client = vertx.createHttpClient()
 
-client.request(HttpMethod.GET, "some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
+client.request(HttpMethod.GET, "some-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
   println(s"Received response with status code ${response.statusCode()}")
 }).end()
 
-client.request(HttpMethod.POST, "foo-uri", (response: io.vertx.core.http.HttpClientResponse) => {
+client.request(HttpMethod.POST, "foo-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
   println(s"Received response with status code ${response.statusCode()}")
 }).end("some-data")
 
@@ -1040,7 +1050,7 @@ m
 ----
 var client = vertx.createHttpClient()
 
-var request = client.post("some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
+var request = client.post("some-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
   println(s"Received response with status code ${response.statusCode()}")
 })
 
@@ -1054,13 +1064,13 @@ request.end()
 
 // Or fluently:
 
-client.post("some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
+client.post("some-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
   println(s"Received response with status code ${response.statusCode()}")
 }).putHeader("content-length", "1000").putHeader("content-type", "text/plain").write(body).end()
 
 // Or event more simply:
 
-client.post("some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
+client.post("some-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
   println(s"Received response with status code ${response.statusCode()}")
 }).putHeader("content-type", "text/plain").end(body)
 
@@ -1207,10 +1217,10 @@ no need to set the `Content-Length` of the request up-front.
 request.setChunked(true)
 
 // Write some chunks
-forLoop - 
-for ( i <- io.vertx.codetrans.CodeBuilder$1@609425 to io.vertx.codetrans.CodeBuilder$1@745cec2f) {
+for ( i <- 0 to 10) {
   request.write(s"this-is-chunk-${i}")
 }
+
 
 request.end()
 
@@ -1231,7 +1241,7 @@ You can handle exceptions corresponding to a request by setting an exception han
 [source,scala]
 ----
 
-var request = client.post("some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
+var request = client.post("some-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
   println(s"Received response with status code ${response.statusCode()}")
 })
 request.exceptionHandler((e: java.lang.Throwable) => {
@@ -1246,7 +1256,7 @@ This does not handle non _2xx_ response that need to be handled in the
 
 [source, scala]
 ----
-var request = client.post("some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
+var request = client.post("some-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
   if (response.statusCode() == 200) {
     println("Everything fine")
     return
@@ -1272,7 +1282,7 @@ not provide a handler when the request is created and set it later on the reques
 ----
 
 var request = client.post("some-uri")
-request.handler((response: io.vertx.core.http.HttpClientResponse) => {
+request.handler((response: io.vertx.scala.core.http.HttpClientResponse) => {
   println(s"Received response with status code ${response.statusCode()}")
 })
 
@@ -1351,7 +1361,14 @@ The request handler are notified of stream reset events with the `link:../../sca
 
 [source,scala]
 ----
-Code not translatable
+
+request.exceptionHandler((err: java.lang.Throwable) => {
+  if (renderInstanceOf) {
+    var reset = err
+    println(s"Stream reset ${reset.getCode()}")
+  }
+})
+
 ----
 
 === Handling http responses
@@ -1365,7 +1382,7 @@ and `link:../../scaladoc/io/vertx/scala/core/http/HttpClientResponse.html#status
 [source,scala]
 ----
 
-client.getNow("some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
+client.getNow("some-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
   // the status code - e.g. 200 or 404
   println(s"Status code is ${response.statusCode()}")
 
@@ -1414,9 +1431,9 @@ a `link:../../scaladoc/io/vertx/scala/core/buffer/Buffer.html[Buffer]` represent
 [source,scala]
 ----
 
-client.getNow("some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
+client.getNow("some-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
 
-  response.handler((buffer: io.vertx.core.buffer.Buffer) => {
+  response.handler((buffer: io.vertx.scala.core.buffer.Buffer) => {
     println(s"Received a part of the response body: ${buffer}")
   })
 })
@@ -1430,12 +1447,12 @@ either aggregate it yourself:
 ----
 import io.vertx.scala.core.buffer.Buffer
 
-client.getNow("some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
+client.getNow("some-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
 
   // Create an empty buffer
   var totalBuffer = Buffer.buffer()
 
-  response.handler((buffer: io.vertx.core.buffer.Buffer) => {
+  response.handler((buffer: io.vertx.scala.core.buffer.Buffer) => {
     println(s"Received a part of the response body: ${buffer.length()}")
 
     totalBuffer.appendBuffer(buffer)
@@ -1455,9 +1472,9 @@ is called with the entire body when the response has been fully read:
 [source,scala]
 ----
 
-client.getNow("some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
+client.getNow("some-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
 
-  response.bodyHandler((totalBuffer: io.vertx.core.buffer.Buffer) => {
+  response.bodyHandler((totalBuffer: io.vertx.scala.core.buffer.Buffer) => {
     // Now all the body has been read
     println(s"Total response body length is ${totalBuffer.length()}")
   })
@@ -1502,7 +1519,7 @@ Here's an example:
 [source,scala]
 ----
 
-var request = client.put("some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
+var request = client.put("some-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
   println(s"Received response with status code ${response.statusCode()}")
 })
 
@@ -1529,14 +1546,14 @@ to have the client continue sending the body:
 [source,scala]
 ----
 
-httpServer.requestHandler((request: io.vertx.core.http.HttpServerRequest) => {
+httpServer.requestHandler((request: io.vertx.scala.core.http.HttpServerRequest) => {
   if (request.getHeader("Expect").equalsIgnoreCase("100-Continue")) {
 
     // Send a 100 continue response
     request.response().writeContinue()
 
     // The client should send the body when it receives the 100 response
-    request.bodyHandler((body: io.vertx.core.buffer.Buffer) => {
+    request.bodyHandler((body: io.vertx.scala.core.buffer.Buffer) => {
       // Do something with body
     })
 
@@ -1555,7 +1572,7 @@ cannot be a logical protocol constraint):
 [source,scala]
 ----
 
-httpServer.requestHandler((request: io.vertx.core.http.HttpServerRequest) => {
+httpServer.requestHandler((request: io.vertx.scala.core.http.HttpServerRequest) => {
   if (request.getHeader("Expect").equalsIgnoreCase("100-Continue")) {
 
     //
@@ -1585,18 +1602,18 @@ A push handler can be set on a request to receive the request/response pushed by
 [source,scala]
 ----
 
-var request = client.get("/index.html", (response: io.vertx.core.http.HttpClientResponse) => {
+var request = client.get("/index.html", (response: io.vertx.scala.core.http.HttpClientResponse) => {
   // Process index.html response
 })
 
 // Set a push handler to be aware of any resource pushed by the server
-request.pushHandler((pushedRequest: io.vertx.core.http.HttpClientRequest) => {
+request.pushHandler((pushedRequest: io.vertx.scala.core.http.HttpClientRequest) => {
 
   // A resource is pushed for this request
   println(s"Server pushed ${pushedRequest.path()}")
 
   // Set an handler for the response
-  pushedRequest.handler((pushedResponse: io.vertx.core.http.HttpClientResponse) => {
+  pushedRequest.handler((pushedResponse: io.vertx.scala.core.http.HttpClientResponse) => {
     println("The response for the pushed request")
   })
 })
@@ -1610,7 +1627,7 @@ If the client does not want to receive a pushed request, it can reset the stream
 
 [source,scala]
 ----
-request.pushHandler((pushedRequest: io.vertx.core.http.HttpClientRequest) => {
+request.pushHandler((pushedRequest: io.vertx.scala.core.http.HttpClientRequest) => {
   if (pushedRequest.path() == "/main.js") {
     pushedRequest.reset()
   } else {
@@ -1633,7 +1650,7 @@ frame arrives. Here's an example:
 
 [source,scala]
 ----
-response.customFrameHandler((frame: io.vertx.core.http.HttpFrame) => {
+response.customFrameHandler((frame: io.vertx.scala.core.http.HttpFrame) => {
 
   println(s"Received a frame type=${frame.type()} payload${frame.payload().toString()}")
 })
@@ -1723,7 +1740,7 @@ can be used.
 [source,scala]
 ----
 
-var clientOptions = renderDataObject-HttpClientOptions
+var clientOptions = HttpClientOptions()
 
 // Uses up to 3 connections and up to 10 streams per connection
 var client = vertx.createHttpClient(clientOptions)
@@ -1767,7 +1784,7 @@ A connection handler can be set on the server to be notified of any incoming con
 ----
 var server = vertx.createHttpServer(http2Options)
 
-server.connectionHandler((connection: io.vertx.core.http.HttpConnection) => {
+server.connectionHandler((connection: io.vertx.scala.core.http.HttpConnection) => {
   println("A client connected")
 })
 
@@ -1787,7 +1804,7 @@ A connection handler can be set on the request to be notified when the connectio
 
 [source,scala]
 ----
-request.connectionHandler((connection: io.vertx.core.http.HttpConnection) => {
+request.connectionHandler((connection: io.vertx.scala.core.http.HttpConnection) => {
   println("Connected to the server")
 })
 
@@ -1807,7 +1824,7 @@ The settings can be changed at any time after the connection is established:
 
 [source,scala]
 ----
-connection.updateSettings(renderDataObject-Http2Settings)
+connection.updateSettings(Http2Settings())
 
 ----
 
@@ -1816,11 +1833,13 @@ to be notified of the acknowledgment:
 
 [source,scala]
 ----
-connection.updateSettings(renderDataObject-Http2Settings, (ar: io.vertx.core.AsyncResult<java.lang.Void>) => {
-  if (renderAsyncResultSucceeded) {
-    println("The settings update has been acknowledged ")
+connection.updateSettings(Http2Settings(), .onComplete {
+    case Success(result) => {
+      println("The settings update has been acknowledged ")
+    }
+    case Failure(throwable) => println("Failure")
   }
-})
+)
 
 ----
 
@@ -1829,7 +1848,7 @@ when the new remote settings are received:
 
 [source,scala]
 ----
-connection.remoteSettingsHandler((settings: io.vertx.core.http.Http2Settings) => {
+connection.remoteSettingsHandler((settings: io.vertx.scala.core.http.Http2Settings) => {
   println("Received new settings")
 })
 
@@ -1847,13 +1866,15 @@ endpoint:
 ----
 import io.vertx.scala.core.buffer.Buffer
 var data = Buffer.buffer()
-forLoop - 
-for ( i <- io.vertx.codetrans.CodeBuilder$1@54ca7f37 to io.vertx.codetrans.CodeBuilder$1@576f51b2) {
+for ( i <- 0 to 8) {
   data.appendByte(i)
 }
-connection.ping(data, (pong: io.vertx.core.AsyncResult<io.vertx.core.buffer.Buffer>) => {
-  println("Remote side replied")
-})
+
+connection.ping(data, .onComplete {
+    case Success(result) => println("Success")
+    case Failure(throwable) => println("Failure")
+  }
+)
 
 ----
 
@@ -1862,7 +1883,7 @@ an handler can be set to be notified for each ping received:
 
 [source,scala]
 ----
-connection.pingHandler((ping: io.vertx.core.buffer.Buffer) => {
+connection.pingHandler((ping: io.vertx.scala.core.buffer.Buffer) => {
   println("Got pinged by remote side")
 })
 
@@ -1903,7 +1924,7 @@ Conversely, it is also possible to be notified when `GOAWAY` are received:
 
 [source,scala]
 ----
-connection.goAwayHandler((goAway: io.vertx.core.http.GoAway) => {
+connection.goAwayHandler((goAway: io.vertx.scala.core.http.GoAway) => {
   println("Received a go away frame")
 })
 
@@ -1967,7 +1988,7 @@ Let's take a verticle creating a HTTP server such as:
 .io.vertx.examples.http.sharing.HttpServerVerticle
 [source,scala]
 ----
-vertx.createHttpServer().requestHandler((request: io.vertx.core.http.HttpServerRequest) => {
+vertx.createHttpServer().requestHandler((request: io.vertx.scala.core.http.HttpServerRequest) => {
   request.response().end(s"Hello from server ${this}")
 }).listen(8080)
 
@@ -1984,8 +2005,8 @@ Let's now imagine a client such as:
 [source,scala]
 ----
 vertx.setPeriodic(100, (l: java.lang.Long) => {
-  vertx.createHttpClient().getNow(8080, "localhost", "/", (resp: io.vertx.core.http.HttpClientResponse) => {
-    resp.bodyHandler((body: io.vertx.core.buffer.Buffer) => {
+  vertx.createHttpClient().getNow(8080, "localhost", "/", (resp: io.vertx.scala.core.http.HttpClientResponse) => {
+    resp.bodyHandler((body: io.vertx.scala.core.buffer.Buffer) => {
       println(body.toString("ISO-8859-1"))
     })
   })
@@ -2036,7 +2057,7 @@ When a WebSocket connection is made to the server, the handler will be called, p
 [source,scala]
 ----
 
-server.websocketHandler((websocket: io.vertx.core.http.ServerWebSocket) => {
+server.websocketHandler((websocket: io.vertx.scala.core.http.ServerWebSocket) => {
   println("Connected!")
 })
 
@@ -2047,7 +2068,7 @@ You can choose to reject the WebSocket by calling `link:../../scaladoc/io/vertx/
 [source,scala]
 ----
 
-server.websocketHandler((websocket: io.vertx.core.http.ServerWebSocket) => {
+server.websocketHandler((websocket: io.vertx.scala.core.http.ServerWebSocket) => {
   if (websocket.path() == "/myapi") {
     websocket.reject()
   } else {
@@ -2065,7 +2086,7 @@ call `link:../../scaladoc/io/vertx/scala/core/http/HttpServerRequest.html#upgrad
 [source,scala]
 ----
 
-server.requestHandler((request: io.vertx.core.http.HttpServerRequest) => {
+server.requestHandler((request: io.vertx.scala.core.http.HttpServerRequest) => {
   if (request.path() == "/myapi") {
 
     var websocket = request.upgrade()
@@ -2096,7 +2117,7 @@ The handler will be called with an instance of `link:../../scaladoc/io/vertx/sca
 
 [source,scala]
 ----
-client.websocket("/some-uri", (websocket: io.vertx.core.http.WebSocket) => {
+client.websocket("/some-uri", (websocket: io.vertx.scala.core.http.WebSocket) => {
   println("Connected!")
 })
 
@@ -2186,7 +2207,7 @@ for example:
 [source,scala]
 ----
 
-websocket.frameHandler((frame: io.vertx.core.http.WebSocketFrame) => {
+websocket.frameHandler((frame: io.vertx.scala.core.http.WebSocketFrame) => {
   println("Received a frame of size!")
 })
 
@@ -2222,7 +2243,7 @@ Here's an example of using an HTTP proxy:
 ----
 import io.vertx.core.net.ProxyType
 
-var options = renderDataObject-HttpClientOptions
+var options = HttpClientOptions()
 var client = vertx.createHttpClient(options)
 
 
@@ -2240,7 +2261,7 @@ For a SOCKS5 proxy:
 ----
 import io.vertx.core.net.ProxyType
 
-var options = renderDataObject-HttpClientOptions
+var options = HttpClientOptions()
 var client = vertx.createHttpClient(options)
 
 
