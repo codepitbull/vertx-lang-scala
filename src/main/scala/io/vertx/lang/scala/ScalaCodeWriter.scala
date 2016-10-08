@@ -310,7 +310,8 @@ class ScalaCodeWriter(builder: ScalaCodeBuilder) extends CodeWriter(builder){
   override def renderMethodInvocation(expression: ExpressionModel, receiverType: TypeInfo, method: MethodSignature, returnType: TypeInfo, argumentModels: util.List[ExpressionModel], argumentTypes: util.List[TypeInfo]): Unit = {
     val lbracket = if(method.getName == "onComplete") '{' else '('
     val rbracket = if(method.getName == "onComplete") '}' else ')'
-    expression.render(this) // ?
+    if(method.getName != "onComplete")
+      expression.render(this) // ?
     append('.')
     append(method.getName)
     append(lbracket)

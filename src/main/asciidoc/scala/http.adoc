@@ -130,7 +130,7 @@ For example:
 ----
 
 var server = vertx.createHttpServer()
-server.onComplete{
+server.listenFuture(8080, "myhost.com").onComplete{
   case Success(result) => {
     println("Server is now listening!")
   }
@@ -829,7 +829,7 @@ import io.vertx.core.http.HttpMethod
 var response = request.response()
 
 // Push main.js to the client
-response.onComplete{
+response.pushFuture(HttpMethod.GET, "/main.js").onComplete{
   case Success(result) => {
 
     // The server is ready to push the response
@@ -1859,7 +1859,9 @@ to be notified of the acknowledgment:
 
 [source,scala]
 ----
-connection.onComplete{
+connection.updateSettingsFuture(Http2Settings()
+  .setMaxConcurrentStreams(100)
+).onComplete{
   case Success(result) => {
     println("The settings update has been acknowledged ")
   }
@@ -1895,7 +1897,7 @@ for ( i <- 0 to 8) {
   data.appendByte(i)
 }
 
-connection.onComplete{
+connection.pingFuture(data).onComplete{
   case Success(result) => println("Success")
   case Failure(throwable) => println("Failure")
 }

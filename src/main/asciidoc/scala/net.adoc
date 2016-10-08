@@ -66,7 +66,7 @@ For example:
 ----
 
 var server = vertx.createNetServer()
-server.onComplete{
+server.listenFuture(1234, "localhost").onComplete{
   case Success(result) => {
     println("Server is now listening!")
   }
@@ -87,7 +87,7 @@ To find out the real port the server is listening on you can call `link:../../sc
 ----
 
 var server = vertx.createNetServer()
-server.onComplete{
+server.listenFuture(0, "localhost").onComplete{
   case Success(result) => {
     println(s"Server is now listening on actual port: ${server.actualPort()}")
   }
@@ -240,7 +240,7 @@ This handler will then be called when the close has fully completed.
 [source,scala]
 ----
 
-server.onComplete{
+server.closeFuture().onComplete{
   case Success(result) => {
     println("Server is now closed")
   }
@@ -358,7 +358,7 @@ var options = NetClientOptions()
   .setConnectTimeout(10000)
 
 var client = vertx.createNetClient(options)
-client.onComplete{
+client.connectFuture(4321, "localhost").onComplete{
   case Success(result) => {
     println("Connected!")
     var socket = res.result()

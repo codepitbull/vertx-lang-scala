@@ -68,7 +68,7 @@ Getting the map is asynchronous and the result is returned to you in the handler
 
 var sd = vertx.sharedData()
 
-sd.onComplete{
+sd.getClusterWideMapFuture("mymap").onComplete{
   case Success(result) => {
     var map = res.result()
   }
@@ -89,7 +89,7 @@ The actual put is asynchronous and the handler is notified once it is complete:
 [source,scala]
 ----
 
-map.onComplete{
+map.putFuture("foo", "bar").onComplete{
   case Success(result) => {
     // Successfully put the value
   }
@@ -110,7 +110,7 @@ The actual get is asynchronous and the handler is notified with the result some 
 [source,scala]
 ----
 
-map.onComplete{
+map.getFuture("foo").onComplete{
   case Success(result) => {
     // Successfully got the value
     var val = resGet.result()
@@ -149,7 +149,7 @@ another caller can obtain it.
 
 [source,scala]
 ----
-sd.onComplete{
+sd.getLockFuture("mylock").onComplete{
   case Success(result) => {
     // Got the lock!
     var lock = res.result()
@@ -173,7 +173,7 @@ with a failure:
 
 [source,scala]
 ----
-sd.onComplete{
+sd.getLockWithTimeoutFuture("mylock", 10000).onComplete{
   case Success(result) => {
     // Got the lock!
     var lock = res.result()
@@ -196,7 +196,7 @@ You obtain an instance with `link:../../scaladoc/io/vertx/scala/core/shareddata/
 
 [source,scala]
 ----
-sd.onComplete{
+sd.getCounterFuture("mycounter").onComplete{
   case Success(result) => {
     var counter = res.result()
   }

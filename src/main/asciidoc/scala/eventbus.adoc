@@ -149,7 +149,7 @@ on the +MessageConsumer+ object.
 
 [source,scala]
 ----
-consumer.onComplete{
+consumer.completionHandlerFuture().onComplete{
   case Success(result) => {
     println("The handler registration has reached all nodes")
   }
@@ -169,7 +169,7 @@ be notified when this is complete use `link:../../scaladoc/io/vertx/scala/core/e
 
 [source,scala]
 ----
-consumer.onComplete{
+consumer.unregisterFuture().onComplete{
   case Success(result) => {
     println("The handler un-registration has reached all nodes")
   }
@@ -249,7 +249,7 @@ The sender:
 
 [source,scala]
 ----
-eventBus.onComplete{
+eventBus.sendFuture("news.uk.sport", "Yay! Someone kicked a ball across a patch of grass").onComplete{
   case Success(result) => {
     println(s"Received reply: ${ar.result().body()}")
   }

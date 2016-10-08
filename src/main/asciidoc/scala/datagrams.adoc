@@ -53,12 +53,12 @@ import io.vertx.scala.core.buffer.Buffer
 var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 var buffer = Buffer.buffer("content")
 // Send a Buffer
-socket.onComplete{
+socket.sendFuture(buffer, 1234, "10.0.0.1").onComplete{
   case Success(result) => println("Success")
   case Failure(throwable) => println("Failure")
 }
 // Send a String
-socket.onComplete{
+socket.sendFuture("A string used as content", 1234, "10.0.0.1").onComplete{
   case Success(result) => println("Success")
   case Failure(throwable) => println("Failure")
 }
@@ -85,7 +85,7 @@ So to listen on a specific address and port you would do something like shown he
 [source,scala]
 ----
 var socket = vertx.createDatagramSocket(DatagramSocketOptions())
-socket.onComplete{
+socket.listenFuture(1234, "0.0.0.0").onComplete{
   case Success(result) => {
     socket.handler((packet: io.vertx.scala.core.datagram.DatagramPacket) => {
       // Do something with the packet
@@ -124,7 +124,7 @@ import io.vertx.scala.core.buffer.Buffer
 var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 var buffer = Buffer.buffer("content")
 // Send a Buffer to a multicast address
-socket.onComplete{
+socket.sendFuture(buffer, 1234, "230.0.0.1").onComplete{
   case Success(result) => println("Success")
   case Failure(throwable) => println("Failure")
 }
@@ -154,14 +154,14 @@ would do something like shown here:
 [source,scala]
 ----
 var socket = vertx.createDatagramSocket(DatagramSocketOptions())
-socket.onComplete{
+socket.listenFuture(1234, "0.0.0.0").onComplete{
   case Success(result) => {
     socket.handler((packet: io.vertx.scala.core.datagram.DatagramPacket) => {
       // Do something with the packet
     })
 
     // join the multicast group
-    socket.onComplete{
+    socket.listenMulticastGroupFuture("230.0.0.1").onComplete{
       case Success(result) => println("Success")
       case Failure(throwable) => println("Failure")
     }
@@ -184,20 +184,20 @@ This is shown here:
 [source,scala]
 ----
 var socket = vertx.createDatagramSocket(DatagramSocketOptions())
-socket.onComplete{
+socket.listenFuture(1234, "0.0.0.0").onComplete{
   case Success(result) => {
     socket.handler((packet: io.vertx.scala.core.datagram.DatagramPacket) => {
       // Do something with the packet
     })
 
     // join the multicast group
-    socket.onComplete{
+    socket.listenMulticastGroupFuture("230.0.0.1").onComplete{
       case Success(result) => {
         // will now receive packets for group
 
         // do some work
 
-        socket.onComplete{
+        socket.unlistenMulticastGroupFuture("230.0.0.1").onComplete{
           case Success(result) => println("Success")
           case Failure(throwable) => println("Failure")
         }
@@ -233,7 +233,7 @@ var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 // Some code
 
 // This would block packets which are send from 10.0.0.2
-socket.onComplete{
+socket.blockMulticastGroupFuture("230.0.0.1", "10.0.0.2").onComplete{
   case Success(result) => println("Success")
   case Failure(throwable) => println("Failure")
 }
