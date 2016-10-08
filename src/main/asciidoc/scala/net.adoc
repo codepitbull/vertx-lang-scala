@@ -70,9 +70,8 @@ server.listenFuture(1234, "localhost").onComplete{
   case Success(result) => {
     println("Server is now listening!")
   }
-  case Failure(throwable) => {
-    println("Failed to bind!")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -91,9 +90,8 @@ server.listenFuture(0, "localhost").onComplete{
   case Success(result) => {
     println(s"Server is now listening on actual port: ${server.actualPort()}")
   }
-  case Failure(throwable) => {
-    println("Failed to bind!")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -244,9 +242,8 @@ server.closeFuture().onComplete{
   case Success(result) => {
     println("Server is now closed")
   }
-  case Failure(throwable) => {
-    println("close failed")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -361,11 +358,10 @@ var client = vertx.createNetClient(options)
 client.connectFuture(4321, "localhost").onComplete{
   case Success(result) => {
     println("Connected!")
-    var socket = res.result()
+    var socket = result
   }
-  case Failure(throwable) => {
-    println(s"Failed to connect: ${res.cause().getMessage()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----

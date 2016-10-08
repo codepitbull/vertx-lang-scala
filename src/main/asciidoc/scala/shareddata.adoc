@@ -70,11 +70,10 @@ var sd = vertx.sharedData()
 
 sd.getClusterWideMapFuture("mymap").onComplete{
   case Success(result) => {
-    var map = res.result()
+    var map = result
   }
-  case Failure(throwable) => {
-    // Something went wrong!
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 
@@ -93,9 +92,8 @@ map.putFuture("foo", "bar").onComplete{
   case Success(result) => {
     // Successfully put the value
   }
-  case Failure(throwable) => {
-    // Something went wrong!
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 
@@ -113,11 +111,10 @@ The actual get is asynchronous and the handler is notified with the result some 
 map.getFuture("foo").onComplete{
   case Success(result) => {
     // Successfully got the value
-    var val = resGet.result()
+    var val = result
   }
-  case Failure(throwable) => {
-    // Something went wrong!
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 
@@ -152,7 +149,7 @@ another caller can obtain it.
 sd.getLockFuture("mylock").onComplete{
   case Success(result) => {
     // Got the lock!
-    var lock = res.result()
+    var lock = result
 
     // 5 seconds later we release the lock so someone else can get it
 
@@ -161,9 +158,8 @@ sd.getLockFuture("mylock").onComplete{
     })
 
   }
-  case Failure(throwable) => {
-    // Something went wrong
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -176,12 +172,11 @@ with a failure:
 sd.getLockWithTimeoutFuture("mylock", 10000).onComplete{
   case Success(result) => {
     // Got the lock!
-    var lock = res.result()
+    var lock = result
 
   }
-  case Failure(throwable) => {
-    // Failed to get lock
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -198,11 +193,10 @@ You obtain an instance with `link:../../scaladoc/io/vertx/scala/core/shareddata/
 ----
 sd.getCounterFuture("mycounter").onComplete{
   case Success(result) => {
-    var counter = res.result()
+    var counter = result
   }
-  case Failure(throwable) => {
-    // Something went wrong!
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----

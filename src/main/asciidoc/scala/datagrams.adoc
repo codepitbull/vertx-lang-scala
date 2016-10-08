@@ -55,12 +55,12 @@ var buffer = Buffer.buffer("content")
 // Send a Buffer
 socket.sendFuture(buffer, 1234, "10.0.0.1").onComplete{
   case Success(result) => println("Success")
-  case Failure(throwable) => println("Failure")
+  case Failure(cause) => println("Failure")
 }
 // Send a String
 socket.sendFuture("A string used as content", 1234, "10.0.0.1").onComplete{
   case Success(result) => println("Success")
-  case Failure(throwable) => println("Failure")
+  case Failure(cause) => println("Failure")
 }
 
 ----
@@ -91,9 +91,8 @@ socket.listenFuture(1234, "0.0.0.0").onComplete{
       // Do something with the packet
     })
   }
-  case Failure(throwable) => {
-    println(s"Listen failed${asyncResult.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -126,7 +125,7 @@ var buffer = Buffer.buffer("content")
 // Send a Buffer to a multicast address
 socket.sendFuture(buffer, 1234, "230.0.0.1").onComplete{
   case Success(result) => println("Success")
-  case Failure(throwable) => println("Failure")
+  case Failure(cause) => println("Failure")
 }
 
 ----
@@ -163,12 +162,11 @@ socket.listenFuture(1234, "0.0.0.0").onComplete{
     // join the multicast group
     socket.listenMulticastGroupFuture("230.0.0.1").onComplete{
       case Success(result) => println("Success")
-      case Failure(throwable) => println("Failure")
+      case Failure(cause) => println("Failure")
     }
   }
-  case Failure(throwable) => {
-    println(s"Listen failed${asyncResult.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -199,17 +197,15 @@ socket.listenFuture(1234, "0.0.0.0").onComplete{
 
         socket.unlistenMulticastGroupFuture("230.0.0.1").onComplete{
           case Success(result) => println("Success")
-          case Failure(throwable) => println("Failure")
+          case Failure(cause) => println("Failure")
         }
       }
-      case Failure(throwable) => {
-        println(s"Listen failed${asyncResult2.cause()}")
-      }
+      case Failure(cause) => {
+        println(s"$cause")}
     }
   }
-  case Failure(throwable) => {
-    println(s"Listen failed${asyncResult.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -235,7 +231,7 @@ var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 // This would block packets which are send from 10.0.0.2
 socket.blockMulticastGroupFuture("230.0.0.1", "10.0.0.2").onComplete{
   case Success(result) => println("Success")
-  case Failure(throwable) => println("Failure")
+  case Failure(cause) => println("Failure")
 }
 
 ----

@@ -153,9 +153,8 @@ consumer.completionHandlerFuture().onComplete{
   case Success(result) => {
     println("The handler registration has reached all nodes")
   }
-  case Failure(throwable) => {
-    println("Registration failed!")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -173,9 +172,8 @@ consumer.unregisterFuture().onComplete{
   case Success(result) => {
     println("The handler un-registration has reached all nodes")
   }
-  case Failure(throwable) => {
-    println("Un-registration failed!")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -251,9 +249,9 @@ The sender:
 ----
 eventBus.sendFuture("news.uk.sport", "Yay! Someone kicked a ball across a patch of grass").onComplete{
   case Success(result) => {
-    println(s"Received reply: ${ar.result().body()}")
+    println(s"Received reply: ${result.body()}")
   }
-  case Failure(throwable) => println("Failure")
+  case Failure(cause) => println("Failure")
 }
 
 ----
@@ -307,13 +305,12 @@ import io.vertx.scala.core.Vertx
 var options = VertxOptions()
 Vertx.clusteredVertx(options, 
   case Success(result) => {
-    var vertx = res.result()
+    var vertx = result
     var eventBus = vertx.eventBus()
     println(s"We now have a clustered event bus: ${eventBus}")
   }
-  case Failure(throwable) => {
-    println(s"Failed: ${res.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 )
 
 ----
@@ -361,13 +358,12 @@ var options = VertxOptions()
 
 Vertx.clusteredVertx(options, 
   case Success(result) => {
-    var vertx = res.result()
+    var vertx = result
     var eventBus = vertx.eventBus()
     println(s"We now have a clustered event bus: ${eventBus}")
   }
-  case Failure(throwable) => {
-    println(s"Failed: ${res.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 )
 
 ----
@@ -399,13 +395,12 @@ var options = VertxOptions()
 
 Vertx.clusteredVertx(options, 
   case Success(result) => {
-    var vertx = res.result()
+    var vertx = result
     var eventBus = vertx.eventBus()
     println(s"We now have a clustered event bus: ${eventBus}")
   }
-  case Failure(throwable) => {
-    println(s"Failed: ${res.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 )
 
 ----

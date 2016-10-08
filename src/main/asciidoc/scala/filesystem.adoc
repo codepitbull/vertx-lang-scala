@@ -18,9 +18,8 @@ fs.copyFuture("foo.txt", "bar.txt").onComplete{
   case Success(result) => {
     // Copied ok!
   }
-  case Failure(throwable) => {
-    // Something went wrong
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -54,11 +53,10 @@ var vertx = Vertx.vertx()
 // Read a file
 vertx.fileSystem().readFileFuture("target/classes/readme.txt").onComplete{
   case Success(result) => {
-    println(result.result())
+    println(result)
   }
-  case Failure(throwable) => {
-    System.err.println(s"Oh oh ...${result.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 // Copy a file
@@ -66,9 +64,8 @@ vertx.fileSystem().copyFuture("target/classes/readme.txt", "target/classes/readm
   case Success(result) => {
     println("File copied")
   }
-  case Failure(throwable) => {
-    System.err.println(s"Oh oh ...${result.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 // Write a file
@@ -76,15 +73,14 @@ vertx.fileSystem().writeFileFuture("target/classes/hello.txt", Buffer.buffer("He
   case Success(result) => {
     println("File written")
   }
-  case Failure(throwable) => {
-    System.err.println(s"Oh oh ...${result.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 // Check existence and delete
 vertx.fileSystem().existsFuture("target/classes/junk.txt").onComplete{
   case Success(result) => println("Success")
-  case Failure(throwable) => println("Failure")
+  case Failure(cause) => println("Failure")
 }
 
 ----
@@ -100,11 +96,10 @@ You open an `link:../../scaladoc/io/vertx/scala/core/file/AsyncFile.html[AsyncFi
 var options = OpenOptions()
 fileSystem.openFuture("myfile.txt", options).onComplete{
   case Success(result) => {
-    var file = res.result()
+    var file = result
   }
-  case Failure(throwable) => {
-    // Something went wrong!
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -135,7 +130,7 @@ import io.vertx.scala.core.buffer.Buffer
 var vertx = Vertx.vertx()
 vertx.fileSystem().openFuture("target/classes/hello.txt", OpenOptions()).onComplete{
   case Success(result) => {
-    var file = result.result()
+    var file = result
     var buff = Buffer.buffer("foo")
     for ( i <- 0 to 5) {
       file.writeFuture(buff, buff.length() * i).onComplete{
@@ -143,16 +138,14 @@ vertx.fileSystem().openFuture("target/classes/hello.txt", OpenOptions()).onCompl
           println("Written ok!")
           // etc
         }
-        case Failure(throwable) => {
-          System.err.println(s"Failed to write: ${ar.cause()}")
-        }
+        case Failure(cause) => {
+          println(s"$cause")}
       }
     }
 
   }
-  case Failure(throwable) => {
-    System.err.println(s"Cannot open file ${result.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -180,23 +173,21 @@ import io.vertx.scala.core.buffer.Buffer
 var vertx = Vertx.vertx()
 vertx.fileSystem().openFuture("target/classes/les_miserables.txt", OpenOptions()).onComplete{
   case Success(result) => {
-    var file = result.result()
+    var file = result
     var buff = Buffer.buffer(1000)
     for ( i <- 0 to 10) {
       file.readFuture(buff, i * 100, i * 100, 100).onComplete{
         case Success(result) => {
           println("Read ok!")
         }
-        case Failure(throwable) => {
-          System.err.println(s"Failed to write: ${ar.cause()}")
-        }
+        case Failure(cause) => {
+          println(s"$cause")}
       }
     }
 
   }
-  case Failure(throwable) => {
-    System.err.println(s"Cannot open file ${result.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -238,15 +229,14 @@ var output = vertx.fileSystem().openBlocking("target/classes/plagiary.txt", Open
 
 vertx.fileSystem().openFuture("target/classes/les_miserables.txt", OpenOptions()).onComplete{
   case Success(result) => {
-    var file = result.result()
+    var file = result
     Pump.pump(file, output).start()
     file.endHandler((r: java.lang.Void) => {
       println("Copy done")
     })
   }
-  case Failure(throwable) => {
-    System.err.println(s"Cannot open file ${result.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----

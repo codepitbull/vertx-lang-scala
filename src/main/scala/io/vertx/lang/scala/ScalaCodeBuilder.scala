@@ -18,6 +18,8 @@ class ScalaCodeBuilder extends CodeBuilder {
 
   val imports = scala.collection.mutable.LinkedHashSet[ClassTypeInfo]()
 
+  var asyncResults:List[String] = List()
+
   override def newWriter(): CodeWriter = new ScalaCodeWriter(this)
 
 
@@ -47,6 +49,7 @@ class ScalaCodeBuilder extends CodeBuilder {
   override def asyncResultHandler(bodyKind: BodyKind, parameterizedTypeInfo: ParameterizedTypeInfo, s: String, codeModel: CodeModel, codeModel1: CodeModel, codeModel2: CodeModel): ExpressionModel = {
     new ExpressionModel(this) {
       override def render(writer: CodeWriter) {
+        asyncResults = s :: asyncResults
         writer.append("\n")
         writer.indent()
         writer.append(s"case Success(result) => ")
@@ -63,11 +66,12 @@ class ScalaCodeBuilder extends CodeBuilder {
           writer.unindent()
         }
 
-        writer.append(s"case Failure(throwable) => ")
+        writer.append(s"case Failure(cause) => ")
         writer.indent()
         if(codeModel2 != null) {
           writer.append("{\n")
-          codeModel2.render(writer)
+          writer.append("println(s\"$cause\")")
+//          codeModel2.render(writer)
           writer.unindent()
           writer.append("}\n")
         }
@@ -153,7 +157,8 @@ class ScalaCodeBuilder extends CodeBuilder {
       writer.append("}\n")
     }
     unit.getMain.render(writer)
-    return writer.getBuffer.toString
+
+    asyncResults.foldLeft(writer.getBuffer.toString)((ret, ar) => ret.replace(s"${ar}.result()", "result"))
   }
 
 

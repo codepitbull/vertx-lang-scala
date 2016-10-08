@@ -29,11 +29,10 @@ To lookup the A / AAAA record for "vertx.io" you would typically use it like:
 var client = vertx.createDnsClient(53, "10.0.0.1")
 client.lookupFuture("vertx.io").onComplete{
   case Success(result) => {
-    println(ar.result())
+    println(result)
   }
-  case Failure(throwable) => {
-    println(s"Failed to resolve entry${ar.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -50,11 +49,10 @@ To lookup the A record for "vertx.io" you would typically use it like:
 var client = vertx.createDnsClient(53, "10.0.0.1")
 client.lookup4Future("vertx.io").onComplete{
   case Success(result) => {
-    println(ar.result())
+    println(result)
   }
-  case Failure(throwable) => {
-    println(s"Failed to resolve entry${ar.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -71,11 +69,10 @@ To lookup the A record for "vertx.io" you would typically use it like:
 var client = vertx.createDnsClient(53, "10.0.0.1")
 client.lookup6Future("vertx.io").onComplete{
   case Success(result) => {
-    println(ar.result())
+    println(result)
   }
-  case Failure(throwable) => {
-    println(s"Failed to resolve entry${ar.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -92,15 +89,14 @@ To lookup all the A records for "vertx.io" you would typically do:
 var client = vertx.createDnsClient(53, "10.0.0.1")
 client.resolveAFuture("vertx.io").onComplete{
   case Success(result) => {
-    var records = ar.result()
+    var records = result
     renderEnhancedForLoop - 
     println(record)
     renderEnhancedForLoop - 
 
   }
-  case Failure(throwable) => {
-    println(s"Failed to resolve entry${ar.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -117,15 +113,14 @@ To lookup all the AAAAA records for "vertx.io" you would typically do:
 var client = vertx.createDnsClient(53, "10.0.0.1")
 client.resolveAAAAFuture("vertx.io").onComplete{
   case Success(result) => {
-    var records = ar.result()
+    var records = result
     renderEnhancedForLoop - 
     println(record)
     renderEnhancedForLoop - 
 
   }
-  case Failure(throwable) => {
-    println(s"Failed to resolve entry${ar.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -142,15 +137,14 @@ To lookup all the CNAME records for "vertx.io" you would typically do:
 var client = vertx.createDnsClient(53, "10.0.0.1")
 client.resolveCNAMEFuture("vertx.io").onComplete{
   case Success(result) => {
-    var records = ar.result()
+    var records = result
     renderEnhancedForLoop - 
     println(record)
     renderEnhancedForLoop - 
 
   }
-  case Failure(throwable) => {
-    println(s"Failed to resolve entry${ar.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -167,15 +161,14 @@ To lookup all the MX records for "vertx.io" you would typically do:
 var client = vertx.createDnsClient(53, "10.0.0.1")
 client.resolveMXFuture("vertx.io").onComplete{
   case Success(result) => {
-    var records = ar.result()
+    var records = result
     renderEnhancedForLoop - 
     println(record)
     renderEnhancedForLoop - 
 
   }
-  case Failure(throwable) => {
-    println(s"Failed to resolve entry${ar.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -203,15 +196,14 @@ To resolve all the TXT records for "vertx.io" you could use something along thes
 var client = vertx.createDnsClient(53, "10.0.0.1")
 client.resolveTXTFuture("vertx.io").onComplete{
   case Success(result) => {
-    var records = ar.result()
+    var records = result
     renderEnhancedForLoop - 
     println(record)
     renderEnhancedForLoop - 
 
   }
-  case Failure(throwable) => {
-    println(s"Failed to resolve entry${ar.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -228,15 +220,14 @@ To resolve all the NS records for "vertx.io" you could use something along these
 var client = vertx.createDnsClient(53, "10.0.0.1")
 client.resolveNSFuture("vertx.io").onComplete{
   case Success(result) => {
-    var records = ar.result()
+    var records = result
     renderEnhancedForLoop - 
     println(record)
     renderEnhancedForLoop - 
 
   }
-  case Failure(throwable) => {
-    println(s"Failed to resolve entry${ar.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -253,15 +244,14 @@ To lookup all the SRV records for "vertx.io" you would typically do:
 var client = vertx.createDnsClient(53, "10.0.0.1")
 client.resolveSRVFuture("vertx.io").onComplete{
   case Success(result) => {
-    var records = ar.result()
+    var records = result
     renderEnhancedForLoop - 
     println(record)
     renderEnhancedForLoop - 
 
   }
-  case Failure(throwable) => {
-    println(s"Failed to resolve entry${ar.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -296,12 +286,11 @@ To resolve the PTR record for the ipaddress 10.0.0.1 you would use the PTR notio
 var client = vertx.createDnsClient(53, "10.0.0.1")
 client.resolvePTRFuture("1.0.0.10.in-addr.arpa").onComplete{
   case Success(result) => {
-    var record = ar.result()
+    var record = result
     println(record)
   }
-  case Failure(throwable) => {
-    println(s"Failed to resolve entry${ar.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -318,12 +307,11 @@ To do a reverse lookup for the ipaddress 10.0.0.1 do something similar like this
 var client = vertx.createDnsClient(53, "10.0.0.1")
 client.reverseLookupFuture("10.0.0.1").onComplete{
   case Success(result) => {
-    var record = ar.result()
+    var record = result
     println(record)
   }
-  case Failure(throwable) => {
-    println(s"Failed to resolve entry${ar.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----

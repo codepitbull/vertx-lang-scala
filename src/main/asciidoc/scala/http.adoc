@@ -134,9 +134,8 @@ server.listenFuture(8080, "myhost.com").onComplete{
   case Success(result) => {
     println("Server is now listening!")
   }
-  case Failure(throwable) => {
-    println("Failed to bind!")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -833,14 +832,13 @@ response.pushFuture(HttpMethod.GET, "/main.js").onComplete{
   case Success(result) => {
 
     // The server is ready to push the response
-    var pushedResponse = ar.result()
+    var pushedResponse = result
 
     // Send main.js response
     pushedResponse.putHeader("content-type", "application/json").end("alert(\"Push response hello\")")
   }
-  case Failure(throwable) => {
-    println(s"Could not push client resource ${ar.cause()}")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 // Send the requested resource
@@ -1865,7 +1863,7 @@ connection.updateSettingsFuture(Http2Settings()
   case Success(result) => {
     println("The settings update has been acknowledged ")
   }
-  case Failure(throwable) => println("Failure")
+  case Failure(cause) => println("Failure")
 }
 
 ----
@@ -1899,7 +1897,7 @@ for ( i <- 0 to 8) {
 
 connection.pingFuture(data).onComplete{
   case Success(result) => println("Success")
-  case Failure(throwable) => println("Failure")
+  case Failure(cause) => println("Failure")
 }
 
 ----

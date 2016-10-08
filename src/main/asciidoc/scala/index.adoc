@@ -289,7 +289,7 @@ vertx.executeBlockingFuture((future: io.vertx.scala.core.Future<java.lang.Object
   future.complete(result)
 }).onComplete{
   case Success(result) => println("Success")
-  case Failure(throwable) => println("Failure")
+  case Failure(cause) => println("Failure")
 }
 
 ----
@@ -319,7 +319,7 @@ executor.executeBlockingFuture((future: io.vertx.scala.core.Future<java.lang.Obj
   future.complete(result)
 }).onComplete{
   case Success(result) => println("Success")
-  case Failure(throwable) => println("Failure")
+  case Failure(cause) => println("Failure")
 }
 
 ----
@@ -380,9 +380,8 @@ CompositeFuture.all(httpServerFuture, netServerFuture).setHandlerFuture().onComp
   case Success(result) => {
     // All servers started
   }
-  case Failure(throwable) => {
-    // At least one server failed
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -413,9 +412,8 @@ CompositeFuture.any(future1, future2).setHandlerFuture().onComplete{
   case Success(result) => {
     // At least one is succeeded
   }
-  case Failure(throwable) => {
-    // All failed
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -441,9 +439,8 @@ CompositeFuture.join(future1, future2, future3).setHandlerFuture().onComplete{
   case Success(result) => {
     // All succeeded
   }
-  case Failure(throwable) => {
-    // All completed and at least one failed
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -667,11 +664,10 @@ If you want to be notified when deployment is complete you can deploy specifying
 ----
 vertx.deployVerticleFuture("com.mycompany.MyOrderProcessorVerticle").onComplete{
   case Success(result) => {
-    println(s"Deployment id is: ${res.result()}")
+    println(s"Deployment id is: ${result}")
   }
-  case Failure(throwable) => {
-    println("Deployment failed!")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
@@ -692,9 +688,8 @@ vertx.undeployFuture(deploymentID).onComplete{
   case Success(result) => {
     println("Undeployed ok")
   }
-  case Failure(throwable) => {
-    println("Undeploy failed!")
-  }
+  case Failure(cause) => {
+    println(s"$cause")}
 }
 
 ----
