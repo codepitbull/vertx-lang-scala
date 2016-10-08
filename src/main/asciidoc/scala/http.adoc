@@ -27,6 +27,8 @@ instance when creating it:
 ----
 
 var options = HttpServerOptions()
+  .setMaxWebsocketFrameSize(1000000)
+
 
 var server = vertx.createHttpServer(options)
 
@@ -45,6 +47,12 @@ To handle `h2` requests, TLS must be enabled along with `link:../dataobjects.htm
 [source,scala]
 ----
 var options = HttpServerOptions()
+  .setUseAlpn(true)
+  .setSsl(true)
+  .setKeyStoreOptions(JksOptions()
+    .setPath("/path/to/my/keystore")
+  )
+
 
 var server = vertx.createHttpServer(options)
 
@@ -76,6 +84,8 @@ For debugging purposes, network activity can be logged.
 ----
 
 var options = HttpServerOptions()
+  .setLogActivity(true)
+
 
 var server = vertx.createHttpServer(options)
 
@@ -120,15 +130,14 @@ For example:
 ----
 
 var server = vertx.createHttpServer()
-server.listen(8080, "myhost.com", .onComplete {
-    case Success(result) => {
-      println("Server is now listening!")
-    }
-    case Failure(throwable) => {
-      println("Failed to bind!")
-    }
+server.onComplete{
+  case Success(result) => {
+    println("Server is now listening!")
   }
-)
+  case Failure(throwable) => {
+    println("Failed to bind!")
+  }
+}
 
 ----
 
@@ -799,7 +808,7 @@ The request handler are notified of stream reset events with the `link:../../sca
 ----
 
 request.response().exceptionHandler((err: java.lang.Throwable) => {
-  if (renderInstanceOf) {
+  if (err.isInstanceOf[StreamResetException]) {
     var reset = err
     println(s"Stream reset ${reset.getCode()}")
   }
@@ -820,20 +829,19 @@ import io.vertx.core.http.HttpMethod
 var response = request.response()
 
 // Push main.js to the client
-response.push(HttpMethod.GET, "/main.js", .onComplete {
-    case Success(result) => {
+response.onComplete{
+  case Success(result) => {
 
-      // The server is ready to push the response
-      var pushedResponse = ar.result()
+    // The server is ready to push the response
+    var pushedResponse = ar.result()
 
-      // Send main.js response
-      pushedResponse.putHeader("content-type", "application/json").end("alert(\"Push response hello\")")
-    }
-    case Failure(throwable) => {
-      println(s"Could not push client resource ${ar.cause()}")
-    }
+    // Send main.js response
+    pushedResponse.putHeader("content-type", "application/json").end("alert(\"Push response hello\")")
   }
-)
+  case Failure(throwable) => {
+    println(s"Could not push client resource ${ar.cause()}")
+  }
+}
 
 // Send the requested resource
 response.sendFile("<html><head><script src=\"/main.js\"></script></head><body></body></html>")
@@ -885,6 +893,8 @@ If you want to configure options for the client, you create it as follows:
 [source,scala]
 ----
 var options = HttpClientOptions()
+  .setKeepAlive(false)
+
 var client = vertx.createHttpClient(options)
 
 ----
@@ -901,6 +911,11 @@ For `h2` requests, TLS must be enabled with _Application-Layer Protocol Negotiat
 import io.vertx.core.http.HttpVersion
 
 var options = HttpClientOptions()
+  .setProtocolVersion("HTTP_2")
+  .setSsl(true)
+  .setUseAlpn(true)
+  .setTrustAll(true)
+
 
 var client = vertx.createHttpClient(options)
 
@@ -913,6 +928,8 @@ For `h2c` requests, TLS must be disabled, the client will do an HTTP/1.1 request
 import io.vertx.core.http.HttpVersion
 
 var options = HttpClientOptions()
+  .setProtocolVersion("HTTP_2")
+
 
 var client = vertx.createHttpClient(options)
 
@@ -937,6 +954,8 @@ For debugging purposes, network activity can be logged.
 [source,scala]
 ----
 var options = HttpClientOptions()
+  .setLogActivity(true)
+
 var client = vertx.createHttpClient(options)
 
 ----
@@ -955,6 +974,8 @@ every time you make a request you can configure the client with a default host/p
 ----
 // Set the default host
 var options = HttpClientOptions()
+  .setDefaultHost("wibble.com")
+
 // Can also set default port if you want...
 var client = vertx.createHttpClient(options)
 client.getNow("/some-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
@@ -1363,7 +1384,7 @@ The request handler are notified of stream reset events with the `link:../../sca
 ----
 
 request.exceptionHandler((err: java.lang.Throwable) => {
-  if (renderInstanceOf) {
+  if (err.isInstanceOf[StreamResetException]) {
     var reset = err
     println(s"Stream reset ${reset.getCode()}")
   }
@@ -1741,6 +1762,9 @@ can be used.
 ----
 
 var clientOptions = HttpClientOptions()
+  .setHttp2MultiplexingLimit(10)
+  .setHttp2MaxPoolSize(3)
+
 
 // Uses up to 3 connections and up to 10 streams per connection
 var client = vertx.createHttpClient(clientOptions)
@@ -1824,7 +1848,9 @@ The settings can be changed at any time after the connection is established:
 
 [source,scala]
 ----
-connection.updateSettings(Http2Settings())
+connection.updateSettings(Http2Settings()
+  .setMaxConcurrentStreams(100)
+)
 
 ----
 
@@ -1833,13 +1859,12 @@ to be notified of the acknowledgment:
 
 [source,scala]
 ----
-connection.updateSettings(Http2Settings(), .onComplete {
-    case Success(result) => {
-      println("The settings update has been acknowledged ")
-    }
-    case Failure(throwable) => println("Failure")
+connection.onComplete{
+  case Success(result) => {
+    println("The settings update has been acknowledged ")
   }
-)
+  case Failure(throwable) => println("Failure")
+}
 
 ----
 
@@ -1870,11 +1895,10 @@ for ( i <- 0 to 8) {
   data.appendByte(i)
 }
 
-connection.ping(data, .onComplete {
-    case Success(result) => println("Success")
-    case Failure(throwable) => println("Failure")
-  }
-)
+connection.onComplete{
+  case Success(result) => println("Success")
+  case Failure(throwable) => println("Failure")
+}
 
 ----
 
@@ -2244,6 +2268,14 @@ Here's an example of using an HTTP proxy:
 import io.vertx.core.net.ProxyType
 
 var options = HttpClientOptions()
+  .setProxyOptions(ProxyOptions()
+    .setType("HTTP")
+    .setHost("localhost")
+    .setPort(3128)
+    .setUsername("username")
+    .setPassword("secret")
+  )
+
 var client = vertx.createHttpClient(options)
 
 
@@ -2262,6 +2294,14 @@ For a SOCKS5 proxy:
 import io.vertx.core.net.ProxyType
 
 var options = HttpClientOptions()
+  .setProxyOptions(ProxyOptions()
+    .setType("SOCKS5")
+    .setHost("localhost")
+    .setPort(1080)
+    .setUsername("username")
+    .setPassword("secret")
+  )
+
 var client = vertx.createHttpClient(options)
 
 

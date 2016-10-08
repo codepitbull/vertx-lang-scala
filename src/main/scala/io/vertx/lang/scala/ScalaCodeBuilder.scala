@@ -7,11 +7,7 @@ import io.vertx.codegen.`type`.EnumTypeInfo
 import io.vertx.codegen.`type`.ParameterizedTypeInfo
 import io.vertx.codegen.`type`.TypeInfo
 import io.vertx.codetrans._
-import io.vertx.codetrans.expression.ApiTypeModel
-import io.vertx.codetrans.expression.EnumExpressionModel
-import io.vertx.codetrans.expression.ExpressionModel
-import io.vertx.codetrans.expression.LambdaExpressionModel
-import io.vertx.codetrans.expression.VariableScope
+import io.vertx.codetrans.expression._
 import io.vertx.codetrans.statement.StatementModel
 import java.util.Collections
 import java.util.function.Consumer
@@ -51,8 +47,7 @@ class ScalaCodeBuilder extends CodeBuilder {
   override def asyncResultHandler(bodyKind: BodyKind, parameterizedTypeInfo: ParameterizedTypeInfo, s: String, codeModel: CodeModel, codeModel1: CodeModel, codeModel2: CodeModel): ExpressionModel = {
     new ExpressionModel(this) {
       override def render(writer: CodeWriter) {
-        writer.indent()
-        writer.append(".onComplete {\n")
+        writer.append("\n")
         writer.indent()
         writer.append(s"case Success(result) => ")
         writer.indent()
@@ -81,8 +76,6 @@ class ScalaCodeBuilder extends CodeBuilder {
           writer.unindent()
         }
         writer.unindent()
-        writer.append("}\n")
-        writer.unindent()
       }
     }
   }
@@ -90,9 +83,9 @@ class ScalaCodeBuilder extends CodeBuilder {
   override def enhancedForLoop(variableName: String, expression: ExpressionModel, body: StatementModel): StatementModel = {
     new StatementModel() {
       override def render(renderer: CodeWriter): Unit = {
-        renderer.append("enhancedForLoop - \n")
+        renderer.append("renderEnhancedForLoop - \n")
         body.render(renderer)
-        renderer.append("enhancedForLoop - \n")
+        renderer.append("renderEnhancedForLoop - \n")
       }
     }
   }
@@ -101,9 +94,9 @@ class ScalaCodeBuilder extends CodeBuilder {
   override def forLoop(initializer: StatementModel, condition: ExpressionModel, update: ExpressionModel, body: StatementModel): StatementModel = {
     new StatementModel() {
       override def render(renderer: CodeWriter): Unit = {
-        renderer.append("forLoop - \n")
+        renderer.append("renderForLoop - \n")
         body.render(renderer)
-        renderer.append("forLoop - \n")
+        renderer.append("renderForLoop - \n")
       }
     }
   }
@@ -124,6 +117,10 @@ class ScalaCodeBuilder extends CodeBuilder {
     }
   }
 
+
+  override def api(expr: ExpressionModel): ApiModel = {
+    new ScalaApiTypeModel(this, expr)
+  }
 
   override def render(unit: RunnableCompilationUnit): String = {
     val writer: CodeWriter = newWriter

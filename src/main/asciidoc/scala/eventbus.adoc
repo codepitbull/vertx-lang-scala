@@ -149,15 +149,14 @@ on the +MessageConsumer+ object.
 
 [source,scala]
 ----
-consumer.completionHandler(.onComplete {
-    case Success(result) => {
-      println("The handler registration has reached all nodes")
-    }
-    case Failure(throwable) => {
-      println("Registration failed!")
-    }
+consumer.onComplete{
+  case Success(result) => {
+    println("The handler registration has reached all nodes")
   }
-)
+  case Failure(throwable) => {
+    println("Registration failed!")
+  }
+}
 
 ----
 
@@ -170,15 +169,14 @@ be notified when this is complete use `link:../../scaladoc/io/vertx/scala/core/e
 
 [source,scala]
 ----
-consumer.unregister(.onComplete {
-    case Success(result) => {
-      println("The handler un-registration has reached all nodes")
-    }
-    case Failure(throwable) => {
-      println("Un-registration failed!")
-    }
+consumer.onComplete{
+  case Success(result) => {
+    println("The handler un-registration has reached all nodes")
   }
-)
+  case Failure(throwable) => {
+    println("Un-registration failed!")
+  }
+}
 
 ----
 
@@ -251,13 +249,12 @@ The sender:
 
 [source,scala]
 ----
-eventBus.send("news.uk.sport", "Yay! Someone kicked a ball across a patch of grass", .onComplete {
-    case Success(result) => {
-      println(s"Received reply: ${ar.result().body()}")
-    }
-    case Failure(throwable) => println("Failure")
+eventBus.onComplete{
+  case Success(result) => {
+    println(s"Received reply: ${ar.result().body()}")
   }
-)
+  case Failure(throwable) => println("Failure")
+}
 
 ----
 
@@ -308,15 +305,14 @@ instance as clustered;
 ----
 import io.vertx.scala.core.Vertx
 var options = VertxOptions()
-Vertx.clusteredVertx(options, .onComplete {
-    case Success(result) => {
-      var vertx = res.result()
-      var eventBus = vertx.eventBus()
-      println(s"We now have a clustered event bus: ${eventBus}")
-    }
-    case Failure(throwable) => {
-      println(s"Failed: ${res.cause()}")
-    }
+Vertx.clusteredVertx(options, 
+  case Success(result) => {
+    var vertx = res.result()
+    var eventBus = vertx.eventBus()
+    println(s"We now have a clustered event bus: ${eventBus}")
+  }
+  case Failure(throwable) => {
+    println(s"Failed: ${res.cause()}")
   }
 )
 
@@ -349,16 +345,28 @@ the event bus acts as a server and client, the configuration is close to
 import io.vertx.core.http.ClientAuth
 import io.vertx.scala.core.Vertx
 var options = VertxOptions()
+  .setEventBusOptions(EventBusOptions()
+    .setSsl(true)
+    .setKeyStoreOptions(JksOptions()
+      .setPath("keystore.jks")
+      .setPassword("wibble")
+    )
+    .setTrustStoreOptions(JksOptions()
+      .setPath("keystore.jks")
+      .setPassword("wibble")
+    )
+    .setClientAuth("REQUIRED")
+  )
 
-Vertx.clusteredVertx(options, .onComplete {
-    case Success(result) => {
-      var vertx = res.result()
-      var eventBus = vertx.eventBus()
-      println(s"We now have a clustered event bus: ${eventBus}")
-    }
-    case Failure(throwable) => {
-      println(s"Failed: ${res.cause()}")
-    }
+
+Vertx.clusteredVertx(options, 
+  case Success(result) => {
+    var vertx = res.result()
+    var eventBus = vertx.eventBus()
+    println(s"We now have a clustered event bus: ${eventBus}")
+  }
+  case Failure(throwable) => {
+    println(s"Failed: ${res.cause()}")
   }
 )
 
@@ -383,16 +391,20 @@ When used in containers, you can also configure the public host and port:
 ----
 import io.vertx.scala.core.Vertx
 var options = VertxOptions()
+  .setEventBusOptions(EventBusOptions()
+    .setClusterPublicHost("whatever")
+    .setClusterPublicPort(1234)
+  )
 
-Vertx.clusteredVertx(options, .onComplete {
-    case Success(result) => {
-      var vertx = res.result()
-      var eventBus = vertx.eventBus()
-      println(s"We now have a clustered event bus: ${eventBus}")
-    }
-    case Failure(throwable) => {
-      println(s"Failed: ${res.cause()}")
-    }
+
+Vertx.clusteredVertx(options, 
+  case Success(result) => {
+    var vertx = res.result()
+    var eventBus = vertx.eventBus()
+    println(s"We now have a clustered event bus: ${eventBus}")
+  }
+  case Failure(throwable) => {
+    println(s"Failed: ${res.cause()}")
   }
 )
 

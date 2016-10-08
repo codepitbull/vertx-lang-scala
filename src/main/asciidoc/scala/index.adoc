@@ -69,7 +69,9 @@ When creating a Vertx object you can also specify options if the defaults aren't
 [source,scala]
 ----
 import io.vertx.scala.core.Vertx
-var vertx = Vertx.vertx(VertxOptions())
+var vertx = Vertx.vertx(VertxOptions()
+  .setWorkerPoolSize(40)
+)
 
 ----
 
@@ -281,15 +283,10 @@ result handler to be called back asynchronous when the blocking code has been ex
 [source,scala]
 ----
 val var someAPI = examples.CoreExamples.BlockingAPI()
-vertx.executeBlocking((future: io.vertx.scala.core.Future<java.lang.Object>) => {
-  // Call some blocking API that takes a significant amount of time to return
-  var result = someAPI.blockingMethod("hello")
-  future.complete(result)
-}, .onComplete {
-    case Success(result) => println("Success")
-    case Failure(throwable) => println("Failure")
-  }
-)
+vertx.onComplete{
+  case Success(result) => println("Success")
+  case Failure(throwable) => println("Failure")
+}
 
 ----
 
@@ -312,15 +309,10 @@ Additional pools can be created for different purposes:
 ----
 val var someAPI = examples.CoreExamples.BlockingAPI()
 var executor = vertx.createSharedWorkerExecutor("my-worker-pool")
-executor.executeBlocking((future: io.vertx.scala.core.Future<java.lang.Object>) => {
-  // Call some blocking API that takes a significant amount of time to return
-  var result = someAPI.blockingMethod("hello")
-  future.complete(result)
-}, .onComplete {
-    case Success(result) => println("Success")
-    case Failure(throwable) => println("Failure")
-  }
-)
+executor.onComplete{
+  case Success(result) => println("Success")
+  case Failure(throwable) => println("Failure")
+}
 
 ----
 
@@ -371,20 +363,19 @@ _succeeded_ when all the futures are and _failed_ when at least one of the futur
 import io.vertx.scala.core.Future
 import io.vertx.scala.core.CompositeFuture
 var httpServerFuture = Future.future()
-httpServer.listen(httpServerFuture.completer())
+httpServer.onComplete{httpServerFuture.completer()}
 
 var netServerFuture = Future.future()
-netServer.listen(netServerFuture.completer())
+netServer.onComplete{netServerFuture.completer()}
 
-CompositeFuture.all(httpServerFuture, netServerFuture).setHandler(.onComplete {
-    case Success(result) => {
-      // All servers started
-    }
-    case Failure(throwable) => {
-      // At least one server failed
-    }
+CompositeFuture.all(httpServerFuture, netServerFuture).onComplete{
+  case Success(result) => {
+    // All servers started
   }
-)
+  case Failure(throwable) => {
+    // At least one server failed
+  }
+}
 
 ----
 
@@ -410,15 +401,14 @@ all the futures are failed:
 [source,scala]
 ----
 import io.vertx.scala.core.CompositeFuture
-CompositeFuture.any(future1, future2).setHandler(.onComplete {
-    case Success(result) => {
-      // At least one is succeeded
-    }
-    case Failure(throwable) => {
-      // All failed
-    }
+CompositeFuture.any(future1, future2).onComplete{
+  case Success(result) => {
+    // At least one is succeeded
   }
-)
+  case Failure(throwable) => {
+    // All failed
+  }
+}
 
 ----
 
@@ -439,15 +429,14 @@ them is failed:
 [source,scala]
 ----
 import io.vertx.scala.core.CompositeFuture
-CompositeFuture.join(future1, future2, future3).setHandler(.onComplete {
-    case Success(result) => {
-      // All succeeded
-    }
-    case Failure(throwable) => {
-      // All completed and at least one failed
-    }
+CompositeFuture.join(future1, future2, future3).onComplete{
+  case Success(result) => {
+    // All succeeded
   }
-)
+  case Failure(throwable) => {
+    // All completed and at least one failed
+  }
+}
 
 ----
 
@@ -474,16 +463,16 @@ var fs = vertx.fileSystem()
 var startFuture = Future.future()
 
 var fut1 = Future.future()
-fs.createFile("/foo", fut1.completer())
+fs.onComplete{fut1.completer()}
 
 fut1.compose((v: java.lang.Void) => {
   // When the file is created (fut1), execute this:
   var fut2 = Future.future()
-  fs.writeFile("/foo", Buffer.buffer(), fut2.completer())
+  fs.onComplete{fut2.completer()}
   return fut2
 }).compose((v: java.lang.Void) => {
   // When the file is written (fut2), execute this:
-  fs.move("/foo", "/bar", startFuture.completer())
+  fs.onComplete{startFuture.completer()}
 }, startFuture)
 
 ----
@@ -574,6 +563,8 @@ If you want to deploy a verticle as a worker verticle you do that with `link:../
 [source,scala]
 ----
 var options = DeploymentOptions()
+  .setWorker(true)
+
 vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", options)
 
 ----
@@ -666,15 +657,14 @@ If you want to be notified when deployment is complete you can deploy specifying
 
 [source,scala]
 ----
-vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", .onComplete {
-    case Success(result) => {
-      println(s"Deployment id is: ${res.result()}")
-    }
-    case Failure(throwable) => {
-      println("Deployment failed!")
-    }
+vertx.onComplete{
+  case Success(result) => {
+    println(s"Deployment id is: ${res.result()}")
   }
-)
+  case Failure(throwable) => {
+    println("Deployment failed!")
+  }
+}
 
 ----
 
@@ -690,15 +680,14 @@ Un-deployment is itself asynchronous so if you want to be notified when un-deplo
 
 [source,scala]
 ----
-vertx.undeploy(deploymentID, .onComplete {
-    case Success(result) => {
-      println("Undeployed ok")
-    }
-    case Failure(throwable) => {
-      println("Undeploy failed!")
-    }
+vertx.onComplete{
+  case Success(result) => {
+    println("Undeployed ok")
   }
-)
+  case Failure(throwable) => {
+    println("Undeploy failed!")
+  }
+}
 
 ----
 
@@ -710,6 +699,8 @@ want to deploy:
 [source,scala]
 ----
 var options = DeploymentOptions()
+  .setInstances(16)
+
 vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", options)
 
 ----
@@ -750,7 +741,9 @@ Here's an example of using an isolation group to isolate a verticle deployment.
 [source,scala]
 ----
 var options = DeploymentOptions()
-options.put(isolatedClasses, List("com.mycompany.myverticle.*", "com.mycompany.somepkg.SomeClass", "org.somelibrary.*"))
+  .setIsolationGroup("mygroup")
+
+options.setIsolatedClasses(List("com.mycompany.myverticle.*", "com.mycompany.somepkg.SomeClass", "org.somelibrary.*"))
 vertx.deployVerticle("com.mycompany.myverticle.VerticleClass", options)
 
 ----
@@ -958,7 +951,9 @@ A different worker pool can be specified in deployment options:
 
 [source,scala]
 ----
-vertx.deployVerticle("the-verticle", DeploymentOptions())
+vertx.deployVerticle("the-verticle", DeploymentOptions()
+  .setWorkerPoolName("the-specific-pool")
+)
 
 ----
 
@@ -1448,7 +1443,11 @@ DNS servers can be also configured when creating a `link:../../scaladoc/io/vertx
 [source,scala]
 ----
 import io.vertx.scala.core.Vertx
-var vertx = Vertx.vertx(VertxOptions())
+var vertx = Vertx.vertx(VertxOptions()
+  .setAddressResolverOptions(AddressResolverOptions()
+    .setServers(Set("192.168.0.1", "192.168.0.2:40000"))
+  )
+)
 
 ----
 
@@ -1460,7 +1459,11 @@ The resolver can be configured to use an alternative _hosts_ file:
 [source,scala]
 ----
 import io.vertx.scala.core.Vertx
-var vertx = Vertx.vertx(VertxOptions())
+var vertx = Vertx.vertx(VertxOptions()
+  .setAddressResolverOptions(AddressResolverOptions()
+    .setHostsPath("/path/to/hosts")
+  )
+)
 
 ----
 
@@ -1470,7 +1473,11 @@ list can be provided:
 [source,scala]
 ----
 import io.vertx.scala.core.Vertx
-var vertx = Vertx.vertx(VertxOptions())
+var vertx = Vertx.vertx(VertxOptions()
+  .setAddressResolverOptions(AddressResolverOptions()
+    .setSearchDomains(Set("foo.com", "bar.com"))
+  )
+)
 
 ----
 

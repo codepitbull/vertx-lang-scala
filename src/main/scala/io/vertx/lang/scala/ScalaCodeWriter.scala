@@ -7,9 +7,9 @@ import javax.lang.model.element.TypeElement
 import com.sun.source.tree.LambdaExpressionTree
 import com.sun.source.tree.LambdaExpressionTree.BodyKind
 import io.vertx.codegen.`type`.{ApiTypeInfo, ClassTypeInfo, EnumTypeInfo, TypeInfo}
-import io.vertx.codetrans.{CodeModel, CodeWriter}
-import io.vertx.codetrans.expression.{DataObjectLiteralModel, ExpressionModel, JsonArrayLiteralModel, JsonObjectLiteralModel}
-import io.vertx.codetrans.statement.StatementModel
+import io.vertx.codetrans.{BlockModel, CodeModel, CodeWriter, MethodSignature}
+import io.vertx.codetrans.expression._
+import io.vertx.codetrans.statement.{ConditionalBlockModel, StatementModel}
 
 import collection.JavaConversions._
 
@@ -93,7 +93,7 @@ class ScalaCodeWriter(builder: ScalaCodeBuilder) extends CodeWriter(builder){
     append(name)
   }
 
-  override def renderDataObjectMemberSelect(expression: ExpressionModel, name: String): Unit = renderJsonObjectMemberSelect(expression, name)
+  override def renderDataObjectMemberSelect(expression: ExpressionModel, name: String): Unit = append("renderDataObjectMemberSelect")
 
   override def renderEnumConstant(`type`: EnumTypeInfo, constant: String): Unit = append(`type`.getSimpleName()).append('.').append(constant)
 
@@ -186,7 +186,30 @@ class ScalaCodeWriter(builder: ScalaCodeBuilder) extends CodeWriter(builder){
 
   override def renderDataObject(model: DataObjectLiteralModel): Unit = {
     append(s"${model.getType.getSimpleName()}()")
-
+    if(model.getMembers.size > 0) {
+      append("\n")
+      indent()
+    }
+    model.getMembers.foreach(member => {
+      append(s".set${member.getName.capitalize}(")
+      if (member.isInstanceOf[Member.Single]) member.asInstanceOf[Member.Single].getValue.render(this)
+      else if (member.isInstanceOf[Member.Sequence]) {
+        append("Set(")
+        member.asInstanceOf[Member.Sequence].getValues.zipWithIndex.foreach{
+          case (v, i) => {
+            if(i > 0)
+              append(", ")
+            v.render(this)
+          }
+        }
+        append(")")
+      }
+      else if (member.isInstanceOf[Member.Entries]) append("renderDataObject-entries")
+      append(s")\n")
+    })
+    if(model.getMembers.size > 0) {
+      unindent()
+    }
   }
 
   override def renderListAdd(list: ExpressionModel, value: ExpressionModel): Unit = {
@@ -208,7 +231,101 @@ class ScalaCodeWriter(builder: ScalaCodeBuilder) extends CodeWriter(builder){
 
   override def renderAsyncResultSucceeded(resultType: TypeInfo, name: String): Unit = append("renderAsyncResultSucceeded")
 
-  override def renderDataObjectAssign(expression: ExpressionModel, name: String, value: ExpressionModel): Unit = renderJsonObjectAssign(expression, name, value)
+  override def renderDataObjectAssign(expression: ExpressionModel, name: String, value: ExpressionModel): Unit = {
+    expression.render(this)
+    append(s".set${name.capitalize}(")
+    value.render(this)
+    append(")")
+  }
 
-  override def renderInstanceOf(expression: ExpressionModel, `type`: TypeElement): Unit = append("renderInstanceOf")
+  override def renderInstanceOf(expression: ExpressionModel, `type`: TypeElement): Unit = {
+    expression.render(this)
+    append(".isInstanceOf[")
+    append(`type`.getSimpleName)
+    append("]")
+  }
+
+  override def renderPrefixDecrement(expression: ExpressionModel): Unit = renderPostfixDecrement(expression)
+
+  override def renderPrefixIncrement(expression: ExpressionModel, writer: CodeWriter): Unit = renderPostfixDecrement(expression)
+
+  override def renderPostfixIncrement(expression: ExpressionModel): Unit = {
+    expression.render(this)
+    append(" += 1")
+  }
+
+  override def renderPostfixDecrement(expression: ExpressionModel): Unit = {
+    expression.render(this)
+    append(" -= 1")
+  }
+
+  override def renderJsonArrayGet(expression: ExpressionModel, index: ExpressionModel): Unit = super.renderJsonArrayGet(expression, index)
+
+  override def renderFragment(fragment: String): Unit = super.renderFragment(fragment)
+
+  override def renderConditionalExpression(condition: ExpressionModel, trueExpression: ExpressionModel, falseExpression: ExpressionModel): Unit = super.renderConditionalExpression(condition, trueExpression, falseExpression)
+
+  override def renderBooleanLiteral(value: String): Unit = super.renderBooleanLiteral(value)
+
+  override def renderChars(value: String): Unit = super.renderChars(value)
+
+  override def renderUnaryMinus(expression: ExpressionModel): Unit = super.renderUnaryMinus(expression)
+
+  override def renderReturn(expression: ExpressionModel): Unit = super.renderReturn(expression)
+
+  override def renderLongLiteral(value: String): Unit = super.renderLongLiteral(value)
+
+  override def renderNullLiteral(): Unit = super.renderNullLiteral()
+
+  override def renderParenthesized(expression: ExpressionModel): Unit = super.renderParenthesized(expression)
+
+  override def renderAssign(variable: ExpressionModel, expression: ExpressionModel): Unit = super.renderAssign(variable, expression)
+
+  override def renderFloatLiteral(value: String): Unit = super.renderFloatLiteral(value)
+
+  override def renderBlock(block: BlockModel): Unit = super.renderBlock(block)
+
+  override def renderConditionals(conditionals: util.List[ConditionalBlockModel], otherwise: StatementModel): Unit = super.renderConditionals(conditionals, otherwise)
+
+  override def renderDoubleLiteral(value: String): Unit = super.renderDoubleLiteral(value)
+
+  override def renderBinary(expression: BinaryExpressionModel): Unit = super.renderBinary(expression)
+
+  override def renderIdentifier(name: String, scope: VariableScope): Unit = super.renderIdentifier(name, scope)
+
+  override def renderUnaryPlus(expression: ExpressionModel): Unit = super.renderUnaryPlus(expression)
+
+  override def renderStringLiteral(value: String): Unit = super.renderStringLiteral(value)
+
+  override def renderEquals(expression: ExpressionModel, arg: ExpressionModel): Unit = super.renderEquals(expression, arg)
+
+  override def renderJsonArrayAdd(expression: ExpressionModel, value: ExpressionModel): Unit = super.renderJsonArrayAdd(expression, value)
+
+  override def renderIntegerLiteral(value: String): Unit = super.renderIntegerLiteral(value)
+
+  override def renderMemberSelect(expression: ExpressionModel, identifier: String): Unit = super.renderMemberSelect(expression, identifier)
+
+  override def renderLogicalComplement(expression: ExpressionModel): Unit = super.renderLogicalComplement(expression)
+
+  override def renderMethodInvocation(expression: ExpressionModel, receiverType: TypeInfo, method: MethodSignature, returnType: TypeInfo, argumentModels: util.List[ExpressionModel], argumentTypes: util.List[TypeInfo]): Unit = {
+    val lbracket = if(method.getName == "onComplete") '{' else '('
+    val rbracket = if(method.getName == "onComplete") '}' else ')'
+    expression.render(this) // ?
+    append('.')
+    append(method.getName)
+    append(lbracket)
+    var i: Int = 0
+    while (i < argumentModels.size) {
+      {
+        if (i > 0) append(", ")
+        argumentModels.get(i).render(this)
+      }
+      {
+        i += 1; i - 1
+      }
+    }
+    append(rbracket)
+  }
+
+  override def renderCharLiteral(value: Char): Unit = super.renderCharLiteral(value)
 }

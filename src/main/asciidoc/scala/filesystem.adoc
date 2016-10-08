@@ -14,15 +14,14 @@ Here's an example of an asynchronous copy of a file:
 var fs = vertx.fileSystem()
 
 // Copy file from foo.txt to bar.txt
-fs.copy("foo.txt", "bar.txt", .onComplete {
-    case Success(result) => {
-      // Copied ok!
-    }
-    case Failure(throwable) => {
-      // Something went wrong
-    }
+fs.onComplete{
+  case Success(result) => {
+    // Copied ok!
   }
-)
+  case Failure(throwable) => {
+    // Something went wrong
+  }
+}
 
 ----
 The blocking versions are named `xxxBlocking` and return the results or throw exceptions directly. In many
@@ -53,44 +52,40 @@ import io.vertx.scala.core.buffer.Buffer
 var vertx = Vertx.vertx()
 
 // Read a file
-vertx.fileSystem().readFile("target/classes/readme.txt", .onComplete {
-    case Success(result) => {
-      println(result.result())
-    }
-    case Failure(throwable) => {
-      System.err.println(s"Oh oh ...${result.cause()}")
-    }
+vertx.fileSystem().onComplete{
+  case Success(result) => {
+    println(result.result())
   }
-)
+  case Failure(throwable) => {
+    System.err.println(s"Oh oh ...${result.cause()}")
+  }
+}
 
 // Copy a file
-vertx.fileSystem().copy("target/classes/readme.txt", "target/classes/readme2.txt", .onComplete {
-    case Success(result) => {
-      println("File copied")
-    }
-    case Failure(throwable) => {
-      System.err.println(s"Oh oh ...${result.cause()}")
-    }
+vertx.fileSystem().onComplete{
+  case Success(result) => {
+    println("File copied")
   }
-)
+  case Failure(throwable) => {
+    System.err.println(s"Oh oh ...${result.cause()}")
+  }
+}
 
 // Write a file
-vertx.fileSystem().writeFile("target/classes/hello.txt", Buffer.buffer("Hello"), .onComplete {
-    case Success(result) => {
-      println("File written")
-    }
-    case Failure(throwable) => {
-      System.err.println(s"Oh oh ...${result.cause()}")
-    }
+vertx.fileSystem().onComplete{
+  case Success(result) => {
+    println("File written")
   }
-)
+  case Failure(throwable) => {
+    System.err.println(s"Oh oh ...${result.cause()}")
+  }
+}
 
 // Check existence and delete
-vertx.fileSystem().exists("target/classes/junk.txt", .onComplete {
-    case Success(result) => println("Success")
-    case Failure(throwable) => println("Failure")
-  }
-)
+vertx.fileSystem().onComplete{
+  case Success(result) => println("Success")
+  case Failure(throwable) => println("Failure")
+}
 
 ----
 
@@ -103,15 +98,14 @@ You open an `link:../../scaladoc/io/vertx/scala/core/file/AsyncFile.html[AsyncFi
 [source,scala]
 ----
 var options = OpenOptions()
-fileSystem.open("myfile.txt", options, .onComplete {
-    case Success(result) => {
-      var file = res.result()
-    }
-    case Failure(throwable) => {
-      // Something went wrong!
-    }
+fileSystem.onComplete{
+  case Success(result) => {
+    var file = res.result()
   }
-)
+  case Failure(throwable) => {
+    // Something went wrong!
+  }
+}
 
 ----
 
@@ -139,29 +133,27 @@ Here is an example of random access writes:
 import io.vertx.scala.core.Vertx
 import io.vertx.scala.core.buffer.Buffer
 var vertx = Vertx.vertx()
-vertx.fileSystem().open("target/classes/hello.txt", OpenOptions(), .onComplete {
-    case Success(result) => {
-      var file = result.result()
-      var buff = Buffer.buffer("foo")
-      for ( i <- 0 to 5) {
-        file.write(buff, buff.length() * i, .onComplete {
-            case Success(result) => {
-              println("Written ok!")
-              // etc
-            }
-            case Failure(throwable) => {
-              System.err.println(s"Failed to write: ${ar.cause()}")
-            }
-          }
-        )
+vertx.fileSystem().onComplete{
+  case Success(result) => {
+    var file = result.result()
+    var buff = Buffer.buffer("foo")
+    for ( i <- 0 to 5) {
+      file.onComplete{
+        case Success(result) => {
+          println("Written ok!")
+          // etc
+        }
+        case Failure(throwable) => {
+          System.err.println(s"Failed to write: ${ar.cause()}")
+        }
       }
+    }
 
-    }
-    case Failure(throwable) => {
-      System.err.println(s"Cannot open file ${result.cause()}")
-    }
   }
-)
+  case Failure(throwable) => {
+    System.err.println(s"Cannot open file ${result.cause()}")
+  }
+}
 
 ----
 
@@ -186,28 +178,26 @@ Here's an example of random access reads:
 import io.vertx.scala.core.Vertx
 import io.vertx.scala.core.buffer.Buffer
 var vertx = Vertx.vertx()
-vertx.fileSystem().open("target/classes/les_miserables.txt", OpenOptions(), .onComplete {
-    case Success(result) => {
-      var file = result.result()
-      var buff = Buffer.buffer(1000)
-      for ( i <- 0 to 10) {
-        file.read(buff, i * 100, i * 100, 100, .onComplete {
-            case Success(result) => {
-              println("Read ok!")
-            }
-            case Failure(throwable) => {
-              System.err.println(s"Failed to write: ${ar.cause()}")
-            }
-          }
-        )
+vertx.fileSystem().onComplete{
+  case Success(result) => {
+    var file = result.result()
+    var buff = Buffer.buffer(1000)
+    for ( i <- 0 to 10) {
+      file.onComplete{
+        case Success(result) => {
+          println("Read ok!")
+        }
+        case Failure(throwable) => {
+          System.err.println(s"Failed to write: ${ar.cause()}")
+        }
       }
+    }
 
-    }
-    case Failure(throwable) => {
-      System.err.println(s"Cannot open file ${result.cause()}")
-    }
   }
-)
+  case Failure(throwable) => {
+    System.err.println(s"Cannot open file ${result.cause()}")
+  }
+}
 
 ----
 
@@ -246,19 +236,18 @@ import io.vertx.scala.core.streams.Pump
 var vertx = Vertx.vertx()
 var output = vertx.fileSystem().openBlocking("target/classes/plagiary.txt", OpenOptions())
 
-vertx.fileSystem().open("target/classes/les_miserables.txt", OpenOptions(), .onComplete {
-    case Success(result) => {
-      var file = result.result()
-      Pump.pump(file, output).start()
-      file.endHandler((r: java.lang.Void) => {
-        println("Copy done")
-      })
-    }
-    case Failure(throwable) => {
-      System.err.println(s"Cannot open file ${result.cause()}")
-    }
+vertx.fileSystem().onComplete{
+  case Success(result) => {
+    var file = result.result()
+    Pump.pump(file, output).start()
+    file.endHandler((r: java.lang.Void) => {
+      println("Copy done")
+    })
   }
-)
+  case Failure(throwable) => {
+    System.err.println(s"Cannot open file ${result.cause()}")
+  }
+}
 
 ----
 

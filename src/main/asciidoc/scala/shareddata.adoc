@@ -68,15 +68,14 @@ Getting the map is asynchronous and the result is returned to you in the handler
 
 var sd = vertx.sharedData()
 
-sd.getClusterWideMap("mymap", .onComplete {
-    case Success(result) => {
-      var map = res.result()
-    }
-    case Failure(throwable) => {
-      // Something went wrong!
-    }
+sd.onComplete{
+  case Success(result) => {
+    var map = res.result()
   }
-)
+  case Failure(throwable) => {
+    // Something went wrong!
+  }
+}
 
 
 ----
@@ -90,15 +89,14 @@ The actual put is asynchronous and the handler is notified once it is complete:
 [source,scala]
 ----
 
-map.put("foo", "bar", .onComplete {
-    case Success(result) => {
-      // Successfully put the value
-    }
-    case Failure(throwable) => {
-      // Something went wrong!
-    }
+map.onComplete{
+  case Success(result) => {
+    // Successfully put the value
   }
-)
+  case Failure(throwable) => {
+    // Something went wrong!
+  }
+}
 
 
 ----
@@ -112,16 +110,15 @@ The actual get is asynchronous and the handler is notified with the result some 
 [source,scala]
 ----
 
-map.get("foo", .onComplete {
-    case Success(result) => {
-      // Successfully got the value
-      var val = resGet.result()
-    }
-    case Failure(throwable) => {
-      // Something went wrong!
-    }
+map.onComplete{
+  case Success(result) => {
+    // Successfully got the value
+    var val = resGet.result()
   }
-)
+  case Failure(throwable) => {
+    // Something went wrong!
+  }
+}
 
 
 ----
@@ -152,23 +149,22 @@ another caller can obtain it.
 
 [source,scala]
 ----
-sd.getLock("mylock", .onComplete {
-    case Success(result) => {
-      // Got the lock!
-      var lock = res.result()
+sd.onComplete{
+  case Success(result) => {
+    // Got the lock!
+    var lock = res.result()
 
-      // 5 seconds later we release the lock so someone else can get it
+    // 5 seconds later we release the lock so someone else can get it
 
-      vertx.setTimer(5000, (tid: java.lang.Long) => {
-        lock.release()
-      })
+    vertx.setTimer(5000, (tid: java.lang.Long) => {
+      lock.release()
+    })
 
-    }
-    case Failure(throwable) => {
-      // Something went wrong
-    }
   }
-)
+  case Failure(throwable) => {
+    // Something went wrong
+  }
+}
 
 ----
 
@@ -177,17 +173,16 @@ with a failure:
 
 [source,scala]
 ----
-sd.getLockWithTimeout("mylock", 10000, .onComplete {
-    case Success(result) => {
-      // Got the lock!
-      var lock = res.result()
+sd.onComplete{
+  case Success(result) => {
+    // Got the lock!
+    var lock = res.result()
 
-    }
-    case Failure(throwable) => {
-      // Failed to get lock
-    }
   }
-)
+  case Failure(throwable) => {
+    // Failed to get lock
+  }
+}
 
 ----
 
@@ -201,15 +196,14 @@ You obtain an instance with `link:../../scaladoc/io/vertx/scala/core/shareddata/
 
 [source,scala]
 ----
-sd.getCounter("mycounter", .onComplete {
-    case Success(result) => {
-      var counter = res.result()
-    }
-    case Failure(throwable) => {
-      // Something went wrong!
-    }
+sd.onComplete{
+  case Success(result) => {
+    var counter = res.result()
   }
-)
+  case Failure(throwable) => {
+    // Something went wrong!
+  }
+}
 
 ----
 
