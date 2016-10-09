@@ -90,9 +90,9 @@ var client = vertx.createDnsClient(53, "10.0.0.1")
 client.resolveAFuture("vertx.io").onComplete{
   case Success(result) => {
     var records = result
-    renderEnhancedForLoop - 
-    println(record)
-    renderEnhancedForLoop - 
+    records.foreach(record => {
+      println(record)
+    }
 
   }
   case Failure(cause) => {
@@ -114,9 +114,9 @@ var client = vertx.createDnsClient(53, "10.0.0.1")
 client.resolveAAAAFuture("vertx.io").onComplete{
   case Success(result) => {
     var records = result
-    renderEnhancedForLoop - 
-    println(record)
-    renderEnhancedForLoop - 
+    records.foreach(record => {
+      println(record)
+    }
 
   }
   case Failure(cause) => {
@@ -138,9 +138,9 @@ var client = vertx.createDnsClient(53, "10.0.0.1")
 client.resolveCNAMEFuture("vertx.io").onComplete{
   case Success(result) => {
     var records = result
-    renderEnhancedForLoop - 
-    println(record)
-    renderEnhancedForLoop - 
+    records.foreach(record => {
+      println(record)
+    }
 
   }
   case Failure(cause) => {
@@ -162,9 +162,9 @@ var client = vertx.createDnsClient(53, "10.0.0.1")
 client.resolveMXFuture("vertx.io").onComplete{
   case Success(result) => {
     var records = result
-    renderEnhancedForLoop - 
-    println(record)
-    renderEnhancedForLoop - 
+    records.foreach(record => {
+      println(record)
+    }
 
   }
   case Failure(cause) => {
@@ -197,9 +197,9 @@ var client = vertx.createDnsClient(53, "10.0.0.1")
 client.resolveTXTFuture("vertx.io").onComplete{
   case Success(result) => {
     var records = result
-    renderEnhancedForLoop - 
-    println(record)
-    renderEnhancedForLoop - 
+    records.foreach(record => {
+      println(record)
+    }
 
   }
   case Failure(cause) => {
@@ -221,9 +221,9 @@ var client = vertx.createDnsClient(53, "10.0.0.1")
 client.resolveNSFuture("vertx.io").onComplete{
   case Success(result) => {
     var records = result
-    renderEnhancedForLoop - 
-    println(record)
-    renderEnhancedForLoop - 
+    records.foreach(record => {
+      println(record)
+    }
 
   }
   case Failure(cause) => {
@@ -245,9 +245,9 @@ var client = vertx.createDnsClient(53, "10.0.0.1")
 client.resolveSRVFuture("vertx.io").onComplete{
   case Success(result) => {
     var records = result
-    renderEnhancedForLoop - 
-    println(record)
-    renderEnhancedForLoop - 
+    records.foreach(record => {
+      println(record)
+    }
 
   }
   case Failure(cause) => {

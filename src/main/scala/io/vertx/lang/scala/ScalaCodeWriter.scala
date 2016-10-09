@@ -53,7 +53,7 @@ class ScalaCodeWriter(builder: ScalaCodeBuilder) extends CodeWriter(builder){
     append(")")
   }
 
-  override def renderAsyncResultFailed(resultType: TypeInfo, name: String): Unit = append("renderAsyncResultFailed")
+  override def renderAsyncResultFailed(resultType: TypeInfo, name: String): Unit = append("todo-renderAsyncResultFailed")
 
   override def renderListGet(list: ExpressionModel, index: ExpressionModel): Unit = {
     list.render(this)
@@ -93,7 +93,7 @@ class ScalaCodeWriter(builder: ScalaCodeBuilder) extends CodeWriter(builder){
     append(name)
   }
 
-  override def renderDataObjectMemberSelect(expression: ExpressionModel, name: String): Unit = append("renderDataObjectMemberSelect")
+  override def renderDataObjectMemberSelect(expression: ExpressionModel, name: String): Unit = append("todo-renderDataObjectMemberSelect")
 
   override def renderEnumConstant(`type`: EnumTypeInfo, constant: String): Unit = append(`type`.getSimpleName()).append('.').append(constant)
 
@@ -136,7 +136,7 @@ class ScalaCodeWriter(builder: ScalaCodeBuilder) extends CodeWriter(builder){
 
   override def renderNewList(): Unit = append("List()")
 
-  override def renderAsyncResultCause(resultType: TypeInfo, name: String): Unit = append("renderAsyncResultCause")
+  override def renderAsyncResultCause(resultType: TypeInfo, name: String): Unit = append("todo-renderAsyncResultCause")
 
   override def renderJavaType(apiType: ClassTypeInfo): Unit = append(apiType.getName)
 
@@ -165,7 +165,7 @@ class ScalaCodeWriter(builder: ScalaCodeBuilder) extends CodeWriter(builder){
     append(")")
   }
 
-  override def renderJsonObject(jsonObject: JsonObjectLiteralModel): Unit = append("renderJsonObject")
+  override def renderJsonObject(jsonObject: JsonObjectLiteralModel): Unit = append("todo-renderJsonObject")
 
   override def renderTryCatch(tryBlock: StatementModel, catchBlock: StatementModel): Unit = {
     append("try {\n")
@@ -180,9 +180,9 @@ class ScalaCodeWriter(builder: ScalaCodeBuilder) extends CodeWriter(builder){
     append("}\n")
   }
 
-  override def renderJsonObjectToString(expression: ExpressionModel): Unit = append("renderJsonObjectToString")
+  override def renderJsonObjectToString(expression: ExpressionModel): Unit = append("todo-renderJsonObjectToString")
 
-  override def renderJsonArray(jsonArray: JsonArrayLiteralModel): Unit = append("renderJsonArray")
+  override def renderJsonArray(jsonArray: JsonArrayLiteralModel): Unit = append("todo-renderJsonArray")
 
   override def renderDataObject(model: DataObjectLiteralModel): Unit = {
     append(s"${model.getType.getSimpleName()}()")
@@ -204,7 +204,7 @@ class ScalaCodeWriter(builder: ScalaCodeBuilder) extends CodeWriter(builder){
         }
         append(")")
       }
-      else if (member.isInstanceOf[Member.Entries]) append("renderDataObject-entries")
+      else if (member.isInstanceOf[Member.Entries]) append("todo-renderDataObject-entries")
       append(s")\n")
     })
     if(model.getMembers.size > 0) {
@@ -225,11 +225,11 @@ class ScalaCodeWriter(builder: ScalaCodeBuilder) extends CodeWriter(builder){
 
   override def renderThis(): Unit = append("this")
 
-  override def renderJsonArrayToString(expression: ExpressionModel): Unit = append("renderJsonArrayToString")
+  override def renderJsonArrayToString(expression: ExpressionModel): Unit = append("todo-renderJsonArrayToString")
 
-  override def renderAsyncResultValue(resultType: TypeInfo, name: String): Unit = append("renderAsyncResultValue")
+  override def renderAsyncResultValue(resultType: TypeInfo, name: String): Unit = append("todo-renderAsyncResultValue")
 
-  override def renderAsyncResultSucceeded(resultType: TypeInfo, name: String): Unit = append("renderAsyncResultSucceeded")
+  override def renderAsyncResultSucceeded(resultType: TypeInfo, name: String): Unit = append("todo-renderAsyncResultSucceeded")
 
   override def renderDataObjectAssign(expression: ExpressionModel, name: String, value: ExpressionModel): Unit = {
     expression.render(this)
@@ -259,54 +259,6 @@ class ScalaCodeWriter(builder: ScalaCodeBuilder) extends CodeWriter(builder){
     append(" -= 1")
   }
 
-  override def renderJsonArrayGet(expression: ExpressionModel, index: ExpressionModel): Unit = super.renderJsonArrayGet(expression, index)
-
-  override def renderFragment(fragment: String): Unit = super.renderFragment(fragment)
-
-  override def renderConditionalExpression(condition: ExpressionModel, trueExpression: ExpressionModel, falseExpression: ExpressionModel): Unit = super.renderConditionalExpression(condition, trueExpression, falseExpression)
-
-  override def renderBooleanLiteral(value: String): Unit = super.renderBooleanLiteral(value)
-
-  override def renderChars(value: String): Unit = super.renderChars(value)
-
-  override def renderUnaryMinus(expression: ExpressionModel): Unit = super.renderUnaryMinus(expression)
-
-  override def renderReturn(expression: ExpressionModel): Unit = super.renderReturn(expression)
-
-  override def renderLongLiteral(value: String): Unit = super.renderLongLiteral(value)
-
-  override def renderNullLiteral(): Unit = super.renderNullLiteral()
-
-  override def renderParenthesized(expression: ExpressionModel): Unit = super.renderParenthesized(expression)
-
-  override def renderAssign(variable: ExpressionModel, expression: ExpressionModel): Unit = super.renderAssign(variable, expression)
-
-  override def renderFloatLiteral(value: String): Unit = super.renderFloatLiteral(value)
-
-  override def renderBlock(block: BlockModel): Unit = super.renderBlock(block)
-
-  override def renderConditionals(conditionals: util.List[ConditionalBlockModel], otherwise: StatementModel): Unit = super.renderConditionals(conditionals, otherwise)
-
-  override def renderDoubleLiteral(value: String): Unit = super.renderDoubleLiteral(value)
-
-  override def renderBinary(expression: BinaryExpressionModel): Unit = super.renderBinary(expression)
-
-  override def renderIdentifier(name: String, scope: VariableScope): Unit = super.renderIdentifier(name, scope)
-
-  override def renderUnaryPlus(expression: ExpressionModel): Unit = super.renderUnaryPlus(expression)
-
-  override def renderStringLiteral(value: String): Unit = super.renderStringLiteral(value)
-
-  override def renderEquals(expression: ExpressionModel, arg: ExpressionModel): Unit = super.renderEquals(expression, arg)
-
-  override def renderJsonArrayAdd(expression: ExpressionModel, value: ExpressionModel): Unit = super.renderJsonArrayAdd(expression, value)
-
-  override def renderIntegerLiteral(value: String): Unit = super.renderIntegerLiteral(value)
-
-  override def renderMemberSelect(expression: ExpressionModel, identifier: String): Unit = super.renderMemberSelect(expression, identifier)
-
-  override def renderLogicalComplement(expression: ExpressionModel): Unit = super.renderLogicalComplement(expression)
-
   override def renderMethodInvocation(expression: ExpressionModel, receiverType: TypeInfo, method: MethodSignature, returnType: TypeInfo, argumentModels: util.List[ExpressionModel], argumentTypes: util.List[TypeInfo]): Unit = {
     val lbracket = if(method.getName == "onComplete") '{' else '('
     val rbracket = if(method.getName == "onComplete") '}' else ')'
@@ -328,5 +280,4 @@ class ScalaCodeWriter(builder: ScalaCodeBuilder) extends CodeWriter(builder){
     append(rbracket)
   }
 
-  override def renderCharLiteral(value: Char): Unit = super.renderCharLiteral(value)
 }

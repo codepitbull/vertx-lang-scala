@@ -9,7 +9,6 @@ import io.vertx.codegen.`type`.TypeInfo
 import io.vertx.codetrans._
 import io.vertx.codetrans.expression._
 import io.vertx.codetrans.statement.StatementModel
-import java.util.Collections
 import java.util.function.Consumer
 
 import scala.collection.JavaConversions._
@@ -87,9 +86,13 @@ class ScalaCodeBuilder extends CodeBuilder {
   override def enhancedForLoop(variableName: String, expression: ExpressionModel, body: StatementModel): StatementModel = {
     new StatementModel() {
       override def render(renderer: CodeWriter): Unit = {
-        renderer.append("renderEnhancedForLoop - \n")
+        expression.render(renderer)
+        renderer.append(s".foreach(${variableName} => {")
+        renderer.append("\n")
+        renderer.indent()
         body.render(renderer)
-        renderer.append("renderEnhancedForLoop - \n")
+        renderer.unindent()
+        renderer.append("}\n")
       }
     }
   }
@@ -98,9 +101,19 @@ class ScalaCodeBuilder extends CodeBuilder {
   override def forLoop(initializer: StatementModel, condition: ExpressionModel, update: ExpressionModel, body: StatementModel): StatementModel = {
     new StatementModel() {
       override def render(renderer: CodeWriter): Unit = {
-        renderer.append("renderForLoop - \n")
+        val condExp = condition.asInstanceOf[BinaryExpressionModel]
+        initializer.render(renderer)
+        renderer.append("\nwhile(")
+        condition.render(renderer)
+        renderer.append("){\n")
+        renderer.indent()
+        condExp.getLeft.render(renderer)
+        renderer.append(" += ")
+        update.render(renderer)
+        renderer.append("\n")
         body.render(renderer)
-        renderer.append("renderForLoop - \n")
+        renderer.unindent()
+        renderer.append("}\n")
       }
     }
   }
