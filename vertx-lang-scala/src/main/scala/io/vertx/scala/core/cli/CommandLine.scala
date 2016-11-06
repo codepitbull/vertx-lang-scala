@@ -20,12 +20,10 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.cli.{CommandLine => JCommandLine}
-import io.vertx.core.cli.{Option => JOption}
-import io.vertx.scala.core.cli.Option
-import io.vertx.core.cli.{CommandLine => JCommandLine}
-import io.vertx.core.cli.{CLI => JCLI}
-import io.vertx.core.cli.{Argument => JArgument}
-import io.vertx.scala.core.cli.Argument
+  import io.vertx.core.cli.{Option => JOption}
+    import io.vertx.core.cli.{CommandLine => JCommandLine}
+  import io.vertx.core.cli.{CLI => JCLI}
+    import io.vertx.core.cli.{Argument => JArgument}
 
 /**
   * The parser transforms a CLI (a model) into an [[io.vertx.scala.core.cli.CommandLine]]. This [[io.vertx.scala.core.cli.CommandLine]]

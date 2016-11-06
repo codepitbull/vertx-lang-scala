@@ -20,9 +20,9 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.core.streams.{StreamBase => JStreamBase}
-import io.vertx.core.streams.{ReadStream => JReadStream}
-
+      import io.vertx.core.streams.{StreamBase => JStreamBase}
+  import io.vertx.core.streams.{ReadStream => JReadStream}
+  
 /**
   * Represents a stream of items that can be read from.
   * 

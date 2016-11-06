@@ -122,6 +122,17 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   }
 
   /**
+    * Set whether the server supports decompression
+    */
+  def setDecompressionSupported(value: Boolean) = {
+    asJava.setDecompressionSupported(value)
+    this
+  }
+  def isDecompressionSupported = {
+    asJava.isDecompressionSupported()
+  }
+
+  /**
     * Add an enabled cipher suite, appended to the ordered suites.
     */
   def addEnabledCipherSuite(value: String) = {

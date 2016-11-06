@@ -20,9 +20,9 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.core.streams.{StreamBase => JStreamBase}
-
+      import io.vertx.core.streams.{WriteStream => JWriteStream}
+  import io.vertx.core.streams.{StreamBase => JStreamBase}
+  
 /**
   *
   * Represents a stream of data that can be written to.
