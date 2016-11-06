@@ -333,7 +333,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableEnumHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[io.vertx.codegen.testmodel.TestEnum] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JTestEnum,io.vertx.codegen.testmodel.TestEnum]((x => x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[TestEnum,io.vertx.codegen.testmodel.TestEnum]((x => x))
     _asJava.methodWithNullableEnumHandlerAsyncResult(notNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -355,7 +355,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableGenEnumHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[io.vertx.codegen.testmodel.TestGenEnum] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JTestGenEnum,io.vertx.codegen.testmodel.TestGenEnum]((x => x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[TestGenEnum,io.vertx.codegen.testmodel.TestGenEnum]((x => x))
     _asJava.methodWithNullableGenEnumHandlerAsyncResult(notNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }

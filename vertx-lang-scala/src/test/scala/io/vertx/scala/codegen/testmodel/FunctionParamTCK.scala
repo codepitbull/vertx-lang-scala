@@ -59,7 +59,7 @@ class FunctionParamTCK(private val _asJava: JFunctionParamTCK) {
     _asJava.methodWithDataObjectParam(asJavaFunction(func))
   }
 
-  def methodWithEnumParam(func: JTestEnum => java.lang.String): String = {
+  def methodWithEnumParam(func: TestEnum => java.lang.String): String = {
     _asJava.methodWithEnumParam(asJavaFunction(func))
   }
 
@@ -99,7 +99,7 @@ class FunctionParamTCK(private val _asJava: JFunctionParamTCK) {
     _asJava.methodWithDataObjectReturn(asJavaFunction(func))
   }
 
-  def methodWithEnumReturn(func: java.lang.String => JTestEnum): String = {
+  def methodWithEnumReturn(func: java.lang.String => TestEnum): String = {
     _asJava.methodWithEnumReturn(asJavaFunction(func))
   }
 

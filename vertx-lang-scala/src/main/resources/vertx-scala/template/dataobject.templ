@@ -25,7 +25,7 @@ def changeJavaGenericNotationToScalaNotation(type) {
     ret = type.simpleName.replace('<', '[').replace('>', ']');
   else
     ret = type.name.replace('<', '[').replace('>', ']');
-  if(type.name.startsWith("io.vertx") && !type.name.contains("JsonObject") && !type.name.contains("JsonArray"))
+  if(type.name.startsWith("io.vertx") && !type.name.contains("JsonObject") && !type.name.contains("JsonArray") && !(type.kind==CLASS_ENUM))
     ret = 'J' + ret;
   return ret;
 }
