@@ -18,7 +18,25 @@ package io.vertx.scala.core.http
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.http.{HttpServerOptions => JHttpServerOptions}
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
+import io.vertx.scala.core.net.JdkSSLEngineOptions
+import io.vertx.core.net.{JksOptions => JJksOptions}
+import io.vertx.scala.core.net.JksOptions
+import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
+import io.vertx.scala.core.net.OpenSSLEngineOptions
+import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
+import io.vertx.scala.core.net.PemKeyCertOptions
+import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
+import io.vertx.scala.core.net.PemTrustOptions
+import io.vertx.core.net.{PfxOptions => JPfxOptions}
+import io.vertx.scala.core.net.PfxOptions
+import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
+import io.vertx.scala.core.net.NetServerOptions
 
 /**
   * Represents options used by an [[io.vertx.scala.core.http.HttpServer]] instance
@@ -29,7 +47,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the accept back log
     */
-  def setAcceptBacklog(value:Int) = {
+  def setAcceptBacklog(value: Int) = {
     asJava.setAcceptBacklog(value)
     this
   }
@@ -40,7 +58,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the list of protocol versions to provide to the server during the Application-Layer Protocol Negotiatiation.
     */
-  def setAlpnVersions(value:scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion]) = {
+  def setAlpnVersions(value: scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion]) = {
     asJava.setAlpnVersions(value)
     this
   }
@@ -51,7 +69,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set whether client auth is required
     */
-  def setClientAuth(value:io.vertx.core.http.ClientAuth) = {
+  def setClientAuth(value: io.vertx.core.http.ClientAuth) = {
     asJava.setClientAuth(value)
     this
   }
@@ -62,7 +80,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set whether client auth is required
     */
-  def setClientAuthRequired(value:Boolean) = {
+  def setClientAuthRequired(value: Boolean) = {
     asJava.setClientAuthRequired(value)
     this
   }
@@ -73,7 +91,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set whether the server supports compression
     */
-  def setCompressionSupported(value:Boolean) = {
+  def setCompressionSupported(value: Boolean) = {
     asJava.setCompressionSupported(value)
     this
   }
@@ -84,7 +102,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Add a CRL path
     */
-  def addCrlPath(value:String) = {
+  def addCrlPath(value: String) = {
     asJava.addCrlPath(value)
     this
   }
@@ -95,7 +113,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Add a CRL value
     */
-  def addCrlValue(value:io.vertx.core.buffer.Buffer) = {
+  def addCrlValue(value: JBuffer) = {
     asJava.addCrlValue(value)
     this
   }
@@ -106,7 +124,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Add an enabled cipher suite, appended to the ordered suites.
     */
-  def addEnabledCipherSuite(value:String) = {
+  def addEnabledCipherSuite(value: String) = {
     asJava.addEnabledCipherSuite(value)
     this
   }
@@ -117,7 +135,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Add an enabled SSL/TLS protocols, appended to the ordered protocols.
     */
-  def addEnabledSecureTransportProtocol(value:String) = {
+  def addEnabledSecureTransportProtocol(value: String) = {
     asJava.addEnabledSecureTransportProtocol(value)
     this
   }
@@ -128,7 +146,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set whether 100 Continue should be handled automatically
     */
-  def setHandle100ContinueAutomatically(value:Boolean) = {
+  def setHandle100ContinueAutomatically(value: Boolean) = {
     asJava.setHandle100ContinueAutomatically(value)
     this
   }
@@ -139,7 +157,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the host
     */
-  def setHost(value:String) = {
+  def setHost(value: String) = {
     asJava.setHost(value)
     this
   }
@@ -154,7 +172,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
     * <p/>
     * A value of `-1` reuses the initial window size setting.
     */
-  def setHttp2ConnectionWindowSize(value:Int) = {
+  def setHttp2ConnectionWindowSize(value: Int) = {
     asJava.setHttp2ConnectionWindowSize(value)
     this
   }
@@ -166,7 +184,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
     * Set the idle timeout, in seconds. zero means don't timeout.
     * This determines if a connection will timeout and be closed if no data is received within the timeout.
     */
-  def setIdleTimeout(value:Int) = {
+  def setIdleTimeout(value: Int) = {
     asJava.setIdleTimeout(value)
     this
   }
@@ -177,14 +195,14 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the HTTP/2 connection settings immediatly sent by the server when a client connects.
     */
-  def setInitialSettings(value:io.vertx.scala.core.http.Http2Settings) = {
+  def setInitialSettings(value: Http2Settings) = {
     asJava.setInitialSettings(value.asJava)
     this
   }
   def getInitialSettings = {
     asJava.getInitialSettings()
   }
-  def setJdkSslEngineOptions(value:io.vertx.scala.core.net.JdkSSLEngineOptions) = {
+  def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
     asJava.setJdkSslEngineOptions(value.asJava)
     this
   }
@@ -192,7 +210,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the key/cert options in jks format, aka Java keystore.
     */
-  def setKeyStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
+  def setKeyStoreOptions(value: JksOptions) = {
     asJava.setKeyStoreOptions(value.asJava)
     this
   }
@@ -200,7 +218,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
     */
-  def setLogActivity(value:Boolean) = {
+  def setLogActivity(value: Boolean) = {
     asJava.setLogActivity(value)
     this
   }
@@ -211,7 +229,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the maximum HTTP chunk size
     */
-  def setMaxChunkSize(value:Int) = {
+  def setMaxChunkSize(value: Int) = {
     asJava.setMaxChunkSize(value)
     this
   }
@@ -222,7 +240,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the maximum length of all headers for HTTP/1.x .
     */
-  def setMaxHeaderSize(value:Int) = {
+  def setMaxHeaderSize(value: Int) = {
     asJava.setMaxHeaderSize(value)
     this
   }
@@ -233,7 +251,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the maximum length of the initial line for HTTP/1.x (e.g. `"GET / HTTP/1.0"`)
     */
-  def setMaxInitialLineLength(value:Int) = {
+  def setMaxInitialLineLength(value: Int) = {
     asJava.setMaxInitialLineLength(value)
     this
   }
@@ -244,14 +262,14 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the maximum websocket frames size
     */
-  def setMaxWebsocketFrameSize(value:Int) = {
+  def setMaxWebsocketFrameSize(value: Int) = {
     asJava.setMaxWebsocketFrameSize(value)
     this
   }
   def getMaxWebsocketFrameSize = {
     asJava.getMaxWebsocketFrameSize()
   }
-  def setOpenSslEngineOptions(value:io.vertx.scala.core.net.OpenSSLEngineOptions) = {
+  def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
     this
   }
@@ -259,7 +277,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the key/cert store options in pem format.
     */
-  def setPemKeyCertOptions(value:io.vertx.scala.core.net.PemKeyCertOptions) = {
+  def setPemKeyCertOptions(value: PemKeyCertOptions) = {
     asJava.setPemKeyCertOptions(value.asJava)
     this
   }
@@ -267,7 +285,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the trust options in pem format
     */
-  def setPemTrustOptions(value:io.vertx.scala.core.net.PemTrustOptions) = {
+  def setPemTrustOptions(value: PemTrustOptions) = {
     asJava.setPemTrustOptions(value.asJava)
     this
   }
@@ -275,7 +293,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the key/cert options in pfx format.
     */
-  def setPfxKeyCertOptions(value:io.vertx.scala.core.net.PfxOptions) = {
+  def setPfxKeyCertOptions(value: PfxOptions) = {
     asJava.setPfxKeyCertOptions(value.asJava)
     this
   }
@@ -283,7 +301,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the trust options in pfx format
     */
-  def setPfxTrustOptions(value:io.vertx.scala.core.net.PfxOptions) = {
+  def setPfxTrustOptions(value: PfxOptions) = {
     asJava.setPfxTrustOptions(value.asJava)
     this
   }
@@ -291,7 +309,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the port
     */
-  def setPort(value:Int) = {
+  def setPort(value: Int) = {
     asJava.setPort(value)
     this
   }
@@ -302,7 +320,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the TCP receive buffer size
     */
-  def setReceiveBufferSize(value:Int) = {
+  def setReceiveBufferSize(value: Int) = {
     asJava.setReceiveBufferSize(value)
     this
   }
@@ -313,7 +331,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the value of reuse address
     */
-  def setReuseAddress(value:Boolean) = {
+  def setReuseAddress(value: Boolean) = {
     asJava.setReuseAddress(value)
     this
   }
@@ -324,7 +342,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the TCP send buffer size
     */
-  def setSendBufferSize(value:Int) = {
+  def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
   }
@@ -335,7 +353,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set whether SO_linger keep alive is enabled
     */
-  def setSoLinger(value:Int) = {
+  def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)
     this
   }
@@ -346,7 +364,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set whether SSL/TLS is enabled
     */
-  def setSsl(value:Boolean) = {
+  def setSsl(value: Boolean) = {
     asJava.setSsl(value)
     this
   }
@@ -357,7 +375,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set whether TCP keep alive is enabled
     */
-  def setTcpKeepAlive(value:Boolean) = {
+  def setTcpKeepAlive(value: Boolean) = {
     asJava.setTcpKeepAlive(value)
     this
   }
@@ -368,7 +386,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set whether TCP no delay is enabled
     */
-  def setTcpNoDelay(value:Boolean) = {
+  def setTcpNoDelay(value: Boolean) = {
     asJava.setTcpNoDelay(value)
     this
   }
@@ -379,7 +397,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the value of traffic class
     */
-  def setTrafficClass(value:Int) = {
+  def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)
     this
   }
@@ -390,7 +408,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the trust options in jks format, aka Java trustore
     */
-  def setTrustStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
+  def setTrustStoreOptions(value: JksOptions) = {
     asJava.setTrustStoreOptions(value.asJava)
     this
   }
@@ -398,7 +416,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the ALPN usage.
     */
-  def setUseAlpn(value:Boolean) = {
+  def setUseAlpn(value: Boolean) = {
     asJava.setUseAlpn(value)
     this
   }
@@ -409,7 +427,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set whether Netty pooled buffers are enabled
     */
-  def setUsePooledBuffers(value:Boolean) = {
+  def setUsePooledBuffers(value: Boolean) = {
     asJava.setUsePooledBuffers(value)
     this
   }
@@ -420,7 +438,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Set the websocket subprotocols supported by the server.
     */
-  def setWebsocketSubProtocols(value:String) = {
+  def setWebsocketSubProtocols(value: String) = {
     asJava.setWebsocketSubProtocols(value)
     this
   }
@@ -432,7 +450,7 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
 object HttpServerOptions {
   
   def apply() = {
-    new HttpServerOptions(new JHttpServerOptions(io.vertx.lang.scala.json.Json.emptyObj()))
+    new HttpServerOptions(new JHttpServerOptions(emptyObj()))
   }
   
   def apply(t: JHttpServerOptions) = {

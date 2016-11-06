@@ -19,27 +19,16 @@ package io.vertx.scala.core.net
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
 import io.vertx.lang.scala.json.Json._
-import io.vertx.core.net.{NetClientOptions => JNetClientOptions}
+import io.vertx.core.net.{TCPSSLOptions => JTCPSSLOptions}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
 
 /**
-  * Options for configuring a [[io.vertx.scala.core.net.NetClient]].
+  * Base class. TCP and SSL related options
   */
 
-class NetClientOptions(val asJava: JNetClientOptions) {
-
-  /**
-    * Set the connect timeout
-    */
-  def setConnectTimeout(value: Int) = {
-    asJava.setConnectTimeout(value)
-    this
-  }
-  def getConnectTimeout = {
-    asJava.getConnectTimeout()
-  }
+class TCPSSLOptions(val asJava: JTCPSSLOptions) {
 
   /**
     * Add a CRL path
@@ -86,18 +75,6 @@ class NetClientOptions(val asJava: JNetClientOptions) {
   }
 
   /**
-    * Set the hostname verification algorithm interval
-    * To disable hostname verification, set hostnameVerificationAlgorithm to an empty String
-    */
-  def setHostnameVerificationAlgorithm(value: String) = {
-    asJava.setHostnameVerificationAlgorithm(value)
-    this
-  }
-  def getHostnameVerificationAlgorithm = {
-    asJava.getHostnameVerificationAlgorithm()
-  }
-
-  /**
     * Set the idle timeout, in seconds. zero means don't timeout.
     * This determines if a connection will timeout and be closed if no data is received within the timeout.
     */
@@ -122,18 +99,6 @@ class NetClientOptions(val asJava: JNetClientOptions) {
   }
 
   /**
-    * Set the local interface to bind for network connections. When the local address is null,
-    * it will pick any local address, the default local address is null.
-    */
-  def setLocalAddress(value: String) = {
-    asJava.setLocalAddress(value)
-    this
-  }
-  def getLocalAddress = {
-    asJava.getLocalAddress()
-  }
-
-  /**
     * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
     */
   def setLogActivity(value: Boolean) = {
@@ -142,18 +107,6 @@ class NetClientOptions(val asJava: JNetClientOptions) {
   }
   def getLogActivity = {
     asJava.getLogActivity()
-  }
-
-  /**
-    * Set the metrics name identifying the reported metrics, useful for grouping metrics
-    * with the same name.
-    */
-  def setMetricsName(value: String) = {
-    asJava.setMetricsName(value)
-    this
-  }
-  def getMetricsName = {
-    asJava.getMetricsName()
   }
   def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
@@ -193,17 +146,6 @@ class NetClientOptions(val asJava: JNetClientOptions) {
   }
 
   /**
-    * Set proxy options for connections via CONNECT proxy (e.g. Squid) or a SOCKS proxy.
-    */
-  def setProxyOptions(value: ProxyOptions) = {
-    asJava.setProxyOptions(value.asJava)
-    this
-  }
-  def getProxyOptions = {
-    asJava.getProxyOptions()
-  }
-
-  /**
     * Set the TCP receive buffer size
     */
   def setReceiveBufferSize(value: Int) = {
@@ -212,28 +154,6 @@ class NetClientOptions(val asJava: JNetClientOptions) {
   }
   def getReceiveBufferSize = {
     asJava.getReceiveBufferSize()
-  }
-
-  /**
-    * Set the value of reconnect attempts
-    */
-  def setReconnectAttempts(value: Int) = {
-    asJava.setReconnectAttempts(value)
-    this
-  }
-  def getReconnectAttempts = {
-    asJava.getReconnectAttempts()
-  }
-
-  /**
-    * Set the reconnect interval
-    */
-  def setReconnectInterval(value: Long) = {
-    asJava.setReconnectInterval(value)
-    this
-  }
-  def getReconnectInterval = {
-    asJava.getReconnectInterval()
   }
 
   /**
@@ -314,17 +234,6 @@ class NetClientOptions(val asJava: JNetClientOptions) {
   }
 
   /**
-    * Set whether all server certificates should be trusted
-    */
-  def setTrustAll(value: Boolean) = {
-    asJava.setTrustAll(value)
-    this
-  }
-  def isTrustAll = {
-    asJava.isTrustAll()
-  }
-
-  /**
     * Set the trust options in jks format, aka Java trustore
     */
   def setTrustStoreOptions(value: JksOptions) = {
@@ -355,23 +264,3 @@ class NetClientOptions(val asJava: JNetClientOptions) {
   }
 }
 
-object NetClientOptions {
-  
-  def apply() = {
-    new NetClientOptions(new JNetClientOptions(emptyObj()))
-  }
-  
-  def apply(t: JNetClientOptions) = {
-    if(t != null)
-      new NetClientOptions(t)
-    else
-      null
-  }
-  
-  def fromJson(json: JsonObject):NetClientOptions = {
-    if(json != null)
-      new NetClientOptions(new JNetClientOptions(json))
-    else
-      null
-  }
-}

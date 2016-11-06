@@ -19,10 +19,12 @@ package io.vertx.scala.core.buffer
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.json.{JsonArray => JJsonArray}
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.json.JsonArray
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.shareddata.impl.{ClusterSerializable => JClusterSerializable}
-import io.vertx.core.json.{JsonObject => JJsonObject}
+import io.vertx.scala.core.shareddata.impl.ClusterSerializable
+import io.vertx.core.json.JsonObject
 
 /**
   * Most data is shuffled around inside Vert.x using buffers.
@@ -32,9 +34,9 @@ import io.vertx.core.json.{JsonObject => JJsonObject}
   * 
   * Please consult the documentation for more information on buffers.
   */
-class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
+class Buffer(private val _asJava: JBuffer) {
 
-  def asJava: io.vertx.core.buffer.Buffer = _asJava
+  def asJava: JBuffer = _asJava
 
   /**
     * Returns a `String` representation of the Buffer with the `UTF-8`encoding
@@ -53,14 +55,14 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
   /**
     * Returns a Json object representation of the Buffer
     */
-  def toJsonObject(): io.vertx.core.json.JsonObject = {
+  def toJsonObject(): JsonObject = {
     _asJava.toJsonObject()
   }
 
   /**
     * Returns a Json array representation of the Buffer
     */
-  def toJsonArray(): io.vertx.core.json.JsonArray = {
+  def toJsonArray(): JsonArray = {
     _asJava.toJsonArray()
   }
 
@@ -220,7 +222,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendBuffer(buff: Buffer): Buffer = {
-    _asJava.appendBuffer(buff.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    _asJava.appendBuffer(buff.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -230,7 +232,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendBuffer(buff: Buffer, offset: Int, len: Int): Buffer = {
-    _asJava.appendBuffer(buff.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], offset, len)
+    _asJava.appendBuffer(buff.asJava.asInstanceOf[JBuffer], offset, len)
     this
   }
 
@@ -547,7 +549,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setBuffer(pos: Int, b: Buffer): Buffer = {
-    _asJava.setBuffer(pos, b.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    _asJava.setBuffer(pos, b.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -556,7 +558,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setBuffer(pos: Int, b: Buffer, offset: Int, len: Int): Buffer = {
-    _asJava.setBuffer(pos, b.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], offset, len)
+    _asJava.setBuffer(pos, b.asJava.asInstanceOf[JBuffer], offset, len)
     this
   }
 
@@ -615,7 +617,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
 
 object Buffer {
 
-  def apply(_asJava: io.vertx.core.buffer.Buffer): Buffer =
+  def apply(_asJava: JBuffer): Buffer =
     new Buffer(_asJava)
 
   def buffer(): Buffer = {
