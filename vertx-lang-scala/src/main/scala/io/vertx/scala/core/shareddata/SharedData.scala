@@ -23,7 +23,7 @@ import io.vertx.core.shareddata.{AsyncMap => JAsyncMap}
 import io.vertx.core.shareddata.{Lock => JLock}
 import io.vertx.core.shareddata.{LocalMap => JLocalMap}
 import io.vertx.core.shareddata.{Counter => JCounter}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 
 /**
   * Shared data allows you to share data safely between different parts of your application in a safe way.

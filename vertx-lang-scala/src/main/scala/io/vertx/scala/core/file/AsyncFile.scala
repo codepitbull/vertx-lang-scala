@@ -29,7 +29,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 
 /**
   * Represents a file on the file-system which can be read from, or written to asynchronously.

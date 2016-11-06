@@ -19,10 +19,10 @@ package io.vertx.scala.core.buffer
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.json.JsonArray
+import io.vertx.core.json.{JsonArray => JJsonArray}
 import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.core.shareddata.impl.ClusterSerializable
-import io.vertx.core.json.JsonObject
+import io.vertx.core.shareddata.impl.{ClusterSerializable => JClusterSerializable}
+import io.vertx.core.json.{JsonObject => JJsonObject}
 
 /**
   * Most data is shuffled around inside Vert.x using buffers.

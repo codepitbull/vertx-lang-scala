@@ -24,14 +24,14 @@ import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.core.http.HttpMethod
+import io.vertx.core.http.{HttpMethod => JHttpMethod}
 import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.core.http.{WebSocket => JWebSocket}
-import io.vertx.core.http.WebsocketVersion
-import io.vertx.core.Handler
+import io.vertx.core.http.{WebsocketVersion => JWebsocketVersion}
+import io.vertx.core.{Handler => JHandler}
 import io.vertx.core.http.{HttpClient => JHttpClient}
 
 /**

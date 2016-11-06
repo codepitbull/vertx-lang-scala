@@ -23,7 +23,7 @@ import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.parsetools.{RecordParser => JRecordParser}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 
 /**
   * A helper class which allows you to easily parse protocols which are delimited by a sequence of bytes, or fixed

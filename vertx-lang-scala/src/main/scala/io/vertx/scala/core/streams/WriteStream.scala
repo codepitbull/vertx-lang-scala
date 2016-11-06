@@ -21,7 +21,7 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.core.streams.{StreamBase => JStreamBase}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 
 /**
   *

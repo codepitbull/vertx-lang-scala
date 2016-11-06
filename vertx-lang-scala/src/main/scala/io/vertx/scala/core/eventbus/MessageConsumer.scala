@@ -24,7 +24,7 @@ import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.eventbus.{Message => JMessage}
 import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 
 /**
   * An event bus consumer object representing a stream of message to an [[io.vertx.scala.core.eventbus.EventBus]] address that can

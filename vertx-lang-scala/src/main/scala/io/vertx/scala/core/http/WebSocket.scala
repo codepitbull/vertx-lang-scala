@@ -24,7 +24,7 @@ import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.http.{WebSocket => JWebSocket}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 import io.vertx.core.http.{WebSocketFrame => JWebSocketFrame}
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.scala.core.net.SocketAddress

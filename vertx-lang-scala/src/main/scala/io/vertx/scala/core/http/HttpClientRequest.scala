@@ -28,16 +28,16 @@ import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.http.{HttpFrame => JHttpFrame}
-import io.vertx.core.http.HttpVersion
+import io.vertx.core.http.{HttpVersion => JHttpVersion}
 import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.core.http.HttpMethod
+import io.vertx.core.http.{HttpMethod => JHttpMethod}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 
 /**
   * Represents a client-side HTTP request.

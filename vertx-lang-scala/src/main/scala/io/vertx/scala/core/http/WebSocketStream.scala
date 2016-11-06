@@ -24,7 +24,7 @@ import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.http.{WebSocket => JWebSocket}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 
 /**
   * A stream for [[io.vertx.scala.core.http.HttpClient]] WebSocket connection.

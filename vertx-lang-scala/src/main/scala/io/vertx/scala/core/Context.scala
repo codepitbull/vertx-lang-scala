@@ -20,8 +20,8 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.{Vertx => JVertx}
-import io.vertx.core.json.JsonObject
-import io.vertx.core.Handler
+import io.vertx.core.json.{JsonObject => JJsonObject}
+import io.vertx.core.{Handler => JHandler}
 import io.vertx.core.{Future => JFuture}
 import io.vertx.core.{Context => JContext}
 

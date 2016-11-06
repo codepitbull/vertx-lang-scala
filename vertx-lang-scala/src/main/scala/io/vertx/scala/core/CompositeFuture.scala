@@ -20,9 +20,9 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.{CompositeFuture => JCompositeFuture}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 import io.vertx.core.{Future => JFuture}
-import java.util.function.Function
+import java.util.function.{Function => JFunction}
 
 /**
   * The composite future wraps a list of [[io.vertx.scala.core.Future futures]], it is useful when several futures

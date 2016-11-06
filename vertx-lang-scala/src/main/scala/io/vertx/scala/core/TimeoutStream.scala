@@ -23,7 +23,7 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 
 /**
   * A timeout stream is triggered by a timer, the scala-function will be call when the timer is fired,

@@ -29,7 +29,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 import io.vertx.core.http.{WebSocketFrame => JWebSocketFrame}
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.scala.core.net.SocketAddress

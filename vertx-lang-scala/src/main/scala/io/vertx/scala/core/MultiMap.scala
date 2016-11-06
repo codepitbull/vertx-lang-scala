@@ -19,7 +19,7 @@ package io.vertx.scala.core
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import java.util.Map.Entry
+import java.util.Map.{Entry => JEntry}
 import io.vertx.core.{MultiMap => JMultiMap}
 
 /**

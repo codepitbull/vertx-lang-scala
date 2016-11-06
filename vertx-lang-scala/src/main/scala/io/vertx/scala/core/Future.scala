@@ -19,9 +19,9 @@ package io.vertx.scala.core
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 import io.vertx.core.{Future => JFuture}
-import java.util.function.Function
+import java.util.function.{Function => JFunction}
 
 /**
   * Represents the result of an action that may, or may not, have occurred yet.

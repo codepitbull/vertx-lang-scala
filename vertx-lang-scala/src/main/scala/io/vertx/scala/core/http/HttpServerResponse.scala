@@ -27,11 +27,11 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
-import io.vertx.core.http.HttpMethod
+import io.vertx.core.http.{HttpMethod => JHttpMethod}
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.{MultiMap => JMultiMap}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 
 /**
   * Represents a server-side HTTP response.

@@ -27,7 +27,7 @@ import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
 import io.vertx.core.http.{HttpServer => JHttpServer}
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 import io.vertx.core.http.{ServerWebSocketStream => JServerWebSocketStream}
 
 /**

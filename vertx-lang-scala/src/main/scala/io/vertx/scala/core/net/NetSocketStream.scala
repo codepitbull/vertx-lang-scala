@@ -23,7 +23,7 @@ import io.vertx.core.net.{NetSocketStream => JNetSocketStream}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 import io.vertx.core.net.{NetSocket => JNetSocket}
 
 /**

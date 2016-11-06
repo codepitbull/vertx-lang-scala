@@ -21,7 +21,7 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.dns.{DnsClient => JDnsClient}
 import io.vertx.core.dns.{MxRecord => JMxRecord}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 import io.vertx.core.dns.{SrvRecord => JSrvRecord}
 
 /**

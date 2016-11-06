@@ -26,7 +26,7 @@ import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 
 /**
   * Represents an file upload from an HTML FORM.

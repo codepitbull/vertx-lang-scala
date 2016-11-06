@@ -24,14 +24,14 @@ import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.http.{HttpFrame => JHttpFrame}
-import io.vertx.core.http.HttpVersion
+import io.vertx.core.http.{HttpVersion => JHttpVersion}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.{MultiMap => JMultiMap}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 import io.vertx.core.net.{NetSocket => JNetSocket}
 import io.vertx.scala.core.net.NetSocket
 import io.vertx.core.net.{NetSocket => JNetSocket}

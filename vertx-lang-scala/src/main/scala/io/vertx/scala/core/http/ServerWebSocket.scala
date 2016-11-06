@@ -27,7 +27,7 @@ import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.{MultiMap => JMultiMap}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 import io.vertx.core.http.{WebSocketFrame => JWebSocketFrame}
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.scala.core.net.SocketAddress

@@ -26,7 +26,7 @@ import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 
 /**
   * A [[io.vertx.scala.core.streams.WriteStream]] for sending packets to a [[io.vertx.scala.core.net.SocketAddress]].

@@ -20,12 +20,12 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
-import io.vertx.codegen.testmodel.TestDataObject
-import java.util.function.Function
+import io.vertx.codegen.testmodel.{TestDataObject => JTestDataObject}
+import java.util.function.{Function => JFunction}
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
-import io.vertx.core.json.JsonArray
-import io.vertx.codegen.testmodel.TestEnum
-import io.vertx.core.json.JsonObject
+import io.vertx.core.json.{JsonArray => JJsonArray}
+import io.vertx.codegen.testmodel.{TestEnum => JTestEnum}
+import io.vertx.core.json.{JsonObject => JJsonObject}
 
 /**
   */

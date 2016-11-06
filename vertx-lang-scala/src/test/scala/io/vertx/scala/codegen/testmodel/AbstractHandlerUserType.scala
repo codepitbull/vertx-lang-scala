@@ -19,7 +19,7 @@ package io.vertx.scala.codegen.testmodel
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 
 /**

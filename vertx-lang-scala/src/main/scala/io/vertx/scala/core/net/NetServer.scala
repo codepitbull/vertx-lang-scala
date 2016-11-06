@@ -24,7 +24,7 @@ import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.net.{NetServer => JNetServer}
-import io.vertx.core.Handler
+import io.vertx.core.{Handler => JHandler}
 import io.vertx.core.net.{NetSocket => JNetSocket}
 
 /**

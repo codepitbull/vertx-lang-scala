@@ -40,7 +40,7 @@ import @{importedType.name.replace(importedType.simpleName,"")+'{'+importedType.
         importedType.kind != CLASS_LIST &&
         importedType.kind != CLASS_SET &&
         importedType.kind != CLASS_MAP}
-import @{importedType}\n
+import @{importedType.name.replace(importedType.simpleName,"")+'{'+importedType.simpleName+" => "+toAliasedTypeName(importedType)+"}\n"}
 	@end{}
 @end{}
 \n
