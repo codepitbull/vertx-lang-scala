@@ -20,8 +20,6 @@ import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.datagram.{DatagramSocketOptions => JDatagramSocketOptions}
-import io.vertx.core.net.{NetworkOptions => JNetworkOptions}
-import io.vertx.scala.core.net.NetworkOptions
 
 /**
   * Options used to configure a datagram socket.
@@ -141,18 +139,18 @@ class DatagramSocketOptions(val asJava: JDatagramSocketOptions) {
 }
 
 object DatagramSocketOptions {
-  
+
   def apply() = {
     new DatagramSocketOptions(new JDatagramSocketOptions(emptyObj()))
   }
-  
+
   def apply(t: JDatagramSocketOptions) = {
     if(t != null)
       new DatagramSocketOptions(t)
     else
       null
   }
-  
+
   def fromJson(json: JsonObject):DatagramSocketOptions = {
     if(json != null)
       new DatagramSocketOptions(new JDatagramSocketOptions(json))

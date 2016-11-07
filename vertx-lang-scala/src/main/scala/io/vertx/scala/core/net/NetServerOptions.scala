@@ -23,7 +23,6 @@ import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
 import io.vertx.core.http.ClientAuth
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
 
 /**
   * Options for configuring a [[io.vertx.scala.core.net.NetServer]].

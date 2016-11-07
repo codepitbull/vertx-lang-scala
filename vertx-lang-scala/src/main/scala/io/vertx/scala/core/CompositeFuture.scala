@@ -29,7 +29,8 @@ import java.util.function.Function
   * The composite future wraps a list of [[io.vertx.scala.core.Future futures]], it is useful when several futures
   * needs to be coordinated.
   */
-class CompositeFuture(private val _asJava: JCompositeFuture) {
+class CompositeFuture(private val _asJava: JCompositeFuture) 
+    extends  {
 
   def asJava: JCompositeFuture = _asJava
 
