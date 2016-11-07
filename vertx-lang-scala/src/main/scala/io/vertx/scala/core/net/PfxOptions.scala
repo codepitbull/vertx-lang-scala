@@ -73,8 +73,8 @@ class PfxOptions(val asJava: JPfxOptions) {
   /**
     * Set the store as a buffer
     */
-  def setValue(value: JBuffer) = {
-    asJava.setValue(value)
+  def setValue(value: Buffer) = {
+    asJava.setValue(value.asJava)
     this
   }
   def getValue = {

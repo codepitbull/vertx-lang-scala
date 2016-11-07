@@ -113,8 +113,8 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   /**
     * Add a CRL value
     */
-  def addCrlValue(value: JBuffer) = {
-    asJava.addCrlValue(value)
+  def addCrlValue(value: Buffer) = {
+    asJava.addCrlValue(value.asJava)
     this
   }
   def getCrlValues = {

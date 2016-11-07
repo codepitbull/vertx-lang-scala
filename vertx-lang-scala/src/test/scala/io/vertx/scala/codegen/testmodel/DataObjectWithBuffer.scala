@@ -28,8 +28,8 @@ import io.vertx.core.buffer.{Buffer => JBuffer}
   */
 
 class DataObjectWithBuffer(val asJava: JDataObjectWithBuffer) {
-  def setBuffer(value: JBuffer) = {
-    asJava.setBuffer(value)
+  def setBuffer(value: Buffer) = {
+    asJava.setBuffer(value.asJava)
     this
   }
   def getBuffer = {

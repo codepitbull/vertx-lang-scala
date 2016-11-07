@@ -72,8 +72,8 @@ class PemTrustOptions(val asJava: JPemTrustOptions) {
   /**
     * Add a certificate value
     */
-  def addCertValue(value: JBuffer) = {
-    asJava.addCertValue(value)
+  def addCertValue(value: Buffer) = {
+    asJava.addCertValue(value.asJava)
     this
   }
   def getCertValues = {

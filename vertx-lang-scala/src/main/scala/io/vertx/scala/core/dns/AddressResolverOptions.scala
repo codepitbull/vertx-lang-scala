@@ -88,8 +88,8 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
     * <p/>
     * The default value is null, so the operating system hosts config is used.
     */
-  def setHostsValue(value: JBuffer) = {
-    asJava.setHostsValue(value)
+  def setHostsValue(value: Buffer) = {
+    asJava.setHostsValue(value.asJava)
     this
   }
   def getHostsValue = {

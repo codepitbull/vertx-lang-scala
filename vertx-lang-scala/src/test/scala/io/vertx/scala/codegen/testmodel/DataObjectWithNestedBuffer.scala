@@ -28,15 +28,15 @@ import io.vertx.core.buffer.{Buffer => JBuffer}
   */
 
 class DataObjectWithNestedBuffer(val asJava: JDataObjectWithNestedBuffer) {
-  def setBuffer(value: JBuffer) = {
-    asJava.setBuffer(value)
+  def setBuffer(value: Buffer) = {
+    asJava.setBuffer(value.asJava)
     this
   }
   def getBuffer = {
     asJava.getBuffer()
   }
-  def setBuffers(value: scala.collection.mutable.Buffer[JBuffer]) = {
-    asJava.setBuffers(value.asJava)
+  def setBuffers(value: scala.collection.mutable.Buffer[Buffer]) = {
+    asJava.setBuffers(value.map(_.asJava).asJava)
     this
   }
   def getBuffers = {
